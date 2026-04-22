@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<style>
+@font-face{font-family:'AbhayaLibre';src:url('fonts/AbhayaLibre-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+@font-face{font-family:'AbhayaLibre';src:url('fonts/AbhayaLibre-Medium.ttf') format('truetype');font-weight:500;font-display:swap;}
+@font-face{font-family:'Inter';src:url('fonts/Inter-Light-BETA.otf') format('opentype');font-weight:300;font-display:swap;}
+@font-face{font-family:'Inter';src:url('fonts/Inter-Regular.otf') format('opentype');font-weight:400;font-display:swap;}
+@font-face{font-family:'Inter';src:url('fonts/Inter-Italic.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap;}
+@font-face{font-family:'Inter';src:url('fonts/Inter-Medium.otf') format('opentype');font-weight:500;font-display:swap;}
+</style>
+<style>
+:root{--mirage:#1E1E20;--pastel-brown:#A07855;--dawn-pink:#EDE8E1;--hemp:#7C7069;--white:#FAFAF8;--serif:'AbhayaLibre',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--t:.3s cubic-bezier(.4,0,.2,1);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--white);color:var(--mirage);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+.site-header{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;background:transparent;border-bottom:1px solid transparent;transition:background var(--t),border-color var(--t),box-shadow var(--t);}
+.site-header.scrolled{background:rgba(250,250,248,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,30,32,.08);box-shadow:0 1px 24px rgba(30,30,32,.05);}
+.header-inner{max-width:1360px;width:100%;margin:0 auto;padding:0 52px;display:flex;align-items:center;}
+.header-logo{line-height:0;margin-right:auto;}
+.logo-light{display:block;height:26px;width:auto;}
+.logo-dark{display:none;height:26px;width:auto;}
+.site-header.scrolled .logo-light{display:none;}
+.site-header.scrolled .logo-dark{display:block;}
+.header-nav{display:flex;align-items:center;gap:32px;margin-right:40px;}
+.header-nav a{font-size:10.5px;font-weight:500;letter-spacing:2.2px;text-transform:uppercase;color:rgba(250,250,248,.8);transition:color var(--t);white-space:nowrap;}
+.header-nav a:hover{color:#fff;}
+.header-nav a.active{color:var(--pastel-brown);}
+.site-header.scrolled .header-nav a{color:var(--hemp);}
+.site-header.scrolled .header-nav a:hover{color:var(--mirage);}
+.site-header.scrolled .header-nav a.active{color:var(--pastel-brown);border-bottom:1px solid var(--pastel-brown);padding-bottom:2px;}
+.header-cta{flex-shrink:0;display:inline-flex;align-items:center;border:1px solid rgba(250,250,248,.4);color:rgba(250,250,248,.9);padding:9px 22px;font-size:10px;font-weight:500;letter-spacing:2.2px;text-transform:uppercase;transition:all var(--t);}
+.header-cta:hover{background:rgba(250,250,248,.1);}
+.site-header.scrolled .header-cta{border-color:var(--mirage);color:var(--mirage);}
+.site-header.scrolled .header-cta:hover{background:var(--mirage);color:var(--white);}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:auto;}
+.ham span{width:22px;height:1.5px;background:rgba(250,250,248,.85);display:block;transition:background var(--t);}
+.site-header.scrolled .ham span{background:var(--mirage);}
+@media(max-width:900px){.header-nav,.header-cta{display:none;}.ham{display:flex;}.header-inner{padding:0 32px;}}
+.mob-nav{display:none;position:fixed;inset:0;z-index:500;background:var(--mirage);flex-direction:column;align-items:center;justify-content:center;gap:36px;}
+.mob-nav.open{display:flex;}
+.mob-nav a{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(250,250,248,.75);font-weight:500;transition:color var(--t);}
+.mob-nav a:hover{color:var(--pastel-brown);}
+.mob-close{position:absolute;top:24px;right:28px;background:none;border:none;color:rgba(250,250,248,.5);font-size:22px;cursor:pointer;}
+.cta-band{background:var(--pastel-brown);padding:80px 52px;}
+.cta-band-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:48px;}
+.cta-band-title{font-family:var(--serif);font-size:clamp(24px,3vw,40px);font-weight:400;color:var(--white);line-height:1.25;}
+.cta-band-title em{font-style:italic;opacity:.85;}
+.btn-cta{flex-shrink:0;display:inline-flex;align-items:center;gap:10px;border:1.5px solid rgba(250,250,248,.6);color:var(--white);padding:14px 32px;font-size:10.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;transition:all var(--t);}
+.btn-cta:hover{background:rgba(250,250,248,.12);border-color:var(--white);}
+.site-footer{background:var(--mirage);padding:80px 52px 0;overflow:hidden;}
+.footer-top{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1.5fr;gap:64px;padding-bottom:64px;border-bottom:1px solid rgba(250,250,248,.06);}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(250,250,248,.4);line-height:1.6;margin-bottom:28px;max-width:300px;}
+.footer-sub{font-size:11.5px;color:rgba(250,250,248,.2);line-height:1.8;margin-bottom:28px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:36px;height:36px;border:1px solid rgba(250,250,248,.1);display:flex;align-items:center;justify-content:center;transition:border-color var(--t);}
+.footer-social a:hover{border-color:var(--pastel-brown);}
+.footer-social img{width:17px;height:17px;filter:brightness(0) invert(1);opacity:.45;}
+.footer-social a:hover img{opacity:.85;}
+.footer-nav-label{font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:var(--pastel-brown);font-weight:500;margin-bottom:20px;}
+.footer-nav-list{display:flex;flex-direction:column;gap:12px;}
+.footer-nav-list a{font-size:13px;color:rgba(250,250,248,.35);transition:color var(--t);}
+.footer-nav-list a:hover{color:rgba(250,250,248,.85);}
+.footer-contact-item{font-size:13px;color:rgba(250,250,248,.35);line-height:1.8;margin-bottom:12px;}
+.footer-contact-item a{color:rgba(250,250,248,.35);transition:color var(--t);}
+.footer-contact-item a:hover{color:var(--pastel-brown);}
+.footer-wordmark{display:block;overflow:hidden;line-height:0;padding:40px 0 0;}
+.footer-wordmark img{width:100%;height:auto;opacity:.07;filter:brightness(10);}
+.footer-legal{max-width:1360px;margin:0 auto;padding:20px 0 28px;display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:rgba(250,250,248,.22);border-top:1px solid rgba(250,250,248,.05);}
+.footer-legal a{color:rgba(250,250,248,.22);transition:color var(--t);}
+.footer-legal a:hover{color:rgba(250,250,248,.5);}
+.footer-legal-links{display:flex;gap:24px;}
+@media(max-width:900px){.cta-band{padding:64px 32px;}.cta-band-inner{flex-direction:column;align-items:flex-start;gap:32px;}.footer-top{grid-template-columns:1fr;gap:40px;}.site-footer{padding:56px 32px 0;}}
+</style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nohall Empreendimentos — Incorporação com Pensamento · Chapecó, SC</title>
+<meta name="description" content="Incorporadora de alto padrão em Chapecó, SC. Projetos arquitetônicos, gestão técnica e incorporação com método, critério e permanência.">
+<style>
+
+
+
+
+
+
+</style>
+<style>
+/* ══════════════════════════════════════
+   DESIGN TOKENS — Nohall Manual da Marca 2026
+══════════════════════════════════════ */
+:root {
+  --mirage:       #1E1E20;   /* Primária — fundo escuro */
+  --pastel-brown: #A07855;   /* Destaque */
+  --dawn-pink:    #EDE8E1;   /* Suporte claro */
+  --hemp:         #7C7069;   /* Neutro */
+  --white:        #FAFAF8;
+  --text-dark:    #1E1E20;
+  --text-muted:   #8C8680;
+  --serif:        'AbhayaLibre', Georgia, serif;
+  --sans:         'Inter', system-ui, sans-serif;
+  --transition:   0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--sans); background: var(--white); color: var(--text-dark); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ══════════════════════════════════════
+   HEADER — fixo, transição ao scroll
+══════════════════════════════════════ */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 68px;
+  display: flex; align-items: center;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.site-header.scrolled {
+  background: rgba(250,250,248,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(30,30,32,0.08);
+  box-shadow: 0 1px 24px rgba(30,30,32,0.06);
+}
+.header-inner {
+  max-width: 1360px; width: 100%; margin: 0 auto;
+  padding: 0 52px;
+  display: flex; align-items: center; gap: 0;
+}
+.header-logo { flex-shrink: 0; margin-right: auto; }
+.header-logo { line-height: 0; }
+.logo-light { display: block; height: 26px; width: auto; }
+.logo-dark  { display: none;  height: 26px; width: auto; }
+.site-header.scrolled .logo-light { display: none; }
+.site-header.scrolled .logo-dark  { display: block; }
+
+.header-nav {
+  display: flex; align-items: center; gap: 32px;
+  margin-right: 40px;
+}
+.header-nav a {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 2.2px;
+  text-transform: uppercase; color: rgba(250,250,248,0.8);
+  transition: color var(--transition);
+  white-space: nowrap;
+}
+.header-nav a:hover { color: #fff; }
+.header-nav a.active { color: var(--pastel-brown); }
+.site-header.scrolled .header-nav a { color: var(--hemp); }
+.site-header.scrolled .header-nav a:hover { color: var(--mirage); }
+.site-header.scrolled .header-nav a.active { color: var(--pastel-brown); }
+
+.header-cta {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center;
+  border: 1px solid rgba(250,250,248,0.35);
+  color: rgba(250,250,248,0.9);
+  padding: 9px 22px; font-size: 10px; font-weight: 500;
+  letter-spacing: 2.2px; text-transform: uppercase;
+  transition: all var(--transition);
+}
+.header-cta:hover { background: rgba(250,250,248,0.1); }
+.site-header.scrolled .header-cta { border-color: var(--mirage); color: var(--mirage); }
+.site-header.scrolled .header-cta:hover { background: var(--mirage); color: var(--white); }
+
+.ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 4px; }
+.ham span { width: 22px; height: 1.5px; background: rgba(250,250,248,0.85); display: block; transition: background var(--transition); }
+.site-header.scrolled .ham span { background: var(--mirage); }
+
+/* ── Mobile Nav ── */
+.mob-nav {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: var(--mirage);
+  flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+}
+.mob-nav.open { display: flex; }
+.mob-nav a {
+  font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(250,250,248,0.75); font-weight: 500;
+  transition: color var(--transition);
+}
+.mob-nav a:hover { color: var(--pastel-brown); }
+.mob-close {
+  position: absolute; top: 24px; right: 28px;
+  background: none; border: none; color: rgba(250,250,248,0.5);
+  font-size: 22px; cursor: pointer; transition: color var(--transition);
+}
+.mob-close:hover { color: #fff; }
+
+/* ══════════════════════════════════════
+   HERO — fullscreen editorial
+══════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100vw; height: 100svh; min-height: 640px;
+  overflow: hidden;
+  background: var(--mirage);
+  display: flex; flex-direction: column;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://static.wixstatic.com/media/fac1e6_9a0a3f7d7390470e912aaf1eb34df808~mv2.jpg/v1/fill/w_1920,h_1080,fp_0.33_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Whisk_8bb2fe7cd2.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  filter: brightness(0.48) saturate(0.85);
+  transform: scale(1.04);
+  animation: heroZoom 24s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.00); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    165deg,
+    rgba(30,30,32,0.15) 0%,
+    rgba(30,30,32,0.0) 40%,
+    rgba(30,30,32,0.55) 100%
+  );
+}
+
+/* Linha vertical decorativa — lado esquerdo */
+.hero-rule {
+  position: absolute;
+  left: 52px; top: 120px; bottom: 60px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(160,120,85,0.5) 30%, rgba(160,120,85,0.5) 70%, transparent);
+  z-index: 5;
+}
+
+/* Conteúdo central do hero */
+.hero-content {
+  position: absolute;
+  left: 88px; bottom: 72px;
+  z-index: 10; max-width: 680px;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow-line { width: 40px; height: 1px; background: var(--pastel-brown); }
+.hero-eyebrow-text {
+  font-size: 9.5px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--pastel-brown); font-weight: 500;
+}
+.hero-heading {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 400; font-style: italic;
+  color: rgba(250,250,248,0.96);
+  line-height: 1.15;
+  margin-bottom: 32px;
+}
+.hero-subtext {
+  font-size: 14px; color: rgba(250,250,248,0.52);
+  line-height: 1.75; letter-spacing: 0.3px;
+  max-width: 420px;
+}
+
+/* Indicador de scroll */
+.hero-scroll {
+  position: absolute; right: 52px; bottom: 72px; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.hero-scroll-text {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(250,250,248,0.35); writing-mode: vertical-lr;
+}
+.hero-scroll-bar {
+  width: 1px; height: 56px;
+  background: linear-gradient(to bottom, rgba(160,120,85,0.7), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity: 0.6; transform: scaleY(1); }
+  50%      { opacity: 1; transform: scaleY(0.7); transform-origin: top; }
+}
+
+/* ══════════════════════════════════════
+   MANIFESTO — faixa de texto editorial
+══════════════════════════════════════ */
+.manifesto-band {
+  background: var(--dawn-pink);
+  padding: 96px 52px;
+  overflow: hidden;
+}
+.manifesto-inner {
+  max-width: 1360px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1px 1fr;
+  gap: 80px; align-items: center;
+}
+.manifesto-divider { background: rgba(30,30,32,0.1); align-self: stretch; }
+.manifesto-label {
+  font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--hemp); font-weight: 500; margin-bottom: 24px;
+}
+.manifesto-text {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 400; color: var(--mirage); line-height: 1.6;
+}
+.manifesto-text em { font-style: italic; color: var(--pastel-brown); }
+
+/* ── Valores interativos — accordion estilo editorial ── */
+.manifesto-values { display: flex; flex-direction: column; }
+.mv-item {
+  border-top: 1px solid rgba(30,30,32,0.1);
+  overflow: hidden;
+  cursor: pointer;
+}
+.mv-item:last-child { border-bottom: 1px solid rgba(30,30,32,0.1); }
+.mv-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 0;
+  transition: padding var(--transition);
+}
+.mv-header-left { display: flex; align-items: baseline; gap: 20px; }
+.mv-num {
+  font-size: 9px; letter-spacing: 2.5px; color: var(--hemp);
+  font-weight: 500; flex-shrink: 0;
+  transition: color var(--transition);
+}
+.mv-word {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 400; color: var(--mirage);
+  transition: color var(--transition), transform var(--transition);
+  transform-origin: left center;
+}
+.mv-arrow {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border: 1px solid rgba(30,30,32,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+.mv-arrow svg { width: 10px; height: 10px; transition: transform var(--transition); }
+.mv-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+}
+.mv-body-inner {
+  padding: 0 0 24px;
+  font-size: 13.5px; line-height: 1.85; color: var(--hemp);
+  max-width: 420px;
+}
+
+/* Estado ativo */
+.mv-item.active .mv-num { color: var(--pastel-brown); }
+.mv-item.active .mv-word { color: var(--pastel-brown); }
+.mv-item.active .mv-arrow {
+  background: var(--pastel-brown);
+  border-color: var(--pastel-brown);
+  transform: rotate(0deg);
+}
+.mv-item.active .mv-arrow svg { transform: rotate(45deg); }
+.mv-item.active .mv-arrow svg path { stroke: white; }
+.mv-item.active .mv-body { max-height: 120px; }
+
+/* Hover não-ativo */
+.mv-item:not(.active):hover .mv-word { transform: translateX(4px); }
+.mv-item:not(.active):hover .mv-arrow { border-color: var(--pastel-brown); }
+
+/* ══════════════════════════════════════
+   CICLO NOHALL — processo em 5 etapas
+══════════════════════════════════════ */
+.ciclo-section {
+  background: var(--white);
+  padding: 120px 0;
+}
+.ciclo-header {
+  max-width: 1360px; margin: 0 auto 72px;
+  padding: 0 52px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+}
+.ciclo-label {
+  font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--pastel-brown); font-weight: 500; margin-bottom: 20px;
+}
+.ciclo-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400; color: var(--mirage); line-height: 1.15;
+}
+.ciclo-desc {
+  font-size: 15px; line-height: 1.85; color: var(--hemp);
+  max-width: 440px; align-self: end;
+}
+.ciclo-steps {
+  max-width: 1360px; margin: 0 auto;
+  padding: 0 52px;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid rgba(30,30,32,0.08);
+}
+.ciclo-step {
+  padding: 48px 40px 48px 0;
+  border-right: 1px solid rgba(30,30,32,0.08);
+  position: relative;
+}
+.ciclo-step:last-child { border-right: none; padding-right: 0; }
+.ciclo-step + .ciclo-step { padding-left: 40px; }
+.ciclo-step-num {
+  font-family: var(--serif);
+  font-size: 48px; font-weight: 400;
+  color: rgba(30,30,32,0.05); line-height: 1;
+  margin-bottom: 20px; display: block;
+}
+.ciclo-step-bar {
+  width: 28px; height: 1px;
+  background: var(--pastel-brown);
+  margin-bottom: 20px;
+}
+.ciclo-step-title {
+  font-family: var(--serif);
+  font-size: 18px; font-weight: 400; color: var(--mirage);
+  margin-bottom: 12px; line-height: 1.3;
+}
+.ciclo-step-desc {
+  font-size: 13px; line-height: 1.8; color: var(--hemp);
+}
+
+/* ══════════════════════════════════════
+   SERVIÇOS — fundo Mirage
+══════════════════════════════════════ */
+.services-section {
+  background: var(--mirage);
+  padding: 112px 52px;
+}
+.services-inner { max-width: 1360px; margin: 0 auto; }
+.services-top {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 64px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(250,250,248,0.07);
+}
+.services-label {
+  font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--pastel-brown); font-weight: 500; margin-bottom: 20px;
+}
+.services-title {
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.5vw, 48px);
+  font-weight: 400; color: var(--white); line-height: 1.2;
+}
+.services-note {
+  font-size: 13px; color: rgba(250,250,248,0.35);
+  max-width: 280px; line-height: 1.8; text-align: right;
+}
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(250,250,248,0.05);
+}
+.service-card {
+  background: var(--mirage);
+  padding: 52px 44px;
+  transition: background var(--transition);
+  position: relative;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: rgba(250,250,248,0.07);
+}
+.service-card:hover { background: rgba(250,250,248,0.03); }
+.service-card-num {
+  font-size: 9px; letter-spacing: 2.5px; color: var(--pastel-brown);
+  margin-bottom: 32px; display: block; font-weight: 500;
+}
+.service-card-title {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 400; color: var(--white);
+  margin-bottom: 16px; line-height: 1.25;
+}
+.service-card-desc {
+  font-size: 13.5px; line-height: 1.85; color: rgba(250,250,248,0.42);
+}
+
+/* ══════════════════════════════════════
+   PORTFÓLIO — galeria com scroll
+══════════════════════════════════════ */
+.portfolio-section {
+  background: var(--dawn-pink);
+  padding: 112px 0 0;
+}
+.portfolio-header {
+  max-width: 1360px; margin: 0 auto 56px;
+  padding: 0 52px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.portfolio-label {
+  font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--hemp); font-weight: 500; margin-bottom: 20px;
+}
+.portfolio-title {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.5vw, 60px);
+  font-weight: 400; color: var(--mirage); line-height: 1.1;
+}
+.portfolio-link {
+  font-size: 10px; font-weight: 500; letter-spacing: 2.2px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  border-bottom: 1px solid var(--pastel-brown);
+  padding-bottom: 2px; margin-bottom: 8px; white-space: nowrap;
+  transition: color var(--transition), border-color var(--transition);
+}
+.portfolio-link:hover { color: var(--mirage); border-color: var(--mirage); }
+
+.gallery-viewport {
+  overflow: hidden; width: 100%; position: relative;
+}
+.gallery-track {
+  display: flex; gap: 8px;
+  width: max-content;
+  padding: 0 0 8px;
+  animation: galleryScroll 50s linear infinite;
+}
+.gallery-track:hover { animation-play-state: paused; }
+@keyframes galleryScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.gallery-card {
+  position: relative; flex-shrink: 0;
+  width: 280px; height: 400px; overflow: hidden;
+  cursor: pointer;
+}
+.gallery-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.7s ease, filter 0.5s;
+  filter: saturate(0.9);
+}
+.gallery-card:hover img { transform: scale(1.05); filter: saturate(1); }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(30,30,32,0.85) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.4s;
+  padding: 24px; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.gallery-card:hover .gallery-overlay { opacity: 1; }
+.gallery-name {
+  font-family: var(--serif);
+  font-size: 18px; color: #fff; font-weight: 400; line-height: 1.2;
+}
+.gallery-cat {
+  font-size: 8.5px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--pastel-brown); margin-top: 6px; font-weight: 500;
+}
+
+/* ══════════════════════════════════════
+   NÚMEROS — dark, impacto
+══════════════════════════════════════ */
+.numbers-section {
+  background: var(--mirage);
+  padding: 112px 52px;
+}
+.numbers-inner { max-width: 1360px; margin: 0 auto; }
+.numbers-label {
+  font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--pastel-brown); font-weight: 500; margin-bottom: 64px;
+}
+.numbers-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(250,250,248,0.07);
+}
+.number-item {
+  padding: 52px 48px 0 0;
+  border-right: 1px solid rgba(250,250,248,0.07);
+}
+.number-item + .number-item { padding-left: 48px; }
+.number-item:last-child { border-right: none; padding-right: 0; }
+.number-value {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 400; color: var(--white);
+  line-height: 1; margin-bottom: 20px;
+  white-space: nowrap;
+}
+.number-bar { width: 32px; height: 1px; background: var(--pastel-brown); margin-bottom: 16px; }
+.number-label { font-size: 13px; font-weight: 500; color: rgba(250,250,248,0.7); margin-bottom: 6px; }
+.number-desc { font-size: 11.5px; color: rgba(250,250,248,0.28); letter-spacing: 0.3px; line-height: 1.5; }
+
+/* ══════════════════════════════════════
+   DEPOIMENTOS
+══════════════════════════════════════ */
+.testimonials-section {
+  background: var(--white);
+  padding: 112px 52px;
+}
+.testimonials-inner { max-width: 1360px; margin: 0 auto; }
+.testimonials-top {
+  margin-bottom: 64px;
+}
+.testimonials-label {
+  font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--pastel-brown); font-weight: 500; margin-bottom: 20px;
+}
+.testimonials-title {
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.8vw, 50px);
+  font-weight: 400; color: var(--mirage); line-height: 1.15;
+}
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+}
+.testimonial {
+  background: var(--dawn-pink);
+  padding: 52px 44px;
+  border-top: 3px solid transparent;
+  transition: border-color var(--transition);
+}
+.testimonial:hover { border-top-color: var(--pastel-brown); }
+.t-quote {
+  font-family: var(--serif);
+  font-size: 56px; color: rgba(160,120,85,0.18);
+  line-height: 0.8; margin-bottom: 24px; display: block;
+}
+.t-text {
+  font-family: var(--serif);
+  font-size: 16.5px; font-style: italic;
+  color: var(--mirage); line-height: 1.75; margin-bottom: 36px;
+}
+.t-line { width: 24px; height: 1px; background: var(--pastel-brown); margin-bottom: 16px; }
+.t-author { font-size: 12.5px; font-weight: 600; color: var(--mirage); letter-spacing: 0.3px; }
+.t-role { font-size: 11.5px; color: var(--hemp); margin-top: 4px; }
+
+/* ══════════════════════════════════════
+   CTA BAND
+══════════════════════════════════════ */
+.cta-band {
+  background: var(--pastel-brown);
+  padding: 80px 52px;
+}
+.cta-band-inner {
+  max-width: 1360px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 48px;
+}
+.cta-band-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 400; color: var(--white); line-height: 1.25;
+}
+.cta-band-title em { font-style: italic; opacity: 0.85; }
+.btn-cta {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent;
+  border: 1.5px solid rgba(250,250,248,0.6);
+  color: var(--white);
+  padding: 14px 32px; font-size: 10.5px; font-weight: 500;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  transition: all var(--transition);
+}
+.btn-cta:hover {
+  background: rgba(250,250,248,0.12);
+  border-color: var(--white);
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+.site-footer {
+  background: var(--mirage);
+  padding: 80px 52px 0;
+  overflow: hidden;
+}
+.footer-top {
+  max-width: 1360px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 64px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid rgba(250,250,248,0.06);
+}
+.footer-tagline {
+  font-family: var(--serif);
+  font-size: 16px; font-style: italic;
+  color: rgba(250,250,248,0.4); line-height: 1.6;
+  margin-bottom: 28px; max-width: 300px;
+}
+.footer-sub {
+  font-size: 11.5px; color: rgba(250,250,248,0.2);
+  line-height: 1.8; margin-bottom: 28px;
+}
+.footer-social { display: flex; gap: 8px; }
+.footer-social a {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(250,250,248,0.1);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color var(--transition);
+}
+.footer-social a:hover { border-color: var(--pastel-brown); }
+.footer-social img { width: 17px; height: 17px; filter: brightness(0) invert(1); opacity: 0.45; }
+.footer-social a:hover img { opacity: 0.85; }
+.footer-nav-label {
+  font-size: 8.5px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--pastel-brown); font-weight: 500; margin-bottom: 20px;
+}
+.footer-nav-list { display: flex; flex-direction: column; gap: 12px; }
+.footer-nav-list a { font-size: 13px; color: rgba(250,250,248,0.35); transition: color var(--transition); }
+.footer-nav-list a:hover { color: rgba(250,250,248,0.85); }
+.footer-contact-item { font-size: 13px; color: rgba(250,250,248,0.35); line-height: 1.8; margin-bottom: 12px; }
+.footer-contact-item a { color: rgba(250,250,248,0.35); transition: color var(--transition); }
+.footer-contact-item a:hover { color: var(--pastel-brown); }
+
+.footer-wordmark {
+  display: block; overflow: hidden; line-height: 0;
+  padding: 40px 0 0;
+}
+.footer-wordmark img { width: 100%; height: auto; opacity: 0.07; filter: brightness(10); }
+
+.footer-legal {
+  max-width: 1360px; margin: 0 auto;
+  padding: 20px 0 28px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10.5px; color: rgba(250,250,248,0.22);
+  border-top: 1px solid rgba(250,250,248,0.05);
+}
+.footer-legal a { color: rgba(250,250,248,0.22); transition: color var(--transition); }
+.footer-legal a:hover { color: rgba(250,250,248,0.5); }
+.footer-legal-links { display: flex; gap: 24px; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .ciclo-steps { grid-template-columns: repeat(3, 1fr); }
+  .ciclo-step:nth-child(3) { border-right: none; }
+  .ciclo-step:nth-child(4) { padding-left: 0; }
+  .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+  .number-item:nth-child(2) { border-right: none; padding-right: 0; }
+  .number-item:nth-child(3) { padding-left: 0; }
+}
+@media (max-width: 900px) {
+  .header-nav, .header-cta { display: none; }
+  .ham { display: flex; }
+  .hero-content { left: 32px; right: 32px; bottom: 52px; }
+  .hero-rule, .hero-scroll { display: none; }
+  .manifesto-inner { grid-template-columns: 1fr; gap: 48px; }
+  .manifesto-divider { display: none; }
+  .ciclo-header { grid-template-columns: 1fr; gap: 24px; }
+  .ciclo-steps { grid-template-columns: repeat(2, 1fr); padding: 0 32px; }
+  .ciclo-step:nth-child(2n) { border-right: none; padding-right: 0; }
+  .ciclo-step:nth-child(2n+1) { padding-left: 0; }
+  .services-section, .numbers-section, .testimonials-section, .portfolio-header { padding-left: 32px; padding-right: 32px; }
+  .manifesto-band, .cta-band { padding-left: 32px; padding-right: 32px; }
+  .ciclo-header { padding: 0 32px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .services-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .services-note { text-align: left; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .numbers-grid { grid-template-columns: 1fr 1fr; }
+  .cta-band-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .footer-top { grid-template-columns: 1fr; gap: 40px; }
+  .site-footer { padding: 56px 32px 0; }
+  .header-inner { padding: 0 32px; }
+  .portfolio-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+@media (max-width: 600px) {
+  .ciclo-steps { grid-template-columns: 1fr; padding: 0 24px; }
+  .ciclo-step { border-right: none !important; padding-left: 0 !important; padding-right: 0 !important; }
+  .numbers-grid { grid-template-columns: 1fr; }
+  .number-item { border-right: none !important; padding-left: 0 !important; padding-right: 0 !important; }
+  .footer-legal { flex-direction: column; gap: 10px; text-align: center; }
+  .manifesto-values { display: flex; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">✕</button>
+  <a href="index.html">Início</a><a href="sobre-nos.html">Sobre Nós</a><a href="atuacao.html">Atuação</a>
+  <a href="empreendimentos.html">Empreendimentos</a><a href="portfolio.html">Portfólio</a><a href="contato.html">Contato</a>
+</nav>
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <img class="logo-light" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FtYWRhXzEiIGRhdGEtbmFtZT0iQ2FtYWRhIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM3MDUuMzggOTI0LjMiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6IHdoaXRlOwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8Zz4KICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIxNzY1LjMyIDQ1MS40MyAxODEwLjA1IDQ5Ni4xNiAxNzY1LjMyIDQ5Ni4xNiAxNDMzLjU2IDQ5Ni4xNiAxMzg4Ljg3IDQ5Ni4xNiAxNDMzLjU2IDQ1MS40NiAxNDMzLjU2IC4zNyAxMzM5LjI0IC4zNyAxMzM5LjI0IDY0Ny44NyAxNDMzLjU2IDY0Ny44NyAxNDMzLjU2IDU1NC4zMyAxNzY1LjMyIDU1NC4zMyAxNzY1LjMyIDY0Ny44NyAxODU5LjY0IDY0Ny44NyAxODU5LjY0IC4zNyAxNzY1LjMyIC4zNyAxNzY1LjMyIDQ1MS40MyIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjU5Mi4zOCw1MTIuMzFMMjQwNi43MSwwaC0xNjMuMzdsLTE4NS42Nyw1MTIuMjgtMTUuMTIsNDEuNjktMzMuOSw5My41NGgxMDAuMjlsMjIuMzMtNjEuNjItMzEuOTItMzEuOTJoNDUxLjM3bC0zMS45OCwzMS45OCwyMi4zNCw2MS41NmgxMDAuMzJsLTMzLjktOTMuNTQtMTUuMTItNDEuNjZaTTIxNjMuOCw0OTYuMTZsMTYxLjIxLTQ0NC43MywxNjEuMjEsNDQ0LjczaC0zMjIuNDFaIi8+CiAgICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMjg4NC4zMyA2MjMuMjUgMjg4NC4zMyAuMTUgMjc5MC4wMSAuMTUgMjc5MC4wMSA2NDcuNjYgMjc5MC4wMSA2NDcuODcgMjg1OS43MiA2NDcuODcgMjg4NC4zMyA2NDcuODcgMjg4NC4zMyA2NDcuNjYgMzE3My40IDY0Ny42NiAzMTczLjQgNTg5Ljg0IDI5MTcuNzQgNTg5Ljg0IDI4ODQuMzMgNjIzLjI1Ii8+CiAgICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMzQ0OS43MyA1ODkuODQgMzQxNi4zMiA2MjMuMjUgMzQxNi4zMiAuMTUgMzMyMS45OSAuMTUgMzMyMS45OSA2NDcuNjYgMzcwNS4zOCA2NDcuNjYgMzcwNS4zOCA1ODkuODQgMzQ0OS43MyA1ODkuODQiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTc1OS45OC4zN2wtOTAuMSw5MC4wN3Y0NjcuMzdsOTAuMDcsOTAuMDdoMzQwLjY3bDkwLjA3LTkwLjA3VjkwLjQzTDExMDAuNTkuMzdoLTM0MC42MVpNMTA5Ni4zNiw1OTAuMDZoLTMzMi4xNVY1OC4yMWgzMzIuMTV2NTMxLjg1WiIvPgogICAgPHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjQyNi45NSA1ODkuODUgMzg5LjcxIDU4OS44NSAxOTUuMTUgNTggMTc0IC4xNSAuOTYgLjE1IC45NiA2NDcuNjYgOTUuMjkgNjQ3LjY2IDk1LjI5IDU4IDEzMy41OSA1OCAzMjguMTUgNTg5Ljg1IDM0OS4yNyA2NDcuNjYgNTIxLjI4IDY0Ny42NiA1MjEuMjggLjE1IDQyNi45NSAuMTUgNDI2Ljk1IDU4OS44NSIvPgogIDwvZz4KICA8Zz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTAsOTI0LjN2LTEzNS4xNGg4Mi4zNnYxNS4yNEgxNy4yM3Y0NC4wOGg2MC42OHYxNS4yNEgxNy4yM3Y0NS4zNWg2NS45NHYxNS4yNEgwWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjQ1LjQsOTI0LjN2LTEzNS4xNGgyNC40OWwzMy4yOSw4NS4yNmMuNzgsMiwxLjY4LDQuNDksMi42OCw3LjQ4czIuMDUsNi4yNCwzLjE3LDkuNzVjMS4xMiwzLjUxLDIuMTksNywzLjIyLDEwLjQ4LDEuMDMsMy40OCwxLjkzLDYuNywyLjcyLDkuNjZoLTMuODFjLjg1LTIuNzgsMS43OC01Ljg4LDIuODEtOS4zLDEuMDMtMy40MSwyLjEtNi44OSwzLjIyLTEwLjQzLDEuMTItMy41NCwyLjE5LTYuODUsMy4yMi05LjkzLDEuMDMtMy4wOCwxLjkzLTUuNjUsMi43Mi03LjcxbDMyLjgzLTg1LjI2aDI0LjU4djEzNS4xNGgtMTYuOTZ2LTc3LjE5YzAtMi43OC4wMS01Ljk1LjA1LTkuNTIuMDMtMy41Ny4wOS03LjMyLjE4LTExLjI1LjA5LTMuOTMuMTgtNy45Mi4yNy0xMS45Ny4wOS00LjA1LjE3LTcuOTguMjMtMTEuNzloMS40NWMtMS4yNyw0LjE3LTIuNjIsOC40Mi00LjA0LDEyLjc0LTEuNDIsNC4zMi0yLjgxLDguNS00LjE3LDEyLjUyLTEuMzYsNC4wMi0yLjY1LDcuNy0zLjg1LDExLjAyLTEuMjEsMy4zMy0yLjI0LDYuMDgtMy4wOCw4LjI1bC0zMC4yLDc3LjE5aC0xNC45N2wtMzAuNjYtNzcuMTljLS44NS0yLjEyLTEuODUtNC43OS0yLjk5LTguMDMtMS4xNS0zLjIzLTIuNC02LjgzLTMuNzYtMTAuNzktMS4zNi0zLjk2LTIuNzctOC4xMy00LjIyLTEyLjUyLTEuNDUtNC4zOC0yLjkzLTguNzgtNC40NC0xMy4yaDEuNjNjLjEyLDMuMzkuMjMsNy4wNS4zMiwxMC45Ny4wOSwzLjkzLjE3LDcuOTEuMjMsMTEuOTMuMDYsNC4wMi4xMiw3Ljg5LjE4LDExLjYxLjA2LDMuNzIuMDksNy4wNi4wOSwxMC4wMnY3Ny4xOWgtMTYuNDJaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01NDYuOTQsOTI0LjN2LTEzNS4xNGg0Ni4yNmMxMC41MiwwLDE5LjE4LDEuOTIsMjUuOTksNS43Niw2LjgsMy44NCwxMS44NSw5LDE1LjE1LDE1LjQ2LDMuMjksNi40Nyw0Ljk0LDEzLjczLDQuOTQsMjEuNzdzLTEuNjUsMTUuMzMtNC45NCwyMS44NmMtMy4zLDYuNTMtOC4zMywxMS43My0xNS4xLDE1LjYtNi43NywzLjg3LTE1LjQyLDUuOC0yNS45NCw1LjhoLTMyLjc0di0xNS4xNWgzMS45M2M3LjEzLDAsMTIuODgtMS4yMiwxNy4yMy0zLjY3czcuNTEtNS44LDkuNDgtMTAuMDdjMS45Ni00LjI2LDIuOTUtOS4wNSwyLjk1LTE0LjM4cy0uOTgtMTAuMDgtMi45NS0xNC4yOWMtMS45Ny00LjItNS4xNC03LjUxLTkuNTItOS45My00LjM5LTIuNDItMTAuMTctMy42My0xNy4zNy0zLjYzaC0yOC4xMnYxMjBoLTE3LjIzWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzk5LjMyLDkyNC4zdi0xMzUuMTRoNDYuMjZjMTAuNTIsMCwxOS4xOCwxLjgsMjUuOTksNS40LDYuOCwzLjYsMTEuODUsOC41NCwxNS4xNSwxNC44MywzLjI5LDYuMjksNC45NCwxMy40Niw0Ljk0LDIxLjVzLTEuNjUsMTUuMTUtNC45NCwyMS4zMWMtMy4zLDYuMTctOC4zMywxMC45OS0xNS4xLDE0LjQ3LTYuNzcsMy40OC0xNS40Miw1LjIyLTI1Ljk0LDUuMjJoLTM2Ljczdi0xNS4zM2gzNS45MmM3LjEzLDAsMTIuODYtMS4wNCwxNy4xOS0zLjEzLDQuMzItMi4wOSw3LjQ4LTUuMDUsOS40OC04Ljg5LDItMy44NCwyLjk5LTguMzksMi45OS0xMy42NXMtMS0xMC4wNS0yLjk5LTE0LjAxYy0yLTMuOTYtNS4xNy03LjA0LTkuNTItOS4yNS00LjM1LTIuMjEtMTAuMTMtMy4zMS0xNy4zMi0zLjMxaC0yOC4xMnYxMjBoLTE3LjIzWk04NzYuOTYsOTI0LjNsLTMyLjY1LTYwLjg2aDE5LjQxbDMzLjIsNjAuODZoLTE5Ljk1WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTA1Mi42LDkyNC4zdi0xMzUuMTRoODIuMzZ2MTUuMjRoLTY1LjEydjQ0LjA4aDYwLjY4djE1LjI0aC02MC42OHY0NS4zNWg2NS45NHYxNS4yNGgtODMuMTdaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMjk4LDkyNC4zdi0xMzUuMTRoODIuMzZ2MTUuMjRoLTY1LjEydjQ0LjA4aDYwLjY4djE1LjI0aC02MC42OHY0NS4zNWg2NS45NHYxNS4yNGgtODMuMTdaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNTQzLjQsOTI0LjN2LTEzNS4xNGgyMC4zMmw1NC45Niw4Ni40NGMxLjQ1LDIuMjQsMy4yLDUuMTEsNS4yNiw4LjYyLDIuMDUsMy41MSw0LjI4LDcuNDcsNi42NywxMS44OCwyLjM5LDQuNDEsNC43Myw5LjEzLDcuMDMsMTQuMTVoLTIuNDVjLS41NC01LjItLjk0LTEwLjE3LTEuMTgtMTQuOTItLjI0LTQuNzUtLjM5LTkuMTItLjQ1LTEzLjExLS4wNi0zLjk5LS4wOS03LjM4LS4wOS0xMC4xNnYtODIuOWgxNy4yM3YxMzUuMTRoLTIwLjVsLTQ4Ljk4LTc2LjkxYy0yLjI0LTMuNTctNC40OS03LjI0LTYuNzYtMTEuMDItMi4yNy0zLjc4LTQuODUtOC4yNS03Ljc1LTEzLjQyLTIuOS01LjE3LTYuNS0xMS41Ni0xMC43OS0xOS4xOGgzLjE3Yy4zLDYuNzEuNTcsMTIuOTEuODIsMTguNTkuMjQsNS42OC40NCwxMC42NC41OSwxNC44Ny4xNSw0LjIzLjIzLDcuNTYuMjMsOS45OHY3Ny4xaC0xNy4zMloiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE4MzQuMzIsNzg5LjE1djEzNS4xNGgtMTcuMjN2LTEzNS4xNGgxNy4yM1pNMTg1OS4yNyw5MjQuM2gtMzIuNjV2LTE1LjI0aDMxLjU2YzExLDAsMjAuMTItMi4xLDI3LjM1LTYuMyw3LjIyLTQuMiwxMi42Mi0xMC4yMywxNi4xOS0xOC4wOSwzLjU3LTcuODYsNS4zNS0xNy4yNiw1LjM1LTI4LjIxcy0xLjc3LTIwLjEyLTUuMzEtMjcuODljLTMuNTQtNy43Ny04LjgtMTMuNzQtMTUuNzgtMTcuOTFzLTE1LjcxLTYuMjYtMjYuMTctNi4yNmgtMzMuOTJ2LTE1LjI0aDM1LjFjMTMuMTgsMCwyNC40NCwyLjY5LDMzLjc5LDguMDcsOS4zNCw1LjM4LDE2LjUxLDEzLjExLDIxLjUsMjMuMTcsNC45OSwxMC4wNyw3LjQ4LDIyLjA5LDcuNDgsMzYuMDVzLTIuNTEsMjYuMi03LjUzLDM2LjMzYy01LjAyLDEwLjEzLTEyLjM0LDE3LjkxLTIxLjk1LDIzLjM2LTkuNjEsNS40NC0yMS4yOSw4LjE2LTM1LjAxLDguMTZaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMTAyLjEyLDc4OS4xNXYxMzUuMTRoLTE3LjIzdi0xMzUuMTRoMTcuMjNaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMjY4LjUyLDkyNC4zdi0xMzUuMTRoMjQuNDlsMzMuMjksODUuMjZjLjc4LDIsMS42OCw0LjQ5LDIuNjgsNy40OHMyLjA1LDYuMjQsMy4xNyw5Ljc1YzEuMTIsMy41MSwyLjE5LDcsMy4yMiwxMC40OCwxLjAzLDMuNDgsMS45Myw2LjcsMi43Miw5LjY2aC0zLjgxYy44NS0yLjc4LDEuNzgtNS44OCwyLjgxLTkuMywxLjAzLTMuNDEsMi4xLTYuODksMy4yMi0xMC40MywxLjEyLTMuNTQsMi4xOS02Ljg1LDMuMjItOS45MywxLjAzLTMuMDgsMS45My01LjY1LDIuNzItNy43MWwzMi44My04NS4yNmgyNC41OHYxMzUuMTRoLTE2Ljk2di03Ny4xOWMwLTIuNzguMDEtNS45NS4wNS05LjUyLjAzLTMuNTcuMDktNy4zMi4xOC0xMS4yNS4wOS0zLjkzLjE4LTcuOTIuMjctMTEuOTcuMDktNC4wNS4xNy03Ljk4LjIzLTExLjc5aDEuNDVjLTEuMjcsNC4xNy0yLjYyLDguNDItNC4wNCwxMi43NC0xLjQyLDQuMzItMi44MSw4LjUtNC4xNywxMi41Mi0xLjM2LDQuMDItMi42NSw3LjctMy44NSwxMS4wMi0xLjIxLDMuMzMtMi4yNCw2LjA4LTMuMDgsOC4yNWwtMzAuMiw3Ny4xOWgtMTQuOTdsLTMwLjY2LTc3LjE5Yy0uODUtMi4xMi0xLjg1LTQuNzktMi45OS04LjAzLTEuMTUtMy4yMy0yLjQtNi44My0zLjc2LTEwLjc5LTEuMzYtMy45Ni0yLjc3LTguMTMtNC4yMi0xMi41Mi0xLjQ1LTQuMzgtMi45My04Ljc4LTQuNDQtMTMuMmgxLjYzYy4xMiwzLjM5LjIzLDcuMDUuMzIsMTAuOTcuMDksMy45My4xNyw3LjkxLjIzLDExLjkzLjA2LDQuMDIuMTIsNy44OS4xOCwxMS42MS4wNiwzLjcyLjA5LDcuMDYuMDksMTAuMDJ2NzcuMTloLTE2LjQyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjU3MC4wNiw5MjQuM3YtMTM1LjE0aDgyLjM2djE1LjI0aC02NS4xMnY0NC4wOGg2MC42OHYxNS4yNGgtNjAuNjh2NDUuMzVoNjUuOTR2MTUuMjRoLTgzLjE3WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjgxNS40Niw5MjQuM3YtMTM1LjE0aDIwLjMybDU0Ljk2LDg2LjQ0YzEuNDUsMi4yNCwzLjIsNS4xMSw1LjI2LDguNjIsMi4wNSwzLjUxLDQuMjgsNy40Nyw2LjY3LDExLjg4LDIuMzksNC40MSw0LjczLDkuMTMsNy4wMywxNC4xNWgtMi40NWMtLjU0LTUuMi0uOTQtMTAuMTctMS4xOC0xNC45Mi0uMjQtNC43NS0uMzktOS4xMi0uNDUtMTMuMTEtLjA2LTMuOTktLjA5LTcuMzgtLjA5LTEwLjE2di04Mi45aDE3LjIzdjEzNS4xNGgtMjAuNWwtNDguOTgtNzYuOTFjLTIuMjQtMy41Ny00LjQ5LTcuMjQtNi43Ni0xMS4wMi0yLjI3LTMuNzgtNC44NS04LjI1LTcuNzUtMTMuNDItMi45LTUuMTctNi41LTExLjU2LTEwLjc5LTE5LjE4aDMuMTdjLjMsNi43MS41NywxMi45MS44MiwxOC41OS4yNCw1LjY4LjQ0LDEwLjY0LjU5LDE0Ljg3LjE1LDQuMjMuMjMsNy41Ni4yMyw5Ljk4djc3LjFoLTE3LjMyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzA4MS43MSw4MDQuMzl2LTE1LjI0aDEwMi4xM3YxNS4yNGgtNDIuMzZ2MTE5LjkxaC0xNy4yM3YtMTE5LjkxaC00Mi41NFoiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTMzOTIuMDUsOTI2LjExYy0xMS41NSwwLTIxLjg1LTIuOC0zMC44OC04LjM5LTkuMDQtNS41OS0xNi4xNi0xMy41Ny0yMS4zNi0yMy45NC01LjItMTAuMzctNy44LTIyLjY5LTcuOC0zNi45NnMyLjYtMjYuNjgsNy44LTM3LjA1YzUuMi0xMC4zNywxMi4zMi0xOC4zNywyMS4zNi0yMy45OSw5LjA0LTUuNjIsMTkuMzMtOC40NCwzMC44OC04LjQ0czIxLjgzLDIuODEsMzAuODQsOC40NGM5LjAxLDUuNjIsMTYuMSwxMy42MiwyMS4yNywyMy45OSw1LjE3LDEwLjM3LDcuNzUsMjIuNzIsNy43NSwzNy4wNXMtMi41OCwyNi41OS03Ljc1LDM2Ljk2Yy01LjE3LDEwLjM3LTEyLjI2LDE4LjM1LTIxLjI3LDIzLjk0LTkuMDEsNS41OS0xOS4yOSw4LjM5LTMwLjg0LDguMzlaTTMzOTIuMDUsOTEwLjE1YzguMDQsMCwxNS4zMS0yLjA0LDIxLjgxLTYuMTIsNi41LTQuMDgsMTEuNjctMTAuMSwxNS41MS0xOC4wNSwzLjg0LTcuOTUsNS43Ni0xNy42Nyw1Ljc2LTI5LjE2cy0xLjkyLTIxLjM5LTUuNzYtMjkuMzRjLTMuODQtNy45NS05LjAxLTEzLjk3LTE1LjUxLTE4LjA1LTYuNS00LjA4LTEzLjc3LTYuMTItMjEuODEtNi4xMnMtMTUuNDIsMi4wNi0yMS45NSw2LjE3Yy02LjUzLDQuMTEtMTEuNzIsMTAuMTQtMTUuNTYsMTguMDktMy44NCw3Ljk1LTUuNzYsMTcuNy01Ljc2LDI5LjI1czEuOTIsMjEuMTksNS43NiwyOS4xMWMzLjg0LDcuOTIsOS4wMiwxMy45NCwxNS41NiwxOC4wNSw2LjUzLDQuMTEsMTMuODUsNi4xNywyMS45NSw2LjE3WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzY1Ni4zMSw5MjYuNjZjLTkuNzQsMC0xOC4xOS0xLjU3LTI1LjM1LTQuNzJzLTEyLjc4LTcuNTQtMTYuODItMTMuMmMtNC4wNS01LjY1LTYuMzUtMTIuMjYtNi44OS0xOS44MmgxNy42OWMuNDgsNS4wOCwyLjIxLDkuMjcsNS4xNywxMi41NiwyLjk2LDMuMyw2Ljc2LDUuNzUsMTEuMzgsNy4zNSw0LjYzLDEuNiw5LjU3LDIuNCwxNC44MywyLjQsNi4xMSwwLDExLjU5LTEsMTYuNDYtMi45OSw0Ljg3LTIsOC43Mi00LjgxLDExLjU2LTguNDQsMi44NC0zLjYzLDQuMjYtNy44Myw0LjI2LTEyLjYxLDAtNC4zNS0xLjIyLTcuODktMy42Ny0xMC42MXMtNS43LTQuOTYtOS43NS02LjcxYy00LjA1LTEuNzUtOC41LTMuMjktMTMuMzMtNC42M2wtMTYuMzMtNC42M2MtMTAuODgtMy4wOC0xOS4zNS03LjUtMjUuNC0xMy4yNC02LjA1LTUuNzQtOS4wNy0xMy4wOS05LjA3LTIyLjA0LDAtNy42MiwyLjA1LTE0LjI5LDYuMTctMjAsNC4xMS01LjcxLDkuNjctMTAuMTQsMTYuNjktMTMuMjksNy4wMS0zLjE0LDE0Ljg3LTQuNzIsMjMuNTgtNC43MnMxNi43NSwxLjU3LDIzLjU4LDQuNzJjNi44MywzLjE1LDEyLjIzLDcuNDIsMTYuMTksMTIuODMsMy45Niw1LjQxLDYuMDYsMTEuNTMsNi4zLDE4LjM3aC0xNi44N2MtLjc5LTYuNTktMy45My0xMS42OC05LjQzLTE1LjI4LTUuNS0zLjYtMTIuMjgtNS40LTIwLjMyLTUuNC01LjgsMC0xMC45Ljk1LTE1LjI4LDIuODYtNC4zOSwxLjktNy43OSw0LjUxLTEwLjIsNy44LTIuNDIsMy4zLTMuNjMsNy4wNi0zLjYzLDExLjI5LDAsNC43MiwxLjQ2LDguNTEsNC40LDExLjM4LDIuOTMsMi44Nyw2LjQxLDUuMTEsMTAuNDMsNi43MSw0LjAyLDEuNiw3LjY2LDIuODYsMTAuOTMsMy43NmwxMy41MSwzLjcyYzMuNjMuOTcsNy42MywyLjMsMTIuMDIsMy45OSw0LjM4LDEuNjksOC41NywzLjk1LDEyLjU2LDYuNzZzNy4yNyw2LjM4LDkuODQsMTAuN2MyLjU3LDQuMzIsMy44NSw5LjYzLDMuODUsMTUuOTIsMCw3LjM4LTEuOTIsMTQuMDMtNS43NiwxOS45NS0zLjg0LDUuOTMtOS40MiwxMC42MS0xNi43MywxNC4wNi03LjMyLDMuNDUtMTYuMTgsNS4xNy0yNi41OCw1LjE3WiIvPgogIDwvZz4KPC9zdmc+" alt="Nohall Empreendimentos">
+      <img class="logo-dark"  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FtYWRhXzEiIGRhdGEtbmFtZT0iQ2FtYWRhIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM3MDUuMzggOTI0LjMiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxRTFFMjA7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnPgogICAgPHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjE3NjUuMzIgNDUxLjQzIDE4MTAuMDUgNDk2LjE2IDE3NjUuMzIgNDk2LjE2IDE0MzMuNTYgNDk2LjE2IDEzODguODcgNDk2LjE2IDE0MzMuNTYgNDUxLjQ2IDE0MzMuNTYgLjM3IDEzMzkuMjQgLjM3IDEzMzkuMjQgNjQ3Ljg3IDE0MzMuNTYgNjQ3Ljg3IDE0MzMuNTYgNTU0LjMzIDE3NjUuMzIgNTU0LjMzIDE3NjUuMzIgNjQ3Ljg3IDE4NTkuNjQgNjQ3Ljg3IDE4NTkuNjQgLjM3IDE3NjUuMzIgLjM3IDE3NjUuMzIgNDUxLjQzIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yNTkyLjM4LDUxMi4zMUwyNDA2LjcxLDBoLTE2My4zN2wtMTg1LjY3LDUxMi4yOC0xNS4xMiw0MS42OS0zMy45LDkzLjU0aDEwMC4yOWwyMi4zMy02MS42Mi0zMS45Mi0zMS45Mmg0NTEuMzdsLTMxLjk4LDMxLjk4LDIyLjM0LDYxLjU2aDEwMC4zMmwtMzMuOS05My41NC0xNS4xMi00MS42NlpNMjE2My44LDQ5Ni4xNmwxNjEuMjEtNDQ0LjczLDE2MS4yMSw0NDQuNzNoLTMyMi40MVoiLz4KICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIyODg0LjMzIDYyMy4yNSAyODg0LjMzIC4xNSAyNzkwLjAxIC4xNSAyNzkwLjAxIDY0Ny42NiAyNzkwLjAxIDY0Ny44NyAyODU5LjcyIDY0Ny44NyAyODg0LjMzIDY0Ny44NyAyODg0LjMzIDY0Ny42NiAzMTczLjQgNjQ3LjY2IDMxNzMuNCA1ODkuODQgMjkxNy43NCA1ODkuODQgMjg4NC4zMyA2MjMuMjUiLz4KICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIzNDQ5LjczIDU4OS44NCAzNDE2LjMyIDYyMy4yNSAzNDE2LjMyIC4xNSAzMzIxLjk5IC4xNSAzMzIxLjk5IDY0Ny42NiAzNzA1LjM4IDY0Ny42NiAzNzA1LjM4IDU4OS44NCAzNDQ5LjczIDU4OS44NCIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzU5Ljk4LjM3bC05MC4xLDkwLjA3djQ2Ny4zN2w5MC4wNyw5MC4wN2gzNDAuNjdsOTAuMDctOTAuMDdWOTAuNDNMMTEwMC41OS4zN2gtMzQwLjYxWk0xMDk2LjM2LDU5MC4wNmgtMzMyLjE1VjU4LjIxaDMzMi4xNXY1MzEuODVaIi8+CiAgICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iNDI2Ljk1IDU4OS44NSAzODkuNzEgNTg5Ljg1IDE5NS4xNSA1OCAxNzQgLjE1IC45NiAuMTUgLjk2IDY0Ny42NiA5NS4yOSA2NDcuNjYgOTUuMjkgNTggMTMzLjU5IDU4IDMyOC4xNSA1ODkuODUgMzQ5LjI3IDY0Ny42NiA1MjEuMjggNjQ3LjY2IDUyMS4yOCAuMTUgNDI2Ljk1IC4xNSA0MjYuOTUgNTg5Ljg1Ii8+CiAgPC9nPgogIDxnPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMCw5MjQuM3YtMTM1LjE0aDgyLjM2djE1LjI0SDE3LjIzdjQ0LjA4aDYwLjY4djE1LjI0SDE3LjIzdjQ1LjM1aDY1Ljk0djE1LjI0SDBaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yNDUuNCw5MjQuM3YtMTM1LjE0aDI0LjQ5bDMzLjI5LDg1LjI2Yy43OCwyLDEuNjgsNC40OSwyLjY4LDcuNDhzMi4wNSw2LjI0LDMuMTcsOS43NWMxLjEyLDMuNTEsMi4xOSw3LDMuMjIsMTAuNDgsMS4wMywzLjQ4LDEuOTMsNi43LDIuNzIsOS42NmgtMy44MWMuODUtMi43OCwxLjc4LTUuODgsMi44MS05LjMsMS4wMy0zLjQxLDIuMS02Ljg5LDMuMjItMTAuNDMsMS4xMi0zLjU0LDIuMTktNi44NSwzLjIyLTkuOTMsMS4wMy0zLjA4LDEuOTMtNS42NSwyLjcyLTcuNzFsMzIuODMtODUuMjZoMjQuNTh2MTM1LjE0aC0xNi45NnYtNzcuMTljMC0yLjc4LjAxLTUuOTUuMDUtOS41Mi4wMy0zLjU3LjA5LTcuMzIuMTgtMTEuMjUuMDktMy45My4xOC03LjkyLjI3LTExLjk3LjA5LTQuMDUuMTctNy45OC4yMy0xMS43OWgxLjQ1Yy0xLjI3LDQuMTctMi42Miw4LjQyLTQuMDQsMTIuNzQtMS40Miw0LjMyLTIuODEsOC41LTQuMTcsMTIuNTItMS4zNiw0LjAyLTIuNjUsNy43LTMuODUsMTEuMDItMS4yMSwzLjMzLTIuMjQsNi4wOC0zLjA4LDguMjVsLTMwLjIsNzcuMTloLTE0Ljk3bC0zMC42Ni03Ny4xOWMtLjg1LTIuMTItMS44NS00Ljc5LTIuOTktOC4wMy0xLjE1LTMuMjMtMi40LTYuODMtMy43Ni0xMC43OS0xLjM2LTMuOTYtMi43Ny04LjEzLTQuMjItMTIuNTItMS40NS00LjM4LTIuOTMtOC43OC00LjQ0LTEzLjJoMS42M2MuMTIsMy4zOS4yMyw3LjA1LjMyLDEwLjk3LjA5LDMuOTMuMTcsNy45MS4yMywxMS45My4wNiw0LjAyLjEyLDcuODkuMTgsMTEuNjEuMDYsMy43Mi4wOSw3LjA2LjA5LDEwLjAydjc3LjE5aC0xNi40MloiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTU0Ni45NCw5MjQuM3YtMTM1LjE0aDQ2LjI2YzEwLjUyLDAsMTkuMTgsMS45MiwyNS45OSw1Ljc2LDYuOCwzLjg0LDExLjg1LDksMTUuMTUsMTUuNDYsMy4yOSw2LjQ3LDQuOTQsMTMuNzMsNC45NCwyMS43N3MtMS42NSwxNS4zMy00Ljk0LDIxLjg2Yy0zLjMsNi41My04LjMzLDExLjczLTE1LjEsMTUuNi02Ljc3LDMuODctMTUuNDIsNS44LTI1Ljk0LDUuOGgtMzIuNzR2LTE1LjE1aDMxLjkzYzcuMTMsMCwxMi44OC0xLjIyLDE3LjIzLTMuNjdzNy41MS01LjgsOS40OC0xMC4wN2MxLjk2LTQuMjYsMi45NS05LjA1LDIuOTUtMTQuMzhzLS45OC0xMC4wOC0yLjk1LTE0LjI5Yy0xLjk3LTQuMi01LjE0LTcuNTEtOS41Mi05LjkzLTQuMzktMi40Mi0xMC4xNy0zLjYzLTE3LjM3LTMuNjNoLTI4LjEydjEyMGgtMTcuMjNaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik03OTkuMzIsOTI0LjN2LTEzNS4xNGg0Ni4yNmMxMC41MiwwLDE5LjE4LDEuOCwyNS45OSw1LjQsNi44LDMuNiwxMS44NSw4LjU0LDE1LjE1LDE0LjgzLDMuMjksNi4yOSw0Ljk0LDEzLjQ2LDQuOTQsMjEuNXMtMS42NSwxNS4xNS00Ljk0LDIxLjMxYy0zLjMsNi4xNy04LjMzLDEwLjk5LTE1LjEsMTQuNDctNi43NywzLjQ4LTE1LjQyLDUuMjItMjUuOTQsNS4yMmgtMzYuNzN2LTE1LjMzaDM1LjkyYzcuMTMsMCwxMi44Ni0xLjA0LDE3LjE5LTMuMTMsNC4zMi0yLjA5LDcuNDgtNS4wNSw5LjQ4LTguODksMi0zLjg0LDIuOTktOC4zOSwyLjk5LTEzLjY1cy0xLTEwLjA1LTIuOTktMTQuMDFjLTItMy45Ni01LjE3LTcuMDQtOS41Mi05LjI1LTQuMzUtMi4yMS0xMC4xMy0zLjMxLTE3LjMyLTMuMzFoLTI4LjEydjEyMGgtMTcuMjNaTTg3Ni45Niw5MjQuM2wtMzIuNjUtNjAuODZoMTkuNDFsMzMuMiw2MC44NmgtMTkuOTVaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMDUyLjYsOTI0LjN2LTEzNS4xNGg4Mi4zNnYxNS4yNGgtNjUuMTJ2NDQuMDhoNjAuNjh2MTUuMjRoLTYwLjY4djQ1LjM1aDY1Ljk0djE1LjI0aC04My4xN1oiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEyOTgsOTI0LjN2LTEzNS4xNGg4Mi4zNnYxNS4yNGgtNjUuMTJ2NDQuMDhoNjAuNjh2MTUuMjRoLTYwLjY4djQ1LjM1aDY1Ljk0djE1LjI0aC04My4xN1oiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE1NDMuNCw5MjQuM3YtMTM1LjE0aDIwLjMybDU0Ljk2LDg2LjQ0YzEuNDUsMi4yNCwzLjIsNS4xMSw1LjI2LDguNjIsMi4wNSwzLjUxLDQuMjgsNy40Nyw2LjY3LDExLjg4LDIuMzksNC40MSw0LjczLDkuMTMsNy4wMywxNC4xNWgtMi40NWMtLjU0LTUuMi0uOTQtMTAuMTctMS4xOC0xNC45Mi0uMjQtNC43NS0uMzktOS4xMi0uNDUtMTMuMTEtLjA2LTMuOTktLjA5LTcuMzgtLjA5LTEwLjE2di04Mi45aDE3LjIzdjEzNS4xNGgtMjAuNWwtNDguOTgtNzYuOTFjLTIuMjQtMy41Ny00LjQ5LTcuMjQtNi43Ni0xMS4wMi0yLjI3LTMuNzgtNC44NS04LjI1LTcuNzUtMTMuNDItMi45LTUuMTctNi41LTExLjU2LTEwLjc5LTE5LjE4aDMuMTdjLjMsNi43MS41NywxMi45MS44MiwxOC41OS4yNCw1LjY4LjQ0LDEwLjY0LjU5LDE0Ljg3LjE1LDQuMjMuMjMsNy41Ni4yMyw5Ljk4djc3LjFoLTE3LjMyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTgzNC4zMiw3ODkuMTV2MTM1LjE0aC0xNy4yM3YtMTM1LjE0aDE3LjIzWk0xODU5LjI3LDkyNC4zaC0zMi42NXYtMTUuMjRoMzEuNTZjMTEsMCwyMC4xMi0yLjEsMjcuMzUtNi4zLDcuMjItNC4yLDEyLjYyLTEwLjIzLDE2LjE5LTE4LjA5LDMuNTctNy44Niw1LjM1LTE3LjI2LDUuMzUtMjguMjFzLTEuNzctMjAuMTItNS4zMS0yNy44OWMtMy41NC03Ljc3LTguOC0xMy43NC0xNS43OC0xNy45MXMtMTUuNzEtNi4yNi0yNi4xNy02LjI2aC0zMy45MnYtMTUuMjRoMzUuMWMxMy4xOCwwLDI0LjQ0LDIuNjksMzMuNzksOC4wNyw5LjM0LDUuMzgsMTYuNTEsMTMuMTEsMjEuNSwyMy4xNyw0Ljk5LDEwLjA3LDcuNDgsMjIuMDksNy40OCwzNi4wNXMtMi41MSwyNi4yLTcuNTMsMzYuMzNjLTUuMDIsMTAuMTMtMTIuMzQsMTcuOTEtMjEuOTUsMjMuMzYtOS42MSw1LjQ0LTIxLjI5LDguMTYtMzUuMDEsOC4xNloiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTIxMDIuMTIsNzg5LjE1djEzNS4xNGgtMTcuMjN2LTEzNS4xNGgxNy4yM1oiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTIyNjguNTIsOTI0LjN2LTEzNS4xNGgyNC40OWwzMy4yOSw4NS4yNmMuNzgsMiwxLjY4LDQuNDksMi42OCw3LjQ4czIuMDUsNi4yNCwzLjE3LDkuNzVjMS4xMiwzLjUxLDIuMTksNywzLjIyLDEwLjQ4LDEuMDMsMy40OCwxLjkzLDYuNywyLjcyLDkuNjZoLTMuODFjLjg1LTIuNzgsMS43OC01Ljg4LDIuODEtOS4zLDEuMDMtMy40MSwyLjEtNi44OSwzLjIyLTEwLjQzLDEuMTItMy41NCwyLjE5LTYuODUsMy4yMi05LjkzLDEuMDMtMy4wOCwxLjkzLTUuNjUsMi43Mi03LjcxbDMyLjgzLTg1LjI2aDI0LjU4djEzNS4xNGgtMTYuOTZ2LTc3LjE5YzAtMi43OC4wMS01Ljk1LjA1LTkuNTIuMDMtMy41Ny4wOS03LjMyLjE4LTExLjI1LjA5LTMuOTMuMTgtNy45Mi4yNy0xMS45Ny4wOS00LjA1LjE3LTcuOTguMjMtMTEuNzloMS40NWMtMS4yNyw0LjE3LTIuNjIsOC40Mi00LjA0LDEyLjc0LTEuNDIsNC4zMi0yLjgxLDguNS00LjE3LDEyLjUyLTEuMzYsNC4wMi0yLjY1LDcuNy0zLjg1LDExLjAyLTEuMjEsMy4zMy0yLjI0LDYuMDgtMy4wOCw4LjI1bC0zMC4yLDc3LjE5aC0xNC45N2wtMzAuNjYtNzcuMTljLS44NS0yLjEyLTEuODUtNC43OS0yLjk5LTguMDMtMS4xNS0zLjIzLTIuNC02LjgzLTMuNzYtMTAuNzktMS4zNi0zLjk2LTIuNzctOC4xMy00LjIyLTEyLjUyLTEuNDUtNC4zOC0yLjkzLTguNzgtNC40NC0xMy4yaDEuNjNjLjEyLDMuMzkuMjMsNy4wNS4zMiwxMC45Ny4wOSwzLjkzLjE3LDcuOTEuMjMsMTEuOTMuMDYsNC4wMi4xMiw3Ljg5LjE4LDExLjYxLjA2LDMuNzIuMDksNy4wNi4wOSwxMC4wMnY3Ny4xOWgtMTYuNDJaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yNTcwLjA2LDkyNC4zdi0xMzUuMTRoODIuMzZ2MTUuMjRoLTY1LjEydjQ0LjA4aDYwLjY4djE1LjI0aC02MC42OHY0NS4zNWg2NS45NHYxNS4yNGgtODMuMTdaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yODE1LjQ2LDkyNC4zdi0xMzUuMTRoMjAuMzJsNTQuOTYsODYuNDRjMS40NSwyLjI0LDMuMiw1LjExLDUuMjYsOC42MiwyLjA1LDMuNTEsNC4yOCw3LjQ3LDYuNjcsMTEuODgsMi4zOSw0LjQxLDQuNzMsOS4xMyw3LjAzLDE0LjE1aC0yLjQ1Yy0uNTQtNS4yLS45NC0xMC4xNy0xLjE4LTE0LjkyLS4yNC00Ljc1LS4zOS05LjEyLS40NS0xMy4xMS0uMDYtMy45OS0uMDktNy4zOC0uMDktMTAuMTZ2LTgyLjloMTcuMjN2MTM1LjE0aC0yMC41bC00OC45OC03Ni45MWMtMi4yNC0zLjU3LTQuNDktNy4yNC02Ljc2LTExLjAyLTIuMjctMy43OC00Ljg1LTguMjUtNy43NS0xMy40Mi0yLjktNS4xNy02LjUtMTEuNTYtMTAuNzktMTkuMThoMy4xN2MuMyw2LjcxLjU3LDEyLjkxLjgyLDE4LjU5LjI0LDUuNjguNDQsMTAuNjQuNTksMTQuODcuMTUsNC4yMy4yMyw3LjU2LjIzLDkuOTh2NzcuMWgtMTcuMzJaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zMDgxLjcxLDgwNC4zOXYtMTUuMjRoMTAyLjEzdjE1LjI0aC00Mi4zNnYxMTkuOTFoLTE3LjIzdi0xMTkuOTFoLTQyLjU0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzM5Mi4wNSw5MjYuMTFjLTExLjU1LDAtMjEuODUtMi44LTMwLjg4LTguMzktOS4wNC01LjU5LTE2LjE2LTEzLjU3LTIxLjM2LTIzLjk0LTUuMi0xMC4zNy03LjgtMjIuNjktNy44LTM2Ljk2czIuNi0yNi42OCw3LjgtMzcuMDVjNS4yLTEwLjM3LDEyLjMyLTE4LjM3LDIxLjM2LTIzLjk5LDkuMDQtNS42MiwxOS4zMy04LjQ0LDMwLjg4LTguNDRzMjEuODMsMi44MSwzMC44NCw4LjQ0YzkuMDEsNS42MiwxNi4xLDEzLjYyLDIxLjI3LDIzLjk5LDUuMTcsMTAuMzcsNy43NSwyMi43Miw3Ljc1LDM3LjA1cy0yLjU4LDI2LjU5LTcuNzUsMzYuOTZjLTUuMTcsMTAuMzctMTIuMjYsMTguMzUtMjEuMjcsMjMuOTQtOS4wMSw1LjU5LTE5LjI5LDguMzktMzAuODQsOC4zOVpNMzM5Mi4wNSw5MTAuMTVjOC4wNCwwLDE1LjMxLTIuMDQsMjEuODEtNi4xMiw2LjUtNC4wOCwxMS42Ny0xMC4xLDE1LjUxLTE4LjA1LDMuODQtNy45NSw1Ljc2LTE3LjY3LDUuNzYtMjkuMTZzLTEuOTItMjEuMzktNS43Ni0yOS4zNGMtMy44NC03Ljk1LTkuMDEtMTMuOTctMTUuNTEtMTguMDUtNi41LTQuMDgtMTMuNzctNi4xMi0yMS44MS02LjEycy0xNS40MiwyLjA2LTIxLjk1LDYuMTdjLTYuNTMsNC4xMS0xMS43MiwxMC4xNC0xNS41NiwxOC4wOS0zLjg0LDcuOTUtNS43NiwxNy43LTUuNzYsMjkuMjVzMS45MiwyMS4xOSw1Ljc2LDI5LjExYzMuODQsNy45Miw5LjAyLDEzLjk0LDE1LjU2LDE4LjA1LDYuNTMsNC4xMSwxMy44NSw2LjE3LDIxLjk1LDYuMTdaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zNjU2LjMxLDkyNi42NmMtOS43NCwwLTE4LjE5LTEuNTctMjUuMzUtNC43MnMtMTIuNzgtNy41NC0xNi44Mi0xMy4yYy00LjA1LTUuNjUtNi4zNS0xMi4yNi02Ljg5LTE5LjgyaDE3LjY5Yy40OCw1LjA4LDIuMjEsOS4yNyw1LjE3LDEyLjU2LDIuOTYsMy4zLDYuNzYsNS43NSwxMS4zOCw3LjM1LDQuNjMsMS42LDkuNTcsMi40LDE0LjgzLDIuNCw2LjExLDAsMTEuNTktMSwxNi40Ni0yLjk5LDQuODctMiw4LjcyLTQuODEsMTEuNTYtOC40NCwyLjg0LTMuNjMsNC4yNi03LjgzLDQuMjYtMTIuNjEsMC00LjM1LTEuMjItNy44OS0zLjY3LTEwLjYxcy01LjctNC45Ni05Ljc1LTYuNzFjLTQuMDUtMS43NS04LjUtMy4yOS0xMy4zMy00LjYzbC0xNi4zMy00LjYzYy0xMC44OC0zLjA4LTE5LjM1LTcuNS0yNS40LTEzLjI0LTYuMDUtNS43NC05LjA3LTEzLjA5LTkuMDctMjIuMDQsMC03LjYyLDIuMDUtMTQuMjksNi4xNy0yMCw0LjExLTUuNzEsOS42Ny0xMC4xNCwxNi42OS0xMy4yOSw3LjAxLTMuMTQsMTQuODctNC43MiwyMy41OC00LjcyczE2Ljc1LDEuNTcsMjMuNTgsNC43MmM2LjgzLDMuMTUsMTIuMjMsNy40MiwxNi4xOSwxMi44MywzLjk2LDUuNDEsNi4wNiwxMS41Myw2LjMsMTguMzdoLTE2Ljg3Yy0uNzktNi41OS0zLjkzLTExLjY4LTkuNDMtMTUuMjgtNS41LTMuNi0xMi4yOC01LjQtMjAuMzItNS40LTUuOCwwLTEwLjkuOTUtMTUuMjgsMi44Ni00LjM5LDEuOS03Ljc5LDQuNTEtMTAuMiw3LjgtMi40MiwzLjMtMy42Myw3LjA2LTMuNjMsMTEuMjksMCw0LjcyLDEuNDYsOC41MSw0LjQsMTEuMzgsMi45MywyLjg3LDYuNDEsNS4xMSwxMC40Myw2LjcxLDQuMDIsMS42LDcuNjYsMi44NiwxMC45MywzLjc2bDEzLjUxLDMuNzJjMy42My45Nyw3LjYzLDIuMywxMi4wMiwzLjk5LDQuMzgsMS42OSw4LjU3LDMuOTUsMTIuNTYsNi43NnM3LjI3LDYuMzgsOS44NCwxMC43YzIuNTcsNC4zMiwzLjg1LDkuNjMsMy44NSwxNS45MiwwLDcuMzgtMS45MiwxNC4wMy01Ljc2LDE5Ljk1LTMuODQsNS45My05LjQyLDEwLjYxLTE2LjczLDE0LjA2LTcuMzIsMy40NS0xNi4xOCw1LjE3LTI2LjU4LDUuMTdaIi8+CiAgPC9nPgo8L3N2Zz4="  alt="Nohall Empreendimentos">
+    </a>
+    <nav class="header-nav"><a href="index.html" class="active">Início</a><a href="sobre-nos.html">Sobre Nós</a><a href="atuacao.html">Atuação</a><a href="empreendimentos.html">Empreendimentos</a><a href="portfolio.html">Portfólio</a><a href="contato.html">Contato</a></nav>
+    <a href="lista-privada.html" class="header-cta">Lista Privada →</a>
+    <div class="ham" onclick="document.getElementById('mobNav').classList.add('open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- ── MOBILE NAV ── -->
+
+
+<!-- ── HEADER ── -->
+
+
+<!-- ════════════════════════
+     HERO
+════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-rule"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Incorporação · Projetos · Gestão · Execução</span>
+    </div>
+    <h1 class="hero-heading">Não acreditamos<br>em pressa.</h1>
+    <p class="hero-subtext">Método, critério e permanência.<br>Do terreno à entrega do ativo — Chapecó, SC.</p>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-bar"></div>
+    <span class="hero-scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     MANIFESTO
+════════════════════════ -->
+<section class="manifesto-band">
+  <div class="manifesto-inner">
+    <div class="manifesto-left">
+      <div class="manifesto-label">Essência da Marca</div>
+      <p class="manifesto-text">
+        Acreditamos em método.<br>
+        Em decisão. Em <em>permanência.</em><br>
+        A cidade evolui.<br>
+        O morar também.
+      </p>
+    </div>
+    <div class="manifesto-divider"></div>
+    <div class="manifesto-right">
+      <div class="manifesto-values">
+
+        <div class="mv-item active">
+          <div class="mv-header">
+            <div class="mv-header-left">
+              <span class="mv-num">01 —</span>
+              <span class="mv-word">Transparência</span>
+            </div>
+            <div class="mv-arrow">
+              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#1E1E20" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="mv-body">
+            <div class="mv-body-inner">Construímos relações com base em informação clara e processos abertos. Nada é escondido — do terreno ao contrato.</div>
+          </div>
+        </div>
+
+        <div class="mv-item">
+          <div class="mv-header">
+            <div class="mv-header-left">
+              <span class="mv-num">02 —</span>
+              <span class="mv-word">Critério</span>
+            </div>
+            <div class="mv-arrow">
+              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#1E1E20" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="mv-body">
+            <div class="mv-body-inner">Cada decisão — de terreno, parceiro ou material — passa por uma avaliação rigorosa. Não fazemos por impulso ou por volume.</div>
+          </div>
+        </div>
+
+        <div class="mv-item">
+          <div class="mv-header">
+            <div class="mv-header-left">
+              <span class="mv-num">03 —</span>
+              <span class="mv-word">Método</span>
+            </div>
+            <div class="mv-arrow">
+              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#1E1E20" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="mv-body">
+            <div class="mv-body-inner">Processos estruturados que garantem previsibilidade em todas as etapas — do projeto à entrega. Sem improvisos, sem desvios.</div>
+          </div>
+        </div>
+
+        <div class="mv-item">
+          <div class="mv-header">
+            <div class="mv-header-left">
+              <span class="mv-num">04 —</span>
+              <span class="mv-word">Permanência</span>
+            </div>
+            <div class="mv-arrow">
+              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#1E1E20" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="mv-body">
+            <div class="mv-body-inner">Construímos com intenção de durar. Não perseguimos tendências — criamos patrimônio que valoriza com o tempo.</div>
+          </div>
+        </div>
+
+        <div class="mv-item">
+          <div class="mv-header">
+            <div class="mv-header-left">
+              <span class="mv-num">05 —</span>
+              <span class="mv-word">Postura</span>
+            </div>
+            <div class="mv-arrow">
+              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#1E1E20" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="mv-body">
+            <div class="mv-body-inner">Elegante, mas sem arrogância. Seguros sem ser frios. Nossa postura reflete o que entregamos: consistência e respeito ao cliente.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     O CICLO NOHALL
+════════════════════════ -->
+<section class="ciclo-section">
+  <div class="ciclo-header">
+    <div>
+      <div class="ciclo-label">O Ciclo Nohall</div>
+      <h2 class="ciclo-title">Do terreno<br>à permanência.</h2>
+    </div>
+    <p class="ciclo-desc">A Nohall atua de forma integrada em todas as etapas do ciclo imobiliário — com controle técnico, visão de longo prazo e entrega previsível do início ao fim.</p>
+  </div>
+  <div class="ciclo-steps">
+    <div class="ciclo-step">
+      <span class="ciclo-step-num">01</span>
+      <div class="ciclo-step-bar"></div>
+      <div class="ciclo-step-title">Decisão</div>
+      <p class="ciclo-step-desc">Análise de viabilidade, escolha de terreno e estruturação do empreendimento com visão de longo prazo.</p>
+    </div>
+    <div class="ciclo-step">
+      <span class="ciclo-step-num">02</span>
+      <div class="ciclo-step-bar"></div>
+      <div class="ciclo-step-title">Critério</div>
+      <p class="ciclo-step-desc">Seleção rigorosa de parceiros, fornecedores e materiais. Cada escolha sustenta o padrão do produto final.</p>
+    </div>
+    <div class="ciclo-step">
+      <span class="ciclo-step-num">03</span>
+      <div class="ciclo-step-bar"></div>
+      <div class="ciclo-step-title">Concepção</div>
+      <p class="ciclo-step-desc">Projetos arquitetônicos com coordenação BIM, foco em executabilidade, estética e identidade de produto.</p>
+    </div>
+    <div class="ciclo-step">
+      <span class="ciclo-step-num">04</span>
+      <div class="ciclo-step-bar"></div>
+      <div class="ciclo-step-title">Método</div>
+      <p class="ciclo-step-desc">Gestão técnica integrada com controle de custos, cronograma e interfaces — sem improviso, sem desvios.</p>
+    </div>
+    <div class="ciclo-step">
+      <span class="ciclo-step-num">05</span>
+      <div class="ciclo-step-bar"></div>
+      <div class="ciclo-step-title">Permanência</div>
+      <p class="ciclo-step-desc">Entrega de um ativo que valoriza com o tempo. Construímos patrimônio — não apenas imóveis.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     SERVIÇOS
+════════════════════════ -->
+<section class="services-section">
+  <div class="services-inner">
+    <div class="services-top">
+      <div>
+        <div class="services-label">Nossa Atuação</div>
+        <h2 class="services-title">Inteligência técnica<br>em cada etapa.</h2>
+      </div>
+      <p class="services-note">Incorporação é nosso core. Os serviços complementares existem para garantir a integridade do processo de ponta a ponta.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-card-num">01 —</span>
+        <div class="service-card-title">Projetos Arquitetônicos</div>
+        <p class="service-card-desc">Concepção e desenvolvimento de projetos com coordenação de disciplinas e alinhamento estético com o padrão do empreendimento.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card-num">02 —</span>
+        <div class="service-card-title">Gestão de Projetos</div>
+        <p class="service-card-desc">Coordenação técnica BIM integrada para antecipar riscos, organizar interfaces e garantir a viabilidade de cada decisão ao longo do ciclo.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card-num">03 —</span>
+        <div class="service-card-title">Construção & Execução</div>
+        <p class="service-card-desc">Administração e execução de obras com controle de qualidade, custos e prazos — entregando previsibilidade ao cliente e ao investidor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     PORTFÓLIO — galeria
+════════════════════════ -->
+<section class="portfolio-section">
+  <div class="portfolio-header">
+    <div>
+      <div class="portfolio-label">Portfólio</div>
+      <h2 class="portfolio-title">Trabalhos<br>desenvolvidos.</h2>
+    </div>
+    <a href="portfolio.html" class="portfolio-link">Ver portfólio completo →</a>
+  </div>
+  <div class="gallery-viewport">
+        <div class="gallery-track">
+      <div class="gallery-card"><img src="images/empreendimentos/casa-jbl.png" alt="Casa JBL" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa JBL</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-aurora.png" alt="Casa Aurora" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Aurora</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-bossa.png" alt="Casa Bossa" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Bossa</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-elisios.png" alt="Casa Elísios" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Elísios</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/rush-wellness.png" alt="RUSH Wellness" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">RUSH Wellness</div><div class="gallery-cat">Comercial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-onix.png" alt="Casa Ônix" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ônix</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/manhattan-residence.png" alt="Manhattan Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Manhattan Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-agata.png" alt="Casa Ágata" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ágata</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/villa-residence.png" alt="Villa Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Villa Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/serena-residence.png" alt="Serena Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Serena Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/urban-residence.png" alt="Urban Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Urban Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-ma.png" alt="Casa MA" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa MA</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-jfm.png" alt="Casa JFM" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa JFM</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-madu.png" alt="Casa Madu" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Madu</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-varanda.png" alt="Casa Varanda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Varanda</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/colline-residence.png" alt="Colline Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Colline Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/nh-residence.png" alt="NH Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">NH Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/porto-esmeralda.png" alt="Porto Esmeralda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Porto Esmeralda</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/retrofit-residence.png" alt="Retrofit Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Retrofit Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/ametista-residence.png" alt="Ametista Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Ametista Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/wr1-residence.png" alt="WR1 Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">WR1 Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <!-- Duplicado para loop infinito -->
+      <div class="gallery-card"><img src="images/empreendimentos/casa-jbl.png" alt="Casa JBL" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa JBL</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-aurora.png" alt="Casa Aurora" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Aurora</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-bossa.png" alt="Casa Bossa" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Bossa</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-elisios.png" alt="Casa Elísios" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Elísios</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/rush-wellness.png" alt="RUSH Wellness" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">RUSH Wellness</div><div class="gallery-cat">Comercial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-onix.png" alt="Casa Ônix" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ônix</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/manhattan-residence.png" alt="Manhattan Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Manhattan Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-agata.png" alt="Casa Ágata" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ágata</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/villa-residence.png" alt="Villa Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Villa Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/serena-residence.png" alt="Serena Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Serena Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/urban-residence.png" alt="Urban Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Urban Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-ma.png" alt="Casa MA" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa MA</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-jfm.png" alt="Casa JFM" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa JFM</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-madu.png" alt="Casa Madu" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Madu</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-varanda.png" alt="Casa Varanda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Varanda</div><div class="gallery-cat">Residencial</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/colline-residence.png" alt="Colline Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Colline Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/nh-residence.png" alt="NH Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">NH Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/porto-esmeralda.png" alt="Porto Esmeralda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Porto Esmeralda</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/retrofit-residence.png" alt="Retrofit Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Retrofit Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/ametista-residence.png" alt="Ametista Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Ametista Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/wr1-residence.png" alt="WR1 Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">WR1 Residence</div><div class="gallery-cat">Alto Padrão</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     NÚMEROS
+════════════════════════ -->
+<section class="numbers-section">
+  <div class="numbers-inner">
+    <div class="numbers-label">Nosso impacto em números</div>
+    <div class="numbers-grid">
+      <div class="number-item">
+        <div class="number-value">+R$ 27M</div>
+        <div class="number-bar"></div>
+        <div class="number-label">Administração de obras</div>
+        <div class="number-desc">Em CAPEX nos últimos 3 anos</div>
+      </div>
+      <div class="number-item">
+        <div class="number-value">+R$ 180M</div>
+        <div class="number-bar"></div>
+        <div class="number-label">Projetos Arquitetônicos</div>
+        <div class="number-desc">Em VGV nos últimos 5 anos</div>
+      </div>
+      <div class="number-item">
+        <div class="number-value">+17k m²</div>
+        <div class="number-bar"></div>
+        <div class="number-label">Execução de obra</div>
+        <div class="number-desc">Nos últimos 3 anos</div>
+      </div>
+      <div class="number-item">
+        <div class="number-value">+R$ 391M</div>
+        <div class="number-bar"></div>
+        <div class="number-label">Gestão de Projetos</div>
+        <div class="number-desc">Em VGV nos últimos 5 anos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     DEPOIMENTOS
+════════════════════════ -->
+<section class="testimonials-section">
+  <div class="testimonials-inner">
+    <div class="testimonials-top">
+      <div class="testimonials-label">Clientes</div>
+      <h2 class="testimonials-title">O que dizem<br>quem viveu o processo.</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <span class="t-quote">"</span>
+        <p class="t-text">"Gostaria de agradecer. O trabalho de vocês foi de extrema importância para a execução da nossa casa".</p>
+        <div class="t-line"></div>
+        <div class="t-author">João Batista Lohn</div>
+        <div class="t-role">CEO · Rede Imperatriz Supermercados</div>
+      </div>
+      <div class="testimonial">
+        <span class="t-quote">"</span>
+        <p class="t-text">"Nós amamos demais o projeto! A casa ficou exatamente com a nossa personalidade, totalmente aconchegante e com cara de lar."</p>
+        <div class="t-line"></div>
+        <div class="t-author">Daniela Lusa</div>
+         <div class="t-role">Advogada</div>
+      </div>
+      <div class="testimonial">
+        <span class="t-quote">"</span>
+        <p class="t-text">"Vocês foram fundamentais para o sucesso desse projeto. Profissionais de primeira — parabéns!"</p>
+        <div class="t-line"></div>
+        <div class="t-author">Márcia Dutra</div>
+        <div class="t-role">Apresentadora · ND Notícias</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     CTA BAND
+════════════════════════ -->
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <h2 class="cta-band-title">Faça parte da nossa<br><em>lista privada</em> de investidores.</h2>
+    <a href="lista-privada.html" class="btn-cta" target="_blank" rel="noopener">
+      Entrar na lista →
+    </a>
+  </div>
+</div>
+
+<!-- ════════════════════════
+     FOOTER
+════════════════════════ -->
+
+
+<script>
+// ── Accordion valores ──
+document.querySelectorAll('.mv-item').forEach(function(item) {
+  item.querySelector('.mv-header').addEventListener('click', function() {
+    var isActive = item.classList.contains('active');
+    document.querySelectorAll('.mv-item').forEach(function(i) { i.classList.remove('active'); });
+    if (!isActive) item.classList.add('active');
+  });
+});
+</script>
+
+<script>
+(function() {
+  var hdr = document.getElementById('siteHeader');
+  function update() {
+    hdr.classList.toggle('scrolled', window.scrollY > 10);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
+
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div>
+      <p class="footer-tagline">Construindo patrimônio sólido no Oeste Catarinense.</p>
+      <p class="footer-sub">Nohall Empreendimentos · CNPJ 37.343.214/0001-70<br>Fundada em 2020 · Chapecó — SC</p>
+      <div class="footer-social"><a href="https://www.instagram.com/nohall.empreendimentos" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png" alt="Instagram"></a>
+        <a href="https://www.facebook.com/nohallempreendimentos" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/11062b_362ef89dec51403eb0ee59a21bde967c~mv2.png" alt="Facebook"></a>
+        <a href="https://br.linkedin.com/company/nohalldeentrada" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/11062b_72c275822d4344358ee379f14e7e115f~mv2.png" alt="LinkedIn"></a>
+        <a href="https://www.youtube.com/@Nohallempreendimentos" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/11062b_30de4e7217e64dfdadc3ea03beea7b94~mv2.png" alt="YouTube"></a></div>
+    </div>
+    <div>
+      <div class="footer-nav-label">Navegação</div>
+      <nav class="footer-nav-list">
+        <a href="index.html">Início</a><a href="sobre-nos.html">Sobre Nós</a><a href="atuacao.html">Atuação</a>
+        <a href="empreendimentos.html">Empreendimentos</a><a href="portfolio.html">Portfólio</a><a href="contato.html">Contato</a>
+      </nav>
+    </div>
+    <div>
+      <div class="footer-nav-label">Contato</div>
+      <div class="footer-contact-item"><a href="https://maps.google.com" target="_blank">R. André Lunardi, 1284 — Sala 205<br>Centro, Xaxim — SC, 89825-000</a></div>
+      <div class="footer-contact-item"><a href="https://wa.me/5549999296829">(49) 99929-6829</a> · <a href="https://wa.me/5549998208744">(49) 99820-8744</a></div>
+      <div class="footer-contact-item"><a href="mailto:empreendimentosnohall@gmail.com">empreendimentosnohall@gmail.com</a></div>
+    </div>
+  </div>
+  <div class="footer-wordmark"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FtYWRhXzEiIGRhdGEtbmFtZT0iQ2FtYWRhIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM3MDUuMzggNjQ3LjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6IHdoaXRlOwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTc2NS4zMiA0NTEuNDMgMTgxMC4wNSA0OTYuMTYgMTc2NS4zMiA0OTYuMTYgMTQzMy41NiA0OTYuMTYgMTM4OC44NyA0OTYuMTYgMTQzMy41NiA0NTEuNDYgMTQzMy41NiAuMzcgMTMzOS4yNCAuMzcgMTMzOS4yNCA2NDcuODcgMTQzMy41NiA2NDcuODcgMTQzMy41NiA1NTQuMzMgMTc2NS4zMiA1NTQuMzMgMTc2NS4zMiA2NDcuODcgMTg1OS42NCA2NDcuODcgMTg1OS42NCAuMzcgMTc2NS4zMiAuMzcgMTc2NS4zMiA0NTEuNDMiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yNTkyLjM4LDUxMi4zMUwyNDA2LjcxLDBoLTE2My4zN2wtMTg1LjY3LDUxMi4yOC0xNS4xMiw0MS42OS0zMy45LDkzLjU0aDEwMC4yOWwyMi4zMy02MS42Mi0zMS45Mi0zMS45Mmg0NTEuMzdsLTMxLjk4LDMxLjk4LDIyLjM0LDYxLjU2aDEwMC4zMmwtMzMuOS05My41NC0xNS4xMi00MS42NlpNMjE2My44LDQ5Ni4xNmwxNjEuMjEtNDQ0LjczLDE2MS4yMSw0NDQuNzNoLTMyMi40MVoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMjg4NC4zMyA2MjMuMjUgMjg4NC4zMyAuMTUgMjc5MC4wMSAuMTUgMjc5MC4wMSA2NDcuNjYgMjc5MC4wMSA2NDcuODcgMjg1OS43MiA2NDcuODcgMjg4NC4zMyA2NDcuODcgMjg4NC4zMyA2NDcuNjYgMzE3My40IDY0Ny42NiAzMTczLjQgNTg5Ljg0IDI5MTcuNzQgNTg5Ljg0IDI4ODQuMzMgNjIzLjI1Ii8+CiAgPHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjM0NDkuNzMgNTg5Ljg0IDM0MTYuMzIgNjIzLjI1IDM0MTYuMzIgLjE1IDMzMjEuOTkgLjE1IDMzMjEuOTkgNjQ3LjY2IDM3MDUuMzggNjQ3LjY2IDM3MDUuMzggNTg5Ljg0IDM0NDkuNzMgNTg5Ljg0Ii8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzU5Ljk4LjM3bC05MC4xLDkwLjA3djQ2Ny4zN2w5MC4wNyw5MC4wN2gzNDAuNjdsOTAuMDctOTAuMDdWOTAuNDNMMTEwMC41OS4zN2gtMzQwLjYxWk0xMDk2LjM2LDU5MC4wNmgtMzMyLjE1VjU4LjIxaDMzMi4xNXY1MzEuODVaIi8+CiAgPHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjQyNi45NSA1ODkuODUgMzg5LjcxIDU4OS44NSAxOTUuMTUgNTggMTc0IC4xNSAuOTYgLjE1IC45NiA2NDcuNjYgOTUuMjkgNjQ3LjY2IDk1LjI5IDU4IDEzMy41OSA1OCAzMjguMTUgNTg5Ljg1IDM0OS4yNyA2NDcuNjYgNTIxLjI4IDY0Ny42NiA1MjEuMjggLjE1IDQyNi45NSAuMTUgNDI2Ljk1IDU4OS44NSIvPgo8L3N2Zz4=" alt="Nohall"></div>
+  <div class="footer-legal">
+    <span>© 2026 Nohall Empreendimentos. Todos os direitos reservados.</span>
+    <div class="footer-legal-links"><a href="politica-de-privacidade.html">Privacidade</a><a href="acessibilidade.html">Acessibilidade</a></div>
+  </div>
+</footer>
+<script>(function(){var h=document.getElementById('siteHeader');function u(){h.classList.toggle('scrolled',window.scrollY>10);}window.addEventListener('scroll',u,{passive:true});u();})();</script>
+</body>
+</html>
