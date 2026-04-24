@@ -538,9 +538,10 @@ async function loadIFCFile(url, disc, modelId) {
   const data = new Uint8Array(buffer);
 
   // 2. Abrir modelo no web-ifc
-  const model = ifcAPI.OpenModel(data, {
-    COORDINATE_TO_ORIGIN: true,
-    USE_FAST_BOOLS: true,
+const loader = new IFCLoader();
+loader.ifcManager.setWasmPath('./vendor/web-ifc/');
+const model = await loader.loadAsync(url);
+scene.add(model);
   });
 
   // 3. Extrair geometria
