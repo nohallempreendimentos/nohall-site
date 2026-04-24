@@ -387,7 +387,7 @@ async function initWebIFC() {
   try {
     ifcAPI = new WebIFC.IfcAPI();
     // Usa o WASM do CDN do unpkg — não precisa hospedar localmente
-    ifcAPI.SetWasmPath('/nohall-site/wasm/');
+    ifcAPI.SetWasmPath('./vendor/web-ifc/', false);
     await ifcAPI.Init();
     console.log('[web-ifc] Engine inicializada com sucesso');
   } catch(e) {
