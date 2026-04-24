@@ -1,11 +1,57 @@
 {
-  "_instrucoes": "Adicione seus projetos aqui. Cada disciplina é um arquivo IFC separado (Cloudflare R2)",
+  "_instrucoes": "Adicione seus projetos aqui. Cada disciplina é um arquivo IFC separado (Cloudflare R2). URLs absolutas são usadas automaticamente.",
   "projects": [
+    {
+      "id": "porto-esmeralda",
+      "name": "Porto Esmeralda",
+      "location": "Balneário Camboriú — SC",
+      "status": "Arquitetura",
+      "year": 2026,
+      "description": "Arquitetura Executiva",
+      "thumbnail": "images/empreendimentos/casa-bossa.png",
+      "disciplines": [
+        {
+          "id": "arq",
+          "name": "Arquitetura_Implantação",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/porto-esmeralda/PE_ARQ_EX_IMPLANTA%C3%87%C3%83O_R03.ifc",
+          "color": "#D4C5B0",
+          "visible": true
+        },
+        {
+          "id": "est",
+          "name": "Arquitetura_Torre A",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/porto-esmeralda/PE_ARQ_EX_TORRE%20A_R03.ifc",
+          "color": "#C0A882",
+          "visible": true
+        },
+        {
+          "id": "hid",
+          "name": "Arquitetura_Torre B",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/porto-esmeralda/PE_ARQ_EX_TORRE%20B_R03.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        },
+        {
+          "id": "ele",
+          "name": "Arquitetura_Torre C",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/porto-esmeralda/PE_ARQ_EX_TORRE%20C_R03.ifc",
+          "color": "#F5C842",
+          "visible": true
+        },
+        {
+          "id": "cli",
+          "name": "Arqutitetura_Torre D",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/porto-esmeralda/PE_ARQ_EX_TORRE%20D_R03.ifc",
+          "color": "#7ED1B2",
+          "visible": true
+        }
+      ]
+    },
     {
       "id": "casa-bossa",
       "name": "Casa Bossa",
-      "location": "Chapecó — SC",
-      "status": "Projeto Executivo",
+      "location": "Florianópolis — SC",
+      "status": "Gestão e Compatibilização",
       "year": 2026,
       "description": "Projeto residencial com compatibilização completa entre disciplinas e visualização BIM integrada.",
       "thumbnail": "images/empreendimentos/casa-bossa.png",
@@ -58,6 +104,174 @@
           "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-bossa/CB_G%C3%A1s.ifc",
           "color": "#FF8A65",
           "visible": true
+        }
+      ]
+    },
+    {
+      "id": "casa-jbl",
+      "name": "Casa JBL",
+      "location": "Florianópolis — SC",
+      "status": "Gestão e Compatibilização",
+      "year": 2025,
+      "description": "Residência unifamiliar com compatibilização e gestão BIM completa.",
+      "thumbnail": "images/empreendimentos/casa-jbl.png",
+      "disciplines": [
+        {
+          "id": "arq",
+          "name": "Arquitetura",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jbl/JBL_Arquitetura.ifc",
+          "color": "#D4C5B0",
+          "visible": true
+        },
+        {
+          "id": "est",
+          "name": "Estrutural",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jbl/JBL_Estrutural.ifc",
+          "color": "#C0A882",
+          "visible": true
+        },
+        {
+          "id": "hid",
+          "name": "Hidráulico",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jbl/JBL_Hidraulico.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        },
+        {
+          "id": "san",
+          "name": "Sanitário",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jbl/JBL_Sanit%C3%A1rio.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        },
+        {
+          "id": "ele",
+          "name": "Elétrico",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jbl/JBL_Climatiza%C3%A7%C3%A3o.ifc",
+          "color": "#F5C842",
+          "visible": true
+        },
+        {
+          "id": "auto",
+          "name": "Automação",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jbl/JBL_Automa%C3%A7%C3%A3o.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        },
+        {
+          "id": "cli",
+          "name": "Climatização",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jbl/JBL_Climatiza%C3%A7%C3%A3o.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        },
+        {
+          "id": "pis",
+          "name": "Piscina",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jbl/JBL_Piscina.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "casa-jfm",
+      "name": "Casa JFM",
+      "location": "Governador Celso Ramos — SC",
+      "status": "Gestão e Compatibilização",
+      "year": 2026,
+      "description": "Residência unifamiliar com compatibilização e gestão BIM completa.",
+      "thumbnail": "images/empreendimentos/casa-jfm.png",
+      "disciplines": [
+        {
+          "id": "arq",
+          "name": "Arquitetura",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-jfm/JFM_Arquitetura.ifc",
+          "color": "#D4C5B0",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "casa-varanda",
+      "name": "Casa Varanda",
+      "location": "Florianópolis — SC",
+      "status": "Gestão e Compatibilização",
+      "year": 2025,
+      "description": "Residência unifamiliar com compatibilização e gestão BIM completa.",
+      "thumbnail": "images/empreendimentos/casa-varanda.png",
+      "disciplines": [
+        {
+          "id": "arq",
+          "name": "Arquitetura",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-varanda/CV_Arquitetura.ifc",
+          "color": "#D4C5B0",
+          "visible": true
+        },
+        {
+          "id": "est",
+          "name": "Estrutural",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-varanda/CV_Estrutural.ifc",
+          "color": "#C0A882",
+          "visible": true
+        },
+        {
+          "id": "hid",
+          "name": "Hidrossanitário",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-varanda/CV_Hidrossanutário.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        },
+        {
+          "id": "cli",
+          "name": "Climatização",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-varanda/CV_Climatização.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        },
+        {
+          "id": "ele",
+          "name": "Elétrico",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-varanda/CV_Elétrico.ifc",
+          "color": "#F5C842",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "manhattan-residence",
+      "name": "Manhattan Residence",
+      "location": "Palhoça — SC",
+      "status": "Gestão e Compatibilização",
+      "year": 2023,
+      "description": "Residência multifamiliar com compatibilização BIM.",
+      "thumbnail": "images/empreendimentos/manhattan-residence.png",
+      "disciplines": [
+        {
+          "id": "arq",
+          "name": "Arquitetura",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/manhattan-residence/MAN_Arquitetura.ifc",
+          "color": "#D4C5B0",
+          "visible": true
+               }
+      ]
+    },
+    {
+      "id": "serena-residence",
+      "name": "Serena Residence",
+      "location": "Xanxerê — SC",
+      "status": "Arquitetura",
+      "year": 2024,
+      "description": "Projeto Arquitetônico Autoral Nohall Empreendimentos.",
+      "thumbnail": "images/empreendimentos/serena-residence.png",
+      "disciplines": [
+        {
+          "id": "arq",
+          "name": "Arquitetura",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/serena-residence/SE_Arquitetura.ifc",
+          "color": "#D4C5B0",
+          "visible": true
+       
         }
       ]
     }
