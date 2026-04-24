@@ -423,7 +423,7 @@ function renderGrid() {
   grid.innerHTML = allProjects.map((p, i) => {
     const hasViewer = p.disciplines && p.disciplines.length > 0;
     const thumb = p.thumbnail
-      ? '<img src="' + resolveUrl(p.thumbnail) + '" alt="' + p.name + '" loading="lazy" onerror="this.style.display='none'">' : '';
+      ? `<img src="${resolveUrl(p.thumbnail)}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">` : '';
     const pills = (p.disciplines||[]).map(d =>
       '<span class="ps-disc-tag"><span class="ps-disc-dot" style="background:' + d.color + '"></span>' + d.name + '</span>'
     ).join('');
