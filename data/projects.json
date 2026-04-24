@@ -1,0 +1,65 @@
+{
+  "_instrucoes": "Adicione seus projetos aqui. Cada disciplina é um arquivo IFC separado (Cloudflare R2)",
+  "projects": [
+    {
+      "id": "casa-bossa",
+      "name": "Casa Bossa",
+      "location": "Chapecó — SC",
+      "status": "Projeto Executivo",
+      "year": 2026,
+      "description": "Projeto residencial com compatibilização completa entre disciplinas e visualização BIM integrada.",
+      "thumbnail": "images/empreendimentos/casa-bossa.png",
+      "disciplines": [
+        {
+          "id": "arq",
+          "name": "Arquitetura",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-bossa/CB_Arquitetura.ifc",
+          "color": "#D4C5B0",
+          "visible": true
+        },
+        {
+          "id": "est",
+          "name": "Estrutural",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-bossa/CB_Estrutural.ifc",
+          "color": "#C0A882",
+          "visible": true
+        },
+        {
+          "id": "hid",
+          "name": "Hidrossanitário",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-bossa/CB_Hidrossanit%C3%A1rio.ifc",
+          "color": "#5BA4CF",
+          "visible": true
+        },
+        {
+          "id": "ele",
+          "name": "Elétrico",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-bossa/CB_El%C3%A9trico.ifc",
+          "color": "#F5C842",
+          "visible": true
+        },
+        {
+          "id": "cli",
+          "name": "Climatização",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-bossa/CB_Climatiza%C3%A7%C3%A3o.ifc",
+          "color": "#7ED1B2",
+          "visible": true
+        },
+        {
+          "id": "aut",
+          "name": "Automação",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-bossa/CB_Automa%C3%A7%C3%A3o.ifc",
+          "color": "#B39DDB",
+          "visible": true
+        },
+        {
+          "id": "gas",
+          "name": "Gás",
+          "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/casa-bossa/CB_G%C3%A1s.ifc",
+          "color": "#FF8A65",
+          "visible": true
+        }
+      ]
+    }
+  ]
+}
