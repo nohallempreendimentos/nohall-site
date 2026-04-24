@@ -387,7 +387,7 @@ async function initWebIFC() {
   try {
     ifcAPI = new WebIFC.IfcAPI();
     // Usa o WASM do CDN do unpkg — não precisa hospedar localmente
-    ifcAPI.SetWasmPath('https://unpkg.com/web-ifc@0.0.44/');
+    ifcAPI.SetWasmPath('./wasm/');
     await ifcAPI.Init();
     console.log('[web-ifc] Engine inicializada com sucesso');
   } catch(e) {
