@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <!-- web-ifc: engine WASM profissional para IFC (mesma base do Speckle) -->
-<script src="./vendor/web-ifc/web-ifc-api-iife.js"></script>
+<script src="https://unpkg.com/web-ifc@0.0.57/web-ifc-api-iife.js"></script>
 
 <style>
 @font-face{font-family:'AbhayaLibre';src:url('fonts/AbhayaLibre-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
@@ -387,7 +387,7 @@ async function initWebIFC() {
   try {
     ifcAPI = new WebIFC.IfcAPI();
     // Usa o WASM do CDN do unpkg — não precisa hospedar localmente
-    ifcAPI.SetWasmPath('./vendor/web-ifc/', false);
+    ifcAPI.SetWasmPath('https://unpkg.com/web-ifc@0.0.57/', true);
     await ifcAPI.Init();
     console.log('[web-ifc] Engine inicializada com sucesso');
   } catch(e) {
