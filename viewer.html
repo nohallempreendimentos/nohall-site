@@ -86,7 +86,20 @@ img{display:block;max-width:100%;}
 #app{display:flex;flex-direction:column;min-height:100vh;}
 #projectScreen{position:relative;min-height:100vh;background:var(--white);display:flex;flex-direction:column;}
 #projectScreen.hidden{display:none;}
-.ps-content{max-width:1360px;margin:0 auto;width:100%;padding:112px 52px 80px;}
+
+/* Hero — mesma estrutura do portfólio */
+.ps-hero{position:relative;height:52vh;min-height:320px;max-height:480px;overflow:hidden;display:flex;align-items:flex-end;}
+.ps-hero-bg{position:absolute;inset:0;background-image:url('images/site/imagem.jpg');background-size:cover;background-position:center 40%;filter:brightness(.55) saturate(.85);}
+.ps-hero-gradient{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,30,32,.25) 0%,rgba(30,30,32,.6) 100%);}
+.ps-hero-content{position:relative;z-index:2;max-width:1360px;width:100%;margin:0 auto;padding:0 52px 56px;}
+.ps-hero-eyebrow{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.ps-hero-eyebrow-line{width:40px;height:1px;background:var(--pastel-brown);}
+.ps-hero-eyebrow-label{font-size:9.5px;letter-spacing:3.5px;text-transform:uppercase;color:var(--pastel-brown);font-weight:500;}
+.ps-hero-title{font-family:var(--serif);font-size:clamp(36px,5.5vw,72px);font-weight:400;color:var(--white);line-height:1.05;margin-bottom:10px;}
+.ps-hero-sub{font-size:14px;color:rgba(250,250,248,.55);letter-spacing:.2px;}
+@media(max-width:900px){.ps-hero-content{padding:0 32px 40px;}.ps-hero{min-height:260px;}}
+
+.ps-content{max-width:1360px;margin:0 auto;width:100%;padding:72px 52px 80px;}
 .ps-eyebrow{display:flex;align-items:center;gap:16px;margin-bottom:28px;}
 .ps-eyebrow-line{width:40px;height:1px;background:var(--pastel-brown);}
 .ps-eyebrow-label{font-size:9.5px;letter-spacing:3.5px;text-transform:uppercase;color:var(--pastel-brown);font-weight:500;}
@@ -219,13 +232,21 @@ img{display:block;max-width:100%;}
     </div>
   </header>
 
-  <div class="ps-content" style="padding-top:120px;">
-    <div class="ps-eyebrow">
-      <div class="ps-eyebrow-line"></div>
-      <span class="ps-eyebrow-label">Modelos BIM</span>
+  <!-- Hero com imagem de fundo — garante contraste para o menu transparente -->
+  <div class="ps-hero">
+    <div class="ps-hero-bg"></div>
+    <div class="ps-hero-gradient"></div>
+    <div class="ps-hero-content">
+      <div class="ps-hero-eyebrow">
+        <div class="ps-hero-eyebrow-line"></div>
+        <span class="ps-hero-eyebrow-label">Modelos BIM</span>
+      </div>
+      <h1 class="ps-hero-title">Visualizador<br>de projetos.</h1>
+      <p class="ps-hero-sub">Selecione um projeto para explorar as disciplinas em 3D.</p>
     </div>
-    <h1 class="ps-title">Visualizador<br>de projetos.</h1>
-    <p class="ps-subtitle">Selecione um projeto para explorar as disciplinas em 3D.</p>
+  </div>
+
+  <div class="ps-content">
     <div class="ps-grid" id="projectGrid">
       <div class="ps-loading"><div class="ps-loading-dot"></div><div class="ps-loading-dot"></div><div class="ps-loading-dot"></div></div>
     </div>
