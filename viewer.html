@@ -275,13 +275,17 @@ img{display:block;max-width:100%;}
       <span class="vbar-location" id="vbarLoc">—</span>
     </div>
     <div class="vbar-right">
-      <button class="vbar-btn on" id="btnSolid" onclick="setMode('solid')">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" opacity=".7"/></svg>
-        <span>Sólido</span>
+      <button class="vbar-btn on" id="btnShaded" onclick="setMode('shaded')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" opacity=".8"/></svg>
+        <span>Sombreado</span>
       </button>
-      <button class="vbar-btn" id="btnWire" onclick="setMode('wire')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        <span>Wireframe</span>
+      <button class="vbar-btn" id="btnArctic" onclick="setMode('arctic')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg>
+        <span>Arctic</span>
+      </button>
+      <button class="vbar-btn" id="btnPen" onclick="setMode('pen')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg>
+        <span>Pen</span>
       </button>
       <button class="vbar-btn" id="btnXray" onclick="setMode('xray')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-dasharray="3 3"/></svg>
@@ -340,9 +344,10 @@ img{display:block;max-width:100%;}
         <button class="vtool on" id="tPersp" title="Perspectiva" onclick="setProj('persp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3L3 21l9-4 9 4-2-18H5z"/></svg></button>
         <button class="vtool" id="tOrtho" title="Ortográfico" onclick="setProj('ortho')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="1"/></svg></button>
         <div class="vtool-sep"></div>
-        <button class="vtool on" id="tSolid" onclick="setMode('solid')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" opacity=".7"/></svg></button>
-        <button class="vtool" id="tWire" onclick="setMode('wire')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></button>
-        <button class="vtool" id="tXray" onclick="setMode('xray')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-dasharray="3 3"/></svg></button>
+        <button class="vtool on" id="tShaded" title="Sombreado (cores IFC)" onclick="setMode('shaded')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" opacity=".8"/></svg></button>
+        <button class="vtool" id="tArctic" title="Arctic (branco)" onclick="setMode('arctic')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" fill="currentColor" opacity=".15"/></svg></button>
+        <button class="vtool" id="tPen" title="Pen (outline)" onclick="setMode('pen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg></button>
+        <button class="vtool" id="tXray" title="X-Ray" onclick="setMode('xray')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-dasharray="3 3"/></svg></button>
         <div class="vtool-sep"></div>
         <button class="vtool" title="Ajustar" onclick="fitAll()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg></button>
         <button class="vtool" title="Capturar" onclick="takeScreenshot()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></button>
@@ -463,6 +468,7 @@ function backToProjects() {
   document.getElementById('projectScreen').classList.remove('hidden');
   document.getElementById('viewerScreen').classList.remove('active');
   clearScene();
+  resetProjectOffset();
   // Liberar modelos do web-ifc
   if (ifcAPI) {
     try {
@@ -523,6 +529,8 @@ async function loadDisciplines(disciplines) {
   document.getElementById('sDiscs').textContent   = disciplines.length;
   document.getElementById('sVerts').textContent   = totalVerts > 999 ? (totalVerts/1000).toFixed(1)+'k' : totalVerts;
   renderDiscList(disciplines);
+  // Reaplicar modo visual corrente (preserva escolha do usuário entre projetos)
+  setMode(_currentMode);
   fitAll();
   setTimeout(hideLoading, 600);
 }
@@ -530,107 +538,130 @@ async function loadDisciplines(disciplines) {
 // ═══════════════════════════════════════════════════════
 // CARREGAMENTO IFC VIA web-ifc (WASM)
 // ═══════════════════════════════════════════════════════
+// Cache de materiais por chave RGBA para minimizar draw calls
+const _matCache = new Map();
+function getMaterial(r, g, b, a, baseColor) {
+  const hasColor = (r + g + b) > 0.01;
+  const color    = hasColor ? new THREE.Color(r, g, b) : baseColor;
+  const opaque   = a >= 0.99;
+  const opacity  = opaque ? 1.0 : Math.max(a, 0.25);
+  const key = color.r.toFixed(2)+'|'+color.g.toFixed(2)+'|'+color.b.toFixed(2)+'|'+opacity.toFixed(2);
+  if (_matCache.has(key)) return _matCache.get(key);
+  const mat = new THREE.MeshStandardMaterial({
+    color,
+    roughness:    0.55,
+    metalness:    0.05,
+    transparent:  !opaque,
+    opacity,
+    side:         THREE.DoubleSide,
+    depthWrite:   opaque,
+  });
+  _matCache.set(key, mat);
+  return mat;
+}
+
+// Offset de projeto — calculado do bounding box do 1º modelo, reutilizado pelos demais
+let _projectOffset = null;
+function resetProjectOffset() { _projectOffset = null; _matCache.clear(); }
+
 async function loadIFCFile(url, disc, modelId) {
-  // 1. Buscar o IFC via CORS (suporta Cloudflare R2)
-  const res = await fetch(url, { method: 'GET', mode: 'cors' });
+  const res = await fetch(url, { mode: 'cors' });
   if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + url.split('/').pop());
+  const data = new Uint8Array(await res.arrayBuffer());
 
-  const buffer = await res.arrayBuffer();
-  const data   = new Uint8Array(buffer);
-
-  // 2. Abrir modelo no web-ifc
+  // COORDINATE_TO_ORIGIN: false → preserva as coordenadas reais do projeto IFC
+  // Todos os arquivos do mesmo projeto compartilham o mesmo sistema de coordenadas
   const modelID = ifcAPI.OpenModel(data, {
-    COORDINATE_TO_ORIGIN: true,
-    USE_FAST_BOOLS: false,
-    CIRCLE_SEGMENTS: 12,
+    COORDINATE_TO_ORIGIN: false,
+    USE_FAST_BOOLS: true,
+    CIRCLE_SEGMENTS: 16,
   });
 
   const group     = new THREE.Group();
   group.name      = disc.name;
   const baseColor = new THREE.Color(disc.color || '#C0A882');
-  let   meshCount = 0;
 
-  // 3. StreamAllMeshes — API estável em todas as versões do web-ifc
+  // Acumular geometrias por material (merge → menos draw calls)
+  const buckets = new Map(); // matKey → { mat, pos[], nor[], idx[], voff }
+  const isFirst = !_projectOffset;
+
+  // Bounds para calcular offset se for o 1º modelo do projeto
+  let minX=Infinity, minY=Infinity, minZ=Infinity;
+  let maxX=-Infinity, maxY=-Infinity, maxZ=-Infinity;
+
   ifcAPI.StreamAllMeshes(modelID, (flatMesh) => {
     const geomArr = flatMesh.geometries;
-
     for (let j = 0; j < geomArr.size(); j++) {
       const geomData = geomArr.get(j);
-
-      // Obter vértices e índices da geometria
-      const ifcGeom = ifcAPI.GetGeometry(modelID, geomData.geometryExpressID);
-      const verts   = ifcAPI.GetVertexArray(ifcGeom.GetVertexData(), ifcGeom.GetVertexDataSize());
-      const idxData = ifcAPI.GetIndexArray(ifcGeom.GetIndexData(), ifcGeom.GetIndexDataSize());
-
-      // Liberar memória WASM imediatamente após copiar os dados
+      const ifcGeom  = ifcAPI.GetGeometry(modelID, geomData.geometryExpressID);
+      const verts    = ifcAPI.GetVertexArray(ifcGeom.GetVertexData(), ifcGeom.GetVertexDataSize());
+      const idxRaw   = ifcAPI.GetIndexArray(ifcGeom.GetIndexData(), ifcGeom.GetIndexDataSize());
       ifcGeom.delete();
+      if (!verts || !verts.length || !idxRaw || !idxRaw.length) continue;
 
-      if (!verts || !verts.length || !idxData || !idxData.length) continue;
+      const mat4 = new THREE.Matrix4().fromArray(geomData.flatTransformation);
+      const mat  = getMaterial(
+        geomData.color.x, geomData.color.y,
+        geomData.color.z, geomData.color.w, baseColor
+      );
+      const key = mat.uuid;
+      if (!buckets.has(key)) buckets.set(key, { mat, pos:[], nor:[], idx:[], voff:0 });
+      const bkt = buckets.get(key);
 
-      // web-ifc entrega stride 6: x,y,z,nx,ny,nz por vértice
-      const numVerts = verts.length / 6;
-      const positions = new Float32Array(numVerts * 3);
-      const normals   = new Float32Array(numVerts * 3);
-
-      for (let k = 0; k < numVerts; k++) {
-        const src = k * 6;
-        const dst = k * 3;
-        positions[dst]     = verts[src];
-        positions[dst + 1] = verts[src + 1];
-        positions[dst + 2] = verts[src + 2];
-        normals[dst]       = verts[src + 3];
-        normals[dst + 1]   = verts[src + 4];
-        normals[dst + 2]   = verts[src + 5];
+      const nv = verts.length / 6;
+      for (let k = 0; k < nv; k++) {
+        const s = k * 6;
+        // Aplicar transform do elemento
+        const v = new THREE.Vector3(verts[s], verts[s+1], verts[s+2]).applyMatrix4(mat4);
+        if (isFirst) {
+          if(v.x<minX)minX=v.x; if(v.x>maxX)maxX=v.x;
+          if(v.y<minY)minY=v.y; if(v.y>maxY)maxY=v.y;
+          if(v.z<minZ)minZ=v.z; if(v.z>maxZ)maxZ=v.z;
+        }
+        // Guardar posição ainda sem offset (aplicado depois)
+        bkt.pos.push(v.x, v.y, v.z);
+        const nrm = new THREE.Vector3(verts[s+3], verts[s+4], verts[s+5]).transformDirection(mat4);
+        bkt.nor.push(nrm.x, nrm.y, nrm.z);
       }
-
-      const bufGeo = new THREE.BufferGeometry();
-      bufGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      bufGeo.setAttribute('normal',   new THREE.BufferAttribute(normals,   3));
-      bufGeo.setIndex(new THREE.BufferAttribute(new Uint32Array(idxData), 1));
-      bufGeo.computeBoundingSphere();
-
-      // Usar a cor real do IFC (RGBA) se disponível
-      const cr = geomData.color.x;
-      const cg = geomData.color.y;
-      const cb = geomData.color.z;
-      const ca = geomData.color.w;
-      const hasColor = (cr + cg + cb) > 0.01;
-
-      const mat = new THREE.MeshPhongMaterial({
-        color:       hasColor ? new THREE.Color(cr, cg, cb) : baseColor,
-        transparent: ca < 0.99,
-        opacity:     ca < 0.99 ? Math.max(ca, 0.35) : 0.92,
-        side:        THREE.DoubleSide,
-        shininess:   40,
-        depthWrite:  ca >= 0.99,
-      });
-
-      const mesh = new THREE.Mesh(bufGeo, mat);
-
-      // Aplicar transformação local da geometria
-      mesh.applyMatrix4(new THREE.Matrix4().fromArray(geomData.flatTransformation));
-      mesh.castShadow    = true;
-      mesh.receiveShadow = true;
-      mesh.userData = {
-        ifcType:  'IFCElement',
-        disc:      disc.name,
-        expressId: flatMesh.expressID,
-        modelId,
-      };
-
-      group.add(mesh);
-      meshCount++;
+      for (let k = 0; k < idxRaw.length; k++) bkt.idx.push(idxRaw[k] + bkt.voff);
+      bkt.voff += nv;
     }
   });
 
-  // 4. Fechar modelo para liberar memória WASM
   ifcAPI.CloseModel(modelID);
 
-  if (meshCount === 0) {
-    throw new Error('Geometria vazia — verifique se o arquivo IFC é válido');
+  // Calcular offset uma única vez (1º modelo → centro XY, piso Z)
+  if (isFirst && minX !== Infinity) {
+    const cx = (minX+maxX)/2, cy = (minY+maxY)/2;
+    _projectOffset = { x: cx, y: cy, z: minZ };
+    console.log('[offset] calculado:', cx.toFixed(1), cy.toFixed(1), minZ.toFixed(1));
+  }
+  const off = _projectOffset || { x:0, y:0, z:0 };
+
+  // Construir meshes mesclados e subtrair offset
+  let meshCount = 0;
+  for (const [, bkt] of buckets) {
+    if (!bkt.pos.length) continue;
+    // Subtrair offset de todas as posições
+    for (let i = 0; i < bkt.pos.length; i += 3) {
+      bkt.pos[i]   -= off.x;
+      bkt.pos[i+1] -= off.y;
+      bkt.pos[i+2] -= off.z;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(bkt.pos), 3));
+    geo.setAttribute('normal',   new THREE.BufferAttribute(new Float32Array(bkt.nor), 3));
+    geo.setIndex(new THREE.BufferAttribute(new Uint32Array(bkt.idx), 1));
+    geo.computeBoundingSphere();
+    const mesh = new THREE.Mesh(geo, bkt.mat);
+    mesh.castShadow = mesh.receiveShadow = true;
+    mesh.userData   = { disc: disc.name, ifcType: 'IFCElement', modelId };
+    group.add(mesh);
+    meshCount++;
   }
 
-  console.log('[IFC] ' + disc.name + ': ' + meshCount + ' malhas carregadas');
+  if (meshCount === 0) throw new Error('Geometria vazia — verifique se o IFC é válido');
+  console.log('[IFC] ' + disc.name + ': ' + meshCount + ' draw calls');
   return group;
 }
 
@@ -681,41 +712,42 @@ function initThree() {
   const vp     = document.getElementById('vviewport');
 
   renderer = new THREE.WebGLRenderer({ canvas, antialias:true, preserveDrawingBuffer:true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.setClearColor(0x1A1A1C);
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));   // 1.5 max → melhor perf
+  renderer.setClearColor(0x1E1E22);
+  renderer.shadowMap.enabled = false;   // desligado: modelos BIM grandes travam com shadow
+  renderer.outputEncoding = typeof THREE.sRGBEncoding !== 'undefined' ? THREE.sRGBEncoding : 3001;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x1A1A1C);
-  scene.fog = new THREE.FogExp2(0x1A1A1C, 0.001);
+  scene.background = new THREE.Color(0x1A1A1E);
+  scene.fog = new THREE.FogExp2(0x1A1A1E, 0.0005);
 
-  camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10000);
+  camera = new THREE.PerspectiveCamera(45, 1, 0.1, 50000);
   camera.position.set(20, 16, 24);
   camera.lookAt(0, 0, 0);
 
-  orthoCamera = new THREE.OrthographicCamera(-10, 10, 10, -10, -5000, 10000);
+  orthoCamera = new THREE.OrthographicCamera(-10, 10, 10, -10, -50000, 50000);
   orthoCamera.position.copy(camera.position);
   orthoCamera.lookAt(0, 0, 0);
 
-  // Iluminação
-  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-  const d1 = new THREE.DirectionalLight(0xfff5e8, 1.4);
-  d1.position.set(15, 28, 15);
-  d1.castShadow = true;
-  d1.shadow.mapSize.set(2048, 2048);
-  d1.shadow.camera.near = 0.1;
-  d1.shadow.camera.far = 1000;
-  d1.shadow.camera.left = -200; d1.shadow.camera.right = 200;
-  d1.shadow.camera.top  =  200; d1.shadow.camera.bottom= -200;
+  // Iluminação estilo Speckle: ambiente generoso + dois direcionais assimétricos
+  scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+  const d1 = new THREE.DirectionalLight(0xfff8f0, 1.6);   // luz quente principal
+  d1.position.set(1, 2.5, 1.5);
+  d1.position.normalize();
   scene.add(d1);
-  const d2 = new THREE.DirectionalLight(0xc8e0ff, 0.5);
-  d2.position.set(-12, 8, -12);
+  const d2 = new THREE.DirectionalLight(0xd0e8ff, 0.7);   // preenchimento frio oposto
+  d2.position.set(-1, 0.5, -1);
+  d2.position.normalize();
   scene.add(d2);
-  scene.add(new THREE.HemisphereLight(0xfff5e8, 0x2c2a28, 0.5));
+  // Hemisphere sky/ground para diferençar teto e piso
+  scene.add(new THREE.HemisphereLight(0xfff5e0, 0x404040, 0.6));
 
-  // Grid
-  const grid = new THREE.GridHelper(500, 100, 0x2a2a2c, 0x252527);
+  // Grid — cor neutra que funciona nos dois fundos
+  const grid = new THREE.GridHelper(500, 100, 0xC8C8C6, 0xD8D8D6);
+  grid.material.opacity = 0.5;
+  grid.material.transparent = true;
   scene.add(grid);
 
   // Eventos
@@ -742,6 +774,8 @@ function animate() {
 
 function clearScene() {
   if (!scene) return;
+  _edgeGroups.forEach((lines, uuid) => { if (lines.parent) lines.parent.remove(lines); });
+  _edgeGroups.clear();
   scene.children
     .filter(c => !(c instanceof THREE.Light) && !(c instanceof THREE.HemisphereLight) && !(c instanceof THREE.GridHelper))
     .forEach(c => scene.remove(c));
@@ -913,14 +947,81 @@ function setProj(p) {
 // ═══════════════════════════════════════════════════════
 // MODOS DE VISUALIZAÇÃO
 // ═══════════════════════════════════════════════════════
+// Guarda as cores originais dos materiais para restaurar no modo Shaded
+const _origColors = new WeakMap();
+// Grupo de arestas (mode Pen)
+const _edgeGroups = new Map(); // mesh.uuid → LineSegments
+
+let _currentMode = 'shaded';
+
 function setMode(m) {
+  _currentMode = m;
+  const bgLight  = new THREE.Color(0xF2F2F0);   // fundo claro (Arctic/Pen)
+  const bgDark   = new THREE.Color(0x1A1A1E);   // fundo escuro (Shaded/XRay)
+  const fogLight = new THREE.Color(0xF2F2F0);
+  const fogDark  = new THREE.Color(0x1A1A1E);
+
+  // Limpar edges existentes
+  _edgeGroups.forEach((lines, uuid) => { if (lines.parent) lines.parent.remove(lines); });
+  _edgeGroups.clear();
+
   allMeshes.forEach(mesh => {
-    mesh.material.wireframe   = m==='wire';
-    mesh.material.transparent = m!=='wire';
-    mesh.material.opacity     = m==='xray'?.14 : m==='solid'?.88 : 1;
-    mesh.material.needsUpdate = true;
+    const mat = mesh.material;
+    // Salvar cor original na primeira vez
+    if (!_origColors.has(mat)) _origColors.set(mat, mat.color.clone());
+    const orig = _origColors.get(mat);
+
+    mat.wireframe   = false;
+    mat.needsUpdate = true;
+
+    if (m === 'shaded') {
+      mat.color.copy(orig);
+      mat.transparent = mat.opacity < 0.99;
+      mat.opacity     = mat.transparent ? Math.max(mat.opacity, 0.25) : 1.0;
+      mat.roughness   = 0.55;
+      mat.metalness   = 0.05;
+    } else if (m === 'arctic') {
+      mat.color.set(0xF8F6F3);
+      mat.transparent = false;
+      mat.opacity     = 1.0;
+      mat.roughness   = 0.85;
+      mat.metalness   = 0.0;
+    } else if (m === 'pen') {
+      mat.color.set(0xF0EEE9);
+      mat.transparent = false;
+      mat.opacity     = 1.0;
+      mat.roughness   = 1.0;
+      mat.metalness   = 0.0;
+      // Adicionar outline edges (LineSegments)
+      const edges = new THREE.EdgesGeometry(mesh.geometry, 15); // 15° = omite faces coplanares
+      const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
+        color: 0x1A1A1E, linewidth: 1, transparent: false,
+      }));
+      lines.renderOrder = 1;
+      mesh.add(lines);
+      _edgeGroups.set(mesh.uuid, lines);
+    } else if (m === 'xray') {
+      mat.color.copy(orig);
+      mat.transparent = true;
+      mat.opacity     = 0.12;
+      mat.roughness   = 0.55;
+      mat.metalness   = 0.05;
+    }
+    mat.needsUpdate = true;
   });
-  ['Wire','Solid','Xray'].forEach(id => {
+
+  // Fundo e neblina conforme modo
+  const useDark = (m === 'shaded' || m === 'xray');
+  const bg  = useDark ? bgDark  : bgLight;
+  const fog = useDark ? fogDark : fogLight;
+  if (scene) {
+    scene.background = bg;
+    if (scene.fog) { scene.fog.color = fog; }
+    renderer.setClearColor(bg);
+  }
+
+  // Botões ativos
+  ['Shaded','Arctic','Pen','Xray'].forEach(id => {
     document.getElementById('btn'+id)?.classList.remove('on');
     document.getElementById('t'+id)?.classList.remove('on');
   });
