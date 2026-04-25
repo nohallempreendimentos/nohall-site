@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <!-- web-ifc: engine WASM profissional para IFC (mesma base do Speckle) -->
-<script src="https://unpkg.com/web-ifc@0.0.57/web-ifc-api-iife.js"></script>
+<script src="./vendor/web-ifc/web-ifc-api-iife.js"></script>
 
 <style>
 @font-face{font-family:'AbhayaLibre';src:url('fonts/AbhayaLibre-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
@@ -319,7 +319,7 @@ img{display:block;max-width:100%;}
           <div class="vstat"><div class="vstat-val" id="sStatus">—</div><div class="vstat-lbl">Status</div></div>
         </div>
       </div>
-      <div class="vsidebar-foot">Engine: web-ifc (WASM)<br>WASM via CDN · IFC via Cloudflare R2.</div>
+      <div class="vsidebar-foot">Engine: web-ifc (WASM)<br>Arquivos IFC via Cloudflare R2.</div>
     </div>
     <div class="vviewport" id="vviewport">
       <canvas id="vcanvas"></canvas>
@@ -387,7 +387,7 @@ async function initWebIFC() {
   try {
     ifcAPI = new WebIFC.IfcAPI();
     // Usa o WASM do CDN do unpkg — não precisa hospedar localmente
-    ifcAPI.SetWasmPath('https://unpkg.com/web-ifc@0.0.57/', true);
+    ifcAPI.SetWasmPath('./vendor/web-ifc/', false);
     await ifcAPI.Init();
     console.log('[web-ifc] Engine inicializada com sucesso');
   } catch(e) {
@@ -531,97 +531,106 @@ async function loadDisciplines(disciplines) {
 // CARREGAMENTO IFC VIA web-ifc (WASM)
 // ═══════════════════════════════════════════════════════
 async function loadIFCFile(url, disc, modelId) {
-  // 1. Buscar o arquivo IFC
-  const res = await fetch(url, { method:'GET', mode:'cors' });
-  if (!res.ok) throw new Error('HTTP ' + res.status + ' ao buscar ' + url);
+  // 1. Buscar o IFC via CORS (suporta Cloudflare R2)
+  const res = await fetch(url, { method: 'GET', mode: 'cors' });
+  if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + url.split('/').pop());
 
   const buffer = await res.arrayBuffer();
-  const data = new Uint8Array(buffer);
+  const data   = new Uint8Array(buffer);
 
   // 2. Abrir modelo no web-ifc
-  const model = ifcAPI.OpenModel(data, {
+  const modelID = ifcAPI.OpenModel(data, {
     COORDINATE_TO_ORIGIN: true,
-    USE_FAST_BOOLS: true,
+    USE_FAST_BOOLS: false,
+    CIRCLE_SEGMENTS: 12,
   });
 
-  // 3. Extrair geometria real e converter para THREE.js
-  const group = new THREE.Group();
-  group.name = disc.name;
+  const group     = new THREE.Group();
+  group.name      = disc.name;
+  const baseColor = new THREE.Color(disc.color || '#C0A882');
+  let   meshCount = 0;
 
-  const baseColor = new THREE.Color(disc.color || '#cccccc');
+  // 3. StreamAllMeshes — API estável em todas as versões do web-ifc
+  ifcAPI.StreamAllMeshes(modelID, (flatMesh) => {
+    const geomArr = flatMesh.geometries;
 
-  ifcAPI.StreamMeshes(model, (mesh) => {
-    const geomData = mesh.geometries;
-    const size = geomData.size();
+    for (let j = 0; j < geomArr.size(); j++) {
+      const geomData = geomArr.get(j);
 
-    for (let i = 0; i < size; i++) {
-      const geom = geomData.get(i);
-      const matrix = geom.flatTransformation;
+      // Obter vértices e índices da geometria
+      const ifcGeom = ifcAPI.GetGeometry(modelID, geomData.geometryExpressID);
+      const verts   = ifcAPI.GetVertexArray(ifcGeom.GetVertexData(), ifcGeom.GetVertexDataSize());
+      const idxData = ifcAPI.GetIndexArray(ifcGeom.GetIndexData(), ifcGeom.GetIndexDataSize());
 
-      const ifcGeom = ifcAPI.GetGeometry(model, geom.geometryExpressID);
-      const verts = ifcAPI.GetVertexArray(ifcGeom.GetVertexData(), ifcGeom.GetVertexDataSize());
-      const indices = ifcAPI.GetIndexArray(ifcGeom.GetIndexData(), ifcGeom.GetIndexDataSize());
+      // Liberar memória WASM imediatamente após copiar os dados
+      ifcGeom.delete();
 
-      const positions = [];
-      const normals = [];
+      if (!verts || !verts.length || !idxData || !idxData.length) continue;
 
-      // web-ifc retorna vértices intercalados: x,y,z,nx,ny,nz
-      for (let j = 0; j < verts.length; j += 6) {
-        positions.push(verts[j], verts[j + 1], verts[j + 2]);
-        normals.push(verts[j + 3], verts[j + 4], verts[j + 5]);
+      // web-ifc entrega stride 6: x,y,z,nx,ny,nz por vértice
+      const numVerts = verts.length / 6;
+      const positions = new Float32Array(numVerts * 3);
+      const normals   = new Float32Array(numVerts * 3);
+
+      for (let k = 0; k < numVerts; k++) {
+        const src = k * 6;
+        const dst = k * 3;
+        positions[dst]     = verts[src];
+        positions[dst + 1] = verts[src + 1];
+        positions[dst + 2] = verts[src + 2];
+        normals[dst]       = verts[src + 3];
+        normals[dst + 1]   = verts[src + 4];
+        normals[dst + 2]   = verts[src + 5];
       }
 
-      const bufferGeometry = new THREE.BufferGeometry();
-      bufferGeometry.setAttribute(
-        'position',
-        new THREE.BufferAttribute(new Float32Array(positions), 3)
-      );
-      bufferGeometry.setAttribute(
-        'normal',
-        new THREE.BufferAttribute(new Float32Array(normals), 3)
-      );
-      bufferGeometry.setIndex(
-        new THREE.BufferAttribute(new Uint32Array(indices), 1)
-      );
+      const bufGeo = new THREE.BufferGeometry();
+      bufGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      bufGeo.setAttribute('normal',   new THREE.BufferAttribute(normals,   3));
+      bufGeo.setIndex(new THREE.BufferAttribute(new Uint32Array(idxData), 1));
+      bufGeo.computeBoundingSphere();
 
-      bufferGeometry.computeBoundingSphere();
+      // Usar a cor real do IFC (RGBA) se disponível
+      const cr = geomData.color.x;
+      const cg = geomData.color.y;
+      const cb = geomData.color.z;
+      const ca = geomData.color.w;
+      const hasColor = (cr + cg + cb) > 0.01;
 
-      const material = new THREE.MeshPhongMaterial({
-        color: baseColor,
-        transparent: true,
-        opacity: 0.88,
-        side: THREE.DoubleSide,
-        shininess: 25,
+      const mat = new THREE.MeshPhongMaterial({
+        color:       hasColor ? new THREE.Color(cr, cg, cb) : baseColor,
+        transparent: ca < 0.99,
+        opacity:     ca < 0.99 ? Math.max(ca, 0.35) : 0.92,
+        side:        THREE.DoubleSide,
+        shininess:   40,
+        depthWrite:  ca >= 0.99,
       });
 
-      const threeMesh = new THREE.Mesh(bufferGeometry, material);
+      const mesh = new THREE.Mesh(bufGeo, mat);
 
-      const mat4 = new THREE.Matrix4();
-      mat4.fromArray(matrix);
-      threeMesh.applyMatrix4(mat4);
-
-      threeMesh.userData = {
-        ifcType: 'IFCElement',
-        disc: disc.name,
-        expressId: mesh.expressID,
+      // Aplicar transformação local da geometria
+      mesh.applyMatrix4(new THREE.Matrix4().fromArray(geomData.flatTransformation));
+      mesh.castShadow    = true;
+      mesh.receiveShadow = true;
+      mesh.userData = {
+        ifcType:  'IFCElement',
+        disc:      disc.name,
+        expressId: flatMesh.expressID,
         modelId,
       };
 
-      threeMesh.castShadow = true;
-      threeMesh.receiveShadow = true;
-
-      group.add(threeMesh);
-
-      ifcGeom.delete();
+      group.add(mesh);
+      meshCount++;
     }
   });
 
-  ifcAPI.CloseModel(model);
+  // 4. Fechar modelo para liberar memória WASM
+  ifcAPI.CloseModel(modelID);
 
-  if (!group.children.length) {
-    throw new Error('Nenhuma geometria encontrada no arquivo IFC');
+  if (meshCount === 0) {
+    throw new Error('Geometria vazia — verifique se o arquivo IFC é válido');
   }
 
+  console.log('[IFC] ' + disc.name + ': ' + meshCount + ' malhas carregadas');
   return group;
 }
 
