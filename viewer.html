@@ -173,7 +173,7 @@ img{display:block;max-width:100%;}
 .vstat-lbl{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,250,248,.22);}
 .vsidebar-foot{margin-top:auto;padding:14px;font-size:9.5px;color:rgba(250,250,248,.15);line-height:1.8;border-top:1px solid rgba(250,250,248,.04);}
 
-.vviewport{flex:1;position:relative;overflow:hidden;background:#1A1A1C;}
+.vviewport{flex:1;position:relative;overflow:hidden;background:#F5F5F3;}
 #vcanvas{width:100%;height:100%;display:block;}
 
 #vloading{position:absolute;inset:0;background:rgba(20,20,22,.96);flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:50;display:none;}
@@ -581,17 +581,60 @@ function getMaterial(r, g, b, a, baseColor) {
   return mat;
 }
 
-// Offset de projeto — calculado do bounding box do 1º modelo, reutilizado pelos demais
+// ═══════════════════════════════════════════════════════
+// OFFSET DE PROJETO
+// ═══════════════════════════════════════════════════════
+// O Revit exporta todos os IFCs com coordenadas relativas ao Ponto Base do Projeto.
+// Basta ler a transformação do IFCSITE (que carrega a origem do projeto) do 1º arquivo
+// e usar como offset fixo para TODOS os arquivos — garantindo alinhamento perfeito.
+// Fallback: mínimo XY global da geometria do 1º arquivo (sem centróide, que variaria).
+
 let _projectOffset = null;
 function resetProjectOffset() { _projectOffset = null; _matCache.clear(); }
+
+function readProjectOrigin(modelID) {
+  // Tentar IFCSITE → RefLatitude/RefLongitude/RefElevation + LocalPlacement
+  // No web-ifc 0.0.57 usamos GetAllItemsOfType para achar o IFCSITE
+  try {
+    const IFCSITE = ifcAPI.GetAllItemsOfType(modelID, WebIFC.IFCSITE, false);
+    if (IFCSITE && IFCSITE.length > 0) {
+      // Pegar a geometria do site para extrair a posição de referência
+      const siteID = IFCSITE[0];
+      const props  = ifcAPI.GetLine(modelID, siteID, false);
+      // ObjectPlacement → posição do site no modelo
+      if (props && props.ObjectPlacement && props.ObjectPlacement.value) {
+        const placementID = props.ObjectPlacement.value;
+        const placement   = ifcAPI.GetLine(modelID, placementID, true);
+        // Navegar pela cadeia de placements para obter coordenadas absolutas
+        if (placement && placement.RelativePlacement) {
+          const rp = placement.RelativePlacement;
+          if (rp && rp.Location && rp.Location.Coordinates) {
+            const coords = rp.Location.Coordinates;
+            if (coords && coords.length >= 3) {
+              const x = coords[0]?.value ?? 0;
+              const y = coords[1]?.value ?? 0;
+              const z = coords[2]?.value ?? 0;
+              if (Math.abs(x) > 0.001 || Math.abs(y) > 0.001) {
+                console.log('[offset] IFCSITE origin:', x.toFixed(2), y.toFixed(2), z.toFixed(2));
+                return { x, y, z };
+              }
+            }
+          }
+        }
+      }
+    }
+  } catch(e) {
+    console.warn('[offset] Erro ao ler IFCSITE:', e.message);
+  }
+  return null; // fallback para cálculo geométrico
+}
 
 async function loadIFCFile(url, disc, modelId) {
   const res = await fetch(url, { mode: 'cors' });
   if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + url.split('/').pop());
   const data = new Uint8Array(await res.arrayBuffer());
 
-  // COORDINATE_TO_ORIGIN: false → preserva as coordenadas reais do projeto IFC
-  // Todos os arquivos do mesmo projeto compartilham o mesmo sistema de coordenadas
+  // COORDINATE_TO_ORIGIN: false → preserva coordenadas reais do Ponto Base do Projeto Revit
   const modelID = ifcAPI.OpenModel(data, {
     COORDINATE_TO_ORIGIN: false,
     USE_FAST_BOOLS: true,
@@ -601,14 +644,15 @@ async function loadIFCFile(url, disc, modelId) {
   const group     = new THREE.Group();
   group.name      = disc.name;
   const baseColor = new THREE.Color(disc.color || '#C0A882');
+  const buckets   = new Map();
+  const isFirst   = !_projectOffset;
 
-  // Acumular geometrias por material (merge → menos draw calls)
-  const buckets = new Map(); // matKey → { mat, pos[], nor[], idx[], voff }
-  const isFirst = !_projectOffset;
+  // Tentar ler origem do IFCSITE antes do StreamAllMeshes
+  let siteOrigin = null;
+  if (isFirst) siteOrigin = readProjectOrigin(modelID);
 
-  // Bounds para calcular offset se for o 1º modelo do projeto
+  // Bounds para fallback (só usados se siteOrigin falhar)
   let minX=Infinity, minY=Infinity, minZ=Infinity;
-  let maxX=-Infinity, maxY=-Infinity, maxZ=-Infinity;
 
   ifcAPI.StreamAllMeshes(modelID, (flatMesh) => {
     const geomArr = flatMesh.geometries;
@@ -632,14 +676,13 @@ async function loadIFCFile(url, disc, modelId) {
       const nv = verts.length / 6;
       for (let k = 0; k < nv; k++) {
         const s = k * 6;
-        // Aplicar transform do elemento
         const v = new THREE.Vector3(verts[s], verts[s+1], verts[s+2]).applyMatrix4(mat4);
-        if (isFirst) {
-          if(v.x<minX)minX=v.x; if(v.x>maxX)maxX=v.x;
-          if(v.y<minY)minY=v.y; if(v.y>maxY)maxY=v.y;
-          if(v.z<minZ)minZ=v.z; if(v.z>maxZ)maxZ=v.z;
+        // Calcular bounds apenas se siteOrigin não disponível
+        if (isFirst && !siteOrigin) {
+          if(v.x<minX)minX=v.x;
+          if(v.y<minY)minY=v.y;
+          if(v.z<minZ)minZ=v.z;
         }
-        // Guardar posição ainda sem offset (aplicado depois)
         bkt.pos.push(v.x, v.y, v.z);
         const nrm = new THREE.Vector3(verts[s+3], verts[s+4], verts[s+5]).transformDirection(mat4);
         bkt.nor.push(nrm.x, nrm.y, nrm.z);
@@ -651,19 +694,21 @@ async function loadIFCFile(url, disc, modelId) {
 
   ifcAPI.CloseModel(modelID);
 
-  // Calcular offset uma única vez (1º modelo → centro XY, piso Z)
-  if (isFirst && minX !== Infinity) {
-    const cx = (minX+maxX)/2, cy = (minY+maxY)/2;
-    _projectOffset = { x: cx, y: cy, z: minZ };
-    console.log('[offset] calculado:', cx.toFixed(1), cy.toFixed(1), minZ.toFixed(1));
+  // Fixar offset do projeto UMA vez — mesmo valor para todos os IFCs subsequentes
+  if (isFirst) {
+    if (siteOrigin) {
+      _projectOffset = siteOrigin;
+    } else if (minX !== Infinity) {
+      // Fallback: mínimo XY (não centróide!) — preserva posições relativas entre arquivos
+      _projectOffset = { x: minX, y: minY, z: minZ };
+      console.log('[offset] fallback minXY:', minX.toFixed(1), minY.toFixed(1), minZ.toFixed(1));
+    }
   }
   const off = _projectOffset || { x:0, y:0, z:0 };
 
-  // Construir meshes mesclados e subtrair offset
   let meshCount = 0;
   for (const [, bkt] of buckets) {
     if (!bkt.pos.length) continue;
-    // Subtrair offset de todas as posições
     for (let i = 0; i < bkt.pos.length; i += 3) {
       bkt.pos[i]   -= off.x;
       bkt.pos[i+1] -= off.y;
@@ -675,8 +720,9 @@ async function loadIFCFile(url, disc, modelId) {
     geo.setIndex(new THREE.BufferAttribute(new Uint32Array(bkt.idx), 1));
     geo.computeBoundingSphere();
     const mesh = new THREE.Mesh(geo, bkt.mat);
-    mesh.castShadow = mesh.receiveShadow = true;
-    mesh.userData   = { disc: disc.name, ifcType: 'IFCElement', modelId };
+    mesh.castShadow    = true;
+    mesh.receiveShadow = true;
+    mesh.userData = { disc: disc.name, ifcType: 'IFCElement', modelId };
     group.add(mesh);
     meshCount++;
   }
@@ -733,16 +779,17 @@ function initThree() {
   const vp     = document.getElementById('vviewport');
 
   renderer = new THREE.WebGLRenderer({ canvas, antialias:true, preserveDrawingBuffer:true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));   // 1.5 max → melhor perf
-  renderer.setClearColor(0x1E1E22);
-  renderer.shadowMap.enabled = false;   // desligado: modelos BIM grandes travam com shadow
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  renderer.setClearColor(0xF5F5F3);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputEncoding = typeof THREE.sRGBEncoding !== 'undefined' ? THREE.sRGBEncoding : 3001;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
+  renderer.toneMappingExposure = 1.05;
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x1A1A1E);
-  scene.fog = new THREE.FogExp2(0x1A1A1E, 0.0005);
+  scene.background = new THREE.Color(0xF5F5F3);
+  // Sem fog — fundo branco não precisa
 
   camera = new THREE.PerspectiveCamera(45, 1, 0.1, 50000);
   camera.position.set(20, 16, 24);
@@ -752,24 +799,35 @@ function initThree() {
   orthoCamera.position.copy(camera.position);
   orthoCamera.lookAt(0, 0, 0);
 
-  // Iluminação estilo Speckle: ambiente generoso + dois direcionais assimétricos
-  scene.add(new THREE.AmbientLight(0xffffff, 1.0));
-  const d1 = new THREE.DirectionalLight(0xfff8f0, 1.6);   // luz quente principal
-  d1.position.set(1, 2.5, 1.5);
-  d1.position.normalize();
-  scene.add(d1);
-  const d2 = new THREE.DirectionalLight(0xd0e8ff, 0.7);   // preenchimento frio oposto
-  d2.position.set(-1, 0.5, -1);
-  d2.position.normalize();
-  scene.add(d2);
-  // Hemisphere sky/ground para diferençar teto e piso
-  scene.add(new THREE.HemisphereLight(0xfff5e0, 0x404040, 0.6));
+  // Iluminação para fundo branco com sombra projetada
+  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
 
-  // Grid — cor neutra que funciona nos dois fundos
-  const grid = new THREE.GridHelper(500, 100, 0xC8C8C6, 0xD8D8D6);
-  grid.material.opacity = 0.5;
-  grid.material.transparent = true;
-  scene.add(grid);
+  const dSun = new THREE.DirectionalLight(0xfff8f0, 1.8); // luz solar principal
+  dSun.position.set(80, 120, 60);
+  dSun.castShadow = true;
+  dSun.shadow.mapSize.set(4096, 4096);
+  dSun.shadow.camera.near = 1;
+  dSun.shadow.camera.far  = 2000;
+  dSun.shadow.camera.left = dSun.shadow.camera.bottom = -500;
+  dSun.shadow.camera.right = dSun.shadow.camera.top   =  500;
+  dSun.shadow.bias = -0.0005;
+  scene.add(dSun);
+
+  const dFill = new THREE.DirectionalLight(0xd8e8ff, 0.5); // preenchimento frio
+  dFill.position.set(-60, 40, -40);
+  scene.add(dFill);
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xd0ccc8, 0.5));
+
+  // Plano de chão — recebe sombra projetada, invisível mas presente
+  const groundMat = new THREE.ShadowMaterial({ opacity: 0.18, transparent: true });
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000), groundMat);
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -0.02; // levemente abaixo do nível zero
+  ground.receiveShadow = true;
+  ground.name = '__ground__';
+  scene.add(ground);
+  // Sem grid
 
   // Eventos
   vp.addEventListener('mousedown', e => {
@@ -795,10 +853,13 @@ function animate() {
 
 function clearScene() {
   if (!scene) return;
-  _edgeGroups.forEach((lines, uuid) => { if (lines.parent) lines.parent.remove(lines); });
+  _edgeGroups.forEach((lines) => { if (lines.parent) lines.parent.remove(lines); });
   _edgeGroups.clear();
+  // Remove apenas grupos de modelo — preserva lights e ground
   scene.children
-    .filter(c => !(c instanceof THREE.Light) && !(c instanceof THREE.HemisphereLight) && !(c instanceof THREE.GridHelper))
+    .filter(c => !(c instanceof THREE.Light) &&
+                 !(c instanceof THREE.HemisphereLight) &&
+                 c.name !== '__ground__')
     .forEach(c => scene.remove(c));
   allMeshes = []; discGroups = {};
 }
@@ -977,18 +1038,15 @@ let _currentMode = 'shaded';
 
 function setMode(m) {
   _currentMode = m;
-  const bgLight  = new THREE.Color(0xF2F2F0);   // fundo claro (Arctic/Pen)
-  const bgDark   = new THREE.Color(0x1A1A1E);   // fundo escuro (Shaded/XRay)
-  const fogLight = new THREE.Color(0xF2F2F0);
-  const fogDark  = new THREE.Color(0x1A1A1E);
+  const bgWhite = new THREE.Color(0xF5F5F3);
+  const bgDark  = new THREE.Color(0x1A1A1E);
 
   // Limpar edges existentes
-  _edgeGroups.forEach((lines, uuid) => { if (lines.parent) lines.parent.remove(lines); });
+  _edgeGroups.forEach((lines) => { if (lines.parent) lines.parent.remove(lines); });
   _edgeGroups.clear();
 
   allMeshes.forEach(mesh => {
     const mat = mesh.material;
-    // Salvar cor original na primeira vez
     if (!_origColors.has(mat)) _origColors.set(mat, mat.color.clone());
     const orig = _origColors.get(mat);
 
@@ -999,24 +1057,23 @@ function setMode(m) {
       mat.color.copy(orig);
       mat.transparent = mat.opacity < 0.99;
       mat.opacity     = mat.transparent ? Math.max(mat.opacity, 0.25) : 1.0;
-      mat.roughness   = 0.55;
-      mat.metalness   = 0.05;
+      mat.roughness   = 0.6;
+      mat.metalness   = 0.0;
     } else if (m === 'arctic') {
-      mat.color.set(0xF8F6F3);
+      mat.color.set(0xF0EEE9);
       mat.transparent = false;
       mat.opacity     = 1.0;
-      mat.roughness   = 0.85;
+      mat.roughness   = 0.9;
       mat.metalness   = 0.0;
     } else if (m === 'pen') {
-      mat.color.set(0xF0EEE9);
+      mat.color.set(0xF8F7F5);
       mat.transparent = false;
       mat.opacity     = 1.0;
       mat.roughness   = 1.0;
       mat.metalness   = 0.0;
-      // Adicionar outline edges (LineSegments)
-      const edges = new THREE.EdgesGeometry(mesh.geometry, 15); // 15° = omite faces coplanares
+      const edges = new THREE.EdgesGeometry(mesh.geometry, 12);
       const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
-        color: 0x1A1A1E, linewidth: 1, transparent: false,
+        color: 0x1A1A1E, linewidth: 1,
       }));
       lines.renderOrder = 1;
       mesh.add(lines);
@@ -1024,22 +1081,23 @@ function setMode(m) {
     } else if (m === 'xray') {
       mat.color.copy(orig);
       mat.transparent = true;
-      mat.opacity     = 0.12;
+      mat.opacity     = 0.10;
       mat.roughness   = 0.55;
-      mat.metalness   = 0.05;
+      mat.metalness   = 0.0;
     }
     mat.needsUpdate = true;
   });
 
-  // Fundo e neblina conforme modo
-  const useDark = (m === 'shaded' || m === 'xray');
-  const bg  = useDark ? bgDark  : bgLight;
-  const fog = useDark ? fogDark : fogLight;
+  const useDark = (m === 'xray');
+  const bg = useDark ? bgDark : bgWhite;
   if (scene) {
     scene.background = bg;
-    if (scene.fog) { scene.fog.color = fog; }
+    scene.fog = null; // sem fog no fundo branco
     renderer.setClearColor(bg);
   }
+
+  // Ajustar sombra do sol conforme modo
+  if (renderer) renderer.shadowMap.enabled = (m !== 'xray');
 
   // Botões ativos
   ['Shaded','Arctic','Pen','Xray'].forEach(id => {
