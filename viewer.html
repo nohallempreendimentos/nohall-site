@@ -296,15 +296,11 @@ img{display:block;max-width:100%;}
       <span class="vbar-location" id="vbarLoc">—</span>
     </div>
     <div class="vbar-right">
-      <button class="vbar-btn on" id="btnShaded" onclick="setMode('shaded')">
+      <button class="vbar-btn" id="btnShaded" onclick="setMode('shaded')">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" opacity=".8"/></svg>
         <span>Sombreado</span>
       </button>
-      <button class="vbar-btn" id="btnArctic" onclick="setMode('arctic')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg>
-        <span>Arctic</span>
-      </button>
-      <button class="vbar-btn" id="btnPen" onclick="setMode('pen')">
+      <button class="vbar-btn on" id="btnPen" onclick="setMode('pen')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg>
         <span>Pen</span>
       </button>
@@ -344,7 +340,7 @@ img{display:block;max-width:100%;}
           <div class="vstat"><div class="vstat-val" id="sStatus">—</div><div class="vstat-lbl">Status</div></div>
         </div>
       </div>
-      <div class="vsidebar-foot">Engine: web-ifc (WASM)<br>Arquivos IFC via Cloudflare R2.</div>
+
     </div>
     <div class="vviewport" id="vviewport">
       <canvas id="vcanvas"></canvas>
@@ -365,9 +361,8 @@ img{display:block;max-width:100%;}
         <button class="vtool on" id="tPersp" title="Perspectiva" onclick="setProj('persp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3L3 21l9-4 9 4-2-18H5z"/></svg></button>
         <button class="vtool" id="tOrtho" title="Ortográfico" onclick="setProj('ortho')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="1"/></svg></button>
         <div class="vtool-sep"></div>
-        <button class="vtool on" id="tShaded" title="Sombreado (cores IFC)" onclick="setMode('shaded')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" opacity=".8"/></svg></button>
-        <button class="vtool" id="tArctic" title="Arctic (branco)" onclick="setMode('arctic')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" fill="currentColor" opacity=".15"/></svg></button>
-        <button class="vtool" id="tPen" title="Pen (outline)" onclick="setMode('pen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg></button>
+        <button class="vtool" id="tShaded" title="Sombreado (cores IFC)" onclick="setMode('shaded')" ><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" opacity=".8"/></svg></button>
+        <button class="vtool on" id="tPen" title="Pen (outline)" onclick="setMode('pen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg></button>
         <button class="vtool" id="tXray" title="X-Ray" onclick="setMode('xray')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-dasharray="3 3"/></svg></button>
         <div class="vtool-sep"></div>
         <button class="vtool" title="Ajustar" onclick="fitAll()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg></button>
@@ -791,7 +786,7 @@ function initThree() {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputEncoding = typeof THREE.sRGBEncoding !== 'undefined' ? THREE.sRGBEncoding : 3001;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.85;  // ← exposição menor = cores mais saturadas, menos lavado
+  renderer.toneMappingExposure = 0.9;
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0xF0EEEA);
@@ -804,13 +799,12 @@ function initThree() {
   orthoCamera.position.copy(camera.position);
   orthoCamera.lookAt(0, 0, 0);
 
-  // Iluminação: ambiente BAIXO (0.35) para as cores do IFC aparecerem
-  // + solar FORTE (2.2) para contraste e sombra
-  // + fill FRIO lateral para não achatar
-  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+  // Iluminação calibrada para fundo escuro: cores do IFC aparecem vivas
+  // Ambiente moderado para não lavar, solar forte para contraste e sombra
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
 
-  const dSun = new THREE.DirectionalLight(0xfffaf5, 2.2);
-  dSun.position.set(80, 120, 60);
+  const dSun = new THREE.DirectionalLight(0xfff8f2, 2.0);
+  dSun.position.set(60, 100, 50);
   dSun.castShadow = true;
   dSun.shadow.mapSize.set(4096, 4096);
   dSun.shadow.camera.near = 1;
@@ -820,15 +814,14 @@ function initThree() {
   dSun.shadow.bias = -0.0003;
   scene.add(dSun);
 
-  const dFill = new THREE.DirectionalLight(0xc8deff, 0.6);
-  dFill.position.set(-60, 30, -50);
+  const dFill = new THREE.DirectionalLight(0xb8ceff, 0.5);
+  dFill.position.set(-50, 30, -40);
   scene.add(dFill);
 
-  // Hemisphere: sky quente, ground escuro → diferença teto/piso
-  scene.add(new THREE.HemisphereLight(0xfff8f0, 0x706860, 0.4));
+  scene.add(new THREE.HemisphereLight(0xfff4e8, 0x303038, 0.5));
 
-  // Plano de chão — só sombra projetada
-  const groundMat = new THREE.ShadowMaterial({ opacity: 0.22, transparent: true });
+  // Plano de chão para sombra projetada
+  const groundMat = new THREE.ShadowMaterial({ opacity: 0.35, transparent: true });
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000), groundMat);
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -0.02;
@@ -1041,12 +1034,12 @@ const _origColors = new WeakMap();
 // Grupo de arestas (mode Pen)
 const _edgeGroups = new Map(); // mesh.uuid → LineSegments
 
-let _currentMode = 'shaded';
+let _currentMode = 'pen';
 
 function setMode(m) {
   _currentMode = m;
-  const bgWhite = new THREE.Color(0xF0EEEA);
-  const bgDark  = new THREE.Color(0x1A1A1E);
+  const bgDark  = new THREE.Color(0x2C2C30);
+  const bgLight = new THREE.Color(0xF0EEEA);
 
   _edgeGroups.forEach((lines) => { if (lines.parent) lines.parent.remove(lines); });
   _edgeGroups.clear();
@@ -1055,22 +1048,13 @@ function setMode(m) {
     const mat = mesh.material;
     if (!_origColors.has(mat)) _origColors.set(mat, mat.color.clone());
     const orig = _origColors.get(mat);
-
-    mat.wireframe   = false;
-    mat.needsUpdate = true;
+    mat.wireframe = false;
 
     if (m === 'shaded') {
-      // Cores reais do IFC — não sobrescrever com branco
       mat.color.copy(orig);
       mat.transparent = mat.opacity < 0.95;
       mat.opacity     = mat.transparent ? Math.max(mat.opacity, 0.3) : 1.0;
       mat.roughness   = 0.45;
-      mat.metalness   = 0.0;
-    } else if (m === 'arctic') {
-      mat.color.set(0xECEAE6);  // off-white quente, não branco puro
-      mat.transparent = false;
-      mat.opacity     = 1.0;
-      mat.roughness   = 0.85;
       mat.metalness   = 0.0;
     } else if (m === 'pen') {
       mat.color.set(0xF5F3F0);
@@ -1079,7 +1063,7 @@ function setMode(m) {
       mat.roughness   = 1.0;
       mat.metalness   = 0.0;
       const edges = new THREE.EdgesGeometry(mesh.geometry, 12);
-      const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2A2825 }));
+      const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x1E1E22 }));
       lines.renderOrder = 1;
       mesh.add(lines);
       _edgeGroups.set(mesh.uuid, lines);
@@ -1093,17 +1077,13 @@ function setMode(m) {
     mat.needsUpdate = true;
   });
 
-  const useDark = (m === 'xray');
-  const bg = useDark ? bgDark : bgWhite;
-  if (scene) {
-    scene.background = bg;
-    scene.fog = null;
-    renderer.setClearColor(bg);
-  }
-  if (renderer) renderer.shadowMap.enabled = (m !== 'xray');
+  const useLight = (m === 'pen');
+  const bg = useLight ? bgLight : bgDark;
+  if (scene) { scene.background = bg; scene.fog = null; renderer.setClearColor(bg); }
+  if (renderer) renderer.shadowMap.enabled = true;
 
   // Botões ativos
-  ['Shaded','Arctic','Pen','Xray'].forEach(id => {
+  ['Shaded','Pen','Xray'].forEach(id => {
     document.getElementById('btn'+id)?.classList.remove('on');
     document.getElementById('t'+id)?.classList.remove('on');
   });
