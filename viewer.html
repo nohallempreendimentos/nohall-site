@@ -173,7 +173,7 @@ img{display:block;max-width:100%;}
 .vstat-lbl{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,250,248,.22);}
 .vsidebar-foot{margin-top:auto;padding:14px;font-size:9.5px;color:rgba(250,250,248,.15);line-height:1.8;border-top:1px solid rgba(250,250,248,.04);}
 
-.vviewport{flex:1;position:relative;overflow:hidden;background:#F5F5F3;}
+.vviewport{flex:1;position:relative;overflow:hidden;background:#F0EEEA;}
 #vcanvas{width:100%;height:100%;display:block;}
 
 #vloading{position:absolute;inset:0;background:rgba(20,20,22,.96);flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:50;display:none;}
@@ -562,20 +562,26 @@ async function loadDisciplines(disciplines) {
 // Cache de materiais por chave RGBA para minimizar draw calls
 const _matCache = new Map();
 function getMaterial(r, g, b, a, baseColor) {
-  const hasColor = (r + g + b) > 0.01;
-  const color    = hasColor ? new THREE.Color(r, g, b) : baseColor;
-  const opaque   = a >= 0.99;
-  const opacity  = opaque ? 1.0 : Math.max(a, 0.25);
+  const hasColor = (r + g + b) > 0.04;  // threshold um pouco maior para evitar preto puro
+  const rawColor = hasColor ? new THREE.Color(r, g, b) : baseColor;
+  // Evitar cores muito claras (quase branco) que somem no fundo branco
+  // Se a cor for muito próxima do branco, usa a baseColor da disciplina
+  const lum = rawColor.r * 0.299 + rawColor.g * 0.587 + rawColor.b * 0.114;
+  const color = lum > 0.88 ? baseColor : rawColor;
+
+  const opaque  = a >= 0.95;
+  const opacity = opaque ? 1.0 : Math.max(a, 0.3);
   const key = color.r.toFixed(2)+'|'+color.g.toFixed(2)+'|'+color.b.toFixed(2)+'|'+opacity.toFixed(2);
   if (_matCache.has(key)) return _matCache.get(key);
+
   const mat = new THREE.MeshStandardMaterial({
     color,
-    roughness:    0.55,
-    metalness:    0.05,
-    transparent:  !opaque,
+    roughness:   0.45,   // menos rugoso = mais reflexo = cores mais vivas
+    metalness:   0.0,
+    transparent: !opaque,
     opacity,
-    side:         THREE.DoubleSide,
-    depthWrite:   opaque,
+    side:        THREE.DoubleSide,
+    depthWrite:  opaque,
   });
   _matCache.set(key, mat);
   return mat;
@@ -780,16 +786,15 @@ function initThree() {
 
   renderer = new THREE.WebGLRenderer({ canvas, antialias:true, preserveDrawingBuffer:true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-  renderer.setClearColor(0xF5F5F3);
+  renderer.setClearColor(0xF0EEEA);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputEncoding = typeof THREE.sRGBEncoding !== 'undefined' ? THREE.sRGBEncoding : 3001;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 0.85;  // ← exposição menor = cores mais saturadas, menos lavado
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xF5F5F3);
-  // Sem fog — fundo branco não precisa
+  scene.background = new THREE.Color(0xF0EEEA);
 
   camera = new THREE.PerspectiveCamera(45, 1, 0.1, 50000);
   camera.position.set(20, 16, 24);
@@ -799,10 +804,12 @@ function initThree() {
   orthoCamera.position.copy(camera.position);
   orthoCamera.lookAt(0, 0, 0);
 
-  // Iluminação para fundo branco com sombra projetada
-  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+  // Iluminação: ambiente BAIXO (0.35) para as cores do IFC aparecerem
+  // + solar FORTE (2.2) para contraste e sombra
+  // + fill FRIO lateral para não achatar
+  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
 
-  const dSun = new THREE.DirectionalLight(0xfff8f0, 1.8); // luz solar principal
+  const dSun = new THREE.DirectionalLight(0xfffaf5, 2.2);
   dSun.position.set(80, 120, 60);
   dSun.castShadow = true;
   dSun.shadow.mapSize.set(4096, 4096);
@@ -810,24 +817,24 @@ function initThree() {
   dSun.shadow.camera.far  = 2000;
   dSun.shadow.camera.left = dSun.shadow.camera.bottom = -500;
   dSun.shadow.camera.right = dSun.shadow.camera.top   =  500;
-  dSun.shadow.bias = -0.0005;
+  dSun.shadow.bias = -0.0003;
   scene.add(dSun);
 
-  const dFill = new THREE.DirectionalLight(0xd8e8ff, 0.5); // preenchimento frio
-  dFill.position.set(-60, 40, -40);
+  const dFill = new THREE.DirectionalLight(0xc8deff, 0.6);
+  dFill.position.set(-60, 30, -50);
   scene.add(dFill);
 
-  scene.add(new THREE.HemisphereLight(0xffffff, 0xd0ccc8, 0.5));
+  // Hemisphere: sky quente, ground escuro → diferença teto/piso
+  scene.add(new THREE.HemisphereLight(0xfff8f0, 0x706860, 0.4));
 
-  // Plano de chão — recebe sombra projetada, invisível mas presente
-  const groundMat = new THREE.ShadowMaterial({ opacity: 0.18, transparent: true });
+  // Plano de chão — só sombra projetada
+  const groundMat = new THREE.ShadowMaterial({ opacity: 0.22, transparent: true });
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000), groundMat);
   ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -0.02; // levemente abaixo do nível zero
+  ground.position.y = -0.02;
   ground.receiveShadow = true;
   ground.name = '__ground__';
   scene.add(ground);
-  // Sem grid
 
   // Eventos
   vp.addEventListener('mousedown', e => {
@@ -1038,10 +1045,9 @@ let _currentMode = 'shaded';
 
 function setMode(m) {
   _currentMode = m;
-  const bgWhite = new THREE.Color(0xF5F5F3);
+  const bgWhite = new THREE.Color(0xF0EEEA);
   const bgDark  = new THREE.Color(0x1A1A1E);
 
-  // Limpar edges existentes
   _edgeGroups.forEach((lines) => { if (lines.parent) lines.parent.remove(lines); });
   _edgeGroups.clear();
 
@@ -1054,35 +1060,34 @@ function setMode(m) {
     mat.needsUpdate = true;
 
     if (m === 'shaded') {
+      // Cores reais do IFC — não sobrescrever com branco
       mat.color.copy(orig);
-      mat.transparent = mat.opacity < 0.99;
-      mat.opacity     = mat.transparent ? Math.max(mat.opacity, 0.25) : 1.0;
-      mat.roughness   = 0.6;
+      mat.transparent = mat.opacity < 0.95;
+      mat.opacity     = mat.transparent ? Math.max(mat.opacity, 0.3) : 1.0;
+      mat.roughness   = 0.45;
       mat.metalness   = 0.0;
     } else if (m === 'arctic') {
-      mat.color.set(0xF0EEE9);
+      mat.color.set(0xECEAE6);  // off-white quente, não branco puro
       mat.transparent = false;
       mat.opacity     = 1.0;
-      mat.roughness   = 0.9;
+      mat.roughness   = 0.85;
       mat.metalness   = 0.0;
     } else if (m === 'pen') {
-      mat.color.set(0xF8F7F5);
+      mat.color.set(0xF5F3F0);
       mat.transparent = false;
       mat.opacity     = 1.0;
       mat.roughness   = 1.0;
       mat.metalness   = 0.0;
       const edges = new THREE.EdgesGeometry(mesh.geometry, 12);
-      const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
-        color: 0x1A1A1E, linewidth: 1,
-      }));
+      const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2A2825 }));
       lines.renderOrder = 1;
       mesh.add(lines);
       _edgeGroups.set(mesh.uuid, lines);
     } else if (m === 'xray') {
       mat.color.copy(orig);
       mat.transparent = true;
-      mat.opacity     = 0.10;
-      mat.roughness   = 0.55;
+      mat.opacity     = 0.12;
+      mat.roughness   = 0.45;
       mat.metalness   = 0.0;
     }
     mat.needsUpdate = true;
@@ -1092,11 +1097,9 @@ function setMode(m) {
   const bg = useDark ? bgDark : bgWhite;
   if (scene) {
     scene.background = bg;
-    scene.fog = null; // sem fog no fundo branco
+    scene.fog = null;
     renderer.setClearColor(bg);
   }
-
-  // Ajustar sombra do sol conforme modo
   if (renderer) renderer.shadowMap.enabled = (m !== 'xray');
 
   // Botões ativos
