@@ -622,30 +622,24 @@ async function loadIFCFile(url, disc, modelId) {
   if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + url.split('/').pop());
   const data = new Uint8Array(await res.arrayBuffer());
 
-  // COORDINATE_TO_ORIGIN: false → preserva coordenadas reais do Ponto Base do Projeto Revit
   const modelID = ifcAPI.OpenModel(data, {
     COORDINATE_TO_ORIGIN: false,
     USE_FAST_BOOLS: true,
-    CIRCLE_SEGMENTS: 16,
+    CIRCLE_SEGMENTS: 12,
   });
 
   const group     = new THREE.Group();
   group.name      = disc.name;
   const baseColor = new THREE.Color(disc.color || '#C0A882');
-  const buckets   = new Map();
   const isFirst   = !_projectOffset;
-
-  // Tentar ler origem do IFCSITE antes do StreamAllMeshes
-  let siteOrigin = null;
+  let siteOrigin  = null;
   if (isFirst) siteOrigin = readProjectOrigin(modelID);
 
-  // Bounds para fallback (só usados se siteOrigin falhar)
-  let minX=Infinity, minY=Infinity, minZ=Infinity;
-
-  // Reusar arrays temporários para evitar alocação no loop
-  const _m = new Float32Array(16);
-  const _p = new Float32Array(3);
-  const _n = new Float32Array(3);
+  // ── PASSE 1: contar vértices e índices por chave de material ──────────────
+  // Estrutura: matKey → { mat, nVerts, nIdx }
+  const counts = new Map();
+  // Também coletar geometrias brutas para não chamar StreamAllMeshes 2x
+  const geomCache = []; // [ { matKey, ft[16], verts, idxRaw } ]
 
   ifcAPI.StreamAllMeshes(modelID, (flatMesh) => {
     const geomArr = flatMesh.geometries;
@@ -657,80 +651,107 @@ async function loadIFCFile(url, disc, modelId) {
       ifcGeom.delete();
       if (!verts || !verts.length || !idxRaw || !idxRaw.length) continue;
 
-      // Extrair matrix4 como array plano — sem instanciar THREE.Matrix4
-      const ft = geomData.flatTransformation;
-      const m00=ft[0],m01=ft[4],m02=ft[8],  m03=ft[12];
-      const m10=ft[1],m11=ft[5],m12=ft[9],  m13=ft[13];
-      const m20=ft[2],m21=ft[6],m22=ft[10], m23=ft[14];
-
       const mat = getMaterial(
         geomData.color.x, geomData.color.y,
         geomData.color.z, geomData.color.w, baseColor
       );
-      const key = mat.uuid;
-      if (!buckets.has(key)) buckets.set(key, { mat, pos:[], nor:[], idx:[], voff:0 });
-      const bkt = buckets.get(key);
+      const mk = mat.uuid;
+      if (!counts.has(mk)) counts.set(mk, { mat, nVerts:0, nIdx:0 });
+      const c = counts.get(mk);
+      c.nVerts += verts.length / 6;
+      c.nIdx   += idxRaw.length;
 
-      const nv = verts.length / 6;
-      for (let k = 0; k < nv; k++) {
-        const s = k * 6;
-        // Transformar posição sem new THREE.Vector3
-        const px = verts[s], py = verts[s+1], pz = verts[s+2];
-        const tx = m00*px + m01*py + m02*pz + m03;
-        const ty = m10*px + m11*py + m12*pz + m13;
-        const tz = m20*px + m21*py + m22*pz + m23;
-        bkt.pos.push(tx, ty, tz);
-        if (isFirst && !siteOrigin) {
-          if(tx<minX)minX=tx; if(ty<minY)minY=ty; if(tz<minZ)minZ=tz;
-        }
-        // Transformar normal (sem translação)
-        const nx = verts[s+3], ny = verts[s+4], nz = verts[s+5];
-        bkt.nor.push(m00*nx + m01*ny + m02*nz,
-                     m10*nx + m11*ny + m12*nz,
-                     m20*nx + m21*ny + m22*nz);
-      }
-      for (let k = 0; k < idxRaw.length; k++) bkt.idx.push(idxRaw[k] + bkt.voff);
-      bkt.voff += nv;
+      // Copiar para JS (Float32 já é view, precisa slice para não perder referência WASM)
+      geomCache.push({
+        mk,
+        ft: Array.from(geomData.flatTransformation),
+        verts: verts.slice(),
+        idxRaw: idxRaw.slice(),
+      });
     }
   });
 
   ifcAPI.CloseModel(modelID);
 
-  // Fixar offset do projeto UMA vez — mesmo valor para todos os IFCs subsequentes
-  if (isFirst) {
-    if (siteOrigin) {
-      _projectOffset = siteOrigin;
-    } else if (minX !== Infinity) {
-      // Fallback: mínimo XY (não centróide!) — preserva posições relativas entre arquivos
-      _projectOffset = { x: minX, y: minY, z: minZ };
-      console.log('[offset] fallback minXY:', minX.toFixed(1), minY.toFixed(1), minZ.toFixed(1));
+  // ── Alocar TypedArrays exatos ────────────────────────────────────────────
+  const buffers = new Map(); // matKey → { mat, pos:Float32Array, nor:Float32Array, idx:Uint32Array, vp:0, ip:0, voff:0 }
+  for (const [mk, c] of counts) {
+    buffers.set(mk, {
+      mat:  c.mat,
+      pos:  new Float32Array(c.nVerts * 3),
+      nor:  new Float32Array(c.nVerts * 3),
+      idx:  new Uint32Array(c.nIdx),
+      vp:   0,  // posição de escrita em pos/nor (em floats)
+      ip:   0,  // posição de escrita em idx
+      voff: 0,  // offset de vértice para indices
+    });
+  }
+
+  // ── PASSE 2: escrever direto nos TypedArrays ─────────────────────────────
+  let minX=Infinity, minY=Infinity, minZ=Infinity;
+
+  for (const g of geomCache) {
+    const { mk, ft, verts, idxRaw } = g;
+    const bkt = buffers.get(mk);
+
+    const m00=ft[0], m01=ft[4], m02=ft[8],  m03=ft[12];
+    const m10=ft[1], m11=ft[5], m12=ft[9],  m13=ft[13];
+    const m20=ft[2], m21=ft[6], m22=ft[10], m23=ft[14];
+
+    const nv = verts.length / 6;
+    for (let k = 0; k < nv; k++) {
+      const s = k * 6;
+      const px = verts[s], py = verts[s+1], pz = verts[s+2];
+      const tx = m00*px + m01*py + m02*pz + m03;
+      const ty = m10*px + m11*py + m12*pz + m13;
+      const tz = m20*px + m21*py + m22*pz + m23;
+      bkt.pos[bkt.vp]   = tx;
+      bkt.pos[bkt.vp+1] = ty;
+      bkt.pos[bkt.vp+2] = tz;
+      if (isFirst && !siteOrigin) {
+        if(tx<minX)minX=tx; if(ty<minY)minY=ty; if(tz<minZ)minZ=tz;
+      }
+      const nx = verts[s+3], ny = verts[s+4], nz = verts[s+5];
+      bkt.nor[bkt.vp]   = m00*nx + m01*ny + m02*nz;
+      bkt.nor[bkt.vp+1] = m10*nx + m11*ny + m12*nz;
+      bkt.nor[bkt.vp+2] = m20*nx + m21*ny + m22*nz;
+      bkt.vp += 3;
     }
+    for (let k = 0; k < idxRaw.length; k++) bkt.idx[bkt.ip++] = idxRaw[k] + bkt.voff;
+    bkt.voff += nv;
+  }
+
+  // Calcular offset uma vez
+  if (isFirst) {
+    _projectOffset = siteOrigin ||
+      (minX !== Infinity ? { x:minX, y:minY, z:minZ } : { x:0, y:0, z:0 });
+    console.log('[offset]', _projectOffset.x.toFixed(1), _projectOffset.y.toFixed(1));
   }
   const off = _projectOffset || { x:0, y:0, z:0 };
 
+  // ── Construir meshes ─────────────────────────────────────────────────────
   let meshCount = 0;
-  for (const [, bkt] of buckets) {
-    if (!bkt.pos.length) continue;
+  for (const [, bkt] of buffers) {
+    if (!bkt.vp) continue;
+    // Subtrair offset in-place
     for (let i = 0; i < bkt.pos.length; i += 3) {
       bkt.pos[i]   -= off.x;
       bkt.pos[i+1] -= off.y;
       bkt.pos[i+2] -= off.z;
     }
     const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(bkt.pos), 3));
-    geo.setAttribute('normal',   new THREE.BufferAttribute(new Float32Array(bkt.nor), 3));
-    geo.setIndex(new THREE.BufferAttribute(new Uint32Array(bkt.idx), 1));
+    geo.setAttribute('position', new THREE.BufferAttribute(bkt.pos, 3));
+    geo.setAttribute('normal',   new THREE.BufferAttribute(bkt.nor, 3));
+    geo.setIndex(new THREE.BufferAttribute(bkt.idx, 1));
     geo.computeBoundingSphere();
     const mesh = new THREE.Mesh(geo, bkt.mat);
-    mesh.castShadow    = true;
-    mesh.receiveShadow = true;
     mesh.userData = { disc: disc.name, ifcType: 'IFCElement', modelId };
     group.add(mesh);
     meshCount++;
   }
 
-  if (meshCount === 0) throw new Error('Geometria vazia — verifique se o IFC é válido');
-  console.log('[IFC] ' + disc.name + ': ' + meshCount + ' draw calls');
+  if (meshCount === 0) throw new Error('Geometria vazia');
+  console.log('[IFC]', disc.name, meshCount, 'draw calls');
   return group;
 }
 
