@@ -173,7 +173,7 @@ img{display:block;max-width:100%;}
 .vstat-lbl{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,250,248,.22);}
 .vsidebar-foot{margin-top:auto;padding:14px;font-size:9.5px;color:rgba(250,250,248,.15);line-height:1.8;border-top:1px solid rgba(250,250,248,.04);}
 
-.vviewport{flex:1;position:relative;overflow:hidden;background:#3A3A3E;}
+.vviewport{flex:1;position:relative;overflow:hidden;background:#ECECEC;}
 #vcanvas{width:100%;height:100%;display:block;}
 
 #vloading{position:absolute;inset:0;background:rgba(20,20,22,.96);flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:50;display:none;}
@@ -558,45 +558,18 @@ async function loadDisciplines(disciplines) {
 const _matCache = new Map();
 function getMaterial(r, g, b, a, baseColor) {
   const hasColor = (r + g + b) > 0.04;
-  let color = hasColor ? new THREE.Color(r, g, b) : baseColor.clone();
-
-  if (hasColor) {
-    // Converter para HSL para manipular saturação e luminosidade
-    const hsl = {};
-    color.getHSL(hsl);
-
-    // 1. Aumentar saturação — cores pastel ficam mais vivas
-    //    Saturação mínima de 0.12 para cores que o Revit exporta como neutras
-    hsl.s = Math.min(1.0, hsl.s * 2.2 + 0.08);
-
-    // 2. Escurecer cores muito claras (L > 0.72) para ficarem visíveis no fundo escuro
-    //    Luminosidade máxima de 0.72 → cores brancas/pastéis ganham corpo
-    if (hsl.l > 0.72) hsl.l = 0.50 + (hsl.l - 0.72) * 0.3;
-
-    // 3. Clamp mínimo: não deixar ficar preto
-    hsl.l = Math.max(0.18, hsl.l);
-
-    color.setHSL(hsl.h, hsl.s, hsl.l);
-  }
-
-  // Transparência real: a < 0.5 → vidro; 0.5–0.94 → semi; >= 0.95 → opaco
+  const color    = hasColor ? new THREE.Color(r, g, b) : baseColor.clone();
   const isGlass  = a < 0.5;
   const opaque   = a >= 0.95;
-  const opacity  = isGlass ? 0.18 : (opaque ? 1.0 : Math.max(a, 0.4));
-
-  const key = color.r.toFixed(2)+'|'+color.g.toFixed(2)+'|'+color.b.toFixed(2)+'|'+opacity.toFixed(2);
+  const opacity  = isGlass ? 0.22 : (opaque ? 1.0 : Math.max(a, 0.4));
+  const key = r.toFixed(2)+'|'+g.toFixed(2)+'|'+b.toFixed(2)+'|'+opacity.toFixed(2);
   if (_matCache.has(key)) return _matCache.get(key);
-
-  const mat = new THREE.MeshStandardMaterial({
+  const mat = new THREE.MeshLambertMaterial({
     color,
-    roughness:    isGlass ? 0.05 : 0.50,
-    metalness:    isGlass ? 0.0  : 0.0,
-    transparent:  !opaque,
+    transparent: !opaque,
     opacity,
-    side:         THREE.DoubleSide,
-    depthWrite:   opaque,
-    // Vidro: reflexo do ambiente para dar efeito de vidro real
-    envMapIntensity: isGlass ? 1.0 : 0.0,
+    side:       THREE.DoubleSide,
+    depthWrite: opaque,
   });
   _matCache.set(key, mat);
   return mat;
@@ -669,6 +642,11 @@ async function loadIFCFile(url, disc, modelId) {
   // Bounds para fallback (só usados se siteOrigin falhar)
   let minX=Infinity, minY=Infinity, minZ=Infinity;
 
+  // Reusar arrays temporários para evitar alocação no loop
+  const _m = new Float32Array(16);
+  const _p = new Float32Array(3);
+  const _n = new Float32Array(3);
+
   ifcAPI.StreamAllMeshes(modelID, (flatMesh) => {
     const geomArr = flatMesh.geometries;
     for (let j = 0; j < geomArr.size(); j++) {
@@ -679,8 +657,13 @@ async function loadIFCFile(url, disc, modelId) {
       ifcGeom.delete();
       if (!verts || !verts.length || !idxRaw || !idxRaw.length) continue;
 
-      const mat4 = new THREE.Matrix4().fromArray(geomData.flatTransformation);
-      const mat  = getMaterial(
+      // Extrair matrix4 como array plano — sem instanciar THREE.Matrix4
+      const ft = geomData.flatTransformation;
+      const m00=ft[0],m01=ft[4],m02=ft[8],  m03=ft[12];
+      const m10=ft[1],m11=ft[5],m12=ft[9],  m13=ft[13];
+      const m20=ft[2],m21=ft[6],m22=ft[10], m23=ft[14];
+
+      const mat = getMaterial(
         geomData.color.x, geomData.color.y,
         geomData.color.z, geomData.color.w, baseColor
       );
@@ -691,16 +674,20 @@ async function loadIFCFile(url, disc, modelId) {
       const nv = verts.length / 6;
       for (let k = 0; k < nv; k++) {
         const s = k * 6;
-        const v = new THREE.Vector3(verts[s], verts[s+1], verts[s+2]).applyMatrix4(mat4);
-        // Calcular bounds apenas se siteOrigin não disponível
+        // Transformar posição sem new THREE.Vector3
+        const px = verts[s], py = verts[s+1], pz = verts[s+2];
+        const tx = m00*px + m01*py + m02*pz + m03;
+        const ty = m10*px + m11*py + m12*pz + m13;
+        const tz = m20*px + m21*py + m22*pz + m23;
+        bkt.pos.push(tx, ty, tz);
         if (isFirst && !siteOrigin) {
-          if(v.x<minX)minX=v.x;
-          if(v.y<minY)minY=v.y;
-          if(v.z<minZ)minZ=v.z;
+          if(tx<minX)minX=tx; if(ty<minY)minY=ty; if(tz<minZ)minZ=tz;
         }
-        bkt.pos.push(v.x, v.y, v.z);
-        const nrm = new THREE.Vector3(verts[s+3], verts[s+4], verts[s+5]).transformDirection(mat4);
-        bkt.nor.push(nrm.x, nrm.y, nrm.z);
+        // Transformar normal (sem translação)
+        const nx = verts[s+3], ny = verts[s+4], nz = verts[s+5];
+        bkt.nor.push(m00*nx + m01*ny + m02*nz,
+                     m10*nx + m11*ny + m12*nz,
+                     m20*nx + m21*ny + m22*nz);
       }
       for (let k = 0; k < idxRaw.length; k++) bkt.idx.push(idxRaw[k] + bkt.voff);
       bkt.voff += nv;
@@ -795,14 +782,13 @@ function initThree() {
 
   renderer = new THREE.WebGLRenderer({ canvas, antialias:true, preserveDrawingBuffer:true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-  renderer.setClearColor(0x3A3A3E);
+  renderer.setClearColor(0xECECEC);
   renderer.shadowMap.enabled = false;
   renderer.outputEncoding = typeof THREE.sRGBEncoding !== 'undefined' ? THREE.sRGBEncoding : 3001;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.95;
+  renderer.toneMapping = THREE.NoToneMapping;   // sem tone mapping = cores exatas do IFC
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x3A3A3E);
+  scene.background = new THREE.Color(0xECECEC);
 
   camera = new THREE.PerspectiveCamera(45, 1, 0.1, 50000);
   camera.position.set(20, 16, 24);
@@ -812,22 +798,18 @@ function initThree() {
   orthoCamera.position.copy(camera.position);
   orthoCamera.lookAt(0, 0, 0);
 
-  // 3 luzes direcionais — faces bem marcadas sem shadow map
-  scene.add(new THREE.AmbientLight(0xffffff, 0.30));
+  // Iluminação idêntica ao Speckle:
+  // Ambient 60% → faces de sombra não ficam pretas
+  // 1 direcional forte de cima-frente → marca as faces com gradiente claro
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
-  const dKey = new THREE.DirectionalLight(0xfff8f0, 1.8);  // principal frente-cima-direita
-  dKey.position.set(1.0, 1.5, 1.0).normalize();
+  const dKey = new THREE.DirectionalLight(0xffffff, 0.9);
+  dKey.position.set(0.5, 1.0, 0.8).normalize();
   scene.add(dKey);
 
-  const dFill = new THREE.DirectionalLight(0xc0d8ff, 0.7); // fill frio oposto
-  dFill.position.set(-1.0, 0.4, -0.6).normalize();
-  scene.add(dFill);
-
-  const dRim = new THREE.DirectionalLight(0xffeedd, 0.4);  // rim baixo-trás → separa do fundo
-  dRim.position.set(0.0, -0.8, -1.0).normalize();
-  scene.add(dRim);
-
-  scene.add(new THREE.HemisphereLight(0xfff4e8, 0x202024, 0.35));
+  const dBack = new THREE.DirectionalLight(0xccddff, 0.3);
+  dBack.position.set(-0.5, -0.3, -0.8).normalize();
+  scene.add(dBack);
 
   // Eventos
   vp.addEventListener('mousedown', e => {
@@ -1035,8 +1017,8 @@ let _currentMode = 'pen';
 
 function setMode(m) {
   _currentMode = m;
-  const bgDark  = new THREE.Color(0x3A3A3E);
-  const bgLight = new THREE.Color(0xF0EEEA);
+  const bgLight = new THREE.Color(0xECECEC);
+  const bgDark  = new THREE.Color(0x2A2A2E);
 
   _edgeGroups.forEach((lines) => { if (lines.parent) lines.parent.remove(lines); });
   _edgeGroups.clear();
@@ -1051,31 +1033,24 @@ function setMode(m) {
       mat.color.copy(orig);
       mat.transparent = mat.opacity < 0.95;
       mat.opacity     = mat.transparent ? Math.max(mat.opacity, 0.3) : 1.0;
-      mat.roughness   = 0.45;
-      mat.metalness   = 0.0;
     } else if (m === 'pen') {
-      mat.color.set(0xF5F3F0);
+      mat.color.copy(orig);
       mat.transparent = false;
       mat.opacity     = 1.0;
-      mat.roughness   = 1.0;
-      mat.metalness   = 0.0;
-      const edges = new THREE.EdgesGeometry(mesh.geometry, 12);
-      const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x1E1E22 }));
+      const edges = new THREE.EdgesGeometry(mesh.geometry, 15);
+      const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x1A1A1E }));
       lines.renderOrder = 1;
       mesh.add(lines);
       _edgeGroups.set(mesh.uuid, lines);
     } else if (m === 'xray') {
       mat.color.copy(orig);
       mat.transparent = true;
-      mat.opacity     = 0.12;
-      mat.roughness   = 0.45;
-      mat.metalness   = 0.0;
+      mat.opacity     = 0.10;
     }
     mat.needsUpdate = true;
   });
 
-  const useLight = (m === 'pen');
-  const bg = useLight ? bgLight : bgDark;
+  const bg = (m === 'xray') ? bgDark : bgLight;
   if (scene) { scene.background = bg; scene.fog = null; renderer.setClearColor(bg); }
 
   // Botões ativos
