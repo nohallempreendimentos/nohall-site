@@ -614,40 +614,34 @@ let _projectOffset = null;
 function resetProjectOffset() { _projectOffset = null; _matCache.clear(); }
 
 function readProjectOrigin(modelID) {
-  // Tentar IFCSITE → RefLatitude/RefLongitude/RefElevation + LocalPlacement
-  // No web-ifc 0.0.57 usamos GetAllItemsOfType para achar o IFCSITE
+  // IFCSITE type code = 274108 (IFC4) / 4097777520 (IFC2x3) — evitar dependência de WebIFC namespace
   try {
-    const IFCSITE = ifcAPI.GetAllItemsOfType(modelID, WebIFC.IFCSITE, false);
-    if (IFCSITE && IFCSITE.length > 0) {
-      // Pegar a geometria do site para extrair a posição de referência
-      const siteID = IFCSITE[0];
-      const props  = ifcAPI.GetLine(modelID, siteID, false);
-      // ObjectPlacement → posição do site no modelo
-      if (props && props.ObjectPlacement && props.ObjectPlacement.value) {
-        const placementID = props.ObjectPlacement.value;
-        const placement   = ifcAPI.GetLine(modelID, placementID, true);
-        // Navegar pela cadeia de placements para obter coordenadas absolutas
-        if (placement && placement.RelativePlacement) {
-          const rp = placement.RelativePlacement;
-          if (rp && rp.Location && rp.Location.Coordinates) {
-            const coords = rp.Location.Coordinates;
-            if (coords && coords.length >= 3) {
-              const x = coords[0]?.value ?? 0;
-              const y = coords[1]?.value ?? 0;
-              const z = coords[2]?.value ?? 0;
-              if (Math.abs(x) > 0.001 || Math.abs(y) > 0.001) {
-                console.log('[offset] IFCSITE origin:', x.toFixed(2), y.toFixed(2), z.toFixed(2));
-                return { x, y, z };
-              }
-            }
-          }
-        }
-      }
+    const IFCSITE_CODE = 4097777520; // IFC2x3 — Revit exporta neste schema por padrão
+    let siteItems = [];
+    try { siteItems = ifcAPI.GetAllItemsOfType(modelID, IFCSITE_CODE, false) || []; } catch(e) {}
+    if (!siteItems.length) {
+      try { siteItems = ifcAPI.GetAllItemsOfType(modelID, 274108, false) || []; } catch(e) {} // IFC4
+    }
+    if (!siteItems.length) return null;
+
+    const props = ifcAPI.GetLine(modelID, siteItems[0], false);
+    if (!props?.ObjectPlacement?.value) return null;
+
+    const placement = ifcAPI.GetLine(modelID, props.ObjectPlacement.value, true);
+    const coords = placement?.RelativePlacement?.Location?.Coordinates;
+    if (!coords || coords.length < 3) return null;
+
+    const x = coords[0]?.value ?? 0;
+    const y = coords[1]?.value ?? 0;
+    const z = coords[2]?.value ?? 0;
+    if (Math.abs(x) > 0.001 || Math.abs(y) > 0.001) {
+      console.log('[offset] IFCSITE origin:', x.toFixed(2), y.toFixed(2), z.toFixed(2));
+      return { x, y, z };
     }
   } catch(e) {
     console.warn('[offset] Erro ao ler IFCSITE:', e.message);
   }
-  return null; // fallback para cálculo geométrico
+  return null;
 }
 
 async function loadIFCFile(url, disc, modelId) {
