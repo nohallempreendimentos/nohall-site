@@ -173,7 +173,7 @@ img{display:block;max-width:100%;}
 .vstat-lbl{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,250,248,.22);}
 .vsidebar-foot{margin-top:auto;padding:14px;font-size:9.5px;color:rgba(250,250,248,.15);line-height:1.8;border-top:1px solid rgba(250,250,248,.04);}
 
-.vviewport{flex:1;position:relative;overflow:hidden;background:#F0EEEA;}
+.vviewport{flex:1;position:relative;overflow:hidden;background:#3A3A3E;}
 #vcanvas{width:100%;height:100%;display:block;}
 
 #vloading{position:absolute;inset:0;background:rgba(20,20,22,.96);flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:50;display:none;}
@@ -557,26 +557,46 @@ async function loadDisciplines(disciplines) {
 // Cache de materiais por chave RGBA para minimizar draw calls
 const _matCache = new Map();
 function getMaterial(r, g, b, a, baseColor) {
-  const hasColor = (r + g + b) > 0.04;  // threshold um pouco maior para evitar preto puro
-  const rawColor = hasColor ? new THREE.Color(r, g, b) : baseColor;
-  // Evitar cores muito claras (quase branco) que somem no fundo branco
-  // Se a cor for muito próxima do branco, usa a baseColor da disciplina
-  const lum = rawColor.r * 0.299 + rawColor.g * 0.587 + rawColor.b * 0.114;
-  const color = lum > 0.88 ? baseColor : rawColor;
+  const hasColor = (r + g + b) > 0.04;
+  let color = hasColor ? new THREE.Color(r, g, b) : baseColor.clone();
 
-  const opaque  = a >= 0.95;
-  const opacity = opaque ? 1.0 : Math.max(a, 0.3);
+  if (hasColor) {
+    // Converter para HSL para manipular saturação e luminosidade
+    const hsl = {};
+    color.getHSL(hsl);
+
+    // 1. Aumentar saturação — cores pastel ficam mais vivas
+    //    Saturação mínima de 0.12 para cores que o Revit exporta como neutras
+    hsl.s = Math.min(1.0, hsl.s * 2.2 + 0.08);
+
+    // 2. Escurecer cores muito claras (L > 0.72) para ficarem visíveis no fundo escuro
+    //    Luminosidade máxima de 0.72 → cores brancas/pastéis ganham corpo
+    if (hsl.l > 0.72) hsl.l = 0.50 + (hsl.l - 0.72) * 0.3;
+
+    // 3. Clamp mínimo: não deixar ficar preto
+    hsl.l = Math.max(0.18, hsl.l);
+
+    color.setHSL(hsl.h, hsl.s, hsl.l);
+  }
+
+  // Transparência real: a < 0.5 → vidro; 0.5–0.94 → semi; >= 0.95 → opaco
+  const isGlass  = a < 0.5;
+  const opaque   = a >= 0.95;
+  const opacity  = isGlass ? 0.18 : (opaque ? 1.0 : Math.max(a, 0.4));
+
   const key = color.r.toFixed(2)+'|'+color.g.toFixed(2)+'|'+color.b.toFixed(2)+'|'+opacity.toFixed(2);
   if (_matCache.has(key)) return _matCache.get(key);
 
   const mat = new THREE.MeshStandardMaterial({
     color,
-    roughness:   0.45,   // menos rugoso = mais reflexo = cores mais vivas
-    metalness:   0.0,
-    transparent: !opaque,
+    roughness:    isGlass ? 0.05 : 0.50,
+    metalness:    isGlass ? 0.0  : 0.0,
+    transparent:  !opaque,
     opacity,
-    side:        THREE.DoubleSide,
-    depthWrite:  opaque,
+    side:         THREE.DoubleSide,
+    depthWrite:   opaque,
+    // Vidro: reflexo do ambiente para dar efeito de vidro real
+    envMapIntensity: isGlass ? 1.0 : 0.0,
   });
   _matCache.set(key, mat);
   return mat;
@@ -781,15 +801,14 @@ function initThree() {
 
   renderer = new THREE.WebGLRenderer({ canvas, antialias:true, preserveDrawingBuffer:true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-  renderer.setClearColor(0xF0EEEA);
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.setClearColor(0x3A3A3E);
+  renderer.shadowMap.enabled = false;
   renderer.outputEncoding = typeof THREE.sRGBEncoding !== 'undefined' ? THREE.sRGBEncoding : 3001;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.9;
+  renderer.toneMappingExposure = 0.95;
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xF0EEEA);
+  scene.background = new THREE.Color(0x3A3A3E);
 
   camera = new THREE.PerspectiveCamera(45, 1, 0.1, 50000);
   camera.position.set(20, 16, 24);
@@ -799,35 +818,22 @@ function initThree() {
   orthoCamera.position.copy(camera.position);
   orthoCamera.lookAt(0, 0, 0);
 
-  // Iluminação calibrada para fundo escuro: cores do IFC aparecem vivas
-  // Ambiente moderado para não lavar, solar forte para contraste e sombra
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  // 3 luzes direcionais — faces bem marcadas sem shadow map
+  scene.add(new THREE.AmbientLight(0xffffff, 0.30));
 
-  const dSun = new THREE.DirectionalLight(0xfff8f2, 2.0);
-  dSun.position.set(60, 100, 50);
-  dSun.castShadow = true;
-  dSun.shadow.mapSize.set(4096, 4096);
-  dSun.shadow.camera.near = 1;
-  dSun.shadow.camera.far  = 2000;
-  dSun.shadow.camera.left = dSun.shadow.camera.bottom = -500;
-  dSun.shadow.camera.right = dSun.shadow.camera.top   =  500;
-  dSun.shadow.bias = -0.0003;
-  scene.add(dSun);
+  const dKey = new THREE.DirectionalLight(0xfff8f0, 1.8);  // principal frente-cima-direita
+  dKey.position.set(1.0, 1.5, 1.0).normalize();
+  scene.add(dKey);
 
-  const dFill = new THREE.DirectionalLight(0xb8ceff, 0.5);
-  dFill.position.set(-50, 30, -40);
+  const dFill = new THREE.DirectionalLight(0xc0d8ff, 0.7); // fill frio oposto
+  dFill.position.set(-1.0, 0.4, -0.6).normalize();
   scene.add(dFill);
 
-  scene.add(new THREE.HemisphereLight(0xfff4e8, 0x303038, 0.5));
+  const dRim = new THREE.DirectionalLight(0xffeedd, 0.4);  // rim baixo-trás → separa do fundo
+  dRim.position.set(0.0, -0.8, -1.0).normalize();
+  scene.add(dRim);
 
-  // Plano de chão para sombra projetada
-  const groundMat = new THREE.ShadowMaterial({ opacity: 0.35, transparent: true });
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000), groundMat);
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -0.02;
-  ground.receiveShadow = true;
-  ground.name = '__ground__';
-  scene.add(ground);
+  scene.add(new THREE.HemisphereLight(0xfff4e8, 0x202024, 0.35));
 
   // Eventos
   vp.addEventListener('mousedown', e => {
@@ -855,11 +861,8 @@ function clearScene() {
   if (!scene) return;
   _edgeGroups.forEach((lines) => { if (lines.parent) lines.parent.remove(lines); });
   _edgeGroups.clear();
-  // Remove apenas grupos de modelo — preserva lights e ground
   scene.children
-    .filter(c => !(c instanceof THREE.Light) &&
-                 !(c instanceof THREE.HemisphereLight) &&
-                 c.name !== '__ground__')
+    .filter(c => !(c instanceof THREE.Light) && !(c instanceof THREE.HemisphereLight))
     .forEach(c => scene.remove(c));
   allMeshes = []; discGroups = {};
 }
@@ -1038,7 +1041,7 @@ let _currentMode = 'pen';
 
 function setMode(m) {
   _currentMode = m;
-  const bgDark  = new THREE.Color(0x2C2C30);
+  const bgDark  = new THREE.Color(0x3A3A3E);
   const bgLight = new THREE.Color(0xF0EEEA);
 
   _edgeGroups.forEach((lines) => { if (lines.parent) lines.parent.remove(lines); });
@@ -1080,7 +1083,6 @@ function setMode(m) {
   const useLight = (m === 'pen');
   const bg = useLight ? bgLight : bgDark;
   if (scene) { scene.background = bg; scene.fog = null; renderer.setClearColor(bg); }
-  if (renderer) renderer.shadowMap.enabled = true;
 
   // Botões ativos
   ['Shaded','Pen','Xray'].forEach(id => {
