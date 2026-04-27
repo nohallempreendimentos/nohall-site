@@ -3,17 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nohall Empreendimentos — Apresentação Institucional · Parceria Estratégica</title>
-<meta name="description" content="Apresentação institucional Nohall Empreendimentos — Incorporação com pensamento. Modelo de parceria via permuta com método, critério e ecossistema técnico integrado.">
-
-<!-- ══════════════════════════════════════════════════════════════════
-     TIPOGRAFIA — Manual da Marca Nohall 2026
-     Display: Abhaya Libre (serifa editorial) · Body: Inter (técnica)
-══════════════════════════════════════════════════════════════════ -->
+<title>Nohall — Proposta de Parceria Estratégica · Chapecó SC</title>
+<meta name="description" content="Apresentação institucional Nohall Empreendimentos para parceria via permuta. Incorporação com método, critério e permanência.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'AbhayaLibre';src:url('fonts/AbhayaLibre-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
 @font-face{font-family:'AbhayaLibre';src:url('fonts/AbhayaLibre-Medium.ttf') format('truetype');font-weight:500;font-display:swap;}
@@ -23,1357 +17,656 @@
 @font-face{font-family:'Inter';src:url('fonts/Inter-Medium.otf') format('opentype');font-weight:500;font-display:swap;}
 </style>
 <style>
-/* ══════════════════════════════════════════════════════════════════
-   DESIGN TOKENS — extraídos do Manual da Marca Nohall 2026
-   e do site nohallempreendimentos.com.br para consistência total
-══════════════════════════════════════════════════════════════════ */
-:root {
-  /* Paleta oficial */
-  --mirage:        #1E1E20;   /* Primária — autoridade, fundo escuro */
-  --mirage-deep:   #141416;   /* Variação para profundidade */
-  --pastel-brown:  #A07855;   /* Destaque — acentos de marca */
-  --pastel-deep:   #8A634E;   /* Marrom do manual, p/ pressão */
-  --dawn-pink:     #EDE8E1;   /* Suporte — respiração */
-  --dawn-light:    #F5F1EB;   /* Suporte mais claro */
-  --hemp:          #7C7069;   /* Neutro — textos secundários */
-  --white:         #FAFAF8;
-  --line:          rgba(30,30,32,.08);
-  --line-dark:     rgba(250,250,248,.08);
+:root{--mirage:#1E1E20;--pastel-brown:#A07855;--dawn-pink:#EDE8E1;--hemp:#7C7069;--white:#FAFAF8;--serif:'AbhayaLibre',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--t:.3s cubic-bezier(.4,0,.2,1);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--white);color:var(--mirage);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+.site-header{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;background:transparent;border-bottom:1px solid transparent;transition:background var(--t),border-color var(--t),box-shadow var(--t);}
+.site-header.scrolled{background:rgba(250,250,248,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,30,32,.08);box-shadow:0 1px 24px rgba(30,30,32,.05);}
+.header-inner{max-width:1360px;width:100%;margin:0 auto;padding:0 52px;display:flex;align-items:center;}
+.header-logo{line-height:0;margin-right:auto;}
+.logo-light{display:block;height:26px;width:auto;}
+.logo-dark{display:none;height:26px;width:auto;}
+.site-header.scrolled .logo-light{display:none;}
+.site-header.scrolled .logo-dark{display:block;}
+.header-nav{display:flex;align-items:center;gap:32px;margin-right:40px;}
+.header-nav a{font-size:10.5px;font-weight:500;letter-spacing:2.2px;text-transform:uppercase;color:rgba(250,250,248,.8);transition:color var(--t);white-space:nowrap;}
+.header-nav a:hover{color:#fff;}
+.header-nav a.active{color:var(--pastel-brown);}
+.site-header.scrolled .header-nav a{color:var(--hemp);}
+.site-header.scrolled .header-nav a:hover{color:var(--mirage);}
+.site-header.scrolled .header-nav a.active{color:var(--pastel-brown);border-bottom:1px solid var(--pastel-brown);padding-bottom:2px;}
+.header-cta{flex-shrink:0;display:inline-flex;align-items:center;border:1px solid rgba(250,250,248,.4);color:rgba(250,250,248,.9);padding:9px 22px;font-size:10px;font-weight:500;letter-spacing:2.2px;text-transform:uppercase;transition:all var(--t);}
+.header-cta:hover{background:rgba(250,250,248,.1);}
+.site-header.scrolled .header-cta{border-color:var(--mirage);color:var(--mirage);}
+.site-header.scrolled .header-cta:hover{background:var(--mirage);color:var(--white);}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:auto;}
+.ham span{width:22px;height:1.5px;background:rgba(250,250,248,.85);display:block;transition:background var(--t);}
+.site-header.scrolled .ham span{background:var(--mirage);}
+@media(max-width:900px){.header-nav,.header-cta{display:none;}.ham{display:flex;}.header-inner{padding:0 32px;}}
+.mob-nav{display:none;position:fixed;inset:0;z-index:500;background:var(--mirage);flex-direction:column;align-items:center;justify-content:center;gap:36px;}
+.mob-nav.open{display:flex;}
+.mob-nav a{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(250,250,248,.75);font-weight:500;transition:color var(--t);}
+.mob-nav a:hover{color:var(--pastel-brown);}
+.mob-close{position:absolute;top:24px;right:28px;background:none;border:none;color:rgba(250,250,248,.5);font-size:22px;cursor:pointer;}
+.cta-band{background:var(--pastel-brown);padding:80px 52px;}
+.cta-band-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:48px;}
+.cta-band-title{font-family:var(--serif);font-size:clamp(24px,3vw,40px);font-weight:400;color:var(--white);line-height:1.25;}
+.cta-band-title em{font-style:italic;opacity:.85;}
+.btn-cta{flex-shrink:0;display:inline-flex;align-items:center;gap:10px;border:1.5px solid rgba(250,250,248,.6);color:var(--white);padding:14px 32px;font-size:10.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;transition:all var(--t);}
+.btn-cta:hover{background:rgba(250,250,248,.12);border-color:var(--white);}
+.site-footer{background:var(--mirage);padding:80px 52px 0;overflow:hidden;}
+.footer-top{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1.5fr;gap:64px;padding-bottom:64px;border-bottom:1px solid rgba(250,250,248,.06);}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(250,250,248,.4);line-height:1.6;margin-bottom:28px;max-width:300px;}
+.footer-sub{font-size:11.5px;color:rgba(250,250,248,.2);line-height:1.8;margin-bottom:28px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:36px;height:36px;border:1px solid rgba(250,250,248,.1);display:flex;align-items:center;justify-content:center;transition:border-color var(--t);}
+.footer-social a:hover{border-color:var(--pastel-brown);}
+.footer-social img{width:17px;height:17px;filter:brightness(0) invert(1);opacity:.45;}
+.footer-social a:hover img{opacity:.85;}
+.footer-nav-label{font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:var(--pastel-brown);font-weight:500;margin-bottom:20px;}
+.footer-nav-list{display:flex;flex-direction:column;gap:12px;}
+.footer-nav-list a{font-size:13px;color:rgba(250,250,248,.35);transition:color var(--t);}
+.footer-nav-list a:hover{color:rgba(250,250,248,.85);}
+.footer-contact-item{font-size:13px;color:rgba(250,250,248,.35);line-height:1.8;margin-bottom:12px;}
+.footer-contact-item a{color:rgba(250,250,248,.35);transition:color var(--t);}
+.footer-contact-item a:hover{color:var(--pastel-brown);}
+.footer-wordmark{display:block;overflow:hidden;line-height:0;padding:40px 0 0;}
+.footer-wordmark img{width:100%;height:auto;opacity:.07;filter:brightness(10);}
+.footer-legal{max-width:1360px;margin:0 auto;padding:20px 0 28px;display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:rgba(250,250,248,.22);border-top:1px solid rgba(250,250,248,.05);}
+.footer-legal a{color:rgba(250,250,248,.22);transition:color var(--t);}
+.footer-legal a:hover{color:rgba(250,250,248,.5);}
+.footer-legal-links{display:flex;gap:24px;}
+@media(max-width:900px){.cta-band{padding:64px 32px;}.cta-band-inner{flex-direction:column;align-items:flex-start;gap:32px;}.footer-top{grid-template-columns:1fr;gap:40px;}.site-footer{padding:56px 32px 0;}}
+</style>
+<style>
+/* ═══════════════════════════════════════════════════════
+   APRESENTAÇÃO — estilos exclusivos desta página
+   Paleta: Mirage #1E1E20 · Pastel Brown #A07855 · Dawn Pink #EDE8E1 · Hemp #7C7069
+   Tipografia: Abhaya Libre (display) · Inter (body)
+═══════════════════════════════════════════════════════ */
 
-  /* Tipografia */
-  --serif: 'Abhaya Libre', Georgia, 'Times New Roman', serif;
-  --sans:  'Inter', system-ui, -apple-system, sans-serif;
-
-  /* Movimento */
-  --t:   0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  --t-l: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* Layout */
-  --max:     1360px;
-  --pad-x:   clamp(28px, 5vw, 80px);
-}
-
+/* ── Reset / base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  font-family: var(--sans);
-  background: var(--white);
-  color: var(--mirage);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "ss01", "cv11";
-  line-height: 1.5;
-}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--white); color: var(--mirage); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
-::selection { background: var(--pastel-brown); color: var(--white); }
+::selection { background: var(--pastel-brown); color: #fff; }
 
-/* ══════════════════════════════════════════════════════════════════
-   UTILITÁRIOS DE TIPOGRAFIA
-══════════════════════════════════════════════════════════════════ */
+/* ── Utilitários ── */
+.max { max-width: 1360px; margin: 0 auto; padding: 0 clamp(28px,5vw,80px); }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 14px;
-  font-size: 10.5px; font-weight: 500;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--pastel-brown);
+  font-size: 10.5px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--pastel-brown);
 }
-.eyebrow::before {
-  content: ''; width: 32px; height: 1px; background: currentColor;
-}
-.eyebrow.no-rule::before { display: none; }
+.eyebrow::before { content:''; width:32px; height:1px; background:currentColor; flex-shrink:0; }
+.serif { font-family: var(--serif); }
 
-.display {
-  font-family: var(--serif);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.015em;
-}
-.display em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--pastel-brown);
-}
+/* ── Reveal on scroll ── */
+.reveal { opacity:0; transform:translateY(24px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.reveal.in { opacity:1; transform:none; }
+.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s} .d5{transition-delay:.40s}
+@media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
 
-/* ══════════════════════════════════════════════════════════════════
-   HEADER fixo
-══════════════════════════════════════════════════════════════════ */
-.site-header {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  height: 64px; display: flex; align-items: center;
-  background: rgba(20,20,22,0);
-  backdrop-filter: blur(0);
-  border-bottom: 1px solid transparent;
-  transition: background var(--t), border-color var(--t), backdrop-filter var(--t);
-}
-.site-header.scrolled {
-  background: rgba(250,250,248,0.97);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
-}
-.header-inner {
-  max-width: var(--max); width: 100%;
-  margin: 0 auto; padding: 0 var(--pad-x);
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 24px;
-}
-.header-logo {
-  display: flex; align-items: center; gap: 12px;
-  font-family: var(--serif); font-size: 17px; font-weight: 500;
-  color: var(--white); transition: color var(--t);
-  letter-spacing: 0.5px;
-}
-.header-logo .icon {
-  width: 26px; height: 26px;
-  color: var(--white);
-  transition: color var(--t);
-  flex-shrink: 0;
-}
-.site-header.scrolled .header-logo { color: var(--mirage); }
-.site-header.scrolled .header-logo .icon { color: var(--mirage); }
-.header-meta {
-  font-size: 10.5px; font-weight: 500; letter-spacing: 2.5px;
-  text-transform: uppercase; color: rgba(250,250,248,0.55);
-  transition: color var(--t);
-}
-.site-header.scrolled .header-meta { color: var(--hemp); }
-@media (max-width: 720px) {
-  .header-meta { display: none; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   ESTRUTURA DE SLIDE (modular — adaptável a PowerPoint depois)
-══════════════════════════════════════════════════════════════════ */
-.slide {
-  position: relative;
-  padding: clamp(80px, 12vh, 140px) var(--pad-x);
-  overflow: hidden;
-}
-.slide-inner {
-  max-width: var(--max); margin: 0 auto;
-  position: relative; z-index: 2;
-}
-.slide.dark  { background: var(--mirage); color: var(--white); }
-.slide.dark .eyebrow { color: var(--pastel-brown); }
-.slide.deep  { background: var(--mirage-deep); color: var(--white); }
-.slide.light { background: var(--white); color: var(--mirage); }
-.slide.cream { background: var(--dawn-pink); color: var(--mirage); }
-.slide.brown { background: var(--pastel-deep); color: var(--white); }
-
-/* Marca d'água numérica — cada slide com seu número (estilo deck) */
-.slide-number {
-  position: absolute;
-  top: clamp(40px, 6vh, 64px); right: var(--pad-x);
-  font-family: var(--serif);
-  font-size: clamp(64px, 9vw, 120px);
-  line-height: 1; font-weight: 400;
-  color: currentColor; opacity: 0.06;
-  letter-spacing: -0.04em;
-  pointer-events: none;
-  z-index: 1;
-}
-.slide.dark .slide-number,
-.slide.deep .slide-number,
-.slide.brown .slide-number { opacity: 0.08; }
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 01 — CAPA / ABERTURA IMPACTANTE
-══════════════════════════════════════════════════════════════════ */
-.slide-cover {
-  min-height: 100vh;
+/* ══════════════════════════════════════════
+   01 · CAPA HERO — full viewport, escuro
+══════════════════════════════════════════ */
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
   background: var(--mirage);
-  display: flex; flex-direction: column;
-  position: relative;
+  overflow: hidden;
+  padding-top: 68px;
 }
-.cover-grid {
-  position: absolute; inset: 0;
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(160,120,85,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(160,120,85,0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
+    linear-gradient(rgba(160,120,85,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,120,85,.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+.hero-corner {
+  position: absolute; width: 48px; height: 48px;
+  border-color: var(--pastel-brown); border-style: solid;
   pointer-events: none;
 }
-.cover-frame {
-  position: absolute; inset: 32px;
-  border: 1px solid rgba(250,250,248,0.06);
-  pointer-events: none;
-}
-.cover-corners::before,
-.cover-corners::after,
-.cover-corners > span::before,
-.cover-corners > span::after {
-  content: ''; position: absolute;
-  width: 40px; height: 40px;
-  border: 1px solid var(--pastel-brown);
-}
-.cover-corners::before { top: 32px; left: 32px; border-right: none; border-bottom: none; }
-.cover-corners::after  { top: 32px; right: 32px; border-left: none; border-bottom: none; }
-.cover-corners > span::before { content: ''; bottom: 32px; left: 32px; border-right: none; border-top: none; position: absolute; }
-.cover-corners > span::after  { content: ''; bottom: 32px; right: 32px; border-left: none; border-top: none; position: absolute; }
-
-.cover-inner {
-  flex: 1; display: flex; flex-direction: column;
-  justify-content: space-between;
-  max-width: var(--max); width: 100%;
-  margin: 0 auto;
-  padding: 120px var(--pad-x) 80px;
+.hero-corner.tl { top:24px; left:24px; border-width:1px 0 0 1px; }
+.hero-corner.tr { top:24px; right:24px; border-width:1px 1px 0 0; }
+.hero-corner.bl { bottom:24px; left:24px; border-width:0 0 1px 1px; }
+.hero-corner.br { bottom:24px; right:24px; border-width:0 1px 1px 0; }
+.hero-body {
   position: relative; z-index: 2;
+  padding: clamp(56px,8vh,112px) 0 clamp(56px,8vh,96px);
 }
-.cover-top { display: flex; justify-content: space-between; gap: 48px; }
-.cover-meta-block {
+.hero-meta {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 40px; margin-bottom: 80px;
   font-size: 10.5px; font-weight: 400; letter-spacing: 2.5px;
-  text-transform: uppercase; color: rgba(250,250,248,0.42);
-  line-height: 2;
+  text-transform: uppercase;
 }
-.cover-meta-block strong {
-  color: var(--pastel-brown); font-weight: 500;
-  display: block; margin-bottom: 6px;
-}
-.cover-center {
-  flex: 1; display: flex; flex-direction: column;
-  justify-content: center; padding: 56px 0;
-}
-.cover-eyebrow {
+.hero-meta-l { color: rgba(250,250,248,.4); line-height: 2; }
+.hero-meta-l strong { color: var(--pastel-brown); display: block; font-weight: 500; margin-bottom: 6px; font-family: var(--sans); }
+.hero-meta-r { text-align: right; color: rgba(250,250,248,.32); line-height: 2; }
+.hero-kicker {
+  display: flex; align-items: center; gap: 16px;
   font-size: 11px; font-weight: 500; letter-spacing: 4px;
   text-transform: uppercase; color: var(--pastel-brown);
   margin-bottom: 32px;
-  display: inline-flex; align-items: center; gap: 16px;
 }
-.cover-eyebrow::before {
-  content: ''; width: 48px; height: 1px; background: currentColor;
-}
-.cover-title {
+.hero-kicker::before { content:''; width:48px; height:1px; background:currentColor; }
+.hero-h1 {
   font-family: var(--serif); font-weight: 400;
-  font-size: clamp(48px, 7.4vw, 108px);
-  line-height: 1.02; letter-spacing: -0.02em;
-  color: var(--white);
-  max-width: 17ch;
-  margin-bottom: 36px;
+  font-size: clamp(52px,7.5vw,112px); line-height: 1.02;
+  letter-spacing: -0.02em; color: #fff;
+  max-width: 18ch; margin-bottom: 32px;
 }
-.cover-title em { font-style: italic; color: var(--pastel-brown); font-weight: 400; }
-.cover-subtitle {
-  font-family: var(--sans); font-weight: 300;
-  font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6;
-  color: rgba(250,250,248,0.62);
-  max-width: 52ch;
-}
-
-.cover-bottom {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 48px; padding-top: 32px;
-  border-top: 1px solid rgba(250,250,248,0.08);
-}
-.cover-recipient {
-  font-family: var(--serif); font-style: italic;
-  font-size: 17px; color: rgba(250,250,248,0.58);
-  line-height: 1.5; max-width: 36ch;
-}
-.cover-recipient strong {
-  display: block; font-style: normal; font-weight: 400;
-  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--pastel-brown); margin-bottom: 8px;
-  font-family: var(--sans);
-}
-.cover-confidential {
-  font-size: 10px; font-weight: 500; letter-spacing: 3px;
-  text-transform: uppercase; color: rgba(250,250,248,0.32);
-  text-align: right; line-height: 2;
-}
-.cover-confidential .dot {
-  display: inline-block; width: 5px; height: 5px;
-  background: var(--pastel-brown); border-radius: 50%;
-  margin-right: 6px; vertical-align: middle;
-}
-
-@media (max-width: 720px) {
-  .cover-inner { padding: 96px 32px 56px; }
-  .cover-top, .cover-bottom { flex-direction: column; gap: 24px; }
-  .cover-confidential { text-align: left; }
-  .cover-frame { inset: 16px; }
-  .cover-corners::before { top: 16px; left: 16px; }
-  .cover-corners::after { top: 16px; right: 16px; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 02 — CONTEXTO / OPORTUNIDADE DE MERCADO
-══════════════════════════════════════════════════════════════════ */
-.context-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(48px, 6vw, 96px);
-  align-items: start;
-}
-.context-eyebrow { margin-bottom: 28px; }
-.context-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(36px, 4.8vw, 64px);
-  line-height: 1.05; letter-spacing: -0.02em;
-  color: var(--mirage);
-  margin-bottom: 28px;
-}
-.context-title em { font-style: italic; color: var(--pastel-brown); }
-.context-lead {
-  font-size: 16px; line-height: 1.7; color: var(--hemp);
-  font-weight: 400;
-}
-.context-points {
-  display: flex; flex-direction: column; gap: 28px;
-}
-.context-point {
-  padding: 28px 0;
-  border-top: 1px solid var(--line);
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 28px;
-  align-items: start;
-}
-.context-point:last-child { border-bottom: 1px solid var(--line); }
-.context-point-num {
-  font-family: var(--serif);
-  font-size: 22px; font-weight: 400;
-  color: var(--pastel-brown);
-  letter-spacing: 0.05em;
-}
-.context-point-title {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 22px; line-height: 1.3;
-  color: var(--mirage); margin-bottom: 10px;
-  letter-spacing: -0.01em;
-}
-.context-point-desc {
-  font-size: 14.5px; line-height: 1.65; color: var(--hemp);
-}
-
-@media (max-width: 900px) {
-  .context-grid { grid-template-columns: 1fr; gap: 48px; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 03 — QUEM É A NOHALL (autoridade)
-══════════════════════════════════════════════════════════════════ */
-.who-grid {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(56px, 7vw, 112px);
-  align-items: center;
-}
-.who-headline {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(40px, 5.6vw, 76px);
-  line-height: 1.04; letter-spacing: -0.025em;
-  color: var(--white);
-  margin-bottom: 32px;
-}
-.who-headline em { font-style: italic; color: var(--pastel-brown); }
-.who-tagline {
-  font-family: var(--serif); font-style: italic;
-  font-size: 18px; line-height: 1.5;
-  color: rgba(250,250,248,0.58);
-  margin-bottom: 40px;
-  padding-left: 20px;
-  border-left: 1px solid var(--pastel-brown);
-}
-.who-meta-list {
-  list-style: none; padding: 0;
-  font-size: 13px; line-height: 2;
-  color: rgba(250,250,248,0.5);
-  letter-spacing: 0.01em;
-}
-.who-meta-list li {
-  display: flex; align-items: center; gap: 14px;
-}
-.who-meta-list li::before {
-  content: ''; width: 18px; height: 1px; background: var(--pastel-brown);
-  flex-shrink: 0;
-}
-.who-meta-list strong {
-  color: rgba(250,250,248,0.85);
-  font-weight: 500;
-  font-family: var(--sans);
-}
-.who-pillars {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(250,250,248,0.08);
-  border: 1px solid rgba(250,250,248,0.08);
-}
-.who-pillar {
-  background: var(--mirage);
-  padding: 36px 32px;
-  position: relative;
-  transition: background var(--t);
-}
-.who-pillar:hover { background: rgba(160,120,85,0.05); }
-.who-pillar-num {
-  font-family: var(--serif);
-  font-size: 13px; font-weight: 400;
-  color: var(--pastel-brown);
-  letter-spacing: 0.05em;
-  margin-bottom: 20px;
-}
-.who-pillar-title {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 22px; line-height: 1.25;
-  color: var(--white); margin-bottom: 12px;
-  letter-spacing: -0.01em;
-}
-.who-pillar-desc {
-  font-size: 13px; line-height: 1.6;
-  color: rgba(250,250,248,0.55);
-}
-
-@media (max-width: 900px) {
-  .who-grid { grid-template-columns: 1fr; gap: 48px; }
-  .who-pillars { grid-template-columns: 1fr; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 04 — CICLO NOHALL (método)
-══════════════════════════════════════════════════════════════════ */
-.cycle-header {
-  max-width: 800px; margin: 0 auto 80px; text-align: center;
-}
-.cycle-header .eyebrow { justify-content: center; margin-bottom: 28px; }
-.cycle-header .eyebrow { display: inline-flex; }
-.cycle-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(40px, 5.4vw, 72px);
-  line-height: 1.05; letter-spacing: -0.02em;
-  margin-bottom: 24px;
-}
-.cycle-title em { font-style: italic; color: var(--pastel-brown); }
-.cycle-lead {
-  font-size: 15px; line-height: 1.7;
-  color: var(--hemp); max-width: 56ch; margin: 0 auto;
-}
-.cycle-track {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 24px; align-items: stretch;
-  position: relative;
-}
-.cycle-track::before {
-  content: '';
-  position: absolute;
-  top: 32px; left: 5%; right: 5%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--pastel-brown) 20%, var(--pastel-brown) 80%, transparent);
-  z-index: 0;
-}
-.cycle-step {
-  position: relative; z-index: 1;
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center;
-}
-.cycle-dot {
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  background: var(--pastel-brown);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 24px;
-  box-shadow: 0 0 0 8px var(--white), 0 0 0 9px rgba(160,120,85,0.18);
-  transition: transform var(--t), box-shadow var(--t);
-}
-.cycle-step:hover .cycle-dot {
-  transform: translateY(-3px);
-  box-shadow: 0 0 0 8px var(--white), 0 0 0 11px rgba(160,120,85,0.25);
-}
-.cycle-dot-num {
-  font-family: var(--serif); font-size: 17px; font-weight: 500;
-  color: var(--white); letter-spacing: 0.02em;
-}
-.cycle-step-title {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 22px; line-height: 1.2;
-  color: var(--mirage); margin-bottom: 12px;
-  letter-spacing: -0.01em;
-}
-.cycle-step-desc {
-  font-size: 13px; line-height: 1.55;
-  color: var(--hemp);
-  max-width: 22ch;
-}
-
-.cycle-flow {
-  margin-top: 72px;
-  text-align: center;
-  font-family: var(--serif); font-style: italic;
-  font-size: 14px; color: var(--hemp);
-  letter-spacing: 0.04em;
-}
-.cycle-flow span { color: var(--pastel-brown); }
-
-@media (max-width: 900px) {
-  .cycle-track { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
-  .cycle-track::before { display: none; }
-}
-@media (max-width: 540px) {
-  .cycle-track { grid-template-columns: 1fr; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 05 — POSICIONAMENTO ("não compete por volume")
-══════════════════════════════════════════════════════════════════ */
-.position-header {
-  margin-bottom: 80px; max-width: 900px;
-}
-.position-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(40px, 5.6vw, 80px);
-  line-height: 1.02; letter-spacing: -0.025em;
-  color: var(--white);
-}
-.position-title em { font-style: italic; color: var(--pastel-brown); }
-.position-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: rgba(250,250,248,0.08);
-  border: 1px solid rgba(250,250,248,0.08);
-}
-.position-card {
-  background: var(--mirage-deep);
-  padding: 48px 36px 56px;
-  display: flex; flex-direction: column;
-  position: relative;
-  transition: background var(--t);
-}
-.position-card:hover { background: rgba(160,120,85,0.06); }
-.position-card-eyebrow {
-  font-size: 10px; font-weight: 500; letter-spacing: 3px;
-  text-transform: uppercase; color: rgba(250,250,248,0.35);
-  margin-bottom: 32px;
-}
-.position-card-title {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 30px; line-height: 1.15;
-  color: var(--white); margin-bottom: auto;
-  padding-bottom: 48px;
-  letter-spacing: -0.015em;
-}
-.position-card-desc {
-  font-size: 14px; line-height: 1.65;
-  color: rgba(250,250,248,0.55);
-  border-top: 1px solid rgba(250,250,248,0.1);
-  padding-top: 24px;
-}
-
-@media (max-width: 900px) {
-  .position-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 540px) {
-  .position-grid { grid-template-columns: 1fr; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 06 — NÚMEROS / PROVA DE CAPACIDADE
-══════════════════════════════════════════════════════════════════ */
-.metrics-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(48px, 6vw, 96px);
-  align-items: end;
-  margin-bottom: 80px;
-}
-.metrics-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(36px, 4.8vw, 60px);
-  line-height: 1.05; letter-spacing: -0.02em;
-}
-.metrics-title em { font-style: italic; color: var(--pastel-brown); }
-.metrics-note {
-  font-size: 14px; line-height: 1.7;
-  color: var(--hemp);
-  max-width: 44ch;
-}
-.metrics-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.metric-cell {
-  padding: 48px 32px;
-  border-right: 1px solid var(--line);
-  position: relative;
-}
-.metric-cell:last-child { border-right: none; }
-.metric-num {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(40px, 4.4vw, 64px);
-  line-height: 1; color: var(--mirage);
-  letter-spacing: -0.03em;
-  margin-bottom: 14px;
-  display: flex; align-items: baseline; gap: 4px;
-}
-.metric-num .unit {
-  font-size: 0.45em; color: var(--pastel-brown);
-  font-weight: 500; font-style: italic;
-  margin-left: 2px;
-}
-.metric-label {
-  font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--hemp);
-  line-height: 1.5;
-}
-
-@media (max-width: 900px) {
-  .metrics-header { grid-template-columns: 1fr; gap: 24px; }
-  .metrics-grid { grid-template-columns: 1fr 1fr; }
-  .metric-cell {
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 36px 24px;
-  }
-  .metric-cell:nth-child(2n) { border-right: none; }
-}
-@media (max-width: 540px) {
-  .metrics-grid { grid-template-columns: 1fr; }
-  .metric-cell { border-right: none !important; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 07 — PORTFÓLIO / TRABALHOS DESENVOLVIDOS
-══════════════════════════════════════════════════════════════════ */
-.portfolio-header {
-  display: grid; grid-template-columns: 1fr auto;
-  gap: 48px; align-items: end;
+.hero-h1 em { font-style: italic; color: var(--pastel-brown); }
+.hero-sub {
+  font-size: clamp(15px,1.4vw,18px); font-weight: 300;
+  color: rgba(250,250,248,.58); max-width: 52ch; line-height: 1.65;
   margin-bottom: 56px;
 }
-.portfolio-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(36px, 4.8vw, 64px);
-  line-height: 1.05; letter-spacing: -0.02em;
-}
-.portfolio-title em { font-style: italic; color: var(--pastel-brown); }
-.portfolio-meta {
-  font-size: 13px; color: var(--hemp);
-  text-align: right; line-height: 1.7;
-}
-.portfolio-meta strong {
-  display: block; color: var(--mirage);
-  font-family: var(--serif); font-size: 17px;
-  font-weight: 500; margin-bottom: 4px;
-}
-.portfolio-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-.portfolio-card {
-  aspect-ratio: 4/5;
-  background: var(--mirage);
-  position: relative; overflow: hidden;
-  cursor: default;
-  border: 1px solid var(--line);
-}
-.portfolio-card::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, var(--mirage) 0%, var(--mirage-deep) 100%);
-}
-.portfolio-card::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle at 30% 20%, rgba(160,120,85,0.18) 0%, transparent 45%),
-    radial-gradient(circle at 70% 80%, rgba(160,120,85,0.10) 0%, transparent 50%);
-  opacity: 0.7;
-  transition: opacity var(--t);
-}
-.portfolio-card:hover::after { opacity: 1; }
-.portfolio-card-content {
-  position: absolute; inset: 0; z-index: 2;
-  padding: 24px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  color: var(--white);
-}
-.portfolio-card-tag {
-  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--pastel-brown);
-}
-.portfolio-card-name {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 22px; line-height: 1.2;
-  color: var(--white);
-  letter-spacing: -0.01em;
-}
-.portfolio-card-cat {
-  font-size: 11px; color: rgba(250,250,248,0.55);
-  letter-spacing: 1px; text-transform: uppercase;
-  margin-top: 6px;
-}
-
-@media (max-width: 900px) {
-  .portfolio-grid { grid-template-columns: 1fr 1fr; }
-  .portfolio-header { grid-template-columns: 1fr; }
-  .portfolio-meta { text-align: left; }
-}
-@media (max-width: 540px) {
-  .portfolio-grid { grid-template-columns: 1fr; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 08 — EQUIPE / FUNDADORES
-══════════════════════════════════════════════════════════════════ */
-.team-header { margin-bottom: 64px; max-width: 800px; }
-.team-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(36px, 5vw, 64px);
-  line-height: 1.05; letter-spacing: -0.02em;
-  margin-bottom: 24px;
-}
-.team-title em { font-style: italic; color: var(--pastel-brown); }
-.team-lead {
-  font-size: 15px; line-height: 1.7; color: var(--hemp);
-  max-width: 60ch;
-}
-.team-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  background: var(--line);
-  border: 1px solid var(--line);
-}
-.team-card {
-  background: var(--white);
-  padding: 0;
-  position: relative;
-}
-.team-photo {
-  aspect-ratio: 4/5;
-  overflow: hidden;
-  position: relative;
-  background: var(--dawn-pink);
-}
-.team-photo img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(100%) contrast(1.02);
-  transition: filter var(--t-l), transform var(--t-l);
-}
-.team-card:hover .team-photo img {
-  filter: grayscale(0%) contrast(1);
-  transform: scale(1.04);
-}
-.team-info {
-  padding: 24px 24px 28px;
-  border-top: 1px solid var(--line);
-}
-.team-name {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 19px; line-height: 1.25;
-  color: var(--mirage); margin-bottom: 4px;
-  letter-spacing: -0.01em;
-}
-.team-role {
-  font-size: 11px; font-weight: 500; letter-spacing: 1.8px;
-  text-transform: uppercase; color: var(--pastel-brown);
-}
-
-@media (max-width: 900px) {
-  .team-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 540px) {
-  .team-grid { grid-template-columns: 1fr; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 09 — ECOSSISTEMA DE PARCEIROS
-══════════════════════════════════════════════════════════════════ */
-.ecosystem-header {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: clamp(48px, 6vw, 96px);
-  align-items: end;
-  margin-bottom: 80px;
-}
-.ecosystem-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(36px, 4.8vw, 64px);
-  line-height: 1.05; letter-spacing: -0.02em;
-  color: var(--white);
-}
-.ecosystem-title em { font-style: italic; color: var(--pastel-brown); }
-.ecosystem-lead {
-  font-size: 15px; line-height: 1.7;
-  color: rgba(250,250,248,0.6);
-}
-.ecosystem-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1px;
-  background: rgba(250,250,248,0.08);
-  border: 1px solid rgba(250,250,248,0.08);
-}
-
-/* Faixa Nohall — protagonista do ecossistema, acima da grid de parceiros */
-.ecosystem-lead {
-  display: grid;
-  grid-template-columns: 88px 1fr auto;
-  gap: 36px;
-  align-items: center;
-  background: linear-gradient(135deg, rgba(160,120,85,0.14) 0%, rgba(160,120,85,0.04) 60%, transparent 100%);
-  border: 1px solid rgba(160,120,85,0.32);
-  padding: 40px 44px;
-  margin-bottom: 32px;
-  position: relative;
-  overflow: hidden;
-}
-.ecosystem-lead::before {
-  content: '';
-  position: absolute; top: 0; left: 0; bottom: 0;
-  width: 3px; background: var(--pastel-brown);
-}
-.ecosystem-lead-mark {
-  width: 64px; height: 64px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--pastel-brown);
-}
-.ecosystem-lead-mark svg { width: 100%; height: 100%; }
-.ecosystem-lead-content { min-width: 0; }
-.ecosystem-lead-tag {
-  font-size: 10px; font-weight: 500; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--pastel-brown);
-  margin-bottom: 12px;
-}
-.ecosystem-lead-title {
-  font-family: var(--serif); font-weight: 500;
-  font-size: clamp(26px, 2.6vw, 34px);
-  line-height: 1.15; color: var(--white);
-  letter-spacing: -0.015em; margin-bottom: 12px;
-}
-.ecosystem-lead-desc {
-  font-size: 14px; line-height: 1.65;
-  color: rgba(250,250,248,0.7);
-  max-width: 64ch;
-}
-.ecosystem-lead-meta {
-  display: flex; flex-direction: column; gap: 10px;
-  padding-left: 36px;
-  border-left: 1px solid rgba(250,250,248,0.12);
-  flex-shrink: 0;
-}
-.ecosystem-lead-meta-row {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 12px;
-}
-.ecosystem-lead-meta-row span {
-  font-family: var(--serif); font-weight: 400;
-  color: var(--pastel-brown);
-  letter-spacing: 0.05em;
-}
-.ecosystem-lead-meta-row strong {
-  color: var(--white); font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
-@media (max-width: 1100px) {
-  .ecosystem-lead {
-    grid-template-columns: 64px 1fr;
-    gap: 28px;
-  }
-  .ecosystem-lead-meta {
-    grid-column: 1 / -1;
-    flex-direction: row; flex-wrap: wrap;
-    padding-left: 0; border-left: none;
-    padding-top: 24px; margin-top: 4px;
-    border-top: 1px solid rgba(250,250,248,0.12);
-    gap: 24px;
-  }
-}
-.partner-card {
-  background: var(--mirage);
-  padding: 40px 36px 44px;
-  display: flex; flex-direction: column;
-  position: relative;
-  transition: background var(--t);
-  min-height: 340px;
-}
-.partner-card:hover { background: rgba(160,120,85,0.05); }
-.partner-tag {
-  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--pastel-brown);
-  margin-bottom: 28px;
-}
-.partner-logo {
-  height: 56px; margin-bottom: 28px;
-  display: flex; align-items: center;
-}
-.partner-logo-placeholder {
-  width: 100%; max-width: 180px;
-  height: 48px;
-  border: 1px dashed rgba(250,250,248,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
-  color: rgba(250,250,248,0.32);
-  background: rgba(250,250,248,0.02);
-}
-.partner-logo img {
-  max-height: 48px; max-width: 180px;
-  width: auto; height: auto;
-  filter: brightness(0) invert(1); opacity: 0.92;
-}
-.partner-name {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 26px; line-height: 1.2;
-  color: var(--white); margin-bottom: 8px;
-  letter-spacing: -0.01em;
-}
-.partner-card.lead .partner-name { font-size: 32px; }
-.partner-role {
-  font-size: 12px; font-weight: 500; letter-spacing: 1.8px;
-  text-transform: uppercase; color: var(--pastel-brown);
-  margin-bottom: 20px;
-}
-.partner-desc {
-  font-size: 13.5px; line-height: 1.65;
-  color: rgba(250,250,248,0.6);
-  margin-top: auto;
-}
-.partner-card.lead .partner-desc { font-size: 14.5px; line-height: 1.7; }
-
-@media (max-width: 900px) {
-  .ecosystem-grid { grid-template-columns: 1fr 1fr; }
-  .ecosystem-lead {
-    grid-template-columns: 56px 1fr;
-    gap: 24px;
-  }
-  .ecosystem-lead-meta { display: none; }
-  .ecosystem-header { grid-template-columns: 1fr; gap: 24px; }
-}
-@media (max-width: 540px) {
-  .ecosystem-grid { grid-template-columns: 1fr; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 10 — MODELO DE PERMUTA (DIFERENCIAL)
-══════════════════════════════════════════════════════════════════ */
-.permuta-header {
-  text-align: center; max-width: 760px;
-  margin: 0 auto 80px;
-}
-.permuta-header .eyebrow { display: inline-flex; margin-bottom: 28px; }
-.permuta-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(40px, 5.4vw, 72px);
-  line-height: 1.04; letter-spacing: -0.025em;
-  color: var(--mirage); margin-bottom: 24px;
-}
-.permuta-title em { font-style: italic; color: var(--pastel-brown); }
-.permuta-lead {
-  font-size: 15px; line-height: 1.7; color: var(--hemp);
-  max-width: 60ch; margin: 0 auto;
-}
-.permuta-pillars {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 64px;
-}
-.permuta-pillar {
-  background: var(--white);
-  border: 1px solid var(--line);
-  padding: 40px 32px 44px;
-  position: relative;
-  transition: border-color var(--t), transform var(--t);
-}
-.permuta-pillar:hover {
-  border-color: var(--pastel-brown);
-  transform: translateY(-2px);
-}
-.permuta-pillar-num {
-  font-family: var(--serif);
-  font-size: 13px; font-weight: 500;
-  color: var(--pastel-brown);
-  letter-spacing: 0.05em;
-  margin-bottom: 24px;
-}
-.permuta-pillar-title {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 24px; line-height: 1.25;
-  color: var(--mirage); margin-bottom: 14px;
-  letter-spacing: -0.01em;
-}
-.permuta-pillar-desc {
-  font-size: 13.5px; line-height: 1.65;
-  color: var(--hemp);
-}
-.permuta-flow {
-  background: var(--mirage);
-  padding: 56px 48px;
-  display: grid;
-  grid-template-columns: 1.2fr 1.6fr;
-  gap: 56px;
-  align-items: center;
-  border: 1px solid var(--mirage);
-  position: relative;
-  overflow: hidden;
-}
-.permuta-flow::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: 200px;
-  background: radial-gradient(ellipse at right, rgba(160,120,85,0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-.permuta-flow-side {
-  position: relative; z-index: 2;
-}
-.permuta-flow-eyebrow {
-  font-size: 10px; font-weight: 500; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--pastel-brown);
-  margin-bottom: 20px;
-}
-.permuta-flow-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(26px, 2.8vw, 36px);
-  line-height: 1.2; letter-spacing: -0.015em;
-  color: var(--white);
-}
-.permuta-flow-title em { font-style: italic; color: var(--pastel-brown); }
-.permuta-flow-list {
-  list-style: none; padding: 0;
-  display: flex; flex-direction: column; gap: 20px;
-  position: relative; z-index: 2;
-}
-.permuta-flow-list li {
-  display: flex;
-  gap: 18px;
-  font-size: 14px; line-height: 1.6;
-  color: rgba(250,250,248,0.78);
-  align-items: flex-start;
-}
-.permuta-flow-list li::before {
-  content: '';
-  width: 7px; height: 7px;
-  background: var(--pastel-brown);
-  border-radius: 50%;
-  margin-top: 8px;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 4px rgba(160,120,85,0.18);
-}
-.permuta-flow-list strong {
-  color: var(--white);
-  font-weight: 500;
-  display: block;
-  margin-bottom: 2px;
-}
-
-@media (max-width: 900px) {
-  .permuta-pillars { grid-template-columns: 1fr; gap: 16px; }
-  .permuta-flow { grid-template-columns: 1fr; gap: 32px; padding: 40px 32px; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 11 — DIFERENCIAIS (porque a Nohall)
-══════════════════════════════════════════════════════════════════ */
-.diff-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: clamp(56px, 7vw, 112px);
-  align-items: start;
-}
-.diff-title {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(36px, 4.8vw, 60px);
-  line-height: 1.05; letter-spacing: -0.02em;
-  color: var(--white);
-  margin-bottom: 24px;
-}
-.diff-title em { font-style: italic; color: var(--pastel-brown); }
-.diff-lead {
-  font-size: 15px; line-height: 1.7;
-  color: rgba(250,250,248,0.58);
-}
-.diff-list {
-  list-style: none; padding: 0;
-  display: flex; flex-direction: column;
-}
-.diff-item {
-  padding: 28px 0;
-  border-top: 1px solid rgba(250,250,248,0.08);
-  display: grid;
-  grid-template-columns: 56px 1fr auto;
-  gap: 24px;
-  align-items: start;
-  transition: padding-left var(--t);
-}
-.diff-item:hover { padding-left: 8px; }
-.diff-item:last-child { border-bottom: 1px solid rgba(250,250,248,0.08); }
-.diff-num {
-  font-family: var(--serif);
-  font-size: 18px; font-weight: 400;
-  color: var(--pastel-brown);
-  letter-spacing: 0.05em;
-}
-.diff-content-title {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 22px; line-height: 1.3;
-  color: var(--white); margin-bottom: 8px;
-  letter-spacing: -0.01em;
-}
-.diff-content-desc {
-  font-size: 13.5px; line-height: 1.65;
-  color: rgba(250,250,248,0.55);
-  max-width: 60ch;
-}
-.diff-arrow {
-  font-size: 18px; color: var(--pastel-brown);
-  opacity: 0.5; transition: opacity var(--t), transform var(--t);
-}
-.diff-item:hover .diff-arrow {
-  opacity: 1; transform: translateX(4px);
-}
-
-@media (max-width: 900px) {
-  .diff-grid { grid-template-columns: 1fr; gap: 48px; }
-  .diff-item { grid-template-columns: 40px 1fr; }
-  .diff-arrow { display: none; }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SLIDE 12 — CTA FINAL (PROPOSTA DE AVANÇO)
-══════════════════════════════════════════════════════════════════ */
-.cta-slide {
-  background: var(--pastel-deep);
-  position: relative;
-  overflow: hidden;
-}
-.cta-slide::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.06) 0%, transparent 40%),
-    radial-gradient(circle at 85% 90%, rgba(0,0,0,0.10) 0%, transparent 50%);
-  pointer-events: none;
-}
-.cta-slide .slide-inner { position: relative; z-index: 2; }
-.cta-grid {
-  display: grid; grid-template-columns: 1.1fr 1fr;
-  gap: clamp(64px, 8vw, 128px);
-  align-items: center;
-}
-.cta-headline {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(44px, 6vw, 84px);
-  line-height: 1.0; letter-spacing: -0.025em;
-  color: var(--white);
-  margin-bottom: 32px;
-}
-.cta-headline em { font-style: italic; color: rgba(255,255,255,0.7); font-weight: 400; }
-.cta-lead {
-  font-size: 16px; line-height: 1.7;
-  color: rgba(255,255,255,0.78);
-  margin-bottom: 40px;
-  max-width: 50ch;
-}
-.cta-signature {
-  padding-top: 32px;
-  border-top: 1px solid rgba(255,255,255,0.18);
-  display: flex; align-items: center; gap: 16px;
-}
-.cta-signature-icon {
-  width: 38px; height: 38px;
-  color: var(--white);
-  flex-shrink: 0;
-  opacity: 0.92;
-}
-.cta-signature-text {
-  font-family: var(--serif); font-style: italic;
-  font-size: 14px; color: rgba(255,255,255,0.72);
-  line-height: 1.5;
-}
-.cta-signature-text strong {
-  display: block; font-style: normal;
-  font-family: var(--sans);
-  font-size: 11px; font-weight: 500;
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--pastel-brown); color: #fff;
+  padding: 14px 32px; font-size: 10.5px; font-weight: 500;
   letter-spacing: 2.5px; text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 4px;
+  transition: background .3s;
 }
-
-.cta-options {
-  display: flex; flex-direction: column;
-  gap: 14px;
+.btn-primary:hover { background: #8a6340; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid rgba(250,250,248,.3); color: rgba(250,250,248,.75);
+  padding: 14px 32px; font-size: 10.5px; font-weight: 500;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  transition: all .3s;
 }
-.cta-option {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
-  padding: 26px 30px;
-  display: grid;
-  grid-template-columns: 36px 1fr auto;
+.btn-ghost:hover { border-color: rgba(250,250,248,.7); color: #fff; }
+.hero-conf {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(250,250,248,.3);
+}
+.hero-conf::before {
+  content:''; width:6px; height:6px; border-radius:50%;
+  background: var(--pastel-brown); animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:.4;transform:scale(1)} 50%{opacity:1;transform:scale(1.3)} }
+.hero-divider {
+  border: none; border-top: 1px solid rgba(250,250,248,.08);
+  margin-bottom: 32px;
+}
+.hero-bottom {
+  display: flex; justify-content: space-between; align-items: flex-end;
   gap: 24px;
-  align-items: center;
-  cursor: pointer;
-  transition: background var(--t), border-color var(--t), transform var(--t);
-  text-decoration: none; color: inherit;
 }
-.cta-option:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.4);
-  transform: translateX(4px);
+.hero-recipient {
+  font-family: var(--serif); font-style: italic;
+  font-size: 16px; color: rgba(250,250,248,.5); line-height: 1.5;
 }
-.cta-option.primary {
-  background: var(--white); color: var(--mirage);
-  border-color: var(--white);
-}
-.cta-option.primary:hover {
-  background: var(--mirage);
-  color: var(--white);
-  border-color: var(--mirage);
-}
-.cta-option-num {
-  font-family: var(--serif);
-  font-size: 17px; font-weight: 500;
-  color: var(--white);
-  opacity: 0.7;
-}
-.cta-option.primary .cta-option-num { color: var(--pastel-brown); opacity: 1; }
-.cta-option-content {
-  display: flex; flex-direction: column; gap: 4px;
-}
-.cta-option-label {
-  font-family: var(--serif); font-weight: 500;
-  font-size: 19px; line-height: 1.2;
-  color: var(--white);
-  letter-spacing: -0.01em;
-}
-.cta-option.primary .cta-option-label { color: var(--mirage); }
-.cta-option-meta {
-  font-size: 12px; color: rgba(255,255,255,0.6);
-  letter-spacing: 0.02em;
-}
-.cta-option.primary .cta-option-meta { color: var(--hemp); }
-.cta-option-arrow {
-  font-size: 17px; color: var(--white); opacity: 0.6;
-  transition: transform var(--t), opacity var(--t);
-}
-.cta-option:hover .cta-option-arrow {
-  transform: translateX(4px); opacity: 1;
-}
-.cta-option.primary .cta-option-arrow { color: var(--mirage); }
-
-@media (max-width: 900px) {
-  .cta-grid { grid-template-columns: 1fr; gap: 56px; }
+.hero-recipient strong {
+  font-style: normal; font-family: var(--sans);
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  display: block; margin-bottom: 6px;
 }
 
-/* ══════════════════════════════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════════════════════════════ */
-.site-footer {
-  background: var(--mirage-deep);
-  color: rgba(250,250,248,0.5);
-  padding: 80px var(--pad-x) 32px;
+/* ══════════════════════════════════════════
+   02 · CONTEXTO — fundo claro
+══════════════════════════════════════════ */
+#contexto { background: var(--white); padding: clamp(80px,10vh,128px) 0; }
+.ctx-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: clamp(48px,7vw,112px); align-items: start;
+}
+.ctx-h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(38px,4.8vw,64px); line-height: 1.05;
+  letter-spacing: -0.02em; margin: 24px 0;
+}
+.ctx-h2 em { font-style: italic; color: var(--pastel-brown); }
+.ctx-lead { font-size: 16px; line-height: 1.7; color: var(--hemp); }
+.ctx-points { display: flex; flex-direction: column; }
+.ctx-point {
+  padding: 28px 0; border-top: 1px solid rgba(30,30,32,.08);
+  display: grid; grid-template-columns: 48px 1fr; gap: 24px;
+}
+.ctx-point:last-child { border-bottom: 1px solid rgba(30,30,32,.08); }
+.ctx-num {
+  font-family: var(--serif); font-size: 20px; color: var(--pastel-brown);
+  padding-top: 2px;
+}
+.ctx-point-h { font-family: var(--serif); font-size: 22px; font-weight: 500; margin-bottom: 8px; letter-spacing: -0.01em; }
+.ctx-point-p { font-size: 14px; line-height: 1.65; color: var(--hemp); }
+@media(max-width:900px){ .ctx-grid{grid-template-columns:1fr;} }
+
+/* ══════════════════════════════════════════
+   03 · QUEM SOMOS — fundo escuro
+══════════════════════════════════════════ */
+#quem { background: var(--mirage); color: #fff; padding: clamp(80px,10vh,128px) 0; }
+.quem-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: clamp(48px,7vw,112px); align-items: center;
+}
+.quem-h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px,5.2vw,72px); line-height: 1.04;
+  letter-spacing: -0.022em; margin: 24px 0 20px;
+}
+.quem-h2 em { font-style: italic; color: var(--pastel-brown); }
+.quem-quote {
+  font-family: var(--serif); font-style: italic;
+  font-size: 18px; color: rgba(250,250,248,.55); line-height: 1.55;
+  padding-left: 20px; border-left: 1px solid var(--pastel-brown);
+  margin-bottom: 36px;
+}
+.quem-meta { list-style: none; }
+.quem-meta li {
+  display: flex; align-items: baseline; gap: 14px;
+  font-size: 13px; color: rgba(250,250,248,.45);
+  padding: 10px 0; border-top: 1px solid rgba(250,250,248,.06);
+}
+.quem-meta li:last-child { border-bottom: 1px solid rgba(250,250,248,.06); }
+.quem-meta li::before { content:'—'; color: var(--pastel-brown); flex-shrink:0; }
+.quem-meta li strong { color: rgba(250,250,248,.82); font-weight: 500; }
+.quem-pillars {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: rgba(250,250,248,.08);
+  border: 1px solid rgba(250,250,248,.08);
+}
+.quem-pillar {
+  background: var(--mirage); padding: 32px 28px;
+  transition: background .3s;
+}
+.quem-pillar:hover { background: rgba(160,120,85,.06); }
+.quem-pillar-n { font-family: var(--serif); font-size: 12px; color: var(--pastel-brown); letter-spacing: .05em; margin-bottom: 16px; }
+.quem-pillar-h { font-family: var(--serif); font-size: 21px; font-weight: 500; color: #fff; margin-bottom: 10px; }
+.quem-pillar-p { font-size: 13px; line-height: 1.6; color: rgba(250,250,248,.5); }
+@media(max-width:900px){ .quem-grid{grid-template-columns:1fr;} .quem-pillars{grid-template-columns:1fr;} }
+
+/* ══════════════════════════════════════════
+   04 · CICLO — fundo Dawn Pink
+══════════════════════════════════════════ */
+#ciclo { background: var(--dawn-pink); padding: clamp(80px,10vh,128px) 0; }
+.ciclo-head { text-align: center; max-width: 720px; margin: 0 auto 80px; }
+.ciclo-h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px,5vw,68px); line-height: 1.04;
+  letter-spacing: -0.022em; margin: 24px 0 20px;
+}
+.ciclo-h2 em { font-style: italic; color: var(--pastel-brown); }
+.ciclo-lead { font-size: 15px; line-height: 1.7; color: var(--hemp); }
+.ciclo-track {
+  display: grid; grid-template-columns: repeat(5,1fr); gap: 20px;
   position: relative;
 }
-.footer-inner {
-  max-width: var(--max); margin: 0 auto;
+.ciclo-track::before {
+  content:''; position: absolute;
+  top: 32px; left: 5%; right: 5%; height: 1px;
+  background: linear-gradient(90deg,transparent,var(--pastel-brown) 20%,var(--pastel-brown) 80%,transparent);
+  z-index: 0;
 }
-.footer-top {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 64px;
-  padding-bottom: 56px;
-  border-bottom: 1px solid rgba(250,250,248,0.06);
+.ciclo-step { position: relative; z-index:1; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.ciclo-dot {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--pastel-brown); display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-family: var(--serif); font-size: 17px; color: #fff;
+  box-shadow: 0 0 0 8px var(--dawn-pink), 0 0 0 9px rgba(160,120,85,.2);
+  transition: transform .35s;
 }
-.footer-brand {
-  display: flex; align-items: center; gap: 14px;
-  margin-bottom: 24px;
-}
-.footer-brand img,
-.footer-brand-icon {
-  height: 28px; width: 28px;
-  color: var(--white);
-  flex-shrink: 0;
-  opacity: 0.92;
-}
-.footer-brand-text {
-  font-family: var(--serif); font-size: 19px; font-weight: 500;
-  color: var(--white); letter-spacing: 0.02em;
-}
-.footer-tagline {
+.ciclo-step:hover .ciclo-dot { transform: translateY(-4px); }
+.ciclo-h3 { font-family: var(--serif); font-size: 21px; font-weight: 500; margin-bottom: 10px; }
+.ciclo-p { font-size: 13px; line-height: 1.55; color: var(--hemp); max-width: 20ch; }
+.ciclo-flow {
+  text-align: center; margin-top: 64px;
   font-family: var(--serif); font-style: italic;
-  font-size: 15px; color: rgba(250,250,248,0.4);
-  line-height: 1.6; max-width: 38ch;
-  margin-bottom: 28px;
+  font-size: 14px; color: var(--hemp); letter-spacing: .04em;
 }
-.footer-info {
-  font-size: 12px; line-height: 1.9;
-  color: rgba(250,250,248,0.32);
+.ciclo-flow span { color: var(--pastel-brown); }
+@media(max-width:900px){
+  .ciclo-track { grid-template-columns: 1fr 1fr; }
+  .ciclo-track::before { display:none; }
 }
-.footer-label {
-  font-size: 9.5px; font-weight: 500; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--pastel-brown);
-  margin-bottom: 18px;
-}
-.footer-list { display: flex; flex-direction: column; gap: 10px; }
-.footer-list a, .footer-list span {
-  font-size: 13px; color: rgba(250,250,248,0.5);
-  transition: color var(--t);
-}
-.footer-list a:hover { color: var(--pastel-brown); }
-.footer-bottom {
-  padding-top: 28px;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 10.5px; letter-spacing: 0.5px;
-  color: rgba(250,250,248,0.28);
-  flex-wrap: wrap; gap: 12px;
-}
-.footer-bottom .pulse {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(250,250,248,0.4);
-}
-.footer-bottom .pulse::before {
-  content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--pastel-brown);
-  animation: pulse 2.4s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50%      { opacity: 1;   transform: scale(1.2); }
-}
-@media (max-width: 900px) {
-  .footer-top { grid-template-columns: 1fr; gap: 40px; }
-  .footer-bottom { flex-direction: column; align-items: flex-start; }
-}
+@media(max-width:540px){ .ciclo-track { grid-template-columns: 1fr; } }
 
-/* ══════════════════════════════════════════════════════════════════
-   ANIMAÇÕES DE ENTRADA (scroll reveal — IntersectionObserver)
-══════════════════════════════════════════════════════════════════ */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+/* ══════════════════════════════════════════
+   05 · POSICIONAMENTO — fundo escuro profundo
+══════════════════════════════════════════ */
+#posicionamento { background: #141416; color: #fff; padding: clamp(80px,10vh,128px) 0; }
+.pos-h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px,5.5vw,80px); line-height: 1.02;
+  letter-spacing: -0.025em; margin: 24px 0 64px;
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.10s; }
-.reveal-delay-2 { transition-delay: 0.20s; }
-.reveal-delay-3 { transition-delay: 0.30s; }
-.reveal-delay-4 { transition-delay: 0.40s; }
-.reveal-delay-5 { transition-delay: 0.50s; }
-
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
-  * { animation: none !important; transition: none !important; }
+.pos-h2 em { font-style: italic; color: var(--pastel-brown); }
+.pos-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: rgba(250,250,248,.08);
+  border: 1px solid rgba(250,250,248,.08);
 }
+.pos-card {
+  background: #141416; padding: 44px 32px 52px;
+  display: flex; flex-direction: column;
+  transition: background .3s;
+}
+.pos-card:hover { background: rgba(160,120,85,.06); }
+.pos-card-ey { font-size: 9.5px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: rgba(250,250,248,.3); margin-bottom: 28px; }
+.pos-card-h { font-family: var(--serif); font-size: 28px; font-weight: 500; color: #fff; margin-bottom: auto; padding-bottom: 40px; line-height: 1.2; }
+.pos-card-p { font-size: 13.5px; line-height: 1.65; color: rgba(250,250,248,.5); border-top: 1px solid rgba(250,250,248,.1); padding-top: 20px; }
+@media(max-width:900px){ .pos-grid{grid-template-columns:1fr 1fr;} }
+@media(max-width:540px){ .pos-grid{grid-template-columns:1fr;} }
 
-/* Print fallback (caso queiram imprimir/exportar PDF) */
-@media print {
-  .site-header, .cta-options, .footer-bottom .pulse { display: none; }
-  .slide { page-break-after: always; padding: 40px 32px; min-height: auto; }
-  body { background: white; }
+/* ══════════════════════════════════════════
+   06 · MÉTRICAS — fundo branco
+══════════════════════════════════════════ */
+#metricas { background: var(--white); padding: clamp(80px,10vh,128px) 0; }
+.met-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(40px,6vw,96px); align-items: end; margin-bottom: 72px;
+}
+.met-h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px,4.5vw,60px); line-height: 1.05;
+  letter-spacing: -0.02em; margin-top: 20px;
+}
+.met-h2 em { font-style: italic; color: var(--pastel-brown); }
+.met-note { font-size: 14px; line-height: 1.7; color: var(--hemp); }
+.met-grid {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  border-top: 1px solid rgba(30,30,32,.08);
+  border-bottom: 1px solid rgba(30,30,32,.08);
+}
+.met-cell {
+  padding: 44px 28px;
+  border-right: 1px solid rgba(30,30,32,.08);
+}
+.met-cell:last-child { border-right: none; }
+.met-n {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px,4vw,62px); line-height: 1; color: var(--mirage);
+  letter-spacing: -0.03em; margin-bottom: 12px;
+}
+.met-n .unit { font-size: .44em; color: var(--pastel-brown); font-style: italic; margin-left: 2px; }
+.met-lbl { font-size: 10.5px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--hemp); line-height: 1.5; }
+@media(max-width:900px){ .met-header{grid-template-columns:1fr;} .met-grid{grid-template-columns:1fr 1fr;} .met-cell{border-bottom:1px solid rgba(30,30,32,.08);} }
+
+/* ══════════════════════════════════════════
+   07 · PORTFÓLIO — fundo dawn-pink
+══════════════════════════════════════════ */
+#portfolio { background: var(--dawn-pink); padding: clamp(80px,10vh,128px) 0; }
+.port-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 32px; margin-bottom: 48px;
+}
+.port-h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px,4.8vw,64px); line-height: 1.05;
+  letter-spacing: -0.02em; margin-top: 20px;
+}
+.port-h2 em { font-style: italic; color: var(--pastel-brown); }
+.port-note { font-size: 13px; color: var(--hemp); text-align: right; line-height: 1.7; }
+.port-note strong { display: block; font-family: var(--serif); font-size: 16px; color: var(--mirage); font-weight: 500; margin-bottom: 2px; }
+.port-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 14px;
+}
+.port-card {
+  aspect-ratio: 4/5; position: relative; overflow: hidden;
+  background: var(--mirage); cursor: default;
+}
+.port-card img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: .6;
+  transition: opacity .5s, transform .6s cubic-bezier(.16,1,.3,1);
+}
+.port-card:hover img { opacity: .8; transform: scale(1.04); }
+.port-card-info {
+  position: absolute; inset: 0; z-index: 2; padding: 20px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  background: linear-gradient(to top, rgba(20,20,22,.82) 0%, transparent 55%);
+}
+.port-tag { font-size: 9.5px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--pastel-brown); }
+.port-card-h { font-family: var(--serif); font-size: 20px; font-weight: 500; color: #fff; line-height: 1.2; }
+.port-card-c { font-size: 11px; color: rgba(250,250,248,.55); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+@media(max-width:900px){ .port-grid{grid-template-columns:1fr 1fr;} .port-header{flex-direction:column;align-items:flex-start;} .port-note{text-align:left;} }
+
+/* ══════════════════════════════════════════
+   08 · EQUIPE — fundo branco
+══════════════════════════════════════════ */
+#equipe { background: var(--white); padding: clamp(80px,10vh,128px) 0; }
+.eq-header { margin-bottom: 56px; max-width: 640px; }
+.eq-h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px,4.8vw,64px); line-height: 1.05;
+  letter-spacing: -0.02em; margin: 20px 0 16px;
+}
+.eq-h2 em { font-style: italic; color: var(--pastel-brown); }
+.eq-lead { font-size: 15px; line-height: 1.7; color: var(--hemp); }
+.eq-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: rgba(30,30,32,.07); border: 1px solid rgba(30,30,32,.07); }
+.eq-card { background: var(--white); }
+.eq-photo { aspect-ratio: 4/5; overflow: hidden; background: var(--dawn-pink); }
+.eq-photo img { width:100%; height:100%; object-fit:cover; filter:grayscale(100%); transition: filter .5s, transform .6s cubic-bezier(.16,1,.3,1); }
+.eq-card:hover .eq-photo img { filter: grayscale(0%); transform: scale(1.04); }
+.eq-info { padding: 20px 20px 24px; border-top: 1px solid rgba(30,30,32,.07); }
+.eq-name { font-family: var(--serif); font-size: 18px; font-weight: 500; margin-bottom: 3px; }
+.eq-role { font-size: 10.5px; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; color: var(--pastel-brown); }
+@media(max-width:900px){ .eq-grid{grid-template-columns:1fr 1fr;} }
+
+/* ══════════════════════════════════════════
+   09 · ECOSSISTEMA — fundo escuro
+══════════════════════════════════════════ */
+#ecossistema { background: var(--mirage); color: #fff; padding: clamp(80px,10vh,128px) 0; }
+.eco-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(40px,6vw,96px); align-items: end; margin-bottom: 56px;
+}
+.eco-h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px,4.8vw,64px); line-height: 1.05;
+  letter-spacing: -0.02em; margin: 20px 0;
+}
+.eco-h2 em { font-style: italic; color: var(--pastel-brown); }
+.eco-lead { font-size: 15px; line-height: 1.7; color: rgba(250,250,248,.6); }
+
+/* Faixa Nohall protagonista */
+.eco-lead-band {
+  display: grid; grid-template-columns: 60px 1fr auto;
+  gap: 32px; align-items: center;
+  background: linear-gradient(135deg,rgba(160,120,85,.12) 0%,rgba(160,120,85,.03) 100%);
+  border: 1px solid rgba(160,120,85,.3);
+  padding: 36px 40px; margin-bottom: 24px;
+  position: relative; overflow: hidden;
+}
+.eco-lead-band::before { content:''; position:absolute; top:0; left:0; bottom:0; width:3px; background:var(--pastel-brown); }
+.eco-mark {
+  width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
+}
+.eco-mark svg { width:100%; height:100%; }
+.eco-lead-h { font-family: var(--serif); font-size: clamp(22px,2.2vw,30px); color:#fff; font-weight:500; letter-spacing:-0.01em; margin-bottom:8px; }
+.eco-lead-tag { font-size:9.5px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--pastel-brown); margin-bottom:12px; }
+.eco-lead-p { font-size:13.5px; line-height:1.65; color:rgba(250,250,248,.65); }
+.eco-lead-meta { display:flex; flex-direction:column; gap:10px; padding-left:32px; border-left:1px solid rgba(250,250,248,.1); flex-shrink:0; }
+.eco-lead-meta span { font-size:11px; font-weight:500; letter-spacing:.02em; }
+.eco-lead-meta span em { font-style:normal; color:var(--pastel-brown); font-family:var(--serif); margin-right:8px; }
+
+/* Grid 5 parceiros */
+.eco-grid {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  gap: 1px; background: rgba(250,250,248,.08);
+  border: 1px solid rgba(250,250,248,.08);
+}
+.eco-card {
+  background: var(--mirage); padding: 32px 28px 36px;
+  display: flex; flex-direction: column;
+  transition: background .3s; min-height: 260px;
+}
+.eco-card:hover { background: rgba(160,120,85,.05); }
+.eco-card-tag { font-size:9.5px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--pastel-brown); margin-bottom:20px; }
+.eco-logo-ph {
+  width: 100%; max-width: 148px; height: 40px;
+  border: 1px dashed rgba(250,250,248,.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size:8px; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(250,250,248,.28); margin-bottom:20px;
+}
+.eco-card-h { font-family:var(--serif); font-size:20px; font-weight:500; color:#fff; margin-bottom:6px; line-height:1.2; }
+.eco-card-role { font-size:10.5px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--pastel-brown); margin-bottom:14px; }
+.eco-card-p { font-size:12.5px; line-height:1.6; color:rgba(250,250,248,.52); margin-top:auto; }
+@media(max-width:1100px){ .eco-lead-band{grid-template-columns:56px 1fr;} .eco-lead-meta{display:none;} }
+@media(max-width:900px){ .eco-grid{grid-template-columns:1fr 1fr;} .eco-header{grid-template-columns:1fr;} }
+@media(max-width:540px){ .eco-grid{grid-template-columns:1fr;} }
+
+/* ══════════════════════════════════════════
+   10 · PERMUTA — fundo branco
+══════════════════════════════════════════ */
+#permuta { background: var(--white); padding: clamp(80px,10vh,128px) 0; }
+.perm-head { text-align:center; max-width:720px; margin:0 auto 72px; }
+.perm-h2 {
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(40px,5vw,68px); line-height:1.04;
+  letter-spacing:-0.022em; margin:20px 0 20px;
+}
+.perm-h2 em { font-style:italic; color:var(--pastel-brown); }
+.perm-lead { font-size:15px; line-height:1.7; color:var(--hemp); max-width:56ch; margin:0 auto; }
+.perm-pillars {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 56px;
+}
+.perm-pillar {
+  border: 1px solid rgba(30,30,32,.1); padding: 36px 28px 40px;
+  transition: border-color .3s, transform .3s;
+}
+.perm-pillar:hover { border-color: var(--pastel-brown); transform: translateY(-2px); }
+.perm-pn { font-family:var(--serif); font-size:12px; color:var(--pastel-brown); letter-spacing:.05em; margin-bottom:20px; }
+.perm-ph { font-family:var(--serif); font-size:22px; font-weight:500; margin-bottom:12px; line-height:1.25; }
+.perm-pp { font-size:13.5px; line-height:1.65; color:var(--hemp); }
+.perm-flow {
+  background: var(--mirage); padding: 48px 44px;
+  display: grid; grid-template-columns: 1.1fr 1.6fr;
+  gap: 48px; align-items: center; position:relative; overflow:hidden;
+}
+.perm-flow::before {
+  content:''; position:absolute; top:0; right:0; bottom:0;
+  width: 200px; background: radial-gradient(ellipse at right,rgba(160,120,85,.12) 0%,transparent 70%);
+}
+.perm-flow-ey { font-size:9.5px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--pastel-brown); margin-bottom:16px; }
+.perm-flow-h { font-family:var(--serif); font-weight:400; font-size:clamp(24px,2.6vw,34px); line-height:1.2; color:#fff; }
+.perm-flow-h em { font-style:italic; color:var(--pastel-brown); }
+.perm-flow-list { list-style:none; display:flex; flex-direction:column; gap:18px; position:relative; z-index:1; }
+.perm-flow-list li {
+  display:flex; gap:16px; font-size:13.5px; line-height:1.6; color:rgba(250,250,248,.75);
+  align-items:flex-start;
+}
+.perm-flow-list li::before {
+  content:''; width:7px; height:7px; border-radius:50%; background:var(--pastel-brown);
+  margin-top:8px; flex-shrink:0; box-shadow:0 0 0 3px rgba(160,120,85,.18);
+}
+.perm-flow-list strong { color:#fff; font-weight:500; display:block; margin-bottom:2px; }
+@media(max-width:900px){ .perm-pillars{grid-template-columns:1fr;} .perm-flow{grid-template-columns:1fr;} }
+
+/* ══════════════════════════════════════════
+   11 · DIFERENCIAIS — fundo escuro
+══════════════════════════════════════════ */
+#diferenciais { background: #141416; color:#fff; padding: clamp(80px,10vh,128px) 0; }
+.diff-grid {
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: clamp(48px,7vw,112px); align-items: start;
+}
+.diff-h2 {
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(36px,4.5vw,60px); line-height:1.05;
+  letter-spacing:-0.02em; margin:20px 0 20px;
+}
+.diff-h2 em { font-style:italic; color:var(--pastel-brown); }
+.diff-lead { font-size:15px; line-height:1.7; color:rgba(250,250,248,.55); }
+.diff-list { list-style:none; }
+.diff-item {
+  display:grid; grid-template-columns:48px 1fr auto;
+  gap:20px; align-items:start; padding:24px 0;
+  border-top:1px solid rgba(250,250,248,.07);
+  transition:padding-left .3s;
+  cursor:default;
+}
+.diff-item:hover { padding-left:8px; }
+.diff-item:last-child { border-bottom:1px solid rgba(250,250,248,.07); }
+.diff-n { font-family:var(--serif); font-size:17px; color:var(--pastel-brown); }
+.diff-h { font-family:var(--serif); font-size:21px; font-weight:500; color:#fff; margin-bottom:7px; }
+.diff-p { font-size:13.5px; line-height:1.65; color:rgba(250,250,248,.52); }
+.diff-arr { font-size:16px; color:var(--pastel-brown); opacity:.5; transition:opacity .3s,transform .3s; padding-top:4px; }
+.diff-item:hover .diff-arr { opacity:1; transform:translateX(4px); }
+@media(max-width:900px){ .diff-grid{grid-template-columns:1fr;} .diff-item{grid-template-columns:40px 1fr;} .diff-arr{display:none;} }
+
+/* ══════════════════════════════════════════
+   12 · CTA FINAL — Pastel Brown profundo
+══════════════════════════════════════════ */
+#cta { background: #8a6340; padding: clamp(80px,10vh,128px) 0; position:relative; overflow:hidden; }
+#cta::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse at 15% 20%,rgba(255,255,255,.07) 0%,transparent 45%),
+              radial-gradient(ellipse at 85% 90%,rgba(0,0,0,.12) 0%,transparent 50%);
+}
+.cta-grid {
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1.1fr 1fr;
+  gap:clamp(56px,8vw,120px); align-items:center;
+}
+.cta-h2 {
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(44px,5.8vw,84px); line-height:1.0;
+  letter-spacing:-0.024em; color:#fff; margin:20px 0 28px;
+}
+.cta-h2 em { font-style:italic; color:rgba(255,255,255,.65); }
+.cta-lead { font-size:16px; line-height:1.7; color:rgba(255,255,255,.75); margin-bottom:40px; max-width:48ch; }
+.cta-sig {
+  display:flex; align-items:center; gap:14px;
+  padding-top:32px; border-top:1px solid rgba(255,255,255,.18);
+}
+.cta-sig-ico { width:34px; height:34px; color:rgba(255,255,255,.8); flex-shrink:0; }
+.cta-sig-text { font-family:var(--serif); font-style:italic; font-size:14px; color:rgba(255,255,255,.65); line-height:1.5; }
+.cta-sig-text strong { font-style:normal; font-family:var(--sans); font-size:10px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,.45); display:block; margin-bottom:4px; }
+.cta-options { display:flex; flex-direction:column; gap:12px; }
+.cta-opt {
+  display:grid; grid-template-columns:36px 1fr auto;
+  gap:20px; align-items:center;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18);
+  padding:24px 28px; cursor:pointer;
+  transition:background .3s,border-color .3s,transform .3s;
+  text-decoration:none; color:inherit;
+}
+.cta-opt:hover { background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.4); transform:translateX(4px); }
+.cta-opt.primary { background:#fff; color:var(--mirage); border-color:#fff; }
+.cta-opt.primary:hover { background:var(--mirage); color:#fff; border-color:var(--mirage); }
+.cta-opt-n { font-family:var(--serif); font-size:16px; color:rgba(255,255,255,.65); }
+.cta-opt.primary .cta-opt-n { color:var(--pastel-brown); }
+.cta-opt-h { font-family:var(--serif); font-size:18px; color:#fff; line-height:1.2; }
+.cta-opt.primary .cta-opt-h { color:var(--mirage); }
+.cta-opt-sub { font-size:11.5px; color:rgba(255,255,255,.55); margin-top:3px; }
+.cta-opt.primary .cta-opt-sub { color:var(--hemp); }
+.cta-opt-arr { font-size:16px; color:rgba(255,255,255,.5); transition:transform .3s,opacity .3s; }
+.cta-opt:hover .cta-opt-arr { transform:translateX(4px); opacity:1; }
+.cta-opt.primary .cta-opt-arr { color:var(--mirage); }
+@media(max-width:900px){ .cta-grid{grid-template-columns:1fr;} }
+
+/* ── número decorativo de slide ── */
+.slide-n {
+  position:absolute; top:clamp(32px,5vh,56px); right:clamp(20px,4vw,72px);
+  font-family:var(--serif); font-size:clamp(56px,9vw,120px);
+  font-weight:400; opacity:.07; pointer-events:none; line-height:1;
+  letter-spacing:-0.04em;
 }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     HEADER FIXO
-══════════════════════════════════════════════════════════════════ -->
 <nav class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">✕</button>
   <a href="index.html">Início</a><a href="sobre-nos.html">Sobre Nós</a><a href="atuacao.html">Atuação</a>
   <a href="empreendimentos.html">Empreendimentos</a><a href="portfolio.html">Portfólio</a><a href="contato.html">Contato</a>
 </nav>
+
 
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
@@ -1387,103 +680,89 @@ img { display: block; max-width: 100%; }
   </div>
 </header>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 01 — CAPA / ABERTURA IMPACTANTE
-     Estabelece o tom: editorial, premium, confidencial.
-     Comunica: identidade, propósito da reunião, destinatário.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide-cover" id="capa">
-  <div class="cover-grid"></div>
-  <div class="cover-frame"></div>
-  <div class="cover-corners"><span></span></div>
+<!-- ════════════════════════════════════════
+     01 · CAPA
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-corner tl"></div>
+  <div class="hero-corner tr"></div>
+  <div class="hero-corner bl"></div>
+  <div class="hero-corner br"></div>
 
-  <div class="cover-inner">
-    <div class="cover-top">
-      <div class="cover-meta-block">
+  <div class="hero-body max">
+    <div class="hero-meta reveal">
+      <div class="hero-meta-l">
         <strong>Nohall Empreendimentos</strong>
         Chapecó · Santa Catarina<br>
         Incorporação · Projetos · Gestão
       </div>
-      <div class="cover-meta-block" style="text-align:right;">
-        <strong>Apresentação Institucional</strong>
+      <div class="hero-meta-r">
+        Apresentação Institucional<br>
         Documento Confidencial<br>
         Versão 1.0 — 2026
       </div>
     </div>
 
-    <div class="cover-center">
-      <div class="cover-eyebrow">Proposta de Parceria Estratégica</div>
-      <h1 class="cover-title">
-        Construir patrimônio<br>com <em>método.</em>
-      </h1>
-      <p class="cover-subtitle">
-        Apresentamos a estrutura da Nohall Empreendimentos como incorporadora líder de um ecossistema técnico integrado — e o caminho para uma parceria via permuta sustentada por critério, transparência e ganho mútuo.
-      </p>
+    <div class="hero-kicker reveal d1">Proposta de Parceria Estratégica</div>
+    <h1 class="hero-h1 reveal d2">
+      Construir patrimônio<br>com <em>método.</em>
+    </h1>
+    <p class="hero-sub reveal d3">
+      Apresentamos a estrutura da Nohall Empreendimentos como incorporadora líder de um ecossistema técnico integrado — e o caminho para uma parceria via permuta sustentada por critério, transparência e ganho mútuo.
+    </p>
+    <div class="hero-ctas reveal d4">
+      <a href="#permuta" class="btn-primary">Ver modelo de parceria</a>
+      <a href="#cta" class="btn-ghost">Avançar para o MOU</a>
     </div>
 
-    <div class="cover-bottom">
-      <div class="cover-recipient">
+    <hr class="hero-divider" style="margin-top:48px;">
+    <div class="hero-bottom reveal d5">
+      <div class="hero-recipient">
         <strong>Apresentado para</strong>
-        Reunião com a propriedade do terreno —<br>
-        para alinhamento de modelo e avanço para MOU.
+        Reunião com proprietários do terreno — alinhamento<br>de modelo e avanço para MOU.
       </div>
-      <div class="cover-confidential">
-        <span><span class="dot"></span>Documento Estratégico</span><br>
-        Não destinado à distribuição pública
-      </div>
+      <div class="hero-conf">Documento estratégico confidencial</div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 02 — CONTEXTO DE MERCADO
-     Demonstra inteligência estratégica e leitura de cenário.
-     Posiciona a Nohall como leitora qualificada do mercado de Chapecó.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide light" id="contexto">
-  <div class="slide-number">02</div>
-  <div class="slide-inner">
-    <div class="context-grid">
-      <div class="context-left reveal">
-        <div class="context-eyebrow eyebrow">01 — Contexto</div>
-        <h2 class="context-title">
-          Chapecó vive um<br>
-          ciclo de <em>maturidade</em><br>
-          imobiliária.
+<!-- ════════════════════════════════════════
+     02 · CONTEXTO DE MERCADO
+════════════════════════════════════════ -->
+<section id="contexto">
+  <div class="slide-n" style="color:var(--mirage)">02</div>
+  <div class="max">
+    <div class="ctx-grid">
+      <div>
+        <div class="eyebrow reveal">01 — Contexto</div>
+        <h2 class="ctx-h2 reveal d1">
+          Chapecó vive um<br>ciclo de <em>maturidade</em><br>imobiliária.
         </h2>
-        <p class="context-lead">
-          O mercado de alto padrão na região passa por uma transição clara: do volume para o critério. Compradores estão mais informados, terrenos bem localizados são finitos, e a margem está nas decisões — não no preço de venda.
+        <p class="ctx-lead reveal d2">
+          O mercado de alto padrão na região passa por uma transição clara: do volume para o critério. Compradores estão mais informados, terrenos bem localizados são finitos, e a margem real está nas decisões estratégicas — não no preço de venda.
         </p>
       </div>
-
-      <div class="context-points">
-        <div class="context-point reveal reveal-delay-1">
-          <span class="context-point-num">01</span>
+      <div class="ctx-points">
+        <div class="ctx-point reveal d1">
+          <span class="ctx-num">01</span>
           <div>
-            <div class="context-point-title">Demanda qualificada e regional</div>
-            <p class="context-point-desc">
-              65% da população de Chapecó está na faixa ativa de compra (gerações X e Y), com 57,7% de renda formalizada. A absorção para apartamentos de 2–3 dormitórios em regiões valorizadas é classificada como muito alta.
-            </p>
+            <h3 class="ctx-point-h">Demanda qualificada e regional</h3>
+            <p class="ctx-point-p">65% da população de Chapecó está na faixa ativa de compra, com 57,7% de renda formalizada. A absorção para apartamentos de 2–3 dormitórios em regiões valorizadas é classificada como muito alta.</p>
           </div>
         </div>
-
-        <div class="context-point reveal reveal-delay-2">
-          <span class="context-point-num">02</span>
+        <div class="ctx-point reveal d2">
+          <span class="ctx-num">02</span>
           <div>
-            <div class="context-point-title">Escassez de terrenos com vocação</div>
-            <p class="context-point-desc">
-              Bairros como Maria Goretti, Jardim Itália, Santa Maria, Palmital e Centro concentram a demanda — e a oferta de terrenos com legislação favorável e bom posicionamento urbano se torna progressivamente mais rara.
-            </p>
+            <h3 class="ctx-point-h">Escassez de terrenos com vocação</h3>
+            <p class="ctx-point-p">Bairros como Maria Goretti, Jardim Itália, Santa Maria, Palmital e Centro concentram a demanda — e a oferta de terrenos com legislação favorável torna-se progressivamente mais rara.</p>
           </div>
         </div>
-
-        <div class="context-point reveal reveal-delay-3">
-          <span class="context-point-num">03</span>
+        <div class="ctx-point reveal d3">
+          <span class="ctx-num">03</span>
           <div>
-            <div class="context-point-title">Janela para incorporação estruturada</div>
-            <p class="context-point-desc">
-              SELIC ainda elevada e cenário político de transição premiam estruturas que entreguem previsibilidade. Quem tem método e ecossistema integrado opera com vantagem real sobre quem ainda improvisa por etapa.
-            </p>
+            <h3 class="ctx-point-h">Janela para incorporação estruturada</h3>
+            <p class="ctx-point-p">Cenário macro premia estruturas que entreguem previsibilidade. Quem tem método e ecossistema integrado opera com vantagem real sobre quem improvisa por etapa.</p>
           </div>
         </div>
       </div>
@@ -1491,371 +770,295 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 03 — QUEM É A NOHALL (autoridade)
-     Apresenta a marca: essência, manifesto, pilares fundadores.
-     Reforça posicionamento sem auto-elogio.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide dark" id="quem-somos">
-  <div class="slide-number">03</div>
-  <div class="slide-inner">
-    <div class="who-grid">
-      <div class="who-left reveal">
-        <div class="eyebrow" style="margin-bottom:28px;">02 — Quem somos</div>
-        <h2 class="who-headline">
-          Incorporação<br>com <em>pensamento.</em>
-        </h2>
-        <p class="who-tagline">
+<!-- ════════════════════════════════════════
+     03 · QUEM SOMOS
+════════════════════════════════════════ -->
+<section id="quem">
+  <div class="slide-n">03</div>
+  <div class="max">
+    <div class="quem-grid">
+      <div>
+        <div class="eyebrow reveal" style="color:var(--pastel-brown)">02 — Quem somos</div>
+        <h2 class="quem-h2 reveal d1">Incorporação<br>com <em>pensamento.</em></h2>
+        <p class="quem-quote reveal d2">
           Não acreditamos em pressa. Nem em repetição. Nem em arquitetura sem intenção. Acreditamos em método, em decisão, em permanência.
         </p>
-        <ul class="who-meta-list">
-          <li><strong>Fundada em 2020</strong> · Chapecó, Santa Catarina</li>
-          <li><strong>CNPJ 37.343.214/0001-70</strong> · Estrutura jurídica consolidada</li>
-          <li><strong>Atuação verticalizada</strong> · Incorporação, projetos e gestão</li>
-          <li><strong>Foco geográfico</strong> · Áreas valorizadas do Oeste Catarinense</li>
+        <ul class="quem-meta reveal d3">
+          <li><strong>Fundada em 2020</strong> — Chapecó, Santa Catarina</li>
+          <li><strong>CNPJ 37.343.214/0001-70</strong> — Estrutura jurídica consolidada</li>
+          <li><strong>Atuação verticalizada</strong> — Incorporação, projetos e gestão</li>
+          <li><strong>Alto padrão</strong> — Foco nas áreas mais valorizadas do Oeste Catarinense</li>
+          <li><strong>Visão 2031</strong> — 5 edifícios · R$ 150M em VGV acumulado</li>
         </ul>
       </div>
-
-      <div class="who-pillars">
-        <div class="who-pillar reveal reveal-delay-1">
-          <div class="who-pillar-num">01</div>
-          <h3 class="who-pillar-title">Transparência</h3>
-          <p class="who-pillar-desc">Relações construídas com informação clara e processos abertos. Do terreno ao contrato — nada é escondido.</p>
+      <div class="quem-pillars reveal d2">
+        <div class="quem-pillar">
+          <div class="quem-pillar-n">01</div>
+          <h3 class="quem-pillar-h">Transparência</h3>
+          <p class="quem-pillar-p">Relações construídas com informação clara. Do terreno ao contrato — nada é escondido.</p>
         </div>
-        <div class="who-pillar reveal reveal-delay-2">
-          <div class="who-pillar-num">02</div>
-          <h3 class="who-pillar-title">Critério</h3>
-          <p class="who-pillar-desc">Cada decisão de terreno, parceiro ou material passa por avaliação rigorosa. Nada é por impulso, nada é por volume.</p>
+        <div class="quem-pillar">
+          <div class="quem-pillar-n">02</div>
+          <h3 class="quem-pillar-h">Critério</h3>
+          <p class="quem-pillar-p">Cada decisão de terreno, parceiro ou material passa por avaliação rigorosa.</p>
         </div>
-        <div class="who-pillar reveal reveal-delay-3">
-          <div class="who-pillar-num">03</div>
-          <h3 class="who-pillar-title">Método</h3>
-          <p class="who-pillar-desc">Processos estruturados que entregam previsibilidade do projeto à entrega. Sem improviso, sem desvio.</p>
+        <div class="quem-pillar">
+          <div class="quem-pillar-n">03</div>
+          <h3 class="quem-pillar-h">Método</h3>
+          <p class="quem-pillar-p">Processos estruturados que entregam previsibilidade do projeto à entrega.</p>
         </div>
-        <div class="who-pillar reveal reveal-delay-4">
-          <div class="who-pillar-num">04</div>
-          <h3 class="who-pillar-title">Permanência</h3>
-          <p class="who-pillar-desc">Construímos com intenção de durar. Não perseguimos tendências — criamos patrimônio que valoriza com o tempo.</p>
+        <div class="quem-pillar">
+          <div class="quem-pillar-n">04</div>
+          <h3 class="quem-pillar-h">Permanência</h3>
+          <p class="quem-pillar-p">Construímos com intenção de durar. Patrimônio que valoriza com o tempo.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 04 — CICLO NOHALL (método)
-     Apresenta o framework operacional que diferencia a Nohall.
-     Decisão · Critério · Concepção · Método · Permanência.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide cream" id="ciclo">
-  <div class="slide-number">04</div>
-  <div class="slide-inner">
-    <div class="cycle-header reveal">
-      <div class="eyebrow">03 — O Método</div>
-      <h2 class="cycle-title">Do terreno<br>à <em>permanência.</em></h2>
-      <p class="cycle-lead">
-        Cada empreendimento Nohall passa por um ciclo estrutural rigoroso. Não é apenas um processo operacional — é a expressão física do nosso método.
-      </p>
+<!-- ════════════════════════════════════════
+     04 · CICLO NOHALL
+════════════════════════════════════════ -->
+<section id="ciclo">
+  <div class="slide-n" style="color:var(--mirage)">04</div>
+  <div class="max">
+    <div class="ciclo-head">
+      <div class="eyebrow reveal" style="justify-content:center">03 — O Método</div>
+      <h2 class="ciclo-h2 reveal d1">Do terreno<br>à <em>permanência.</em></h2>
+      <p class="ciclo-lead reveal d2">Cada empreendimento Nohall passa por um ciclo estrutural rigoroso. Não é apenas um processo operacional — é a expressão física do nosso método.</p>
     </div>
-
-    <div class="cycle-track">
-      <div class="cycle-step reveal reveal-delay-1">
-        <div class="cycle-dot"><span class="cycle-dot-num">01</span></div>
-        <h3 class="cycle-step-title">Decisão</h3>
-        <p class="cycle-step-desc">Análise de terreno, viabilidade econômica e contexto urbano.</p>
+    <div class="ciclo-track">
+      <div class="ciclo-step reveal d1">
+        <div class="ciclo-dot">01</div>
+        <h3 class="ciclo-h3">Decisão</h3>
+        <p class="ciclo-p">Análise de terreno, viabilidade e contexto urbano.</p>
       </div>
-      <div class="cycle-step reveal reveal-delay-2">
-        <div class="cycle-dot"><span class="cycle-dot-num">02</span></div>
-        <h3 class="cycle-step-title">Critério</h3>
-        <p class="cycle-step-desc">Definição do produto com intenção arquitetônica e de mercado.</p>
+      <div class="ciclo-step reveal d2">
+        <div class="ciclo-dot">02</div>
+        <h3 class="ciclo-h3">Critério</h3>
+        <p class="ciclo-p">Definição do produto com intenção arquitetônica.</p>
       </div>
-      <div class="cycle-step reveal reveal-delay-3">
-        <div class="cycle-dot"><span class="cycle-dot-num">03</span></div>
-        <h3 class="cycle-step-title">Concepção</h3>
-        <p class="cycle-step-desc">Projeto desenvolvido com precisão, propósito e coordenação BIM.</p>
+      <div class="ciclo-step reveal d3">
+        <div class="ciclo-dot">03</div>
+        <h3 class="ciclo-h3">Concepção</h3>
+        <p class="ciclo-p">Projeto com precisão, propósito e coordenação BIM.</p>
       </div>
-      <div class="cycle-step reveal reveal-delay-4">
-        <div class="cycle-dot"><span class="cycle-dot-num">04</span></div>
-        <h3 class="cycle-step-title">Método</h3>
-        <p class="cycle-step-desc">Execução controlada, sem atalhos. Custo, prazo e qualidade rastreáveis.</p>
+      <div class="ciclo-step reveal d4">
+        <div class="ciclo-dot">04</div>
+        <h3 class="ciclo-h3">Método</h3>
+        <p class="ciclo-p">Execução controlada. Custo, prazo e qualidade rastreáveis.</p>
       </div>
-      <div class="cycle-step reveal reveal-delay-5">
-        <div class="cycle-dot"><span class="cycle-dot-num">05</span></div>
-        <h3 class="cycle-step-title">Permanência</h3>
-        <p class="cycle-step-desc">Entrega de um ativo que valoriza com o tempo e transforma o entorno.</p>
+      <div class="ciclo-step reveal d5">
+        <div class="ciclo-dot">05</div>
+        <h3 class="ciclo-h3">Permanência</h3>
+        <p class="ciclo-p">Entrega de um ativo que valoriza e transforma o entorno.</p>
       </div>
     </div>
-
-    <div class="cycle-flow reveal">
+    <p class="ciclo-flow reveal">
       Decisão <span>→</span> Critério <span>→</span> Concepção <span>→</span> Método <span>→</span> Permanência
-    </div>
+    </p>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 05 — POSICIONAMENTO
-     "A Nohall não compete por volume."
-     Quatro pilares que orientam decisões.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide deep" id="posicionamento">
-  <div class="slide-number">05</div>
-  <div class="slide-inner">
-    <div class="position-header reveal">
-      <div class="eyebrow" style="margin-bottom:28px;">04 — Posicionamento</div>
-      <h2 class="position-title">
-        A Nohall não compete<br>por <em>volume.</em>
-      </h2>
-    </div>
-
-    <div class="position-grid">
-      <div class="position-card reveal reveal-delay-1">
-        <div class="position-card-eyebrow">Não por volume</div>
-        <h3 class="position-card-title">Por<br>Consistência</h3>
-        <p class="position-card-desc">Cada projeto reflete o mesmo nível de critério e intenção — do primeiro ao último empreendimento.</p>
+<!-- ════════════════════════════════════════
+     05 · POSICIONAMENTO
+════════════════════════════════════════ -->
+<section id="posicionamento">
+  <div class="slide-n">05</div>
+  <div class="max">
+    <div class="eyebrow reveal" style="color:var(--pastel-brown)">04 — Posicionamento</div>
+    <h2 class="pos-h2 reveal d1">A Nohall não compete<br>por <em>volume.</em></h2>
+    <div class="pos-grid">
+      <div class="pos-card reveal d1">
+        <div class="pos-card-ey">Não por volume</div>
+        <h3 class="pos-card-h">Por<br>Consistência</h3>
+        <p class="pos-card-p">Cada projeto reflete o mesmo nível de critério e intenção — do primeiro ao último empreendimento.</p>
       </div>
-      <div class="position-card reveal reveal-delay-2">
-        <div class="position-card-eyebrow">Não por velocidade</div>
-        <h3 class="position-card-title">Por<br>Estrutura</h3>
-        <p class="position-card-desc">O tempo do projeto é o tempo necessário. Sem atalhos, sem improviso. A previsibilidade vem do método.</p>
+      <div class="pos-card reveal d2">
+        <div class="pos-card-ey">Não por velocidade</div>
+        <h3 class="pos-card-h">Por<br>Estrutura</h3>
+        <p class="pos-card-p">O tempo do projeto é o tempo necessário. Sem atalhos. A previsibilidade vem do método.</p>
       </div>
-      <div class="position-card reveal reveal-delay-3">
-        <div class="position-card-eyebrow">Não por tendência</div>
-        <h3 class="position-card-title">Por<br>Permanência</h3>
-        <p class="position-card-desc">O que entregamos deve sobreviver às modas e ao tempo. Construímos para durar — esteticamente e como ativo.</p>
+      <div class="pos-card reveal d3">
+        <div class="pos-card-ey">Não por tendência</div>
+        <h3 class="pos-card-h">Por<br>Permanência</h3>
+        <p class="pos-card-p">O que entregamos sobrevive às modas e ao tempo. Construímos para durar.</p>
       </div>
-      <div class="position-card reveal reveal-delay-4">
-        <div class="position-card-eyebrow">Não por presença</div>
-        <h3 class="position-card-title">Por<br>Impacto</h3>
-        <p class="position-card-desc">Cada empreendimento transforma a rua, o entorno, a cidade. Não construímos imóveis — construímos referências.</p>
+      <div class="pos-card reveal d4">
+        <div class="pos-card-ey">Não por presença</div>
+        <h3 class="pos-card-h">Por<br>Impacto</h3>
+        <p class="pos-card-p">Cada empreendimento transforma a rua, o entorno, a cidade. Não construímos imóveis — construímos referências.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 06 — NÚMEROS / PROVA DE CAPACIDADE
-     Dados reais extraídos do portfólio Nohall.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide light" id="numeros">
-  <div class="slide-number">06</div>
-  <div class="slide-inner">
-    <div class="metrics-header">
-      <div class="reveal">
-        <div class="eyebrow" style="margin-bottom:24px;">05 — Capacidade Técnica</div>
-        <h2 class="metrics-title">
-          Cinco anos<br>de <em>histórico técnico</em><br>verificável.
-        </h2>
+<!-- ════════════════════════════════════════
+     06 · MÉTRICAS
+════════════════════════════════════════ -->
+<section id="metricas">
+  <div class="slide-n" style="color:var(--mirage)">06</div>
+  <div class="max">
+    <div class="met-header">
+      <div>
+        <div class="eyebrow reveal">05 — Capacidade Técnica</div>
+        <h2 class="met-h2 reveal d1">Cinco anos de <em>histórico técnico</em> verificável.</h2>
       </div>
-      <p class="metrics-note reveal reveal-delay-1">
-        Antes de incorporar, a Nohall consolidou ecossistema técnico e arquitetônico. Os números abaixo refletem o domínio operacional que sustenta cada novo empreendimento — e que se traduz em previsibilidade real para o parceiro de terreno.
-      </p>
+      <p class="met-note reveal d2">Antes de incorporar, a Nohall consolidou ecossistema técnico e arquitetônico. Esses números refletem domínio operacional real — e se traduzem em previsibilidade para o parceiro de terreno.</p>
     </div>
-
-    <div class="metrics-grid">
-      <div class="metric-cell reveal">
-        <div class="metric-num">+140<span class="unit">k m²</span></div>
-        <div class="metric-label">Projetos arquitetônicos<br>desenvolvidos</div>
+    <div class="met-grid">
+      <div class="met-cell reveal d1">
+        <div class="met-n">+140<span class="unit">k m²</span></div>
+        <div class="met-lbl">Projetos arquitetônicos<br>desenvolvidos</div>
       </div>
-      <div class="metric-cell reveal reveal-delay-1">
-        <div class="metric-num">+59<span class="unit">k m²</span></div>
-        <div class="metric-label">Obras compatibilizadas<br>com BIM</div>
+      <div class="met-cell reveal d2">
+        <div class="met-n">+59<span class="unit">k m²</span></div>
+        <div class="met-lbl">Obras compatibilizadas<br>com BIM</div>
       </div>
-      <div class="metric-cell reveal reveal-delay-2">
-        <div class="metric-num">+17<span class="unit">k m²</span></div>
-        <div class="metric-label">Obras atualmente<br>em execução</div>
+      <div class="met-cell reveal d3">
+        <div class="met-n">+17<span class="unit">k m²</span></div>
+        <div class="met-lbl">Obras atualmente<br>em execução</div>
       </div>
-      <div class="metric-cell reveal reveal-delay-3">
-        <div class="metric-num">R$ 27<span class="unit">M</span></div>
-        <div class="metric-label">Patrimônio sob<br>administração técnica</div>
+      <div class="met-cell reveal d4">
+        <div class="met-n">R$27<span class="unit">M</span></div>
+        <div class="met-lbl">Patrimônio sob<br>administração técnica</div>
       </div>
-      <div class="metric-cell reveal reveal-delay-4">
-        <div class="metric-num">5<span class="unit">anos</span></div>
-        <div class="metric-label">De atuação consolidada<br>no Oeste Catarinense</div>
+      <div class="met-cell reveal d5">
+        <div class="met-n">5<span class="unit">anos</span></div>
+        <div class="met-lbl">De atuação consolidada<br>no Oeste Catarinense</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 07 — PORTFÓLIO
-     Mostra projetos desenvolvidos pela Nohall (arquitetura/gestão).
-     Cards estilizados — substituíveis por imagens reais quando disponíveis.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide cream" id="portfolio">
-  <div class="slide-number">07</div>
-  <div class="slide-inner">
-    <div class="portfolio-header">
-      <div class="reveal">
-        <div class="eyebrow" style="margin-bottom:24px;">06 — Portfólio</div>
-        <h2 class="portfolio-title">
-          Trabalhos<br><em>desenvolvidos.</em>
-        </h2>
+<!-- ════════════════════════════════════════
+     07 · PORTFÓLIO
+════════════════════════════════════════ -->
+<section id="portfolio">
+  <div class="slide-n" style="color:var(--mirage)">07</div>
+  <div class="max">
+    <div class="port-header">
+      <div>
+        <div class="eyebrow reveal">06 — Portfólio</div>
+        <h2 class="port-h2 reveal d1">Trabalhos<br><em>desenvolvidos.</em></h2>
       </div>
-      <div class="portfolio-meta reveal reveal-delay-1">
+      <div class="port-note reveal d2">
         <strong>Recorte editorial — 8 de 21 projetos</strong>
         Residenciais e alto padrão · Chapecó e região
       </div>
     </div>
-
-    <div class="portfolio-grid">
-      <div class="portfolio-card reveal reveal-delay-1">
-        <div class="portfolio-card-content">
-          <span class="portfolio-card-tag">Alto Padrão</span>
-          <div>
-            <h3 class="portfolio-card-name">Manhattan<br>Residence</h3>
-            <div class="portfolio-card-cat">Vertical residencial</div>
-          </div>
+    <div class="port-grid">
+      <div class="port-card reveal d1">
+        <img src="images/empreendimentos/manhattan-residence.png" alt="Manhattan Residence" loading="lazy">
+        <div class="port-card-info">
+          <span class="port-tag">Alto Padrão</span>
+          <div><h3 class="port-card-h">Manhattan Residence</h3><div class="port-card-c">Vertical residencial</div></div>
         </div>
       </div>
-      <div class="portfolio-card reveal reveal-delay-2">
-        <div class="portfolio-card-content">
-          <span class="portfolio-card-tag">Alto Padrão</span>
-          <div>
-            <h3 class="portfolio-card-name">Serena<br>Residence</h3>
-            <div class="portfolio-card-cat">Vertical residencial</div>
-          </div>
+      <div class="port-card reveal d2">
+        <img src="images/empreendimentos/serena-residence.png" alt="Serena Residence" loading="lazy">
+        <div class="port-card-info">
+          <span class="port-tag">Alto Padrão</span>
+          <div><h3 class="port-card-h">Serena Residence</h3><div class="port-card-c">Vertical residencial</div></div>
         </div>
       </div>
-      <div class="portfolio-card reveal reveal-delay-3">
-        <div class="portfolio-card-content">
-          <span class="portfolio-card-tag">Alto Padrão</span>
-          <div>
-            <h3 class="portfolio-card-name">Colline<br>Residence</h3>
-            <div class="portfolio-card-cat">Vertical residencial</div>
-          </div>
+      <div class="port-card reveal d3">
+        <img src="images/empreendimentos/colline-residence.png" alt="Colline Residence" loading="lazy">
+        <div class="port-card-info">
+          <span class="port-tag">Alto Padrão</span>
+          <div><h3 class="port-card-h">Colline Residence</h3><div class="port-card-c">Vertical residencial</div></div>
         </div>
       </div>
-      <div class="portfolio-card reveal reveal-delay-4">
-        <div class="portfolio-card-content">
-          <span class="portfolio-card-tag">Alto Padrão</span>
-          <div>
-            <h3 class="portfolio-card-name">Ametista<br>Residence</h3>
-            <div class="portfolio-card-cat">Vertical residencial</div>
-          </div>
+      <div class="port-card reveal d4">
+        <img src="images/empreendimentos/ametista-residence.png" alt="Ametista Residence" loading="lazy">
+        <div class="port-card-info">
+          <span class="port-tag">Alto Padrão</span>
+          <div><h3 class="port-card-h">Ametista Residence</h3><div class="port-card-c">Vertical residencial</div></div>
         </div>
       </div>
-      <div class="portfolio-card reveal reveal-delay-1">
-        <div class="portfolio-card-content">
-          <span class="portfolio-card-tag">Residencial</span>
-          <div>
-            <h3 class="portfolio-card-name">Casa<br>Aurora</h3>
-            <div class="portfolio-card-cat">Unifamiliar de alto padrão</div>
-          </div>
+      <div class="port-card reveal d1">
+        <img src="images/empreendimentos/casa-aurora.png" alt="Casa Aurora" loading="lazy">
+        <div class="port-card-info">
+          <span class="port-tag">Residencial</span>
+          <div><h3 class="port-card-h">Casa Aurora</h3><div class="port-card-c">Unifamiliar alto padrão</div></div>
         </div>
       </div>
-      <div class="portfolio-card reveal reveal-delay-2">
-        <div class="portfolio-card-content">
-          <span class="portfolio-card-tag">Residencial</span>
-          <div>
-            <h3 class="portfolio-card-name">Casa<br>Bossa</h3>
-            <div class="portfolio-card-cat">Unifamiliar de alto padrão</div>
-          </div>
+      <div class="port-card reveal d2">
+        <img src="images/empreendimentos/casa-bossa.png" alt="Casa Bossa" loading="lazy">
+        <div class="port-card-info">
+          <span class="port-tag">Residencial</span>
+          <div><h3 class="port-card-h">Casa Bossa</h3><div class="port-card-c">Unifamiliar alto padrão</div></div>
         </div>
       </div>
-      <div class="portfolio-card reveal reveal-delay-3">
-        <div class="portfolio-card-content">
-          <span class="portfolio-card-tag">Comercial</span>
-          <div>
-            <h3 class="portfolio-card-name">RUSH<br>Wellness</h3>
-            <div class="portfolio-card-cat">Equipamento comercial</div>
-          </div>
+      <div class="port-card reveal d3">
+        <img src="images/empreendimentos/rush-wellness.png" alt="RUSH Wellness" loading="lazy">
+        <div class="port-card-info">
+          <span class="port-tag">Comercial</span>
+          <div><h3 class="port-card-h">RUSH Wellness</h3><div class="port-card-c">Equipamento comercial</div></div>
         </div>
       </div>
-      <div class="portfolio-card reveal reveal-delay-4">
-        <div class="portfolio-card-content">
-          <span class="portfolio-card-tag">Alto Padrão</span>
-          <div>
-            <h3 class="portfolio-card-name">Porto<br>Esmeralda</h3>
-            <div class="portfolio-card-cat">Vertical residencial</div>
-          </div>
+      <div class="port-card reveal d4">
+        <img src="images/empreendimentos/porto-esmeralda.png" alt="Porto Esmeralda" loading="lazy">
+        <div class="port-card-info">
+          <span class="port-tag">Alto Padrão</span>
+          <div><h3 class="port-card-h">Porto Esmeralda</h3><div class="port-card-c">Vertical residencial</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 08 — EQUIPE / FUNDADORES
-     Humaniza a marca. Quatro sócios com responsabilidades técnicas claras.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide light" id="equipe">
-  <div class="slide-number">08</div>
-  <div class="slide-inner">
-    <div class="team-header reveal">
-      <div class="eyebrow" style="margin-bottom:24px;">07 — Liderança</div>
-      <h2 class="team-title">As pessoas por trás<br>do <em>método.</em></h2>
-      <p class="team-lead">
-        Quatro sócios com responsabilidades técnicas e de capital claramente segmentadas. A complementaridade não é discurso — é estrutura operacional documentada.
-      </p>
+<!-- ════════════════════════════════════════
+     08 · EQUIPE
+════════════════════════════════════════ -->
+<section id="equipe">
+  <div class="slide-n" style="color:var(--mirage)">08</div>
+  <div class="max">
+    <div class="eq-header">
+      <div class="eyebrow reveal">07 — Liderança</div>
+      <h2 class="eq-h2 reveal d1">As pessoas por trás<br>do <em>método.</em></h2>
+      <p class="eq-lead reveal d2">Quatro sócios com responsabilidades técnicas e de capital claramente segmentadas. A complementaridade não é discurso — é estrutura operacional documentada.</p>
     </div>
-
-    <div class="team-grid">
-      <div class="team-card reveal reveal-delay-1">
-        <div class="team-photo">
-          <img src="assets/equipe/camila-giachini.png" alt="Camila Giachini" loading="lazy">
-        </div>
-        <div class="team-info">
-          <h3 class="team-name">Camila Giachini</h3>
-          <div class="team-role">Arquiteta &amp; Designer</div>
-        </div>
+    <div class="eq-grid">
+      <div class="eq-card reveal d1">
+        <div class="eq-photo"><img src="images/equipe/camila-giachini.png" alt="Camila Giachini" loading="lazy"></div>
+        <div class="eq-info"><div class="eq-name">Camila Giachini</div><div class="eq-role">Arquiteta &amp; Designer</div></div>
       </div>
-      <div class="team-card reveal reveal-delay-2">
-        <div class="team-photo">
-          <img src="assets/equipe/fernando-neres.png" alt="Fernando Neres" loading="lazy">
-        </div>
-        <div class="team-info">
-          <h3 class="team-name">Fernando Neres</h3>
-          <div class="team-role">Engenheiro Civil</div>
-        </div>
+      <div class="eq-card reveal d2">
+        <div class="eq-photo"><img src="images/equipe/fernando-neres.png" alt="Fernando Neres" loading="lazy"></div>
+        <div class="eq-info"><div class="eq-name">Fernando Neres</div><div class="eq-role">Engenheiro Civil</div></div>
       </div>
-      <div class="team-card reveal reveal-delay-3">
-        <div class="team-photo">
-          <img src="assets/equipe/fernando-faoro.png" alt="Fernando Faoro" loading="lazy">
-        </div>
-        <div class="team-info">
-          <h3 class="team-name">Fernando Faoro</h3>
-          <div class="team-role">Engenheiro Civil</div>
-        </div>
+      <div class="eq-card reveal d3">
+        <div class="eq-photo"><img src="images/equipe/fernando-faoro.png" alt="Fernando Faoro" loading="lazy"></div>
+        <div class="eq-info"><div class="eq-name">Fernando Faoro</div><div class="eq-role">Engenheiro Civil</div></div>
       </div>
-      <div class="team-card reveal reveal-delay-4">
-        <div class="team-photo">
-          <img src="assets/equipe/felipe-andrade.png" alt="Felipe Andrade" loading="lazy">
-        </div>
-        <div class="team-info">
-          <h3 class="team-name">Felipe Andrade</h3>
-          <div class="team-role">Capital Partner</div>
-        </div>
+      <div class="eq-card reveal d4">
+        <div class="eq-photo"><img src="images/equipe/felipe-andrade.png" alt="Felipe Andrade" loading="lazy"></div>
+        <div class="eq-info"><div class="eq-name">Felipe Andrade</div><div class="eq-role">Capital Partner</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 09 — ECOSSISTEMA DE PARCEIROS
-     A Nohall como protagonista, com parceiros estruturados em volta.
-     Espaços preparados para logos futuros.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide dark" id="ecossistema">
-  <div class="slide-number">09</div>
-  <div class="slide-inner">
-    <div class="ecosystem-header">
-      <div class="reveal">
-        <div class="eyebrow" style="margin-bottom:24px;">08 — Ecossistema</div>
-        <h2 class="ecosystem-title">
-          Uma incorporadora<br>
-          sustentada por um<br>
-          <em>ecossistema técnico.</em>
-        </h2>
+<!-- ════════════════════════════════════════
+     09 · ECOSSISTEMA
+════════════════════════════════════════ -->
+<section id="ecossistema">
+  <div class="slide-n">09</div>
+  <div class="max">
+    <div class="eco-header">
+      <div>
+        <div class="eyebrow reveal" style="color:var(--pastel-brown)">08 — Ecossistema</div>
+        <h2 class="eco-h2 reveal d1">Uma incorporadora sustentada por um <em>ecossistema técnico.</em></h2>
       </div>
-      <p class="ecosystem-lead reveal reveal-delay-1">
-        A Nohall lidera o empreendimento — da decisão de terreno à entrega do ativo. Em torno dela, parceiros consolidados garantem que cada interface técnica, jurídica e fiscal opere com o mesmo padrão de rigor.
-      </p>
+      <p class="eco-lead reveal d2">A Nohall lidera o empreendimento da decisão de terreno à entrega do ativo. Em torno dela, parceiros consolidados garantem que cada interface técnica, jurídica e fiscal opere com o mesmo padrão de rigor.</p>
     </div>
 
-    <!-- ── Faixa de destaque NOHALL — protagonista do ecossistema ── -->
-    <div class="ecosystem-lead reveal reveal-delay-1">
-      <div class="ecosystem-lead-mark">
-        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+    <!-- Faixa Nohall protagonista -->
+    <div class="eco-lead-band reveal">
+      <div class="eco-mark">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" style="color:var(--pastel-brown)">
           <path d="M16 16 L36 16 L36 36 L16 36 Z"/>
           <path d="M36 16 L46 22 L46 42 L36 36"/>
           <path d="M16 36 L26 42 L46 42"/>
@@ -1865,301 +1068,190 @@ img { display: block; max-width: 100%; }
           <path d="M46 32 L64 68"/>
         </svg>
       </div>
-      <div class="ecosystem-lead-content">
-        <div class="ecosystem-lead-tag">Liderança · Incorporadora</div>
-        <h3 class="ecosystem-lead-title">Nohall Empreendimentos</h3>
-        <p class="ecosystem-lead-desc">
-          Protagonista do empreendimento. Conduz a incorporação, a definição de produto, a arquitetura, a coordenação do ecossistema e a relação com investidores e proprietários de terreno. É a Nohall que define o método — e responde por ele.
-        </p>
+      <div>
+        <div class="eco-lead-tag">Liderança · Incorporadora</div>
+        <h3 class="eco-lead-h">Nohall Empreendimentos</h3>
+        <p class="eco-lead-p">Protagonista do empreendimento. Conduz a incorporação, a definição de produto, a arquitetura, a coordenação do ecossistema e a relação com investidores e proprietários de terreno. É a Nohall que define o método e responde por ele.</p>
       </div>
-      <div class="ecosystem-lead-meta">
-        <div class="ecosystem-lead-meta-row">
-          <span>01</span><strong>Incorporação</strong>
-        </div>
-        <div class="ecosystem-lead-meta-row">
-          <span>02</span><strong>Arquitetura</strong>
-        </div>
-        <div class="ecosystem-lead-meta-row">
-          <span>03</span><strong>Gestão técnica</strong>
-        </div>
-        <div class="ecosystem-lead-meta-row">
-          <span>04</span><strong>Governança</strong>
-        </div>
+      <div class="eco-lead-meta">
+        <span><em>01</em> Incorporação</span>
+        <span><em>02</em> Arquitetura</span>
+        <span><em>03</em> Gestão técnica</span>
+        <span><em>04</em> Governança</span>
       </div>
     </div>
 
-    <!-- ── Grid de parceiros estratégicos (5 cards, layout simétrico) ── -->
-    <div class="ecosystem-grid">
-
-      <!-- Card 02: Scala Arquitetura — execução de obras -->
-      <div class="partner-card reveal reveal-delay-1">
-        <div class="partner-tag">Parceiro Técnico</div>
-        <div class="partner-logo">
-          <div class="partner-logo-placeholder">Logo Scala</div>
-        </div>
-        <h3 class="partner-name">Scala Arquitetura</h3>
-        <div class="partner-role">Execução de Obras</div>
-        <p class="partner-desc">
-          Parceira responsável pela execução de obras com controle de qualidade, custos e prazos.
-        </p>
+    <div class="eco-grid">
+      <div class="eco-card reveal d1">
+        <div class="eco-card-tag">Parceiro Técnico</div>
+        <div class="eco-logo-ph">Logo Scala</div>
+        <h4 class="eco-card-h">Scala Arquitetura</h4>
+        <div class="eco-card-role">Execução de Obras</div>
+        <p class="eco-card-p">Execução de obras com controle de qualidade, custos e prazos.</p>
       </div>
-
-      <!-- Card 03: Fiducia — administração de obras -->
-      <div class="partner-card reveal reveal-delay-2">
-        <div class="partner-tag">Parceiro Técnico</div>
-        <div class="partner-logo">
-          <div class="partner-logo-placeholder">Logo Fiducia</div>
-        </div>
-        <h3 class="partner-name">Fiducia</h3>
-        <div class="partner-role">Administração de Obras</div>
-        <p class="partner-desc">
-          Gestão administrativa do canteiro: contratos, fornecedores, medição e controle financeiro da obra.
-        </p>
+      <div class="eco-card reveal d2">
+        <div class="eco-card-tag">Parceiro Técnico</div>
+        <div class="eco-logo-ph">Logo Fiducia</div>
+        <h4 class="eco-card-h">Fiducia</h4>
+        <div class="eco-card-role">Administração de Obras</div>
+        <p class="eco-card-p">Gestão administrativa do canteiro: contratos, medição e controle financeiro.</p>
       </div>
-
-      <!-- Card 04: Jorge Lacerda Advogados -->
-      <div class="partner-card reveal reveal-delay-3">
-        <div class="partner-tag">Parceiro Jurídico</div>
-        <div class="partner-logo">
-          <div class="partner-logo-placeholder">Logo Jorge Lacerda Adv.</div>
-        </div>
-        <h3 class="partner-name">Jorge Lacerda<br>Advogados</h3>
-        <div class="partner-role">Jurídico Imobiliário &amp; Societário</div>
-        <p class="partner-desc">
-          Estruturação societária, contratos de permuta, SCP e diligência jurídica do terreno e do empreendimento.
-        </p>
+      <div class="eco-card reveal d3">
+        <div class="eco-card-tag">Parceiro Jurídico</div>
+        <div class="eco-logo-ph">Logo Jorge Lacerda</div>
+        <h4 class="eco-card-h">Jorge Lacerda Advogados</h4>
+        <div class="eco-card-role">Jurídico Imobiliário &amp; Societário</div>
+        <p class="eco-card-p">Contratos de permuta, SCP e diligência jurídica do terreno.</p>
       </div>
-
-      <!-- Card 05: Acelera On Demand — mentoria estratégica -->
-      <div class="partner-card reveal reveal-delay-4">
-        <div class="partner-tag">Parceiro Estratégico</div>
-        <div class="partner-logo">
-          <div class="partner-logo-placeholder">Logo Acelera</div>
-        </div>
-        <h3 class="partner-name">Acelera<br>On Demand</h3>
-        <div class="partner-role">Mentoria Estratégica</div>
-        <p class="partner-desc">
-          Acompanhamento de governança, estratégia comercial e tomada de decisão em decisões societárias.
-        </p>
+      <div class="eco-card reveal d4">
+        <div class="eco-card-tag">Parceiro Estratégico</div>
+        <div class="eco-logo-ph">Logo Acelera</div>
+        <h4 class="eco-card-h">Acelera On Demand</h4>
+        <div class="eco-card-role">Mentoria Estratégica</div>
+        <p class="eco-card-p">Governança, estratégia comercial e tomada de decisão societária.</p>
       </div>
-
-      <!-- Card 06: Contábil -->
-      <div class="partner-card reveal reveal-delay-5">
-        <div class="partner-tag">Parceiro Fiscal</div>
-        <div class="partner-logo">
-          <div class="partner-logo-placeholder">Logo Contabilidade</div>
-        </div>
-        <h3 class="partner-name">Escritório<br>Contábil</h3>
-        <div class="partner-role">Contabilidade &amp; Fiscal</div>
-        <p class="partner-desc">
-          Estruturação fiscal e contábil das SCPs e da incorporação, com integração ao planejamento tributário.
-        </p>
+      <div class="eco-card reveal d5">
+        <div class="eco-card-tag">Parceiro Fiscal</div>
+        <div class="eco-logo-ph">Logo Contabil</div>
+        <h4 class="eco-card-h">Escritório Contábil</h4>
+        <div class="eco-card-role">Contabilidade &amp; Fiscal</div>
+        <p class="eco-card-p">Estruturação fiscal das SCPs e planejamento tributário.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 10 — MODELO DE ATUAÇÃO EM PERMUTAS
-     Estrutura conceitual do modelo. Não compromete percentuais,
-     mas demonstra clareza de processo.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide light" id="modelo-permuta">
-  <div class="slide-number">10</div>
-  <div class="slide-inner">
-    <div class="permuta-header reveal">
-      <div class="eyebrow">09 — Modelo de Parceria</div>
-      <h2 class="permuta-title">Permuta com <em>critério.</em></h2>
-      <p class="permuta-lead">
-        A Nohall estrutura permutas com transparência total e proteção mútua. O proprietário do terreno entra com o ativo; a Nohall entra com a estrutura completa de incorporação, projeto, gestão e capital de viabilização.
-      </p>
+<!-- ════════════════════════════════════════
+     10 · MODELO DE PERMUTA
+════════════════════════════════════════ -->
+<section id="permuta">
+  <div class="slide-n" style="color:var(--mirage)">10</div>
+  <div class="max">
+    <div class="perm-head">
+      <div class="eyebrow reveal" style="justify-content:center">09 — Modelo de Parceria</div>
+      <h2 class="perm-h2 reveal d1">Permuta com <em>critério.</em></h2>
+      <p class="perm-lead reveal d2">A Nohall estrutura permutas com transparência total e proteção mútua. O proprietário entra com o ativo; a Nohall entra com a estrutura completa de incorporação, projeto, gestão e capital de viabilização.</p>
     </div>
-
-    <div class="permuta-pillars">
-      <div class="permuta-pillar reveal reveal-delay-1">
-        <div class="permuta-pillar-num">01 — Estrutura</div>
-        <h3 class="permuta-pillar-title">SCP dedicada<br>e patrimônio segregado</h3>
-        <p class="permuta-pillar-desc">
-          Cada empreendimento opera em Sociedade em Conta de Participação própria, com governança documentada e patrimônio isolado dos demais ativos da Nohall.
-        </p>
+    <div class="perm-pillars">
+      <div class="perm-pillar reveal d1">
+        <div class="perm-pn">01 — Estrutura</div>
+        <h3 class="perm-ph">SCP dedicada<br>e patrimônio segregado</h3>
+        <p class="perm-pp">Cada empreendimento opera em Sociedade em Conta de Participação própria, com governança documentada e patrimônio isolado dos demais ativos da Nohall.</p>
       </div>
-      <div class="permuta-pillar reveal reveal-delay-2">
-        <div class="permuta-pillar-num">02 — Garantias</div>
-        <h3 class="permuta-pillar-title">Diligência jurídica<br>completa antes do MOU</h3>
-        <p class="permuta-pillar-desc">
-          Conduzida por Jorge Lacerda Advogados. Análise de matrícula, cadeia dominial, ônus, débitos e instrumentos contratuais redigidos com proteção bilateral.
-        </p>
+      <div class="perm-pillar reveal d2">
+        <div class="perm-pn">02 — Garantias</div>
+        <h3 class="perm-ph">Diligência jurídica<br>completa antes do MOU</h3>
+        <p class="perm-pp">Conduzida por Jorge Lacerda Advogados. Análise de matrícula, cadeia dominial, ônus, débitos e instrumentos contratuais redigidos com proteção bilateral.</p>
       </div>
-      <div class="permuta-pillar reveal reveal-delay-3">
-        <div class="permuta-pillar-num">03 — Transparência</div>
-        <h3 class="permuta-pillar-title">Acompanhamento<br>integral pelo terrenista</h3>
-        <p class="permuta-pillar-desc">
-          Reporting periódico de cronograma, custos e VGV. O proprietário tem acesso à informação real do empreendimento, sem caixa preta operacional.
-        </p>
+      <div class="perm-pillar reveal d3">
+        <div class="perm-pn">03 — Transparência</div>
+        <h3 class="perm-ph">Acompanhamento<br>integral pelo terrenista</h3>
+        <p class="perm-pp">Reporting periódico de cronograma, custos e VGV. O proprietário tem acesso à informação real do empreendimento — sem caixa preta operacional.</p>
       </div>
     </div>
-
-    <!-- Fluxo conceitual: do MOU à entrega -->
-    <div class="permuta-flow reveal">
-      <div class="permuta-flow-side">
-        <div class="permuta-flow-eyebrow">Sequência conceitual</div>
-        <h3 class="permuta-flow-title">
-          Do <em>MOU</em><br>à entrega do ativo.
-        </h3>
+    <div class="perm-flow reveal">
+      <div>
+        <div class="perm-flow-ey">Sequência conceitual</div>
+        <h3 class="perm-flow-h">Do <em>MOU</em><br>à entrega do ativo.</h3>
       </div>
-      <ul class="permuta-flow-list">
-        <li><div><strong>01 · MOU + NDA</strong><br>Alinhamento de premissas, percentual e cronograma macro.</div></li>
-        <li><div><strong>02 · Diligência &amp; Estudo de Massa</strong><br>Análise jurídica e quadro de áreas, fachada e legislação.</div></li>
-        <li><div><strong>03 · Viabilidade Econômica + Anteprojeto</strong><br>Validação de produto, VGV, lucro e unidades especiais.</div></li>
-        <li><div><strong>04 · Contrato Definitivo + Lançamento</strong><br>Formalização da permuta, SCP estruturada e abertura comercial.</div></li>
-        <li><div><strong>05 · Execução &amp; Entrega</strong><br>Obra controlada, reporting periódico e entrega das unidades pactuadas.</div></li>
+      <ul class="perm-flow-list">
+        <li><div><strong>01 · MOU + NDA</strong>Alinhamento de premissas, percentual e cronograma macro.</div></li>
+        <li><div><strong>02 · Diligência &amp; Estudo de Massa</strong>Análise jurídica e quadro de áreas, fachada e legislação.</div></li>
+        <li><div><strong>03 · Viabilidade Econômica + Anteprojeto</strong>Validação de produto, VGV, lucro e unidades especiais.</div></li>
+        <li><div><strong>04 · Contrato Definitivo + Lançamento</strong>Formalização da permuta, SCP estruturada e abertura comercial.</div></li>
+        <li><div><strong>05 · Execução &amp; Entrega</strong>Obra controlada, reporting periódico e entrega das unidades pactuadas.</div></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 11 — DIFERENCIAIS / POR QUE A NOHALL
-     Argumentos racionais para um público técnico exigente.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide deep" id="diferenciais">
-  <div class="slide-number">11</div>
-  <div class="slide-inner">
+<!-- ════════════════════════════════════════
+     11 · DIFERENCIAIS
+════════════════════════════════════════ -->
+<section id="diferenciais">
+  <div class="slide-n">11</div>
+  <div class="max">
     <div class="diff-grid">
-      <div class="diff-left reveal">
-        <div class="eyebrow" style="margin-bottom:28px;">10 — Por que a Nohall</div>
-        <h2 class="diff-title">
-          Cinco fatores<br>
-          que separam<br>
-          <em>execução de</em><br>
-          <em>incorporação.</em>
-        </h2>
-        <p class="diff-lead">
-          O proprietário de um terreno qualificado tem opções. A pergunta correta não é "quem constrói?" — é "quem garante o resultado?". A Nohall responde com estrutura, não com promessa.
-        </p>
+      <div>
+        <div class="eyebrow reveal" style="color:var(--pastel-brown)">10 — Por que a Nohall</div>
+        <h2 class="diff-h2 reveal d1">Cinco fatores que separam <em>execução de incorporação.</em></h2>
+        <p class="diff-lead reveal d2">O proprietário de um terreno qualificado tem opções. A pergunta correta não é "quem constrói?" — é "quem garante o resultado?". A Nohall responde com estrutura, não com promessa.</p>
       </div>
-
       <ul class="diff-list">
-        <li class="diff-item reveal reveal-delay-1">
-          <span class="diff-num">01</span>
-          <div>
-            <h3 class="diff-content-title">Ecossistema técnico verticalizado</h3>
-            <p class="diff-content-desc">Arquitetura, gestão BIM, jurídico, contábil e execução operam dentro do mesmo método. As interfaces críticas não são terceirizadas — são governadas.</p>
-          </div>
-          <span class="diff-arrow">→</span>
+        <li class="diff-item reveal d1">
+          <span class="diff-n">01</span>
+          <div><h3 class="diff-h">Ecossistema técnico verticalizado</h3><p class="diff-p">Arquitetura, gestão BIM, jurídico, contábil e execução operam dentro do mesmo método. As interfaces críticas não são terceirizadas — são governadas.</p></div>
+          <span class="diff-arr">→</span>
         </li>
-        <li class="diff-item reveal reveal-delay-2">
-          <span class="diff-num">02</span>
-          <div>
-            <h3 class="diff-content-title">Cinco anos de portfólio rastreável</h3>
-            <p class="diff-content-desc">Mais de 140 mil m² em projetos arquitetônicos e 17 mil m² em obras em execução comprovam capacidade técnica anterior à incorporação. Não estamos começando.</p>
-          </div>
-          <span class="diff-arrow">→</span>
+        <li class="diff-item reveal d2">
+          <span class="diff-n">02</span>
+          <div><h3 class="diff-h">Cinco anos de portfólio rastreável</h3><p class="diff-p">Mais de 140 mil m² em projetos e 17 mil m² em execução comprovam capacidade técnica antes da incorporação. Não estamos começando.</p></div>
+          <span class="diff-arr">→</span>
         </li>
-        <li class="diff-item reveal reveal-delay-3">
-          <span class="diff-num">03</span>
-          <div>
-            <h3 class="diff-content-title">Identidade Visual e produto consolidados</h3>
-            <p class="diff-content-desc">Manual da marca, posicionamento e arquitetura de produto definidos antes da incorporação. O empreendimento entra no mercado com narrativa, não apenas com tijolo.</p>
-          </div>
-          <span class="diff-arrow">→</span>
+        <li class="diff-item reveal d3">
+          <span class="diff-n">03</span>
+          <div><h3 class="diff-h">Identidade visual e produto consolidados</h3><p class="diff-p">Manual de marca, posicionamento e arquitetura de produto definidos antes da incorporação. O empreendimento entra no mercado com narrativa, não apenas com tijolo.</p></div>
+          <span class="diff-arr">→</span>
         </li>
-        <li class="diff-item reveal reveal-delay-4">
-          <span class="diff-num">04</span>
-          <div>
-            <h3 class="diff-content-title">Estrutura societária enxuta e ágil</h3>
-            <p class="diff-content-desc">Decisões rápidas, baixo custo fixo e quatro sócios com responsabilidades complementares. Sem burocracia interna — e sem a inércia das incorporadoras de grande porte.</p>
-          </div>
-          <span class="diff-arrow">→</span>
+        <li class="diff-item reveal d4">
+          <span class="diff-n">04</span>
+          <div><h3 class="diff-h">Estrutura societária enxuta e ágil</h3><p class="diff-p">Decisões rápidas, baixo custo fixo e quatro sócios com responsabilidades complementares. Sem burocracia interna e sem a inércia das incorporadoras de grande porte.</p></div>
+          <span class="diff-arr">→</span>
         </li>
-        <li class="diff-item reveal reveal-delay-5">
-          <span class="diff-num">05</span>
-          <div>
-            <h3 class="diff-content-title">Transparência como cláusula, não como discurso</h3>
-            <p class="diff-content-desc">Reporting estruturado para o terrenista, governança documentada e relação contratual proporcional. A informação flui — porque a confiança depende disso.</p>
-          </div>
-          <span class="diff-arrow">→</span>
+        <li class="diff-item reveal d5">
+          <span class="diff-n">05</span>
+          <div><h3 class="diff-h">Transparência como cláusula, não como discurso</h3><p class="diff-p">Reporting estruturado para o terrenista, governança documentada e relação contratual proporcional. A informação flui — porque a confiança depende disso.</p></div>
+          <span class="diff-arr">→</span>
         </li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     SLIDE 12 — CTA FINAL
-     Três caminhos de avanço — escolha do parceiro de terreno.
-     Reforça segurança, profissionalismo e ganho mútuo.
-══════════════════════════════════════════════════════════════════ -->
-<section class="slide cta-slide" id="proximo-passo">
-  <div class="slide-number">12</div>
-  <div class="slide-inner">
+<!-- ════════════════════════════════════════
+     12 · CTA FINAL
+════════════════════════════════════════ -->
+<section id="cta">
+  <div class="slide-n">12</div>
+  <div class="max">
     <div class="cta-grid">
-      <div class="cta-left reveal">
-        <div class="eyebrow" style="margin-bottom:28px; color: rgba(255,255,255,0.7);">11 — Próximo passo</div>
-        <h2 class="cta-headline">
-          O terreno encontra<br>
-          o método.<br>
-          <em>O resto é estrutura.</em>
-        </h2>
-        <p class="cta-lead">
-          Avançamos no ritmo que faz sentido para os dois lados. A Nohall opera com cronograma documentado e três frentes prontas para iniciar — basta a definição de qual é a porta de entrada da nossa parceria.
-        </p>
-
-        <div class="cta-signature">
-          <svg class="cta-signature-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-            <path d="M16 16 L36 16 L36 36 L16 36 Z"/>
-            <path d="M36 16 L46 22 L46 42 L36 36"/>
-            <path d="M16 36 L26 42 L46 42"/>
-            <path d="M64 58 L84 58 L84 78 L64 78 Z"/>
-            <path d="M84 58 L94 64 L94 84 L84 78"/>
-            <path d="M64 78 L74 84 L94 84"/>
+      <div>
+        <div class="eyebrow reveal" style="color:rgba(255,255,255,.6)">11 — Próximo passo</div>
+        <h2 class="cta-h2 reveal d1">O terreno encontra<br>o método.<br><em>O resto é estrutura.</em></h2>
+        <p class="cta-lead reveal d2">Avançamos no ritmo que faz sentido para os dois lados. A Nohall opera com cronograma documentado e três frentes prontas para iniciar — basta a definição de qual é a porta de entrada da nossa parceria.</p>
+        <div class="cta-sig reveal d3">
+          <svg class="cta-sig-ico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M16 16 L36 16 L36 36 L16 36 Z"/><path d="M36 16 L46 22 L46 42 L36 36"/><path d="M16 36 L26 42 L46 42"/>
+            <path d="M64 58 L84 58 L84 78 L64 78 Z"/><path d="M84 58 L94 64 L94 84 L84 78"/><path d="M64 78 L74 84 L94 84"/>
             <path d="M46 32 L64 68"/>
           </svg>
-          <div class="cta-signature-text">
+          <div class="cta-sig-text">
             <strong>Nohall Empreendimentos</strong>
-            "Incorporação com pensamento."<br>
-            Chapecó · Santa Catarina
+            "Incorporação com pensamento."<br>Chapecó · Santa Catarina
           </div>
         </div>
       </div>
-
-      <div class="cta-options reveal reveal-delay-1">
-
-        <a href="#" class="cta-option primary">
-          <span class="cta-option-num">01</span>
-          <div class="cta-option-content">
-            <span class="cta-option-label">Avançar para o MOU</span>
-            <span class="cta-option-meta">Documento bilateral · Próxima semana</span>
-          </div>
-          <span class="cta-option-arrow">→</span>
+      <div class="cta-options reveal d2">
+        <a href="#" class="cta-opt primary">
+          <span class="cta-opt-n">01</span>
+          <div><div class="cta-opt-h">Avançar para o MOU</div><div class="cta-opt-sub">Documento bilateral · Próxima semana</div></div>
+          <span class="cta-opt-arr">→</span>
         </a>
-
-        <a href="#" class="cta-option">
-          <span class="cta-option-num">02</span>
-          <div class="cta-option-content">
-            <span class="cta-option-label">Reunião técnica<br>aprofundada</span>
-            <span class="cta-option-meta">Estudo de massa · Quadro de áreas · Viabilidade</span>
-          </div>
-          <span class="cta-option-arrow">→</span>
+        <a href="#" class="cta-opt">
+          <span class="cta-opt-n">02</span>
+          <div><div class="cta-opt-h">Reunião técnica aprofundada</div><div class="cta-opt-sub">Estudo de massa · Quadro de áreas · Viabilidade</div></div>
+          <span class="cta-opt-arr">→</span>
         </a>
-
-        <a href="#" class="cta-option">
-          <span class="cta-option-num">03</span>
-          <div class="cta-option-content">
-            <span class="cta-option-label">Apresentação do<br>Business Plan</span>
-            <span class="cta-option-meta">VGV · Cronograma · Estrutura SCP</span>
-          </div>
-          <span class="cta-option-arrow">→</span>
+        <a href="#" class="cta-opt">
+          <span class="cta-opt-n">03</span>
+          <div><div class="cta-opt-h">Apresentação do Business Plan</div><div class="cta-opt-sub">VGV · Cronograma · Estrutura SCP</div></div>
+          <span class="cta-opt-arr">→</span>
         </a>
-
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════════════════════════ -->
 <footer class="site-footer">
   <div class="footer-top">
     <div>
@@ -2191,9 +1283,22 @@ img { display: block; max-width: 100%; }
   </div>
 </footer>
 
-<!-- ══════════════════════════════════════════════════════════════════
-     COMPORTAMENTOS — header scrolled + reveal on scroll
-══════════════════════════════════════════════════════════════════ -->
 <script>(function(){var h=document.getElementById('siteHeader');function u(){h.classList.toggle('scrolled',window.scrollY>10);}window.addEventListener('scroll',u,{passive:true});u();})();</script>
+<script>
+// Reveal on scroll
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
 </body>
 </html>
