@@ -395,44 +395,61 @@ img { display: block; max-width: 100%; }
 .met-lbl { font-size: 10.5px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--hemp); line-height: 1.5; }
 @media(max-width:900px){ .met-header{grid-template-columns:1fr;} .met-grid{grid-template-columns:1fr 1fr;} .met-cell{border-bottom:1px solid rgba(30,30,32,.08);} }
 
+
 /* ══════════════════════════════════════════
-   07 · PORTFÓLIO — fundo dawn-pink
+   07 · PORTFÓLIO — galeria horizontal rolante
 ══════════════════════════════════════════ */
-#portfolio { background: var(--dawn-pink); padding: clamp(80px,10vh,128px) 0; }
-.port-header {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  gap: 32px; margin-bottom: 48px;
+#portfolio { background: var(--dawn-pink); padding: clamp(56px,8vh,96px) 0 0; overflow: hidden; }
+.port-top {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  align-items: end; gap: 32px;
+  padding: 0 clamp(28px,5vw,80px) clamp(40px,5vh,64px);
+  max-width: 1360px; margin: 0 auto;
 }
-.port-h2 {
+.port-top .port-h2 {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(36px,4.8vw,64px); line-height: 1.05;
   letter-spacing: -0.02em; margin-top: 20px;
+  grid-column: 1 / 3;
 }
-.port-h2 em { font-style: italic; color: var(--pastel-brown); }
-.port-note { font-size: 13px; color: var(--hemp); text-align: right; line-height: 1.7; }
-.port-note strong { display: block; font-family: var(--serif); font-size: 16px; color: var(--mirage); font-weight: 500; margin-bottom: 2px; }
-.port-grid {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 14px;
+.port-top .port-h2 em { font-style: italic; color: var(--pastel-brown); }
+.port-top-link {
+  justify-self: end; align-self: end;
+  font-size: 10.5px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  display: inline-flex; align-items: center; gap: 8px;
+  padding-bottom: 4px; border-bottom: 1px solid var(--pastel-brown);
+  transition: opacity .3s; white-space: nowrap;
 }
-.port-card {
-  aspect-ratio: 4/5; position: relative; overflow: hidden;
-  background: var(--mirage); cursor: default;
+.port-top-link:hover { opacity: .65; }
+.gallery-viewport { overflow: hidden; position: relative; cursor: grab; user-select: none; }
+.gallery-viewport:active { cursor: grabbing; }
+.gallery-track {
+  display: flex; gap: 10px;
+  padding: 0 clamp(28px,5vw,80px) clamp(40px,5vh,64px);
+  transition: transform .05s linear;
+  will-change: transform;
 }
-.port-card img {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; opacity: .6;
-  transition: opacity .5s, transform .6s cubic-bezier(.16,1,.3,1);
+.gallery-card {
+  flex: 0 0 clamp(260px,22vw,340px);
+  aspect-ratio: 3/4; position: relative; overflow: hidden;
+  background: var(--mirage);
 }
-.port-card:hover img { opacity: .8; transform: scale(1.04); }
-.port-card-info {
-  position: absolute; inset: 0; z-index: 2; padding: 20px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background: linear-gradient(to top, rgba(20,20,22,.82) 0%, transparent 55%);
+.gallery-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .6s cubic-bezier(.16,1,.3,1), opacity .4s;
+  opacity: .88;
 }
-.port-tag { font-size: 9.5px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--pastel-brown); }
-.port-card-h { font-family: var(--serif); font-size: 20px; font-weight: 500; color: #fff; line-height: 1.2; }
-.port-card-c { font-size: 11px; color: rgba(250,250,248,.55); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-@media(max-width:900px){ .port-grid{grid-template-columns:1fr 1fr;} .port-header{flex-direction:column;align-items:flex-start;} .port-note{text-align:left;} }
+.gallery-card:hover img { transform: scale(1.04); opacity: 1; }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20,20,22,.78) 0%, transparent 50%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 20px 18px;
+}
+.gallery-name { font-family: var(--serif); font-size: 17px; font-weight: 500; color: #fff; line-height: 1.2; }
+.gallery-cat { font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(250,250,248,.55); margin-top: 4px; }
+@media(max-width:720px){ .port-top { grid-template-columns: 1fr; } .port-top .port-h2 { grid-column: 1; } .port-top-link { justify-self: start; } }
 
 /* ══════════════════════════════════════════
    08 · EQUIPE — fundo branco
@@ -474,7 +491,7 @@ img { display: block; max-width: 100%; }
 
 /* Faixa Nohall protagonista */
 .eco-lead-band {
-  display: grid; grid-template-columns: 60px 1fr auto;
+  display: grid; grid-template-columns: 1fr auto;
   gap: 32px; align-items: center;
   background: linear-gradient(135deg,rgba(160,120,85,.12) 0%,rgba(160,120,85,.03) 100%);
   border: 1px solid rgba(160,120,85,.3);
@@ -700,7 +717,7 @@ img { display: block; max-width: 100%; }
       <div class="hero-meta-r">
         Apresentação Institucional<br>
         Documento Confidencial<br>
-        Versão 1.0 — 2026
+        
       </div>
     </div>
 
@@ -711,12 +728,7 @@ img { display: block; max-width: 100%; }
     <p class="hero-sub reveal d3">
       Apresentamos a estrutura da Nohall Empreendimentos como incorporadora líder de um ecossistema técnico integrado — e o caminho para uma parceria via permuta sustentada por critério, transparência e ganho mútuo.
     </p>
-    <div class="hero-ctas reveal d4">
-      <a href="#permuta" class="btn-primary">Ver modelo de parceria</a>
-      <a href="#cta" class="btn-ghost">Avançar para o MOU</a>
-    </div>
-
-    <hr class="hero-divider" style="margin-top:48px;">
+        <hr class="hero-divider" style="margin-top:48px;">
     <div class="hero-bottom reveal d5">
       <div class="hero-recipient">
         <strong>Apresentado para</strong>
@@ -731,8 +743,7 @@ img { display: block; max-width: 100%; }
      02 · CONTEXTO DE MERCADO
 ════════════════════════════════════════ -->
 <section id="contexto">
-  <div class="slide-n" style="color:var(--mirage)">02</div>
-  <div class="max">
+    <div class="max">
     <div class="ctx-grid">
       <div>
         <div class="eyebrow reveal">01 — Contexto</div>
@@ -774,8 +785,7 @@ img { display: block; max-width: 100%; }
      03 · QUEM SOMOS
 ════════════════════════════════════════ -->
 <section id="quem">
-  <div class="slide-n">03</div>
-  <div class="max">
+    <div class="max">
     <div class="quem-grid">
       <div>
         <div class="eyebrow reveal" style="color:var(--pastel-brown)">02 — Quem somos</div>
@@ -821,7 +831,6 @@ img { display: block; max-width: 100%; }
      04 · CICLO NOHALL
 ════════════════════════════════════════ -->
 <section id="ciclo">
-  <div class="slide-n" style="color:var(--mirage)">04</div>
   <div class="max">
     <div class="ciclo-head">
       <div class="eyebrow reveal" style="justify-content:center">03 — O Método</div>
@@ -861,44 +870,11 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════
-     05 · POSICIONAMENTO
-════════════════════════════════════════ -->
-<section id="posicionamento">
-  <div class="slide-n">05</div>
-  <div class="max">
-    <div class="eyebrow reveal" style="color:var(--pastel-brown)">04 — Posicionamento</div>
-    <h2 class="pos-h2 reveal d1">A Nohall não compete<br>por <em>volume.</em></h2>
-    <div class="pos-grid">
-      <div class="pos-card reveal d1">
-        <div class="pos-card-ey">Não por volume</div>
-        <h3 class="pos-card-h">Por<br>Consistência</h3>
-        <p class="pos-card-p">Cada projeto reflete o mesmo nível de critério e intenção — do primeiro ao último empreendimento.</p>
-      </div>
-      <div class="pos-card reveal d2">
-        <div class="pos-card-ey">Não por velocidade</div>
-        <h3 class="pos-card-h">Por<br>Estrutura</h3>
-        <p class="pos-card-p">O tempo do projeto é o tempo necessário. Sem atalhos. A previsibilidade vem do método.</p>
-      </div>
-      <div class="pos-card reveal d3">
-        <div class="pos-card-ey">Não por tendência</div>
-        <h3 class="pos-card-h">Por<br>Permanência</h3>
-        <p class="pos-card-p">O que entregamos sobrevive às modas e ao tempo. Construímos para durar.</p>
-      </div>
-      <div class="pos-card reveal d4">
-        <div class="pos-card-ey">Não por presença</div>
-        <h3 class="pos-card-h">Por<br>Impacto</h3>
-        <p class="pos-card-p">Cada empreendimento transforma a rua, o entorno, a cidade. Não construímos imóveis — construímos referências.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ════════════════════════════════════════
      06 · MÉTRICAS
 ════════════════════════════════════════ -->
 <section id="metricas">
-  <div class="slide-n" style="color:var(--mirage)">06</div>
   <div class="max">
     <div class="met-header">
       <div>
@@ -909,23 +885,23 @@ img { display: block; max-width: 100%; }
     </div>
     <div class="met-grid">
       <div class="met-cell reveal d1">
-        <div class="met-n">+140<span class="unit">k m²</span></div>
+        <div class="met-n"><span class="count-up" data-target="140" data-prefix="+" data-suffix="">0</span><span class="unit">k m²</span></div>
         <div class="met-lbl">Projetos arquitetônicos<br>desenvolvidos</div>
       </div>
       <div class="met-cell reveal d2">
-        <div class="met-n">+59<span class="unit">k m²</span></div>
+        <div class="met-n"><span class="count-up" data-target="59" data-prefix="+" data-suffix="">0</span><span class="unit">k m²</span></div>
         <div class="met-lbl">Obras compatibilizadas<br>com BIM</div>
       </div>
       <div class="met-cell reveal d3">
-        <div class="met-n">+17<span class="unit">k m²</span></div>
+        <div class="met-n"><span class="count-up" data-target="17" data-prefix="+" data-suffix="">0</span><span class="unit">k m²</span></div>
         <div class="met-lbl">Obras atualmente<br>em execução</div>
       </div>
       <div class="met-cell reveal d4">
-        <div class="met-n">R$27<span class="unit">M</span></div>
+        <div class="met-n">R$<span class="count-up" data-target="27" data-prefix="" data-suffix="">0</span><span class="unit">M</span></div>
         <div class="met-lbl">Patrimônio sob<br>administração técnica</div>
       </div>
       <div class="met-cell reveal d5">
-        <div class="met-n">5<span class="unit">anos</span></div>
+        <div class="met-n"><span class="count-up" data-target="5" data-prefix="" data-suffix="">0</span><span class="unit">anos</span></div>
         <div class="met-lbl">De atuação consolidada<br>no Oeste Catarinense</div>
       </div>
     </div>
@@ -936,73 +912,95 @@ img { display: block; max-width: 100%; }
      07 · PORTFÓLIO
 ════════════════════════════════════════ -->
 <section id="portfolio">
-  <div class="slide-n" style="color:var(--mirage)">07</div>
-  <div class="max">
-    <div class="port-header">
-      <div>
-        <div class="eyebrow reveal">06 — Portfólio</div>
-        <h2 class="port-h2 reveal d1">Trabalhos<br><em>desenvolvidos.</em></h2>
-      </div>
-      <div class="port-note reveal d2">
-        <strong>Recorte editorial — 8 de 21 projetos</strong>
-        Residenciais e alto padrão · Chapecó e região
-      </div>
-    </div>
-    <div class="port-grid">
-      <div class="port-card reveal d1">
+  <div class="port-top">
+    <div class="eyebrow reveal" style="grid-column:1/3">06 — Portfólio</div>
+    <h2 class="port-h2 reveal d1">Trabalhos<br><em>desenvolvidos.</em></h2>
+    <a href="portfolio.html" class="port-top-link reveal d2">Ver portfólio completo →</a>
+  </div>
+  <div class="gallery-viewport" id="galleryViewport">
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-card">
         <img src="images/empreendimentos/manhattan-residence.png" alt="Manhattan Residence" loading="lazy">
-        <div class="port-card-info">
-          <span class="port-tag">Alto Padrão</span>
-          <div><h3 class="port-card-h">Manhattan Residence</h3><div class="port-card-c">Vertical residencial</div></div>
+        <div class="gallery-overlay">
+          <div class="gallery-name">Manhattan Residence</div>
+          <div class="gallery-cat">Alto Padrão</div>
         </div>
       </div>
-      <div class="port-card reveal d2">
-        <img src="images/empreendimentos/serena-residence.png" alt="Serena Residence" loading="lazy">
-        <div class="port-card-info">
-          <span class="port-tag">Alto Padrão</span>
-          <div><h3 class="port-card-h">Serena Residence</h3><div class="port-card-c">Vertical residencial</div></div>
-        </div>
-      </div>
-      <div class="port-card reveal d3">
+      <div class="gallery-card">
         <img src="images/empreendimentos/colline-residence.png" alt="Colline Residence" loading="lazy">
-        <div class="port-card-info">
-          <span class="port-tag">Alto Padrão</span>
-          <div><h3 class="port-card-h">Colline Residence</h3><div class="port-card-c">Vertical residencial</div></div>
+        <div class="gallery-overlay">
+          <div class="gallery-name">Colline Residence</div>
+          <div class="gallery-cat">Alto Padrão</div>
         </div>
       </div>
-      <div class="port-card reveal d4">
+      <div class="gallery-card">
+        <img src="images/empreendimentos/serena-residence.png" alt="Serena Residence" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-name">Serena Residence</div>
+          <div class="gallery-cat">Alto Padrão</div>
+        </div>
+      </div>
+      <div class="gallery-card">
         <img src="images/empreendimentos/ametista-residence.png" alt="Ametista Residence" loading="lazy">
-        <div class="port-card-info">
-          <span class="port-tag">Alto Padrão</span>
-          <div><h3 class="port-card-h">Ametista Residence</h3><div class="port-card-c">Vertical residencial</div></div>
+        <div class="gallery-overlay">
+          <div class="gallery-name">Ametista Residence</div>
+          <div class="gallery-cat">Alto Padrão</div>
         </div>
       </div>
-      <div class="port-card reveal d1">
-        <img src="images/empreendimentos/casa-aurora.png" alt="Casa Aurora" loading="lazy">
-        <div class="port-card-info">
-          <span class="port-tag">Residencial</span>
-          <div><h3 class="port-card-h">Casa Aurora</h3><div class="port-card-c">Unifamiliar alto padrão</div></div>
-        </div>
-      </div>
-      <div class="port-card reveal d2">
-        <img src="images/empreendimentos/casa-bossa.png" alt="Casa Bossa" loading="lazy">
-        <div class="port-card-info">
-          <span class="port-tag">Residencial</span>
-          <div><h3 class="port-card-h">Casa Bossa</h3><div class="port-card-c">Unifamiliar alto padrão</div></div>
-        </div>
-      </div>
-      <div class="port-card reveal d3">
-        <img src="images/empreendimentos/rush-wellness.png" alt="RUSH Wellness" loading="lazy">
-        <div class="port-card-info">
-          <span class="port-tag">Comercial</span>
-          <div><h3 class="port-card-h">RUSH Wellness</h3><div class="port-card-c">Equipamento comercial</div></div>
-        </div>
-      </div>
-      <div class="port-card reveal d4">
+      <div class="gallery-card">
         <img src="images/empreendimentos/porto-esmeralda.png" alt="Porto Esmeralda" loading="lazy">
-        <div class="port-card-info">
-          <span class="port-tag">Alto Padrão</span>
-          <div><h3 class="port-card-h">Porto Esmeralda</h3><div class="port-card-c">Vertical residencial</div></div>
+        <div class="gallery-overlay">
+          <div class="gallery-name">Porto Esmeralda</div>
+          <div class="gallery-cat">Alto Padrão</div>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="images/empreendimentos/casa-aurora.png" alt="Casa Aurora" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-name">Casa Aurora</div>
+          <div class="gallery-cat">Residencial</div>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="images/empreendimentos/casa-bossa.png" alt="Casa Bossa" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-name">Casa Bossa</div>
+          <div class="gallery-cat">Residencial</div>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="images/empreendimentos/casa-jbl.png" alt="Casa JBL" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-name">Casa JBL</div>
+          <div class="gallery-cat">Residencial</div>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="images/empreendimentos/rush-wellness.png" alt="RUSH Wellness" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-name">RUSH Wellness</div>
+          <div class="gallery-cat">Comercial</div>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="images/empreendimentos/urban-residence.jpg" alt="Urban Residence" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-name">Urban Residence</div>
+          <div class="gallery-cat">Alto Padrão</div>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="images/empreendimentos/nh-residence.png" alt="NH Residence" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-name">NH Residence</div>
+          <div class="gallery-cat">Alto Padrão</div>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="images/empreendimentos/villa-residence.jpg" alt="Villa Residence" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-name">Villa Residence</div>
+          <div class="gallery-cat">Alto Padrão</div>
         </div>
       </div>
     </div>
@@ -1013,7 +1011,6 @@ img { display: block; max-width: 100%; }
      08 · EQUIPE
 ════════════════════════════════════════ -->
 <section id="equipe">
-  <div class="slide-n" style="color:var(--mirage)">08</div>
   <div class="max">
     <div class="eq-header">
       <div class="eyebrow reveal">07 — Liderança</div>
@@ -1045,7 +1042,6 @@ img { display: block; max-width: 100%; }
      09 · ECOSSISTEMA
 ════════════════════════════════════════ -->
 <section id="ecossistema">
-  <div class="slide-n">09</div>
   <div class="max">
     <div class="eco-header">
       <div>
@@ -1057,18 +1053,7 @@ img { display: block; max-width: 100%; }
 
     <!-- Faixa Nohall protagonista -->
     <div class="eco-lead-band reveal">
-      <div class="eco-mark">
-        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" style="color:var(--pastel-brown)">
-          <path d="M16 16 L36 16 L36 36 L16 36 Z"/>
-          <path d="M36 16 L46 22 L46 42 L36 36"/>
-          <path d="M16 36 L26 42 L46 42"/>
-          <path d="M64 58 L84 58 L84 78 L64 78 Z"/>
-          <path d="M84 58 L94 64 L94 84 L84 78"/>
-          <path d="M64 78 L74 84 L94 84"/>
-          <path d="M46 32 L64 68"/>
-        </svg>
-      </div>
-      <div>
+            <div>
         <div class="eco-lead-tag">Liderança · Incorporadora</div>
         <h3 class="eco-lead-h">Nohall Empreendimentos</h3>
         <p class="eco-lead-p">Protagonista do empreendimento. Conduz a incorporação, a definição de produto, a arquitetura, a coordenação do ecossistema e a relação com investidores e proprietários de terreno. É a Nohall que define o método e responde por ele.</p>
@@ -1084,38 +1069,38 @@ img { display: block; max-width: 100%; }
     <div class="eco-grid">
       <div class="eco-card reveal d1">
         <div class="eco-card-tag">Parceiro Técnico</div>
-        <div class="eco-logo-ph">Logo Scala</div>
+        <div class="eco-logo-ph"><img src="images/parceiros/scala-arquitetura.png" alt="Scala Arquitetura" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
         <h4 class="eco-card-h">Scala Arquitetura</h4>
         <div class="eco-card-role">Execução de Obras</div>
         <p class="eco-card-p">Execução de obras com controle de qualidade, custos e prazos.</p>
       </div>
       <div class="eco-card reveal d2">
         <div class="eco-card-tag">Parceiro Técnico</div>
-        <div class="eco-logo-ph">Logo Fiducia</div>
+        <div class="eco-logo-ph"><img src="images/parceiros/fiducia.png" alt="Fiducia" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
         <h4 class="eco-card-h">Fiducia</h4>
         <div class="eco-card-role">Administração de Obras</div>
         <p class="eco-card-p">Gestão administrativa do canteiro: contratos, medição e controle financeiro.</p>
       </div>
       <div class="eco-card reveal d3">
         <div class="eco-card-tag">Parceiro Jurídico</div>
-        <div class="eco-logo-ph">Logo Jorge Lacerda</div>
+        <div class="eco-logo-ph"><img src="images/parceiros/jorge-lacerda.png" alt="Jorge Lacerda Advogados" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
         <h4 class="eco-card-h">Jorge Lacerda Advogados</h4>
         <div class="eco-card-role">Jurídico Imobiliário &amp; Societário</div>
         <p class="eco-card-p">Contratos de permuta, SCP e diligência jurídica do terreno.</p>
       </div>
       <div class="eco-card reveal d4">
         <div class="eco-card-tag">Parceiro Estratégico</div>
-        <div class="eco-logo-ph">Logo Acelera</div>
+        <div class="eco-logo-ph"><img src="images/parceiros/acelera.png" alt="Acelera On Demand" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
         <h4 class="eco-card-h">Acelera On Demand</h4>
         <div class="eco-card-role">Mentoria Estratégica</div>
         <p class="eco-card-p">Governança, estratégia comercial e tomada de decisão societária.</p>
       </div>
-      <div class="eco-card reveal d5">
-        <div class="eco-card-tag">Parceiro Fiscal</div>
-        <div class="eco-logo-ph">Logo Contabil</div>
-        <h4 class="eco-card-h">Escritório Contábil</h4>
-        <div class="eco-card-role">Contabilidade &amp; Fiscal</div>
-        <p class="eco-card-p">Estruturação fiscal das SCPs e planejamento tributário.</p>
+            <div class="eco-card reveal d5">
+        <div class="eco-card-tag">Parceiro Funding</div>
+        <div class="eco-logo-ph"><img src="images/parceiros/ip-funding.png" alt="IP Funding" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
+        <h4 class="eco-card-h">IP Funding</h4>
+        <div class="eco-card-role">Funding &amp; Captação</div>
+        <p class="eco-card-p">Estruturação financeira, captação de investidores e viabilização do funding do empreendimento.</p>
       </div>
     </div>
   </div>
@@ -1125,7 +1110,6 @@ img { display: block; max-width: 100%; }
      10 · MODELO DE PERMUTA
 ════════════════════════════════════════ -->
 <section id="permuta">
-  <div class="slide-n" style="color:var(--mirage)">10</div>
   <div class="max">
     <div class="perm-head">
       <div class="eyebrow reveal" style="justify-content:center">09 — Modelo de Parceria</div>
@@ -1169,7 +1153,6 @@ img { display: block; max-width: 100%; }
      11 · DIFERENCIAIS
 ════════════════════════════════════════ -->
 <section id="diferenciais">
-  <div class="slide-n">11</div>
   <div class="max">
     <div class="diff-grid">
       <div>
@@ -1212,7 +1195,6 @@ img { display: block; max-width: 100%; }
      12 · CTA FINAL
 ════════════════════════════════════════ -->
 <section id="cta">
-  <div class="slide-n">12</div>
   <div class="max">
     <div class="cta-grid">
       <div>
@@ -1298,6 +1280,66 @@ img { display: block; max-width: 100%; }
     });
   },{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
   els.forEach(function(e){io.observe(e);});
+})();
+</script>
+
+<script>
+/* ── Galeria drag horizontal ── */
+(function(){
+  var vp = document.getElementById('galleryViewport');
+  var tr = document.getElementById('galleryTrack');
+  if(!vp||!tr) return;
+  var isDown=false, startX=0, scrollLeft=0;
+  vp.addEventListener('mousedown',function(e){
+    isDown=true; vp.style.cursor='grabbing';
+    startX=e.pageX-vp.offsetLeft; scrollLeft=vp.scrollLeft;
+  });
+  vp.addEventListener('mouseleave',function(){isDown=false;vp.style.cursor='grab';});
+  vp.addEventListener('mouseup',function(){isDown=false;vp.style.cursor='grab';});
+  vp.addEventListener('mousemove',function(e){
+    if(!isDown)return; e.preventDefault();
+    var x=e.pageX-vp.offsetLeft;
+    vp.scrollLeft=scrollLeft-(x-startX)*1.4;
+  });
+  // Touch
+  var tStartX=0, tScrollLeft=0;
+  vp.addEventListener('touchstart',function(e){tStartX=e.touches[0].pageX;tScrollLeft=vp.scrollLeft;},{passive:true});
+  vp.addEventListener('touchmove',function(e){
+    vp.scrollLeft=tScrollLeft-(e.touches[0].pageX-tStartX)*1.4;
+  },{passive:true});
+  // Overflow scroll (fallback)
+  vp.style.overflowX='auto'; vp.style.scrollbarWidth='none';
+  var style=document.createElement('style');
+  style.textContent='#galleryViewport::-webkit-scrollbar{display:none}';
+  document.head.appendChild(style);
+})();
+
+/* ── Counter animado ── */
+(function(){
+  function animateCount(el){
+    var target=+el.dataset.target;
+    var prefix=el.dataset.prefix||'';
+    var duration=1800;
+    var start=null;
+    function step(ts){
+      if(!start)start=ts;
+      var prog=Math.min((ts-start)/duration,1);
+      var ease=1-Math.pow(1-prog,4);
+      el.textContent=prefix+Math.round(ease*target);
+      if(prog<1)requestAnimationFrame(step);
+      else el.textContent=prefix+target;
+    }
+    requestAnimationFrame(step);
+  }
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.count-up').forEach(animateCount); return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){animateCount(e.target);io.unobserve(e.target);}
+    });
+  },{threshold:0.5});
+  document.querySelectorAll('.count-up').forEach(function(el){io.observe(el);});
 })();
 </script>
 </body>
