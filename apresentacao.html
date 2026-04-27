@@ -524,11 +524,19 @@ img { display: block; max-width: 100%; }
 .eco-card:hover { background: rgba(160,120,85,.05); }
 .eco-card-tag { font-size:9.5px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--pastel-brown); margin-bottom:20px; }
 .eco-logo-ph {
-  width: 100%; max-width: 148px; height: 40px;
-  border: 1px dashed rgba(250,250,248,.18);
+  width: 148px; height: 48px;
   display: flex; align-items: center; justify-content: center;
-  font-size:8px; letter-spacing:2px; text-transform:uppercase;
-  color:rgba(250,250,248,.28); margin-bottom:20px;
+  margin-bottom: 20px; overflow: hidden;
+  background: transparent;
+}
+.eco-logo-ph img {
+  display: block;
+  width: 148px;
+  height: 48px;
+  object-fit: contain;
+  object-position: center center;
+  filter: brightness(0) invert(1);
+  opacity: .88;
 }
 .eco-card-h { font-family:var(--serif); font-size:20px; font-weight:500; color:#fff; margin-bottom:6px; line-height:1.2; }
 .eco-card-role { font-size:10.5px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--pastel-brown); margin-bottom:14px; }
@@ -1064,35 +1072,35 @@ img { display: block; max-width: 100%; }
     <div class="eco-grid">
       <div class="eco-card reveal d1">
         <div class="eco-card-tag">Parceiro Técnico</div>
-        <div class="eco-logo-ph"><img src="images/parceiros/scala-arquitetura.png" alt="Scala Arquitetura" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
+        <div class="eco-logo-ph"><img src="images/parceiros/scala-arquitetura.png" alt="Scala Arquitetura" ></div>
         <h4 class="eco-card-h">Scala Arquitetura</h4>
         <div class="eco-card-role">Execução de Obras</div>
         <p class="eco-card-p">Execução de obras com controle de qualidade, custos e prazos.</p>
       </div>
       <div class="eco-card reveal d2">
         <div class="eco-card-tag">Parceiro Técnico</div>
-        <div class="eco-logo-ph"><img src="images/parceiros/fiducia.png" alt="Fiducia" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
+        <div class="eco-logo-ph"><img src="images/parceiros/fiducia.png" alt="Fiducia" ></div>
         <h4 class="eco-card-h">Fiducia</h4>
         <div class="eco-card-role">Administração de Obras</div>
         <p class="eco-card-p">Gestão administrativa do canteiro: contratos, medição e controle financeiro.</p>
       </div>
       <div class="eco-card reveal d3">
         <div class="eco-card-tag">Parceiro Jurídico</div>
-        <div class="eco-logo-ph"><img src="images/parceiros/jorge-lacerda.jpeg" alt="Jorge Lacerda Advogados" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
+        <div class="eco-logo-ph"><img src="images/parceiros/jorge-lacerda.png" alt="Jorge Lacerda Advogados" ></div>
         <h4 class="eco-card-h">Jorge Lacerda Advogados</h4>
         <div class="eco-card-role">Jurídico Imobiliário &amp; Societário</div>
         <p class="eco-card-p">Contratos de permuta, SCP e diligência jurídica do terreno.</p>
       </div>
       <div class="eco-card reveal d4">
         <div class="eco-card-tag">Parceiro Estratégico</div>
-        <div class="eco-logo-ph"><img src="images/parceiros/acelara.png" alt="Acelera On Demand" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
+        <div class="eco-logo-ph"><img src="images/parceiros/acelera.png" alt="Acelera On Demand" ></div>
         <h4 class="eco-card-h">Acelera On Demand</h4>
         <div class="eco-card-role">Mentoria Estratégica</div>
         <p class="eco-card-p">Governança, estratégia comercial e tomada de decisão societária.</p>
       </div>
             <div class="eco-card reveal d5">
         <div class="eco-card-tag">Parceiro Funding</div>
-        <div class="eco-logo-ph"><img src="images/parceiros/ip-funding.jpeg" alt="IP Funding" style="max-height:32px;max-width:120px;width:auto;filter:brightness(0) invert(1);opacity:.85;"></div>
+        <div class="eco-logo-ph"><img src="images/parceiros/ip-funding.png" alt="IP Funding" ></div>
         <h4 class="eco-card-h">IP Funding</h4>
         <div class="eco-card-role">Funding &amp; Captação</div>
         <p class="eco-card-p">Estruturação financeira, captação de investidores e viabilização do funding do empreendimento.</p>
