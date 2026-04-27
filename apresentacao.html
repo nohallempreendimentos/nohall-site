@@ -1,0 +1,2243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nohall Empreendimentos — Apresentação Institucional · Parceria Estratégica</title>
+<meta name="description" content="Apresentação institucional Nohall Empreendimentos — Incorporação com pensamento. Modelo de parceria via permuta com método, critério e ecossistema técnico integrado.">
+
+<!-- ══════════════════════════════════════════════════════════════════
+     TIPOGRAFIA — Manual da Marca Nohall 2026
+     Display: Abhaya Libre (serifa editorial) · Body: Inter (técnica)
+══════════════════════════════════════════════════════════════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — extraídos do Manual da Marca Nohall 2026
+   e do site nohallempreendimentos.com.br para consistência total
+══════════════════════════════════════════════════════════════════ */
+:root {
+  /* Paleta oficial */
+  --mirage:        #1E1E20;   /* Primária — autoridade, fundo escuro */
+  --mirage-deep:   #141416;   /* Variação para profundidade */
+  --pastel-brown:  #A07855;   /* Destaque — acentos de marca */
+  --pastel-deep:   #8A634E;   /* Marrom do manual, p/ pressão */
+  --dawn-pink:     #EDE8E1;   /* Suporte — respiração */
+  --dawn-light:    #F5F1EB;   /* Suporte mais claro */
+  --hemp:          #7C7069;   /* Neutro — textos secundários */
+  --white:         #FAFAF8;
+  --line:          rgba(30,30,32,.08);
+  --line-dark:     rgba(250,250,248,.08);
+
+  /* Tipografia */
+  --serif: 'Abhaya Libre', Georgia, 'Times New Roman', serif;
+  --sans:  'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Movimento */
+  --t:   0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --t-l: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --max:     1360px;
+  --pad-x:   clamp(28px, 5vw, 80px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--mirage);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+  line-height: 1.5;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--pastel-brown); color: var(--white); }
+
+/* ══════════════════════════════════════════════════════════════════
+   UTILITÁRIOS DE TIPOGRAFIA
+══════════════════════════════════════════════════════════════════ */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--pastel-brown);
+}
+.eyebrow::before {
+  content: ''; width: 32px; height: 1px; background: currentColor;
+}
+.eyebrow.no-rule::before { display: none; }
+
+.display {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+.display em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--pastel-brown);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HEADER fixo
+══════════════════════════════════════════════════════════════════ */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 64px; display: flex; align-items: center;
+  background: rgba(20,20,22,0);
+  backdrop-filter: blur(0);
+  border-bottom: 1px solid transparent;
+  transition: background var(--t), border-color var(--t), backdrop-filter var(--t);
+}
+.site-header.scrolled {
+  background: rgba(250,250,248,0.97);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  max-width: var(--max); width: 100%;
+  margin: 0 auto; padding: 0 var(--pad-x);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px;
+}
+.header-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--serif); font-size: 17px; font-weight: 500;
+  color: var(--white); transition: color var(--t);
+  letter-spacing: 0.5px;
+}
+.header-logo .icon {
+  width: 26px; height: 26px;
+  color: var(--white);
+  transition: color var(--t);
+  flex-shrink: 0;
+}
+.site-header.scrolled .header-logo { color: var(--mirage); }
+.site-header.scrolled .header-logo .icon { color: var(--mirage); }
+.header-meta {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(250,250,248,0.55);
+  transition: color var(--t);
+}
+.site-header.scrolled .header-meta { color: var(--hemp); }
+@media (max-width: 720px) {
+  .header-meta { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ESTRUTURA DE SLIDE (modular — adaptável a PowerPoint depois)
+══════════════════════════════════════════════════════════════════ */
+.slide {
+  position: relative;
+  padding: clamp(80px, 12vh, 140px) var(--pad-x);
+  overflow: hidden;
+}
+.slide-inner {
+  max-width: var(--max); margin: 0 auto;
+  position: relative; z-index: 2;
+}
+.slide.dark  { background: var(--mirage); color: var(--white); }
+.slide.dark .eyebrow { color: var(--pastel-brown); }
+.slide.deep  { background: var(--mirage-deep); color: var(--white); }
+.slide.light { background: var(--white); color: var(--mirage); }
+.slide.cream { background: var(--dawn-pink); color: var(--mirage); }
+.slide.brown { background: var(--pastel-deep); color: var(--white); }
+
+/* Marca d'água numérica — cada slide com seu número (estilo deck) */
+.slide-number {
+  position: absolute;
+  top: clamp(40px, 6vh, 64px); right: var(--pad-x);
+  font-family: var(--serif);
+  font-size: clamp(64px, 9vw, 120px);
+  line-height: 1; font-weight: 400;
+  color: currentColor; opacity: 0.06;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  z-index: 1;
+}
+.slide.dark .slide-number,
+.slide.deep .slide-number,
+.slide.brown .slide-number { opacity: 0.08; }
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 01 — CAPA / ABERTURA IMPACTANTE
+══════════════════════════════════════════════════════════════════ */
+.slide-cover {
+  min-height: 100vh;
+  background: var(--mirage);
+  display: flex; flex-direction: column;
+  position: relative;
+}
+.cover-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(160,120,85,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,120,85,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+.cover-frame {
+  position: absolute; inset: 32px;
+  border: 1px solid rgba(250,250,248,0.06);
+  pointer-events: none;
+}
+.cover-corners::before,
+.cover-corners::after,
+.cover-corners > span::before,
+.cover-corners > span::after {
+  content: ''; position: absolute;
+  width: 40px; height: 40px;
+  border: 1px solid var(--pastel-brown);
+}
+.cover-corners::before { top: 32px; left: 32px; border-right: none; border-bottom: none; }
+.cover-corners::after  { top: 32px; right: 32px; border-left: none; border-bottom: none; }
+.cover-corners > span::before { content: ''; bottom: 32px; left: 32px; border-right: none; border-top: none; position: absolute; }
+.cover-corners > span::after  { content: ''; bottom: 32px; right: 32px; border-left: none; border-top: none; position: absolute; }
+
+.cover-inner {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: space-between;
+  max-width: var(--max); width: 100%;
+  margin: 0 auto;
+  padding: 120px var(--pad-x) 80px;
+  position: relative; z-index: 2;
+}
+.cover-top { display: flex; justify-content: space-between; gap: 48px; }
+.cover-meta-block {
+  font-size: 10.5px; font-weight: 400; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(250,250,248,0.42);
+  line-height: 2;
+}
+.cover-meta-block strong {
+  color: var(--pastel-brown); font-weight: 500;
+  display: block; margin-bottom: 6px;
+}
+.cover-center {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; padding: 56px 0;
+}
+.cover-eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  margin-bottom: 32px;
+  display: inline-flex; align-items: center; gap: 16px;
+}
+.cover-eyebrow::before {
+  content: ''; width: 48px; height: 1px; background: currentColor;
+}
+.cover-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(48px, 7.4vw, 108px);
+  line-height: 1.02; letter-spacing: -0.02em;
+  color: var(--white);
+  max-width: 17ch;
+  margin-bottom: 36px;
+}
+.cover-title em { font-style: italic; color: var(--pastel-brown); font-weight: 400; }
+.cover-subtitle {
+  font-family: var(--sans); font-weight: 300;
+  font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6;
+  color: rgba(250,250,248,0.62);
+  max-width: 52ch;
+}
+
+.cover-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 48px; padding-top: 32px;
+  border-top: 1px solid rgba(250,250,248,0.08);
+}
+.cover-recipient {
+  font-family: var(--serif); font-style: italic;
+  font-size: 17px; color: rgba(250,250,248,0.58);
+  line-height: 1.5; max-width: 36ch;
+}
+.cover-recipient strong {
+  display: block; font-style: normal; font-weight: 400;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--pastel-brown); margin-bottom: 8px;
+  font-family: var(--sans);
+}
+.cover-confidential {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(250,250,248,0.32);
+  text-align: right; line-height: 2;
+}
+.cover-confidential .dot {
+  display: inline-block; width: 5px; height: 5px;
+  background: var(--pastel-brown); border-radius: 50%;
+  margin-right: 6px; vertical-align: middle;
+}
+
+@media (max-width: 720px) {
+  .cover-inner { padding: 96px 32px 56px; }
+  .cover-top, .cover-bottom { flex-direction: column; gap: 24px; }
+  .cover-confidential { text-align: left; }
+  .cover-frame { inset: 16px; }
+  .cover-corners::before { top: 16px; left: 16px; }
+  .cover-corners::after { top: 16px; right: 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 02 — CONTEXTO / OPORTUNIDADE DE MERCADO
+══════════════════════════════════════════════════════════════════ */
+.context-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(48px, 6vw, 96px);
+  align-items: start;
+}
+.context-eyebrow { margin-bottom: 28px; }
+.context-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 64px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--mirage);
+  margin-bottom: 28px;
+}
+.context-title em { font-style: italic; color: var(--pastel-brown); }
+.context-lead {
+  font-size: 16px; line-height: 1.7; color: var(--hemp);
+  font-weight: 400;
+}
+.context-points {
+  display: flex; flex-direction: column; gap: 28px;
+}
+.context-point {
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+.context-point:last-child { border-bottom: 1px solid var(--line); }
+.context-point-num {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 400;
+  color: var(--pastel-brown);
+  letter-spacing: 0.05em;
+}
+.context-point-title {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 22px; line-height: 1.3;
+  color: var(--mirage); margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.context-point-desc {
+  font-size: 14.5px; line-height: 1.65; color: var(--hemp);
+}
+
+@media (max-width: 900px) {
+  .context-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 03 — QUEM É A NOHALL (autoridade)
+══════════════════════════════════════════════════════════════════ */
+.who-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(56px, 7vw, 112px);
+  align-items: center;
+}
+.who-headline {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px, 5.6vw, 76px);
+  line-height: 1.04; letter-spacing: -0.025em;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+.who-headline em { font-style: italic; color: var(--pastel-brown); }
+.who-tagline {
+  font-family: var(--serif); font-style: italic;
+  font-size: 18px; line-height: 1.5;
+  color: rgba(250,250,248,0.58);
+  margin-bottom: 40px;
+  padding-left: 20px;
+  border-left: 1px solid var(--pastel-brown);
+}
+.who-meta-list {
+  list-style: none; padding: 0;
+  font-size: 13px; line-height: 2;
+  color: rgba(250,250,248,0.5);
+  letter-spacing: 0.01em;
+}
+.who-meta-list li {
+  display: flex; align-items: center; gap: 14px;
+}
+.who-meta-list li::before {
+  content: ''; width: 18px; height: 1px; background: var(--pastel-brown);
+  flex-shrink: 0;
+}
+.who-meta-list strong {
+  color: rgba(250,250,248,0.85);
+  font-weight: 500;
+  font-family: var(--sans);
+}
+.who-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(250,250,248,0.08);
+  border: 1px solid rgba(250,250,248,0.08);
+}
+.who-pillar {
+  background: var(--mirage);
+  padding: 36px 32px;
+  position: relative;
+  transition: background var(--t);
+}
+.who-pillar:hover { background: rgba(160,120,85,0.05); }
+.who-pillar-num {
+  font-family: var(--serif);
+  font-size: 13px; font-weight: 400;
+  color: var(--pastel-brown);
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+.who-pillar-title {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 22px; line-height: 1.25;
+  color: var(--white); margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.who-pillar-desc {
+  font-size: 13px; line-height: 1.6;
+  color: rgba(250,250,248,0.55);
+}
+
+@media (max-width: 900px) {
+  .who-grid { grid-template-columns: 1fr; gap: 48px; }
+  .who-pillars { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 04 — CICLO NOHALL (método)
+══════════════════════════════════════════════════════════════════ */
+.cycle-header {
+  max-width: 800px; margin: 0 auto 80px; text-align: center;
+}
+.cycle-header .eyebrow { justify-content: center; margin-bottom: 28px; }
+.cycle-header .eyebrow { display: inline-flex; }
+.cycle-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.cycle-title em { font-style: italic; color: var(--pastel-brown); }
+.cycle-lead {
+  font-size: 15px; line-height: 1.7;
+  color: var(--hemp); max-width: 56ch; margin: 0 auto;
+}
+.cycle-track {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 24px; align-items: stretch;
+  position: relative;
+}
+.cycle-track::before {
+  content: '';
+  position: absolute;
+  top: 32px; left: 5%; right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pastel-brown) 20%, var(--pastel-brown) 80%, transparent);
+  z-index: 0;
+}
+.cycle-step {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+}
+.cycle-dot {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--pastel-brown);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 0 0 8px var(--white), 0 0 0 9px rgba(160,120,85,0.18);
+  transition: transform var(--t), box-shadow var(--t);
+}
+.cycle-step:hover .cycle-dot {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 8px var(--white), 0 0 0 11px rgba(160,120,85,0.25);
+}
+.cycle-dot-num {
+  font-family: var(--serif); font-size: 17px; font-weight: 500;
+  color: var(--white); letter-spacing: 0.02em;
+}
+.cycle-step-title {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 22px; line-height: 1.2;
+  color: var(--mirage); margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.cycle-step-desc {
+  font-size: 13px; line-height: 1.55;
+  color: var(--hemp);
+  max-width: 22ch;
+}
+
+.cycle-flow {
+  margin-top: 72px;
+  text-align: center;
+  font-family: var(--serif); font-style: italic;
+  font-size: 14px; color: var(--hemp);
+  letter-spacing: 0.04em;
+}
+.cycle-flow span { color: var(--pastel-brown); }
+
+@media (max-width: 900px) {
+  .cycle-track { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+  .cycle-track::before { display: none; }
+}
+@media (max-width: 540px) {
+  .cycle-track { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 05 — POSICIONAMENTO ("não compete por volume")
+══════════════════════════════════════════════════════════════════ */
+.position-header {
+  margin-bottom: 80px; max-width: 900px;
+}
+.position-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px, 5.6vw, 80px);
+  line-height: 1.02; letter-spacing: -0.025em;
+  color: var(--white);
+}
+.position-title em { font-style: italic; color: var(--pastel-brown); }
+.position-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(250,250,248,0.08);
+  border: 1px solid rgba(250,250,248,0.08);
+}
+.position-card {
+  background: var(--mirage-deep);
+  padding: 48px 36px 56px;
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: background var(--t);
+}
+.position-card:hover { background: rgba(160,120,85,0.06); }
+.position-card-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(250,250,248,0.35);
+  margin-bottom: 32px;
+}
+.position-card-title {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 30px; line-height: 1.15;
+  color: var(--white); margin-bottom: auto;
+  padding-bottom: 48px;
+  letter-spacing: -0.015em;
+}
+.position-card-desc {
+  font-size: 14px; line-height: 1.65;
+  color: rgba(250,250,248,0.55);
+  border-top: 1px solid rgba(250,250,248,0.1);
+  padding-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .position-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .position-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 06 — NÚMEROS / PROVA DE CAPACIDADE
+══════════════════════════════════════════════════════════════════ */
+.metrics-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 6vw, 96px);
+  align-items: end;
+  margin-bottom: 80px;
+}
+.metrics-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 60px);
+  line-height: 1.05; letter-spacing: -0.02em;
+}
+.metrics-title em { font-style: italic; color: var(--pastel-brown); }
+.metrics-note {
+  font-size: 14px; line-height: 1.7;
+  color: var(--hemp);
+  max-width: 44ch;
+}
+.metrics-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.metric-cell {
+  padding: 48px 32px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.metric-cell:last-child { border-right: none; }
+.metric-num {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px, 4.4vw, 64px);
+  line-height: 1; color: var(--mirage);
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+  display: flex; align-items: baseline; gap: 4px;
+}
+.metric-num .unit {
+  font-size: 0.45em; color: var(--pastel-brown);
+  font-weight: 500; font-style: italic;
+  margin-left: 2px;
+}
+.metric-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--hemp);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .metrics-header { grid-template-columns: 1fr; gap: 24px; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+  .metric-cell {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 36px 24px;
+  }
+  .metric-cell:nth-child(2n) { border-right: none; }
+}
+@media (max-width: 540px) {
+  .metrics-grid { grid-template-columns: 1fr; }
+  .metric-cell { border-right: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 07 — PORTFÓLIO / TRABALHOS DESENVOLVIDOS
+══════════════════════════════════════════════════════════════════ */
+.portfolio-header {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 48px; align-items: end;
+  margin-bottom: 56px;
+}
+.portfolio-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 64px);
+  line-height: 1.05; letter-spacing: -0.02em;
+}
+.portfolio-title em { font-style: italic; color: var(--pastel-brown); }
+.portfolio-meta {
+  font-size: 13px; color: var(--hemp);
+  text-align: right; line-height: 1.7;
+}
+.portfolio-meta strong {
+  display: block; color: var(--mirage);
+  font-family: var(--serif); font-size: 17px;
+  font-weight: 500; margin-bottom: 4px;
+}
+.portfolio-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.portfolio-card {
+  aspect-ratio: 4/5;
+  background: var(--mirage);
+  position: relative; overflow: hidden;
+  cursor: default;
+  border: 1px solid var(--line);
+}
+.portfolio-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--mirage) 0%, var(--mirage-deep) 100%);
+}
+.portfolio-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(160,120,85,0.18) 0%, transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(160,120,85,0.10) 0%, transparent 50%);
+  opacity: 0.7;
+  transition: opacity var(--t);
+}
+.portfolio-card:hover::after { opacity: 1; }
+.portfolio-card-content {
+  position: absolute; inset: 0; z-index: 2;
+  padding: 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: var(--white);
+}
+.portfolio-card-tag {
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--pastel-brown);
+}
+.portfolio-card-name {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 22px; line-height: 1.2;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.portfolio-card-cat {
+  font-size: 11px; color: rgba(250,250,248,0.55);
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+  .portfolio-grid { grid-template-columns: 1fr 1fr; }
+  .portfolio-header { grid-template-columns: 1fr; }
+  .portfolio-meta { text-align: left; }
+}
+@media (max-width: 540px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 08 — EQUIPE / FUNDADORES
+══════════════════════════════════════════════════════════════════ */
+.team-header { margin-bottom: 64px; max-width: 800px; }
+.team-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.team-title em { font-style: italic; color: var(--pastel-brown); }
+.team-lead {
+  font-size: 15px; line-height: 1.7; color: var(--hemp);
+  max-width: 60ch;
+}
+.team-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.team-card {
+  background: var(--white);
+  padding: 0;
+  position: relative;
+}
+.team-photo {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  position: relative;
+  background: var(--dawn-pink);
+}
+.team-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(100%) contrast(1.02);
+  transition: filter var(--t-l), transform var(--t-l);
+}
+.team-card:hover .team-photo img {
+  filter: grayscale(0%) contrast(1);
+  transform: scale(1.04);
+}
+.team-info {
+  padding: 24px 24px 28px;
+  border-top: 1px solid var(--line);
+}
+.team-name {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 19px; line-height: 1.25;
+  color: var(--mirage); margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.team-role {
+  font-size: 11px; font-weight: 500; letter-spacing: 1.8px;
+  text-transform: uppercase; color: var(--pastel-brown);
+}
+
+@media (max-width: 900px) {
+  .team-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 09 — ECOSSISTEMA DE PARCEIROS
+══════════════════════════════════════════════════════════════════ */
+.ecosystem-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 6vw, 96px);
+  align-items: end;
+  margin-bottom: 80px;
+}
+.ecosystem-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 64px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--white);
+}
+.ecosystem-title em { font-style: italic; color: var(--pastel-brown); }
+.ecosystem-lead {
+  font-size: 15px; line-height: 1.7;
+  color: rgba(250,250,248,0.6);
+}
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: rgba(250,250,248,0.08);
+  border: 1px solid rgba(250,250,248,0.08);
+}
+
+/* Faixa Nohall — protagonista do ecossistema, acima da grid de parceiros */
+.ecosystem-lead {
+  display: grid;
+  grid-template-columns: 88px 1fr auto;
+  gap: 36px;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(160,120,85,0.14) 0%, rgba(160,120,85,0.04) 60%, transparent 100%);
+  border: 1px solid rgba(160,120,85,0.32);
+  padding: 40px 44px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.ecosystem-lead::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 3px; background: var(--pastel-brown);
+}
+.ecosystem-lead-mark {
+  width: 64px; height: 64px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--pastel-brown);
+}
+.ecosystem-lead-mark svg { width: 100%; height: 100%; }
+.ecosystem-lead-content { min-width: 0; }
+.ecosystem-lead-tag {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  margin-bottom: 12px;
+}
+.ecosystem-lead-title {
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1.15; color: var(--white);
+  letter-spacing: -0.015em; margin-bottom: 12px;
+}
+.ecosystem-lead-desc {
+  font-size: 14px; line-height: 1.65;
+  color: rgba(250,250,248,0.7);
+  max-width: 64ch;
+}
+.ecosystem-lead-meta {
+  display: flex; flex-direction: column; gap: 10px;
+  padding-left: 36px;
+  border-left: 1px solid rgba(250,250,248,0.12);
+  flex-shrink: 0;
+}
+.ecosystem-lead-meta-row {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px;
+}
+.ecosystem-lead-meta-row span {
+  font-family: var(--serif); font-weight: 400;
+  color: var(--pastel-brown);
+  letter-spacing: 0.05em;
+}
+.ecosystem-lead-meta-row strong {
+  color: var(--white); font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 1100px) {
+  .ecosystem-lead {
+    grid-template-columns: 64px 1fr;
+    gap: 28px;
+  }
+  .ecosystem-lead-meta {
+    grid-column: 1 / -1;
+    flex-direction: row; flex-wrap: wrap;
+    padding-left: 0; border-left: none;
+    padding-top: 24px; margin-top: 4px;
+    border-top: 1px solid rgba(250,250,248,0.12);
+    gap: 24px;
+  }
+}
+.partner-card {
+  background: var(--mirage);
+  padding: 40px 36px 44px;
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: background var(--t);
+  min-height: 340px;
+}
+.partner-card:hover { background: rgba(160,120,85,0.05); }
+.partner-tag {
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  margin-bottom: 28px;
+}
+.partner-logo {
+  height: 56px; margin-bottom: 28px;
+  display: flex; align-items: center;
+}
+.partner-logo-placeholder {
+  width: 100%; max-width: 180px;
+  height: 48px;
+  border: 1px dashed rgba(250,250,248,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(250,250,248,0.32);
+  background: rgba(250,250,248,0.02);
+}
+.partner-logo img {
+  max-height: 48px; max-width: 180px;
+  width: auto; height: auto;
+  filter: brightness(0) invert(1); opacity: 0.92;
+}
+.partner-name {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 26px; line-height: 1.2;
+  color: var(--white); margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.partner-card.lead .partner-name { font-size: 32px; }
+.partner-role {
+  font-size: 12px; font-weight: 500; letter-spacing: 1.8px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  margin-bottom: 20px;
+}
+.partner-desc {
+  font-size: 13.5px; line-height: 1.65;
+  color: rgba(250,250,248,0.6);
+  margin-top: auto;
+}
+.partner-card.lead .partner-desc { font-size: 14.5px; line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .ecosystem-grid { grid-template-columns: 1fr 1fr; }
+  .ecosystem-lead {
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+  }
+  .ecosystem-lead-meta { display: none; }
+  .ecosystem-header { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 540px) {
+  .ecosystem-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 10 — MODELO DE PERMUTA (DIFERENCIAL)
+══════════════════════════════════════════════════════════════════ */
+.permuta-header {
+  text-align: center; max-width: 760px;
+  margin: 0 auto 80px;
+}
+.permuta-header .eyebrow { display: inline-flex; margin-bottom: 28px; }
+.permuta-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1.04; letter-spacing: -0.025em;
+  color: var(--mirage); margin-bottom: 24px;
+}
+.permuta-title em { font-style: italic; color: var(--pastel-brown); }
+.permuta-lead {
+  font-size: 15px; line-height: 1.7; color: var(--hemp);
+  max-width: 60ch; margin: 0 auto;
+}
+.permuta-pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.permuta-pillar {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 40px 32px 44px;
+  position: relative;
+  transition: border-color var(--t), transform var(--t);
+}
+.permuta-pillar:hover {
+  border-color: var(--pastel-brown);
+  transform: translateY(-2px);
+}
+.permuta-pillar-num {
+  font-family: var(--serif);
+  font-size: 13px; font-weight: 500;
+  color: var(--pastel-brown);
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.permuta-pillar-title {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 24px; line-height: 1.25;
+  color: var(--mirage); margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.permuta-pillar-desc {
+  font-size: 13.5px; line-height: 1.65;
+  color: var(--hemp);
+}
+.permuta-flow {
+  background: var(--mirage);
+  padding: 56px 48px;
+  display: grid;
+  grid-template-columns: 1.2fr 1.6fr;
+  gap: 56px;
+  align-items: center;
+  border: 1px solid var(--mirage);
+  position: relative;
+  overflow: hidden;
+}
+.permuta-flow::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 200px;
+  background: radial-gradient(ellipse at right, rgba(160,120,85,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.permuta-flow-side {
+  position: relative; z-index: 2;
+}
+.permuta-flow-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  margin-bottom: 20px;
+}
+.permuta-flow-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(26px, 2.8vw, 36px);
+  line-height: 1.2; letter-spacing: -0.015em;
+  color: var(--white);
+}
+.permuta-flow-title em { font-style: italic; color: var(--pastel-brown); }
+.permuta-flow-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 20px;
+  position: relative; z-index: 2;
+}
+.permuta-flow-list li {
+  display: flex;
+  gap: 18px;
+  font-size: 14px; line-height: 1.6;
+  color: rgba(250,250,248,0.78);
+  align-items: flex-start;
+}
+.permuta-flow-list li::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: var(--pastel-brown);
+  border-radius: 50%;
+  margin-top: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(160,120,85,0.18);
+}
+.permuta-flow-list strong {
+  color: var(--white);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 900px) {
+  .permuta-pillars { grid-template-columns: 1fr; gap: 16px; }
+  .permuta-flow { grid-template-columns: 1fr; gap: 32px; padding: 40px 32px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 11 — DIFERENCIAIS (porque a Nohall)
+══════════════════════════════════════════════════════════════════ */
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(56px, 7vw, 112px);
+  align-items: start;
+}
+.diff-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 60px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.diff-title em { font-style: italic; color: var(--pastel-brown); }
+.diff-lead {
+  font-size: 15px; line-height: 1.7;
+  color: rgba(250,250,248,0.58);
+}
+.diff-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column;
+}
+.diff-item {
+  padding: 28px 0;
+  border-top: 1px solid rgba(250,250,248,0.08);
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 24px;
+  align-items: start;
+  transition: padding-left var(--t);
+}
+.diff-item:hover { padding-left: 8px; }
+.diff-item:last-child { border-bottom: 1px solid rgba(250,250,248,0.08); }
+.diff-num {
+  font-family: var(--serif);
+  font-size: 18px; font-weight: 400;
+  color: var(--pastel-brown);
+  letter-spacing: 0.05em;
+}
+.diff-content-title {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 22px; line-height: 1.3;
+  color: var(--white); margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.diff-content-desc {
+  font-size: 13.5px; line-height: 1.65;
+  color: rgba(250,250,248,0.55);
+  max-width: 60ch;
+}
+.diff-arrow {
+  font-size: 18px; color: var(--pastel-brown);
+  opacity: 0.5; transition: opacity var(--t), transform var(--t);
+}
+.diff-item:hover .diff-arrow {
+  opacity: 1; transform: translateX(4px);
+}
+
+@media (max-width: 900px) {
+  .diff-grid { grid-template-columns: 1fr; gap: 48px; }
+  .diff-item { grid-template-columns: 40px 1fr; }
+  .diff-arrow { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLIDE 12 — CTA FINAL (PROPOSTA DE AVANÇO)
+══════════════════════════════════════════════════════════════════ */
+.cta-slide {
+  background: var(--pastel-deep);
+  position: relative;
+  overflow: hidden;
+}
+.cta-slide::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(0,0,0,0.10) 0%, transparent 50%);
+  pointer-events: none;
+}
+.cta-slide .slide-inner { position: relative; z-index: 2; }
+.cta-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: clamp(64px, 8vw, 128px);
+  align-items: center;
+}
+.cta-headline {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 1.0; letter-spacing: -0.025em;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+.cta-headline em { font-style: italic; color: rgba(255,255,255,0.7); font-weight: 400; }
+.cta-lead {
+  font-size: 16px; line-height: 1.7;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 40px;
+  max-width: 50ch;
+}
+.cta-signature {
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  display: flex; align-items: center; gap: 16px;
+}
+.cta-signature-icon {
+  width: 38px; height: 38px;
+  color: var(--white);
+  flex-shrink: 0;
+  opacity: 0.92;
+}
+.cta-signature-text {
+  font-family: var(--serif); font-style: italic;
+  font-size: 14px; color: rgba(255,255,255,0.72);
+  line-height: 1.5;
+}
+.cta-signature-text strong {
+  display: block; font-style: normal;
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+
+.cta-options {
+  display: flex; flex-direction: column;
+  gap: 14px;
+}
+.cta-option {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 26px 30px;
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  cursor: pointer;
+  transition: background var(--t), border-color var(--t), transform var(--t);
+  text-decoration: none; color: inherit;
+}
+.cta-option:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateX(4px);
+}
+.cta-option.primary {
+  background: var(--white); color: var(--mirage);
+  border-color: var(--white);
+}
+.cta-option.primary:hover {
+  background: var(--mirage);
+  color: var(--white);
+  border-color: var(--mirage);
+}
+.cta-option-num {
+  font-family: var(--serif);
+  font-size: 17px; font-weight: 500;
+  color: var(--white);
+  opacity: 0.7;
+}
+.cta-option.primary .cta-option-num { color: var(--pastel-brown); opacity: 1; }
+.cta-option-content {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.cta-option-label {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 19px; line-height: 1.2;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.cta-option.primary .cta-option-label { color: var(--mirage); }
+.cta-option-meta {
+  font-size: 12px; color: rgba(255,255,255,0.6);
+  letter-spacing: 0.02em;
+}
+.cta-option.primary .cta-option-meta { color: var(--hemp); }
+.cta-option-arrow {
+  font-size: 17px; color: var(--white); opacity: 0.6;
+  transition: transform var(--t), opacity var(--t);
+}
+.cta-option:hover .cta-option-arrow {
+  transform: translateX(4px); opacity: 1;
+}
+.cta-option.primary .cta-option-arrow { color: var(--mirage); }
+
+@media (max-width: 900px) {
+  .cta-grid { grid-template-columns: 1fr; gap: 56px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════════════════ */
+.site-footer {
+  background: var(--mirage-deep);
+  color: rgba(250,250,248,0.5);
+  padding: 80px var(--pad-x) 32px;
+  position: relative;
+}
+.footer-inner {
+  max-width: var(--max); margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 64px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(250,250,248,0.06);
+}
+.footer-brand {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+}
+.footer-brand img,
+.footer-brand-icon {
+  height: 28px; width: 28px;
+  color: var(--white);
+  flex-shrink: 0;
+  opacity: 0.92;
+}
+.footer-brand-text {
+  font-family: var(--serif); font-size: 19px; font-weight: 500;
+  color: var(--white); letter-spacing: 0.02em;
+}
+.footer-tagline {
+  font-family: var(--serif); font-style: italic;
+  font-size: 15px; color: rgba(250,250,248,0.4);
+  line-height: 1.6; max-width: 38ch;
+  margin-bottom: 28px;
+}
+.footer-info {
+  font-size: 12px; line-height: 1.9;
+  color: rgba(250,250,248,0.32);
+}
+.footer-label {
+  font-size: 9.5px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--pastel-brown);
+  margin-bottom: 18px;
+}
+.footer-list { display: flex; flex-direction: column; gap: 10px; }
+.footer-list a, .footer-list span {
+  font-size: 13px; color: rgba(250,250,248,0.5);
+  transition: color var(--t);
+}
+.footer-list a:hover { color: var(--pastel-brown); }
+.footer-bottom {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10.5px; letter-spacing: 0.5px;
+  color: rgba(250,250,248,0.28);
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom .pulse {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(250,250,248,0.4);
+}
+.footer-bottom .pulse::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--pastel-brown);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.2); }
+}
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ANIMAÇÕES DE ENTRADA (scroll reveal — IntersectionObserver)
+══════════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.10s; }
+.reveal-delay-2 { transition-delay: 0.20s; }
+.reveal-delay-3 { transition-delay: 0.30s; }
+.reveal-delay-4 { transition-delay: 0.40s; }
+.reveal-delay-5 { transition-delay: 0.50s; }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Print fallback (caso queiram imprimir/exportar PDF) */
+@media print {
+  .site-header, .cta-options, .footer-bottom .pulse { display: none; }
+  .slide { page-break-after: always; padding: 40px 32px; min-height: auto; }
+  body { background: white; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     HEADER FIXO
+══════════════════════════════════════════════════════════════════ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#capa" class="header-logo">
+      <svg class="icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+        <!-- Mark Nohall: dois cubos isométricos espelhados, ligados por uma diagonal -->
+        <!-- Cubo superior (canto top-left) -->
+        <path d="M16 16 L36 16 L36 36 L16 36 Z"/>
+        <path d="M36 16 L46 22 L46 42 L36 36"/>
+        <path d="M16 36 L26 42 L46 42"/>
+        <!-- Cubo inferior (canto bottom-right) -->
+        <path d="M64 58 L84 58 L84 78 L64 78 Z"/>
+        <path d="M84 58 L94 64 L94 84 L84 78"/>
+        <path d="M64 78 L74 84 L94 84"/>
+        <!-- Diagonal de ligação -->
+        <path d="M46 32 L64 68"/>
+      </svg>
+      <span>Nohall</span>
+    </a>
+    <span class="header-meta">Apresentação Institucional · Confidencial</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 01 — CAPA / ABERTURA IMPACTANTE
+     Estabelece o tom: editorial, premium, confidencial.
+     Comunica: identidade, propósito da reunião, destinatário.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide-cover" id="capa">
+  <div class="cover-grid"></div>
+  <div class="cover-frame"></div>
+  <div class="cover-corners"><span></span></div>
+
+  <div class="cover-inner">
+    <div class="cover-top">
+      <div class="cover-meta-block">
+        <strong>Nohall Empreendimentos</strong>
+        Chapecó · Santa Catarina<br>
+        Incorporação · Projetos · Gestão
+      </div>
+      <div class="cover-meta-block" style="text-align:right;">
+        <strong>Apresentação Institucional</strong>
+        Documento Confidencial<br>
+        Versão 1.0 — 2026
+      </div>
+    </div>
+
+    <div class="cover-center">
+      <div class="cover-eyebrow">Proposta de Parceria Estratégica</div>
+      <h1 class="cover-title">
+        Construir patrimônio<br>com <em>método.</em>
+      </h1>
+      <p class="cover-subtitle">
+        Apresentamos a estrutura da Nohall Empreendimentos como incorporadora líder de um ecossistema técnico integrado — e o caminho para uma parceria via permuta sustentada por critério, transparência e ganho mútuo.
+      </p>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-recipient">
+        <strong>Apresentado para</strong>
+        Reunião com a propriedade do terreno —<br>
+        para alinhamento de modelo e avanço para MOU.
+      </div>
+      <div class="cover-confidential">
+        <span><span class="dot"></span>Documento Estratégico</span><br>
+        Não destinado à distribuição pública
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 02 — CONTEXTO DE MERCADO
+     Demonstra inteligência estratégica e leitura de cenário.
+     Posiciona a Nohall como leitora qualificada do mercado de Chapecó.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide light" id="contexto">
+  <div class="slide-number">02</div>
+  <div class="slide-inner">
+    <div class="context-grid">
+      <div class="context-left reveal">
+        <div class="context-eyebrow eyebrow">01 — Contexto</div>
+        <h2 class="context-title">
+          Chapecó vive um<br>
+          ciclo de <em>maturidade</em><br>
+          imobiliária.
+        </h2>
+        <p class="context-lead">
+          O mercado de alto padrão na região passa por uma transição clara: do volume para o critério. Compradores estão mais informados, terrenos bem localizados são finitos, e a margem está nas decisões — não no preço de venda.
+        </p>
+      </div>
+
+      <div class="context-points">
+        <div class="context-point reveal reveal-delay-1">
+          <span class="context-point-num">01</span>
+          <div>
+            <div class="context-point-title">Demanda qualificada e regional</div>
+            <p class="context-point-desc">
+              65% da população de Chapecó está na faixa ativa de compra (gerações X e Y), com 57,7% de renda formalizada. A absorção para apartamentos de 2–3 dormitórios em regiões valorizadas é classificada como muito alta.
+            </p>
+          </div>
+        </div>
+
+        <div class="context-point reveal reveal-delay-2">
+          <span class="context-point-num">02</span>
+          <div>
+            <div class="context-point-title">Escassez de terrenos com vocação</div>
+            <p class="context-point-desc">
+              Bairros como Maria Goretti, Jardim Itália, Santa Maria, Palmital e Centro concentram a demanda — e a oferta de terrenos com legislação favorável e bom posicionamento urbano se torna progressivamente mais rara.
+            </p>
+          </div>
+        </div>
+
+        <div class="context-point reveal reveal-delay-3">
+          <span class="context-point-num">03</span>
+          <div>
+            <div class="context-point-title">Janela para incorporação estruturada</div>
+            <p class="context-point-desc">
+              SELIC ainda elevada e cenário político de transição premiam estruturas que entreguem previsibilidade. Quem tem método e ecossistema integrado opera com vantagem real sobre quem ainda improvisa por etapa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 03 — QUEM É A NOHALL (autoridade)
+     Apresenta a marca: essência, manifesto, pilares fundadores.
+     Reforça posicionamento sem auto-elogio.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide dark" id="quem-somos">
+  <div class="slide-number">03</div>
+  <div class="slide-inner">
+    <div class="who-grid">
+      <div class="who-left reveal">
+        <div class="eyebrow" style="margin-bottom:28px;">02 — Quem somos</div>
+        <h2 class="who-headline">
+          Incorporação<br>com <em>pensamento.</em>
+        </h2>
+        <p class="who-tagline">
+          Não acreditamos em pressa. Nem em repetição. Nem em arquitetura sem intenção. Acreditamos em método, em decisão, em permanência.
+        </p>
+        <ul class="who-meta-list">
+          <li><strong>Fundada em 2020</strong> · Chapecó, Santa Catarina</li>
+          <li><strong>CNPJ 37.343.214/0001-70</strong> · Estrutura jurídica consolidada</li>
+          <li><strong>Atuação verticalizada</strong> · Incorporação, projetos e gestão</li>
+          <li><strong>Foco geográfico</strong> · Áreas valorizadas do Oeste Catarinense</li>
+        </ul>
+      </div>
+
+      <div class="who-pillars">
+        <div class="who-pillar reveal reveal-delay-1">
+          <div class="who-pillar-num">01</div>
+          <h3 class="who-pillar-title">Transparência</h3>
+          <p class="who-pillar-desc">Relações construídas com informação clara e processos abertos. Do terreno ao contrato — nada é escondido.</p>
+        </div>
+        <div class="who-pillar reveal reveal-delay-2">
+          <div class="who-pillar-num">02</div>
+          <h3 class="who-pillar-title">Critério</h3>
+          <p class="who-pillar-desc">Cada decisão de terreno, parceiro ou material passa por avaliação rigorosa. Nada é por impulso, nada é por volume.</p>
+        </div>
+        <div class="who-pillar reveal reveal-delay-3">
+          <div class="who-pillar-num">03</div>
+          <h3 class="who-pillar-title">Método</h3>
+          <p class="who-pillar-desc">Processos estruturados que entregam previsibilidade do projeto à entrega. Sem improviso, sem desvio.</p>
+        </div>
+        <div class="who-pillar reveal reveal-delay-4">
+          <div class="who-pillar-num">04</div>
+          <h3 class="who-pillar-title">Permanência</h3>
+          <p class="who-pillar-desc">Construímos com intenção de durar. Não perseguimos tendências — criamos patrimônio que valoriza com o tempo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 04 — CICLO NOHALL (método)
+     Apresenta o framework operacional que diferencia a Nohall.
+     Decisão · Critério · Concepção · Método · Permanência.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide cream" id="ciclo">
+  <div class="slide-number">04</div>
+  <div class="slide-inner">
+    <div class="cycle-header reveal">
+      <div class="eyebrow">03 — O Método</div>
+      <h2 class="cycle-title">Do terreno<br>à <em>permanência.</em></h2>
+      <p class="cycle-lead">
+        Cada empreendimento Nohall passa por um ciclo estrutural rigoroso. Não é apenas um processo operacional — é a expressão física do nosso método.
+      </p>
+    </div>
+
+    <div class="cycle-track">
+      <div class="cycle-step reveal reveal-delay-1">
+        <div class="cycle-dot"><span class="cycle-dot-num">01</span></div>
+        <h3 class="cycle-step-title">Decisão</h3>
+        <p class="cycle-step-desc">Análise de terreno, viabilidade econômica e contexto urbano.</p>
+      </div>
+      <div class="cycle-step reveal reveal-delay-2">
+        <div class="cycle-dot"><span class="cycle-dot-num">02</span></div>
+        <h3 class="cycle-step-title">Critério</h3>
+        <p class="cycle-step-desc">Definição do produto com intenção arquitetônica e de mercado.</p>
+      </div>
+      <div class="cycle-step reveal reveal-delay-3">
+        <div class="cycle-dot"><span class="cycle-dot-num">03</span></div>
+        <h3 class="cycle-step-title">Concepção</h3>
+        <p class="cycle-step-desc">Projeto desenvolvido com precisão, propósito e coordenação BIM.</p>
+      </div>
+      <div class="cycle-step reveal reveal-delay-4">
+        <div class="cycle-dot"><span class="cycle-dot-num">04</span></div>
+        <h3 class="cycle-step-title">Método</h3>
+        <p class="cycle-step-desc">Execução controlada, sem atalhos. Custo, prazo e qualidade rastreáveis.</p>
+      </div>
+      <div class="cycle-step reveal reveal-delay-5">
+        <div class="cycle-dot"><span class="cycle-dot-num">05</span></div>
+        <h3 class="cycle-step-title">Permanência</h3>
+        <p class="cycle-step-desc">Entrega de um ativo que valoriza com o tempo e transforma o entorno.</p>
+      </div>
+    </div>
+
+    <div class="cycle-flow reveal">
+      Decisão <span>→</span> Critério <span>→</span> Concepção <span>→</span> Método <span>→</span> Permanência
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 05 — POSICIONAMENTO
+     "A Nohall não compete por volume."
+     Quatro pilares que orientam decisões.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide deep" id="posicionamento">
+  <div class="slide-number">05</div>
+  <div class="slide-inner">
+    <div class="position-header reveal">
+      <div class="eyebrow" style="margin-bottom:28px;">04 — Posicionamento</div>
+      <h2 class="position-title">
+        A Nohall não compete<br>por <em>volume.</em>
+      </h2>
+    </div>
+
+    <div class="position-grid">
+      <div class="position-card reveal reveal-delay-1">
+        <div class="position-card-eyebrow">Não por volume</div>
+        <h3 class="position-card-title">Por<br>Consistência</h3>
+        <p class="position-card-desc">Cada projeto reflete o mesmo nível de critério e intenção — do primeiro ao último empreendimento.</p>
+      </div>
+      <div class="position-card reveal reveal-delay-2">
+        <div class="position-card-eyebrow">Não por velocidade</div>
+        <h3 class="position-card-title">Por<br>Estrutura</h3>
+        <p class="position-card-desc">O tempo do projeto é o tempo necessário. Sem atalhos, sem improviso. A previsibilidade vem do método.</p>
+      </div>
+      <div class="position-card reveal reveal-delay-3">
+        <div class="position-card-eyebrow">Não por tendência</div>
+        <h3 class="position-card-title">Por<br>Permanência</h3>
+        <p class="position-card-desc">O que entregamos deve sobreviver às modas e ao tempo. Construímos para durar — esteticamente e como ativo.</p>
+      </div>
+      <div class="position-card reveal reveal-delay-4">
+        <div class="position-card-eyebrow">Não por presença</div>
+        <h3 class="position-card-title">Por<br>Impacto</h3>
+        <p class="position-card-desc">Cada empreendimento transforma a rua, o entorno, a cidade. Não construímos imóveis — construímos referências.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 06 — NÚMEROS / PROVA DE CAPACIDADE
+     Dados reais extraídos do portfólio Nohall.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide light" id="numeros">
+  <div class="slide-number">06</div>
+  <div class="slide-inner">
+    <div class="metrics-header">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:24px;">05 — Capacidade Técnica</div>
+        <h2 class="metrics-title">
+          Cinco anos<br>de <em>histórico técnico</em><br>verificável.
+        </h2>
+      </div>
+      <p class="metrics-note reveal reveal-delay-1">
+        Antes de incorporar, a Nohall consolidou ecossistema técnico e arquitetônico. Os números abaixo refletem o domínio operacional que sustenta cada novo empreendimento — e que se traduz em previsibilidade real para o parceiro de terreno.
+      </p>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-cell reveal">
+        <div class="metric-num">+140<span class="unit">k m²</span></div>
+        <div class="metric-label">Projetos arquitetônicos<br>desenvolvidos</div>
+      </div>
+      <div class="metric-cell reveal reveal-delay-1">
+        <div class="metric-num">+59<span class="unit">k m²</span></div>
+        <div class="metric-label">Obras compatibilizadas<br>com BIM</div>
+      </div>
+      <div class="metric-cell reveal reveal-delay-2">
+        <div class="metric-num">+17<span class="unit">k m²</span></div>
+        <div class="metric-label">Obras atualmente<br>em execução</div>
+      </div>
+      <div class="metric-cell reveal reveal-delay-3">
+        <div class="metric-num">R$ 27<span class="unit">M</span></div>
+        <div class="metric-label">Patrimônio sob<br>administração técnica</div>
+      </div>
+      <div class="metric-cell reveal reveal-delay-4">
+        <div class="metric-num">5<span class="unit">anos</span></div>
+        <div class="metric-label">De atuação consolidada<br>no Oeste Catarinense</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 07 — PORTFÓLIO
+     Mostra projetos desenvolvidos pela Nohall (arquitetura/gestão).
+     Cards estilizados — substituíveis por imagens reais quando disponíveis.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide cream" id="portfolio">
+  <div class="slide-number">07</div>
+  <div class="slide-inner">
+    <div class="portfolio-header">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:24px;">06 — Portfólio</div>
+        <h2 class="portfolio-title">
+          Trabalhos<br><em>desenvolvidos.</em>
+        </h2>
+      </div>
+      <div class="portfolio-meta reveal reveal-delay-1">
+        <strong>Recorte editorial — 8 de 21 projetos</strong>
+        Residenciais e alto padrão · Chapecó e região
+      </div>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-tag">Alto Padrão</span>
+          <div>
+            <h3 class="portfolio-card-name">Manhattan<br>Residence</h3>
+            <div class="portfolio-card-cat">Vertical residencial</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-tag">Alto Padrão</span>
+          <div>
+            <h3 class="portfolio-card-name">Serena<br>Residence</h3>
+            <div class="portfolio-card-cat">Vertical residencial</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-3">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-tag">Alto Padrão</span>
+          <div>
+            <h3 class="portfolio-card-name">Colline<br>Residence</h3>
+            <div class="portfolio-card-cat">Vertical residencial</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-4">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-tag">Alto Padrão</span>
+          <div>
+            <h3 class="portfolio-card-name">Ametista<br>Residence</h3>
+            <div class="portfolio-card-cat">Vertical residencial</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-tag">Residencial</span>
+          <div>
+            <h3 class="portfolio-card-name">Casa<br>Aurora</h3>
+            <div class="portfolio-card-cat">Unifamiliar de alto padrão</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-tag">Residencial</span>
+          <div>
+            <h3 class="portfolio-card-name">Casa<br>Bossa</h3>
+            <div class="portfolio-card-cat">Unifamiliar de alto padrão</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-3">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-tag">Comercial</span>
+          <div>
+            <h3 class="portfolio-card-name">RUSH<br>Wellness</h3>
+            <div class="portfolio-card-cat">Equipamento comercial</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-4">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-tag">Alto Padrão</span>
+          <div>
+            <h3 class="portfolio-card-name">Porto<br>Esmeralda</h3>
+            <div class="portfolio-card-cat">Vertical residencial</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 08 — EQUIPE / FUNDADORES
+     Humaniza a marca. Quatro sócios com responsabilidades técnicas claras.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide light" id="equipe">
+  <div class="slide-number">08</div>
+  <div class="slide-inner">
+    <div class="team-header reveal">
+      <div class="eyebrow" style="margin-bottom:24px;">07 — Liderança</div>
+      <h2 class="team-title">As pessoas por trás<br>do <em>método.</em></h2>
+      <p class="team-lead">
+        Quatro sócios com responsabilidades técnicas e de capital claramente segmentadas. A complementaridade não é discurso — é estrutura operacional documentada.
+      </p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-photo">
+          <img src="assets/equipe/camila-giachini.png" alt="Camila Giachini" loading="lazy">
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">Camila Giachini</h3>
+          <div class="team-role">Arquiteta &amp; Designer</div>
+        </div>
+      </div>
+      <div class="team-card reveal reveal-delay-2">
+        <div class="team-photo">
+          <img src="assets/equipe/fernando-neres.png" alt="Fernando Neres" loading="lazy">
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">Fernando Neres</h3>
+          <div class="team-role">Engenheiro Civil</div>
+        </div>
+      </div>
+      <div class="team-card reveal reveal-delay-3">
+        <div class="team-photo">
+          <img src="assets/equipe/fernando-faoro.png" alt="Fernando Faoro" loading="lazy">
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">Fernando Faoro</h3>
+          <div class="team-role">Engenheiro Civil</div>
+        </div>
+      </div>
+      <div class="team-card reveal reveal-delay-4">
+        <div class="team-photo">
+          <img src="assets/equipe/felipe-andrade.png" alt="Felipe Andrade" loading="lazy">
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">Felipe Andrade</h3>
+          <div class="team-role">Capital Partner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 09 — ECOSSISTEMA DE PARCEIROS
+     A Nohall como protagonista, com parceiros estruturados em volta.
+     Espaços preparados para logos futuros.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide dark" id="ecossistema">
+  <div class="slide-number">09</div>
+  <div class="slide-inner">
+    <div class="ecosystem-header">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:24px;">08 — Ecossistema</div>
+        <h2 class="ecosystem-title">
+          Uma incorporadora<br>
+          sustentada por um<br>
+          <em>ecossistema técnico.</em>
+        </h2>
+      </div>
+      <p class="ecosystem-lead reveal reveal-delay-1">
+        A Nohall lidera o empreendimento — da decisão de terreno à entrega do ativo. Em torno dela, parceiros consolidados garantem que cada interface técnica, jurídica e fiscal opere com o mesmo padrão de rigor.
+      </p>
+    </div>
+
+    <!-- ── Faixa de destaque NOHALL — protagonista do ecossistema ── -->
+    <div class="ecosystem-lead reveal reveal-delay-1">
+      <div class="ecosystem-lead-mark">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+          <path d="M16 16 L36 16 L36 36 L16 36 Z"/>
+          <path d="M36 16 L46 22 L46 42 L36 36"/>
+          <path d="M16 36 L26 42 L46 42"/>
+          <path d="M64 58 L84 58 L84 78 L64 78 Z"/>
+          <path d="M84 58 L94 64 L94 84 L84 78"/>
+          <path d="M64 78 L74 84 L94 84"/>
+          <path d="M46 32 L64 68"/>
+        </svg>
+      </div>
+      <div class="ecosystem-lead-content">
+        <div class="ecosystem-lead-tag">Liderança · Incorporadora</div>
+        <h3 class="ecosystem-lead-title">Nohall Empreendimentos</h3>
+        <p class="ecosystem-lead-desc">
+          Protagonista do empreendimento. Conduz a incorporação, a definição de produto, a arquitetura, a coordenação do ecossistema e a relação com investidores e proprietários de terreno. É a Nohall que define o método — e responde por ele.
+        </p>
+      </div>
+      <div class="ecosystem-lead-meta">
+        <div class="ecosystem-lead-meta-row">
+          <span>01</span><strong>Incorporação</strong>
+        </div>
+        <div class="ecosystem-lead-meta-row">
+          <span>02</span><strong>Arquitetura</strong>
+        </div>
+        <div class="ecosystem-lead-meta-row">
+          <span>03</span><strong>Gestão técnica</strong>
+        </div>
+        <div class="ecosystem-lead-meta-row">
+          <span>04</span><strong>Governança</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Grid de parceiros estratégicos (5 cards, layout simétrico) ── -->
+    <div class="ecosystem-grid">
+
+      <!-- Card 02: Scala Arquitetura — execução de obras -->
+      <div class="partner-card reveal reveal-delay-1">
+        <div class="partner-tag">Parceiro Técnico</div>
+        <div class="partner-logo">
+          <div class="partner-logo-placeholder">Logo Scala</div>
+        </div>
+        <h3 class="partner-name">Scala Arquitetura</h3>
+        <div class="partner-role">Execução de Obras</div>
+        <p class="partner-desc">
+          Parceira responsável pela execução de obras com controle de qualidade, custos e prazos.
+        </p>
+      </div>
+
+      <!-- Card 03: Fiducia — administração de obras -->
+      <div class="partner-card reveal reveal-delay-2">
+        <div class="partner-tag">Parceiro Técnico</div>
+        <div class="partner-logo">
+          <div class="partner-logo-placeholder">Logo Fiducia</div>
+        </div>
+        <h3 class="partner-name">Fiducia</h3>
+        <div class="partner-role">Administração de Obras</div>
+        <p class="partner-desc">
+          Gestão administrativa do canteiro: contratos, fornecedores, medição e controle financeiro da obra.
+        </p>
+      </div>
+
+      <!-- Card 04: Jorge Lacerda Advogados -->
+      <div class="partner-card reveal reveal-delay-3">
+        <div class="partner-tag">Parceiro Jurídico</div>
+        <div class="partner-logo">
+          <div class="partner-logo-placeholder">Logo Jorge Lacerda Adv.</div>
+        </div>
+        <h3 class="partner-name">Jorge Lacerda<br>Advogados</h3>
+        <div class="partner-role">Jurídico Imobiliário &amp; Societário</div>
+        <p class="partner-desc">
+          Estruturação societária, contratos de permuta, SCP e diligência jurídica do terreno e do empreendimento.
+        </p>
+      </div>
+
+      <!-- Card 05: Acelera On Demand — mentoria estratégica -->
+      <div class="partner-card reveal reveal-delay-4">
+        <div class="partner-tag">Parceiro Estratégico</div>
+        <div class="partner-logo">
+          <div class="partner-logo-placeholder">Logo Acelera</div>
+        </div>
+        <h3 class="partner-name">Acelera<br>On Demand</h3>
+        <div class="partner-role">Mentoria Estratégica</div>
+        <p class="partner-desc">
+          Acompanhamento de governança, estratégia comercial e tomada de decisão em decisões societárias.
+        </p>
+      </div>
+
+      <!-- Card 06: Contábil -->
+      <div class="partner-card reveal reveal-delay-5">
+        <div class="partner-tag">Parceiro Fiscal</div>
+        <div class="partner-logo">
+          <div class="partner-logo-placeholder">Logo Contabilidade</div>
+        </div>
+        <h3 class="partner-name">Escritório<br>Contábil</h3>
+        <div class="partner-role">Contabilidade &amp; Fiscal</div>
+        <p class="partner-desc">
+          Estruturação fiscal e contábil das SCPs e da incorporação, com integração ao planejamento tributário.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 10 — MODELO DE ATUAÇÃO EM PERMUTAS
+     Estrutura conceitual do modelo. Não compromete percentuais,
+     mas demonstra clareza de processo.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide light" id="modelo-permuta">
+  <div class="slide-number">10</div>
+  <div class="slide-inner">
+    <div class="permuta-header reveal">
+      <div class="eyebrow">09 — Modelo de Parceria</div>
+      <h2 class="permuta-title">Permuta com <em>critério.</em></h2>
+      <p class="permuta-lead">
+        A Nohall estrutura permutas com transparência total e proteção mútua. O proprietário do terreno entra com o ativo; a Nohall entra com a estrutura completa de incorporação, projeto, gestão e capital de viabilização.
+      </p>
+    </div>
+
+    <div class="permuta-pillars">
+      <div class="permuta-pillar reveal reveal-delay-1">
+        <div class="permuta-pillar-num">01 — Estrutura</div>
+        <h3 class="permuta-pillar-title">SCP dedicada<br>e patrimônio segregado</h3>
+        <p class="permuta-pillar-desc">
+          Cada empreendimento opera em Sociedade em Conta de Participação própria, com governança documentada e patrimônio isolado dos demais ativos da Nohall.
+        </p>
+      </div>
+      <div class="permuta-pillar reveal reveal-delay-2">
+        <div class="permuta-pillar-num">02 — Garantias</div>
+        <h3 class="permuta-pillar-title">Diligência jurídica<br>completa antes do MOU</h3>
+        <p class="permuta-pillar-desc">
+          Conduzida por Jorge Lacerda Advogados. Análise de matrícula, cadeia dominial, ônus, débitos e instrumentos contratuais redigidos com proteção bilateral.
+        </p>
+      </div>
+      <div class="permuta-pillar reveal reveal-delay-3">
+        <div class="permuta-pillar-num">03 — Transparência</div>
+        <h3 class="permuta-pillar-title">Acompanhamento<br>integral pelo terrenista</h3>
+        <p class="permuta-pillar-desc">
+          Reporting periódico de cronograma, custos e VGV. O proprietário tem acesso à informação real do empreendimento, sem caixa preta operacional.
+        </p>
+      </div>
+    </div>
+
+    <!-- Fluxo conceitual: do MOU à entrega -->
+    <div class="permuta-flow reveal">
+      <div class="permuta-flow-side">
+        <div class="permuta-flow-eyebrow">Sequência conceitual</div>
+        <h3 class="permuta-flow-title">
+          Do <em>MOU</em><br>à entrega do ativo.
+        </h3>
+      </div>
+      <ul class="permuta-flow-list">
+        <li><div><strong>01 · MOU + NDA</strong><br>Alinhamento de premissas, percentual e cronograma macro.</div></li>
+        <li><div><strong>02 · Diligência &amp; Estudo de Massa</strong><br>Análise jurídica e quadro de áreas, fachada e legislação.</div></li>
+        <li><div><strong>03 · Viabilidade Econômica + Anteprojeto</strong><br>Validação de produto, VGV, lucro e unidades especiais.</div></li>
+        <li><div><strong>04 · Contrato Definitivo + Lançamento</strong><br>Formalização da permuta, SCP estruturada e abertura comercial.</div></li>
+        <li><div><strong>05 · Execução &amp; Entrega</strong><br>Obra controlada, reporting periódico e entrega das unidades pactuadas.</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 11 — DIFERENCIAIS / POR QUE A NOHALL
+     Argumentos racionais para um público técnico exigente.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide deep" id="diferenciais">
+  <div class="slide-number">11</div>
+  <div class="slide-inner">
+    <div class="diff-grid">
+      <div class="diff-left reveal">
+        <div class="eyebrow" style="margin-bottom:28px;">10 — Por que a Nohall</div>
+        <h2 class="diff-title">
+          Cinco fatores<br>
+          que separam<br>
+          <em>execução de</em><br>
+          <em>incorporação.</em>
+        </h2>
+        <p class="diff-lead">
+          O proprietário de um terreno qualificado tem opções. A pergunta correta não é "quem constrói?" — é "quem garante o resultado?". A Nohall responde com estrutura, não com promessa.
+        </p>
+      </div>
+
+      <ul class="diff-list">
+        <li class="diff-item reveal reveal-delay-1">
+          <span class="diff-num">01</span>
+          <div>
+            <h3 class="diff-content-title">Ecossistema técnico verticalizado</h3>
+            <p class="diff-content-desc">Arquitetura, gestão BIM, jurídico, contábil e execução operam dentro do mesmo método. As interfaces críticas não são terceirizadas — são governadas.</p>
+          </div>
+          <span class="diff-arrow">→</span>
+        </li>
+        <li class="diff-item reveal reveal-delay-2">
+          <span class="diff-num">02</span>
+          <div>
+            <h3 class="diff-content-title">Cinco anos de portfólio rastreável</h3>
+            <p class="diff-content-desc">Mais de 140 mil m² em projetos arquitetônicos e 17 mil m² em obras em execução comprovam capacidade técnica anterior à incorporação. Não estamos começando.</p>
+          </div>
+          <span class="diff-arrow">→</span>
+        </li>
+        <li class="diff-item reveal reveal-delay-3">
+          <span class="diff-num">03</span>
+          <div>
+            <h3 class="diff-content-title">Identidade Visual e produto consolidados</h3>
+            <p class="diff-content-desc">Manual da marca, posicionamento e arquitetura de produto definidos antes da incorporação. O empreendimento entra no mercado com narrativa, não apenas com tijolo.</p>
+          </div>
+          <span class="diff-arrow">→</span>
+        </li>
+        <li class="diff-item reveal reveal-delay-4">
+          <span class="diff-num">04</span>
+          <div>
+            <h3 class="diff-content-title">Estrutura societária enxuta e ágil</h3>
+            <p class="diff-content-desc">Decisões rápidas, baixo custo fixo e quatro sócios com responsabilidades complementares. Sem burocracia interna — e sem a inércia das incorporadoras de grande porte.</p>
+          </div>
+          <span class="diff-arrow">→</span>
+        </li>
+        <li class="diff-item reveal reveal-delay-5">
+          <span class="diff-num">05</span>
+          <div>
+            <h3 class="diff-content-title">Transparência como cláusula, não como discurso</h3>
+            <p class="diff-content-desc">Reporting estruturado para o terrenista, governança documentada e relação contratual proporcional. A informação flui — porque a confiança depende disso.</p>
+          </div>
+          <span class="diff-arrow">→</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDE 12 — CTA FINAL
+     Três caminhos de avanço — escolha do parceiro de terreno.
+     Reforça segurança, profissionalismo e ganho mútuo.
+══════════════════════════════════════════════════════════════════ -->
+<section class="slide cta-slide" id="proximo-passo">
+  <div class="slide-number">12</div>
+  <div class="slide-inner">
+    <div class="cta-grid">
+      <div class="cta-left reveal">
+        <div class="eyebrow" style="margin-bottom:28px; color: rgba(255,255,255,0.7);">11 — Próximo passo</div>
+        <h2 class="cta-headline">
+          O terreno encontra<br>
+          o método.<br>
+          <em>O resto é estrutura.</em>
+        </h2>
+        <p class="cta-lead">
+          Avançamos no ritmo que faz sentido para os dois lados. A Nohall opera com cronograma documentado e três frentes prontas para iniciar — basta a definição de qual é a porta de entrada da nossa parceria.
+        </p>
+
+        <div class="cta-signature">
+          <svg class="cta-signature-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+            <path d="M16 16 L36 16 L36 36 L16 36 Z"/>
+            <path d="M36 16 L46 22 L46 42 L36 36"/>
+            <path d="M16 36 L26 42 L46 42"/>
+            <path d="M64 58 L84 58 L84 78 L64 78 Z"/>
+            <path d="M84 58 L94 64 L94 84 L84 78"/>
+            <path d="M64 78 L74 84 L94 84"/>
+            <path d="M46 32 L64 68"/>
+          </svg>
+          <div class="cta-signature-text">
+            <strong>Nohall Empreendimentos</strong>
+            "Incorporação com pensamento."<br>
+            Chapecó · Santa Catarina
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-options reveal reveal-delay-1">
+
+        <a href="#" class="cta-option primary">
+          <span class="cta-option-num">01</span>
+          <div class="cta-option-content">
+            <span class="cta-option-label">Avançar para o MOU</span>
+            <span class="cta-option-meta">Documento bilateral · Próxima semana</span>
+          </div>
+          <span class="cta-option-arrow">→</span>
+        </a>
+
+        <a href="#" class="cta-option">
+          <span class="cta-option-num">02</span>
+          <div class="cta-option-content">
+            <span class="cta-option-label">Reunião técnica<br>aprofundada</span>
+            <span class="cta-option-meta">Estudo de massa · Quadro de áreas · Viabilidade</span>
+          </div>
+          <span class="cta-option-arrow">→</span>
+        </a>
+
+        <a href="#" class="cta-option">
+          <span class="cta-option-num">03</span>
+          <div class="cta-option-content">
+            <span class="cta-option-label">Apresentação do<br>Business Plan</span>
+            <span class="cta-option-meta">VGV · Cronograma · Estrutura SCP</span>
+          </div>
+          <span class="cta-option-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <svg class="footer-brand-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+            <path d="M16 16 L36 16 L36 36 L16 36 Z"/>
+            <path d="M36 16 L46 22 L46 42 L36 36"/>
+            <path d="M16 36 L26 42 L46 42"/>
+            <path d="M64 58 L84 58 L84 78 L64 78 Z"/>
+            <path d="M84 58 L94 64 L94 84 L84 78"/>
+            <path d="M64 78 L74 84 L94 84"/>
+            <path d="M46 32 L64 68"/>
+          </svg>
+          <span class="footer-brand-text">Nohall Empreendimentos</span>
+        </div>
+        <p class="footer-tagline">Construindo patrimônio sólido no Oeste Catarinense — com método, critério e permanência.</p>
+        <p class="footer-info">
+          CNPJ 37.343.214/0001-70<br>
+          Fundada em 2020 · Chapecó — Santa Catarina<br>
+          Incorporação · Projetos · Gestão
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-label">Esta apresentação</div>
+        <div class="footer-list">
+          <span>Apresentação Institucional</span>
+          <span>Versão 1.0 — 2026</span>
+          <span>Documento Confidencial</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-label">Contato</div>
+        <div class="footer-list">
+          <a href="https://www.nohallempreendimentos.com.br" target="_blank" rel="noopener">nohallempreendimentos.com.br</a>
+          <a href="https://instagram.com/nohall.empreendimentos" target="_blank" rel="noopener">@nohall.empreendimentos</a>
+          <span>Chapecó · Santa Catarina · Brasil</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="pulse">Documento ativo · 2026</span>
+      <span>© Nohall Empreendimentos. Todos os direitos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     COMPORTAMENTOS — header scrolled + reveal on scroll
+══════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  // Header: muda fundo após o scroll inicial
+  var header = document.getElementById('siteHeader');
+  function onScroll () {
+    if (window.scrollY > 64) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Reveal on scroll — IntersectionObserver
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    // Fallback — sem IntersectionObserver, simplesmente exibe tudo
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+  }
+})();
+</script>
+
+</body>
+</html>
