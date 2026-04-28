@@ -145,6 +145,18 @@ img{display:block;max-width:100%;}
 .ideal-name{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:3px;}
 .ideal-role{font-size:10.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:var(--hemp);}
 @media(max-width:900px){.ideal-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:680px){
+  .hero-corner{display:none;}
+  .hero-meta{justify-content:flex-start;margin-bottom:40px;font-size:9px;letter-spacing:1.8px;}
+  .hero-meta-r{text-align:left;}
+  .hero-body{padding:40px 0 48px;}
+  .hero-kicker{font-size:9.5px;letter-spacing:3px;margin-bottom:20px;}
+  .hero-h1{font-size:clamp(40px,11vw,72px);margin-bottom:20px;max-width:100%;}
+  .hero-sub{font-size:15px;margin-bottom:32px;max-width:100%;}
+  .hero-bottom{flex-direction:column;align-items:flex-start;gap:16px;}
+  .hero-conf{font-size:9px;}
+  .hero-recipient{font-size:14px;}
+}
 @media(max-width:540px){.ideal-grid{grid-template-columns:1fr;}}
 
 /* ══════════════════════════════════════════
@@ -307,6 +319,14 @@ img{display:block;max-width:100%;}
 .cta-opt:hover .cta-opt-arr{transform:translateX(4px);opacity:1;}
 .cta-opt.primary .cta-opt-arr{color:var(--mirage);}
 @media(max-width:900px){.cta-grid{grid-template-columns:1fr;}}
+@media(max-width:680px){
+  .cta-opt{grid-template-columns:28px 1fr auto;gap:12px;padding:18px 20px;}
+  .emp-grid{grid-template-columns:1fr;}
+  .ideal-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:480px){
+  .ideal-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
