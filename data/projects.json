@@ -8,7 +8,7 @@
       "status": "Arquitetura",
       "year": 2026,
       "description": "Arquitetura Executiva",
-      "thumbnail": "images/empreendimentos/porto-esmeralda.png",
+      "thumbnail": "images/empreendimentos/porto-esmeralda.webp",
       "disciplines": [
         {
           "id": "arq",
@@ -54,7 +54,7 @@
       "status": "Gestão e Compatibilização",
       "year": 2026,
       "description": "Projeto residencial com compatibilização completa entre disciplinas e visualização BIM integrada.",
-      "thumbnail": "images/empreendimentos/casa-bossa.png",
+      "thumbnail": "images/empreendimentos/casa-bossa.webp",
       "disciplines": [
         {
           "id": "arq",
@@ -114,7 +114,7 @@
       "status": "Gestão e Compatibilização",
       "year": 2025,
       "description": "Residência unifamiliar com compatibilização e gestão BIM completa.",
-      "thumbnail": "images/empreendimentos/casa-jbl.png",
+      "thumbnail": "images/empreendimentos/casa-jbl.webp",
       "disciplines": [
         {
           "id": "arq",
@@ -181,7 +181,7 @@
       "status": "Gestão e Compatibilização",
       "year": 2026,
       "description": "Residência unifamiliar com compatibilização e gestão BIM completa.",
-      "thumbnail": "images/empreendimentos/casa-jfm.png",
+      "thumbnail": "images/empreendimentos/casa-jfm.webp",
       "disciplines": [
         {
           "id": "arq",
@@ -199,7 +199,7 @@
       "status": "Gestão e Compatibilização",
       "year": 2025,
       "description": "Residência unifamiliar com compatibilização e gestão BIM completa.",
-      "thumbnail": "images/empreendimentos/casa-varanda.png",
+      "thumbnail": "images/empreendimentos/casa-varanda.webp",
       "disciplines": [
         {
           "id": "arq",
@@ -245,7 +245,7 @@
       "status": "Gestão e Compatibilização",
       "year": 2023,
       "description": "Residência multifamiliar com compatibilização BIM.",
-      "thumbnail": "images/empreendimentos/manhattan-residence.png",
+      "thumbnail": "images/empreendimentos/manhattan-residence.webp",
       "disciplines": [
         {
           "id": "arq",
@@ -253,7 +253,7 @@
           "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/manhattan-residence/MAN_Arquitetura.ifc",
           "color": "#D4C5B0",
           "visible": true
-               }
+        }
       ]
     },
     {
@@ -263,7 +263,7 @@
       "status": "Arquitetura",
       "year": 2024,
       "description": "Projeto Arquitetônico Autoral Nohall Empreendimentos.",
-      "thumbnail": "images/empreendimentos/serena-residence.png",
+      "thumbnail": "images/empreendimentos/serena-residence.webp",
       "disciplines": [
         {
           "id": "arq",
@@ -271,7 +271,6 @@
           "file": "https://pub-03eba28801be4047b390b6504f019ddf.r2.dev/serena-residence/SE_Arquitetura.ifc",
           "color": "#D4C5B0",
           "visible": true
-       
         }
       ]
     }
