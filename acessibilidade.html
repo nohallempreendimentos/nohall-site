@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acessibilidade — Nohall Empreendimentos</title>
+<meta name="description" content="Declaração de acessibilidade do site da Nohall Empreendimentos.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nohall.com.br/acessibilidade.html">
+<meta property="og:title" content="Acessibilidade — Nohall">
+<meta property="og:description" content="Declaração de acessibilidade do site da Nohall Empreendimentos.">
+<meta property="og:image" content="https://nohall.com.br/images/og-cover.jpg">
+<meta property="og:url" content="https://nohall.com.br/acessibilidade.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Nohall Empreendimentos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Acessibilidade — Nohall">
+<meta name="twitter:description" content="Declaração de acessibilidade do site da Nohall Empreendimentos.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://nohall.com.br/"},{"@type":"ListItem","position":2,"name":"Acessibilidade","item":"https://nohall.com.br/acessibilidade.html"}]}
+</script>
+
 <style>
 
 
@@ -12,6 +32,7 @@
 <style>
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--white);color:var(--mirage);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 a{text-decoration:none;color:inherit;}
@@ -108,10 +129,6 @@ img{display:block;max-width:100%;}
 .doc-contact-link:hover{color:var(--pastel-brown);border-color:var(--pastel-brown);}
 @media(max-width:900px){.doc-section{padding:64px 32px 80px;}.doc-toc{padding:24px 24px;}.doc-contact-box{flex-direction:column;align-items:flex-start;gap:20px;padding:28px 24px;}}
 </style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Acessibilidade — Nohall Empreendimentos</title>
-<meta name="description" content="Declaração de Acessibilidade da Nohall Empreendimentos. Nosso compromisso com a inclusão digital e acesso universal ao site.">
 
 <style>
 
@@ -399,14 +416,14 @@ document.querySelectorAll('.mv-item').forEach(function(item) {
     </div>
     <div>
       <div class="footer-nav-label">Navegação</div>
-      <nav class="footer-nav-list">
+      <nav class="footer-nav-list" aria-label="Navegação do rodapé">
         <a href="index.html">Início</a><a href="sobre-nos.html">Sobre Nós</a><a href="atuacao.html">Atuação</a>
         <a href="empreendimentos.html">Empreendimentos</a><a href="portfolio.html">Portfólio</a><a href="contato.html">Contato</a>
       </nav>
     </div>
     <div>
       <div class="footer-nav-label">Contato</div>
-      <div class="footer-contact-item"><a href="https://maps.google.com" target="_blank">R. André Lunardi, 1284 — Sala 205<br>Centro, Xaxim — SC, 89825-000</a></div>
+      <div class="footer-contact-item"><a href="https://maps.google.com/maps?q=R.+André+Lunardi,+1284+Xaxim+SC+89825-000" target="_blank">R. André Lunardi, 1284 — Sala 205<br>Centro, Xaxim — SC, 89825-000</a></div>
       <div class="footer-contact-item"><a href="https://wa.me/5549999296829">(49) 99929-6829</a> · <a href="https://wa.me/5549998208744">(49) 99820-8744</a></div>
       <div class="footer-contact-item"><a href="mailto:empreendimentosnohall@gmail.com">empreendimentosnohall@gmail.com</a></div>
     </div>

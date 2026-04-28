@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /lista-privada.html
+Disallow: /viewer.html
+
+Sitemap: https://nohall.com.br/sitemap.xml
