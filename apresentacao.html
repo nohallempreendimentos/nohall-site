@@ -727,11 +727,11 @@ img{display:block;max-width:100%;}
     </div>
     <div class="met-grid" style="grid-template-columns:repeat(4,1fr);">
       <div class="met-cell reveal d1">
-        <div class="met-n">+<span class="count-up" data-target="240" data-prefix="">0</span><span class="unit" style="font-size:.45em;vertical-align:super;"> mil m²</span></div>
+        <div class="met-n">+<span class="count-up" data-target="240" data-prefix="">0</span><span class="unit"> mil m²</span></div>
         <div class="met-lbl">Projetos arquitetônicos<br>desenvolvidos</div>
       </div>
       <div class="met-cell reveal d2">
-        <div class="met-n">+<span class="count-up" data-target="59" data-prefix="">0</span><span class="unit" style="font-size:.45em;vertical-align:super;"> mil m²</span></div>
+        <div class="met-n">+<span class="count-up" data-target="59" data-prefix="">0</span><span class="unit"> mil m²</span></div>
         <div class="met-lbl">Obras compatibilizadas<br>com BIM</div>
       </div>
       <div class="met-cell reveal d3">
@@ -999,7 +999,7 @@ img{display:block;max-width:100%;}
   if(!vp||!tr)return;
 
   /* Esconder scrollbar */
-  vp.style.overflowX='scroll';vp.style.scrollbarWidth='none';
+  vp.style.overflowX='scroll';vp.style.overflowY='hidden';vp.style.scrollbarWidth='none';
   var s=document.createElement('style');s.textContent='#galleryViewport::-webkit-scrollbar{display:none}';document.head.appendChild(s);
 
   /* Duplicar cards para loop infinito */
