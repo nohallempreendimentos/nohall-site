@@ -209,14 +209,15 @@ img{display:block;max-width:100%;}
 .port-top .port-h2 em{font-style:italic;color:var(--pastel-brown);}
 .port-top-link{justify-self:end;align-self:end;font-size:10.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--pastel-brown);display:inline-flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid var(--pastel-brown);transition:opacity .3s;white-space:nowrap;}
 .port-top-link:hover{opacity:.65;}
-.gallery-viewport{overflow:hidden;position:relative;user-select:none;}
+.gallery-viewport{overflow:hidden;position:relative;user-select:none;min-height:360px;}
 .gallery-viewport:active{cursor:grabbing;}
-.gallery-track{display:flex;gap:10px;padding:0 0 clamp(40px,5vh,64px);width:max-content;animation:galleryScroll 60s linear infinite;}
+.gallery-track{display:flex;gap:10px;padding:0 0 clamp(40px,5vh,64px);width:max-content;will-change:transform;animation:galleryScroll 60s linear infinite;}
 .gallery-track:hover{animation-play-state:paused;}
 @keyframes galleryScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-.gallery-card{flex:0 0 clamp(260px,22vw,340px);aspect-ratio:3/4;position:relative;overflow:hidden;background:var(--mirage);}
+.gallery-card{flex:0 0 clamp(200px,42vw,340px);aspect-ratio:3/4;position:relative;overflow:hidden;background:var(--mirage);}
 .gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:.88;}
 .gallery-card:hover img{transform:scale(1.04);opacity:1;}
+@media(max-width:680px){.gallery-card{flex:0 0 200px;}.gallery-viewport{min-height:280px;}}
 .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,20,22,.78) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px 18px;}
 .gallery-name{font-family:var(--serif);font-size:17px;font-weight:500;color:#fff;line-height:1.2;}
 .gallery-cat{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(250,250,248,.55);margin-top:4px;}
@@ -670,12 +671,12 @@ img{display:block;max-width:100%;}
   </div>
   <div class="gallery-viewport" id="galleryViewport">
     <div class="gallery-track" id="galleryTrack">
-      <div class="gallery-card"><img src="images/empreendimentos/manhattan-residence.webp" alt="Manhattan Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Manhattan Residence</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens%20douglas/casa-floresta.webp" alt="Casa Floresta" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Floresta</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="images/empreendimentos/colline-residence.webp" alt="Colline Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Colline Residence</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens%20douglas/casa-lg.webp" alt="Casa L&amp;G" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa L&amp;G</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="images/empreendimentos/serena-residence.webp" alt="Serena Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Serena Residence</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens%20douglas/dona-lurdes.webp" alt="Residencial Dona Lurdes" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Dona Lurdes</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/manhattan-residence.webp" alt="Manhattan Residence" loading="eager"><div class="gallery-overlay"><div class="gallery-name">Manhattan Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-floresta.webp" alt="Casa Floresta" loading="eager"><div class="gallery-overlay"><div class="gallery-name">Casa Floresta</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/colline-residence.webp" alt="Colline Residence" loading="eager"><div class="gallery-overlay"><div class="gallery-name">Colline Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-lg.webp" alt="Casa L&amp;G" loading="eager"><div class="gallery-overlay"><div class="gallery-name">Casa L&amp;G</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/serena-residence.webp" alt="Serena Residence" loading="eager"><div class="gallery-overlay"><div class="gallery-name">Serena Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/dona-lurdes.webp" alt="Residencial Dona Lurdes" loading="eager"><div class="gallery-overlay"><div class="gallery-name">Residencial Dona Lurdes</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/ametista-residence.webp" alt="Ametista Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Ametista Residence</div><div class="gallery-cat">NOHALL</div></div></div>
       <div class="gallery-card"><img src="imagens%20douglas/residencial-mario.webp" alt="Res. e Comercial Mario" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Res. e Comercial Mario</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/porto-esmeralda.webp" alt="Porto Esmeralda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Porto Esmeralda</div><div class="gallery-cat">NOHALL</div></div></div>
@@ -738,7 +739,7 @@ img{display:block;max-width:100%;}
       </div>
       <p class="met-note reveal d2">Esses números refletem a soma do portfólio das três empresas — e se traduzem em previsibilidade para o parceiro de terreno.</p>
     </div>
-    <div class="met-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="met-grid">
       <div class="met-cell reveal d1">
         <div class="met-n">+<span class="count-up" data-target="240" data-prefix="">0</span><span class="unit"> mil m²</span></div>
         <div class="met-lbl">Projetos arquitetônicos<br>desenvolvidos</div>
