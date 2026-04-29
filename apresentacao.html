@@ -198,9 +198,11 @@ img{display:block;max-width:100%;}
 .port-top .port-h2 em{font-style:italic;color:var(--pastel-brown);}
 .port-top-link{justify-self:end;align-self:end;font-size:10.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--pastel-brown);display:inline-flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid var(--pastel-brown);transition:opacity .3s;white-space:nowrap;}
 .port-top-link:hover{opacity:.65;}
-.gallery-viewport{overflow:hidden;position:relative;cursor:grab;user-select:none;}
+.gallery-viewport{overflow:hidden;position:relative;user-select:none;}
 .gallery-viewport:active{cursor:grabbing;}
-.gallery-track{display:flex;gap:10px;padding:0 clamp(28px,5vw,80px) clamp(40px,5vh,64px);}
+.gallery-track{display:flex;gap:10px;padding:0 0 clamp(40px,5vh,64px);width:max-content;animation:galleryScroll 60s linear infinite;}
+.gallery-track:hover{animation-play-state:paused;}
+@keyframes galleryScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 .gallery-card{flex:0 0 clamp(260px,22vw,340px);aspect-ratio:3/4;position:relative;overflow:hidden;background:var(--mirage);}
 .gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:.88;}
 .gallery-card:hover img{transform:scale(1.04);opacity:1;}
@@ -657,24 +659,24 @@ img{display:block;max-width:100%;}
   </div>
   <div class="gallery-viewport" id="galleryViewport">
     <div class="gallery-track" id="galleryTrack">
-      <div class="gallery-card"><img src="images/empreendimentos/manhattan-residence.webp" alt="Manhattan Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Manhattan Residence</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/casa-floresta.webp" alt="Casa Floresta" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Floresta</div><div class="gallery-cat">SCALA</div></div></div>
+<div class="gallery-card"><img src="images/empreendimentos/manhattan-residence.webp" alt="Manhattan Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Manhattan Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-floresta.webp" alt="Casa Floresta" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Floresta</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/colline-residence.webp" alt="Colline Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Colline Residence</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/casa-lg.webp" alt="Casa L&G" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa L&G</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-lg.webp" alt="Casa L&G" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa L&G</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/serena-residence.webp" alt="Serena Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Serena Residence</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/dona-lurdes.webp" alt="Residencial Dona Lurdes" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Dona Lurdes</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/dona-lurdes.webp" alt="Residencial Dona Lurdes" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Dona Lurdes</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/ametista-residence.webp" alt="Ametista Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Ametista Residence</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/residencial-mario.webp" alt="Residencial e Comercial Mario" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Mario</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-mario.webp" alt="Residencial e Comercial Mario" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Mario</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/porto-esmeralda.webp" alt="Porto Esmeralda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Porto Esmeralda</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/residencial-mirage.webp" alt="Residencial Mirage" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Mirage</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-mirage.webp" alt="Residencial Mirage" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Mirage</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/casa-aurora.webp" alt="Casa Aurora" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Aurora</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/residencial-saomarcos.webp" alt="Residencial São Marcos" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial São Marcos</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-saomarcos.webp" alt="Residencial São Marcos" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial São Marcos</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/casa-bossa.webp" alt="Casa Bossa" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Bossa</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/residencial-sulani.webp" alt="Residencial Sulani" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Sulani</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-sulani.webp" alt="Residencial Sulani" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Sulani</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/rush-wellness.webp" alt="RUSH Wellness" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">RUSH Wellness</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/unar-parise.webp" alt="Residencial e Comercial Unar Parise" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Unar Parise</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/unar-parise.webp" alt="Residencial e Comercial Unar Parise" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Unar Parise</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/casa-jbl.webp" alt="Casa JBL" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa JBL</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/vale-verde.webp" alt="Residencial e Comercial Vale Verde" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Vale Verde</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/vale-verde.webp" alt="Residencial e Comercial Vale Verde" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Vale Verde</div><div class="gallery-cat">SCALA</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/casa-agata.webp" alt="Casa Ágata" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ágata</div><div class="gallery-cat">NOHALL</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/casa-elisios.webp" alt="Casa Elísios" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Elísios</div><div class="gallery-cat">NOHALL</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/casa-ma.webp" alt="Casa MA" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa MA</div><div class="gallery-cat">NOHALL</div></div></div>
@@ -700,15 +702,67 @@ img{display:block;max-width:100%;}
       <div class="gallery-card"><img src="images/empreendimentos/wr1-residence.webp" alt="WR1 Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">WR1 Residence</div><div class="gallery-cat">NOHALL</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/urban-residence.webp" alt="Urban Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Urban Residence</div><div class="gallery-cat">NOHALL</div></div></div>
       <div class="gallery-card"><img src="images/empreendimentos/villa-residence.webp" alt="Villa Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Villa Residence</div><div class="gallery-cat">NOHALL</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/casa-floresta.webp" alt="Casa Floresta" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Floresta</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/casa-lg.webp" alt="Casa L&G" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa L&G</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/dona-lurdes.webp" alt="Residencial Dona Lurdes" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Dona Lurdes</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/residencial-mario.webp" alt="Residencial e Comercial Mario" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Mario</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/residencial-mirage.webp" alt="Residencial Mirage" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Mirage</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/residencial-saomarcos.webp" alt="Residencial São Marcos" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial São Marcos</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/residencial-sulani.webp" alt="Residencial Sulani" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Sulani</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/unar-parise.webp" alt="Residencial e Comercial Unar Parise" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Unar Parise</div><div class="gallery-cat">SCALA</div></div></div>
-      <div class="gallery-card"><img src="imagens/douglas/vale-verde.webp" alt="Residencial e Comercial Vale Verde" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Vale Verde</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-floresta.webp" alt="Casa Floresta" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Floresta</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-lg.webp" alt="Casa L&G" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa L&G</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/dona-lurdes.webp" alt="Residencial Dona Lurdes" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Dona Lurdes</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-mario.webp" alt="Residencial e Comercial Mario" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Mario</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-mirage.webp" alt="Residencial Mirage" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Mirage</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-saomarcos.webp" alt="Residencial São Marcos" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial São Marcos</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-sulani.webp" alt="Residencial Sulani" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Sulani</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/unar-parise.webp" alt="Residencial e Comercial Unar Parise" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Unar Parise</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/vale-verde.webp" alt="Residencial e Comercial Vale Verde" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Vale Verde</div><div class="gallery-cat">SCALA</div></div></div>
+<div class="gallery-card"><img src="images/empreendimentos/manhattan-residence.webp" alt="Manhattan Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Manhattan Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-floresta.webp" alt="Casa Floresta" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Floresta</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/colline-residence.webp" alt="Colline Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Colline Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-lg.webp" alt="Casa L&G" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa L&G</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/serena-residence.webp" alt="Serena Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Serena Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/dona-lurdes.webp" alt="Residencial Dona Lurdes" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Dona Lurdes</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/ametista-residence.webp" alt="Ametista Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Ametista Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-mario.webp" alt="Residencial e Comercial Mario" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Mario</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/porto-esmeralda.webp" alt="Porto Esmeralda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Porto Esmeralda</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-mirage.webp" alt="Residencial Mirage" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Mirage</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-aurora.webp" alt="Casa Aurora" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Aurora</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-saomarcos.webp" alt="Residencial São Marcos" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial São Marcos</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-bossa.webp" alt="Casa Bossa" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Bossa</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-sulani.webp" alt="Residencial Sulani" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Sulani</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/rush-wellness.webp" alt="RUSH Wellness" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">RUSH Wellness</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/unar-parise.webp" alt="Residencial e Comercial Unar Parise" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Unar Parise</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-jbl.webp" alt="Casa JBL" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa JBL</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/vale-verde.webp" alt="Residencial e Comercial Vale Verde" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Vale Verde</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-agata.webp" alt="Casa Ágata" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ágata</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-elisios.webp" alt="Casa Elísios" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Elísios</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-ma.webp" alt="Casa MA" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa MA</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-onix.webp" alt="Casa Ônix" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ônix</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-varanda.webp" alt="Casa Varanda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Varanda</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/wr1-residence.webp" alt="WR1 Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">WR1 Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/urban-residence.webp" alt="Urban Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Urban Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/villa-residence.webp" alt="Villa Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Villa Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      </div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/colline-residence.webp" alt="Colline Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Colline Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/serena-residence.webp" alt="Serena Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Serena Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/ametista-residence.webp" alt="Ametista Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Ametista Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/porto-esmeralda.webp" alt="Porto Esmeralda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Porto Esmeralda</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-aurora.webp" alt="Casa Aurora" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Aurora</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-bossa.webp" alt="Casa Bossa" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Bossa</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/rush-wellness.webp" alt="RUSH Wellness" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">RUSH Wellness</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-jbl.webp" alt="Casa JBL" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa JBL</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-agata.webp" alt="Casa Ágata" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ágata</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-elisios.webp" alt="Casa Elísios" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Elísios</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-ma.webp" alt="Casa MA" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa MA</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-onix.webp" alt="Casa Ônix" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Ônix</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/casa-varanda.webp" alt="Casa Varanda" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Varanda</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/wr1-residence.webp" alt="WR1 Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">WR1 Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/urban-residence.webp" alt="Urban Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Urban Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="images/empreendimentos/villa-residence.webp" alt="Villa Residence" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Villa Residence</div><div class="gallery-cat">NOHALL</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-floresta.webp" alt="Casa Floresta" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa Floresta</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/casa-lg.webp" alt="Casa L&G" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Casa L&G</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/dona-lurdes.webp" alt="Residencial Dona Lurdes" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Dona Lurdes</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-mario.webp" alt="Residencial e Comercial Mario" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Mario</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-mirage.webp" alt="Residencial Mirage" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Mirage</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-saomarcos.webp" alt="Residencial São Marcos" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial São Marcos</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/residencial-sulani.webp" alt="Residencial Sulani" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial Sulani</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/unar-parise.webp" alt="Residencial e Comercial Unar Parise" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Unar Parise</div><div class="gallery-cat">SCALA</div></div></div>
+      <div class="gallery-card"><img src="imagens%20douglas/vale-verde.webp" alt="Residencial e Comercial Vale Verde" loading="lazy"><div class="gallery-overlay"><div class="gallery-name">Residencial e Comercial Vale Verde</div><div class="gallery-cat">SCALA</div></div></div>
     </div>
   </div>
 </section>
@@ -993,51 +1047,7 @@ img{display:block;max-width:100%;}
 </script>
 
 <script>
-/* Galeria — auto-scroll + pausa no hover + drag */
-(function(){
-  var vp=document.getElementById('galleryViewport'),tr=document.getElementById('galleryTrack');
-  if(!vp||!tr)return;
-
-  /* Esconder scrollbar */
-  vp.style.overflowX='scroll';vp.style.overflowY='hidden';vp.style.scrollbarWidth='none';
-  var s=document.createElement('style');s.textContent='#galleryViewport::-webkit-scrollbar{display:none}';document.head.appendChild(s);
-
-  /* Duplicar cards para loop infinito */
-  var origCards=Array.from(tr.children);
-  origCards.forEach(function(c){tr.appendChild(c.cloneNode(true));});
-  var halfW=tr.scrollWidth/2;
-
-  /* Auto-scroll */
-  var speed=0.6; /* pixels por frame — ajuste aqui para mais rápido/lento */
-  var paused=false;
-  var raf;
-
-  function tick(){
-    if(!paused){
-      vp.scrollLeft+=speed;
-      /* Loop: quando chegar na metade, volta ao início silenciosamente */
-      if(vp.scrollLeft>=halfW) vp.scrollLeft=vp.scrollLeft-halfW;
-    }
-    raf=requestAnimationFrame(tick);
-  }
-  raf=requestAnimationFrame(tick);
-
-  /* Pausar no hover */
-  vp.addEventListener('mouseenter',function(){paused=true;vp.style.cursor='grab';});
-  vp.addEventListener('mouseleave',function(){paused=false;vp.style.cursor='default';if(isDown)isDown=false;});
-
-  /* Drag manual */
-  var isDown=false,startX=0,scrollLeft=0;
-  vp.addEventListener('mousedown',function(e){isDown=true;paused=true;vp.style.cursor='grabbing';startX=e.pageX-vp.offsetLeft;scrollLeft=vp.scrollLeft;});
-  vp.addEventListener('mouseup',function(){isDown=false;paused=false;vp.style.cursor='grab';});
-  vp.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();vp.scrollLeft=scrollLeft-(e.pageX-vp.offsetLeft-startX)*1.4;});
-
-  /* Touch */
-  var tX=0,tS=0;
-  vp.addEventListener('touchstart',function(e){tX=e.touches[0].pageX;tS=vp.scrollLeft;paused=true;},{passive:true});
-  vp.addEventListener('touchend',function(){paused=false;},{passive:true});
-  vp.addEventListener('touchmove',function(e){vp.scrollLeft=tS-(e.touches[0].pageX-tX)*1.4;},{passive:true});
-})();
+/* Galeria: animação CSS — ver keyframes no head */
 </script>
 
 <script>
