@@ -975,20 +975,50 @@ img{display:block;max-width:100%;}
 </script>
 
 <script>
-/* Galeria drag horizontal */
+/* Galeria — auto-scroll + pausa no hover + drag */
 (function(){
   var vp=document.getElementById('galleryViewport'),tr=document.getElementById('galleryTrack');
   if(!vp||!tr)return;
-  var isDown=false,startX=0,scrollLeft=0;
-  vp.addEventListener('mousedown',function(e){isDown=true;vp.style.cursor='grabbing';startX=e.pageX-vp.offsetLeft;scrollLeft=vp.scrollLeft;});
-  vp.addEventListener('mouseleave',function(){isDown=false;vp.style.cursor='grab';});
-  vp.addEventListener('mouseup',function(){isDown=false;vp.style.cursor='grab';});
-  vp.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();vp.scrollLeft=scrollLeft-(e.pageX-vp.offsetLeft-startX)*1.4;});
-  var tX=0,tS=0;
-  vp.addEventListener('touchstart',function(e){tX=e.touches[0].pageX;tS=vp.scrollLeft;},{passive:true});
-  vp.addEventListener('touchmove',function(e){vp.scrollLeft=tS-(e.touches[0].pageX-tX)*1.4;},{passive:true});
-  vp.style.overflowX='auto';vp.style.scrollbarWidth='none';
+
+  /* Esconder scrollbar */
+  vp.style.overflowX='scroll';vp.style.scrollbarWidth='none';
   var s=document.createElement('style');s.textContent='#galleryViewport::-webkit-scrollbar{display:none}';document.head.appendChild(s);
+
+  /* Duplicar cards para loop infinito */
+  var origCards=Array.from(tr.children);
+  origCards.forEach(function(c){tr.appendChild(c.cloneNode(true));});
+  var halfW=tr.scrollWidth/2;
+
+  /* Auto-scroll */
+  var speed=0.6; /* pixels por frame — ajuste aqui para mais rápido/lento */
+  var paused=false;
+  var raf;
+
+  function tick(){
+    if(!paused){
+      vp.scrollLeft+=speed;
+      /* Loop: quando chegar na metade, volta ao início silenciosamente */
+      if(vp.scrollLeft>=halfW) vp.scrollLeft=vp.scrollLeft-halfW;
+    }
+    raf=requestAnimationFrame(tick);
+  }
+  raf=requestAnimationFrame(tick);
+
+  /* Pausar no hover */
+  vp.addEventListener('mouseenter',function(){paused=true;vp.style.cursor='grab';});
+  vp.addEventListener('mouseleave',function(){paused=false;vp.style.cursor='default';if(isDown)isDown=false;});
+
+  /* Drag manual */
+  var isDown=false,startX=0,scrollLeft=0;
+  vp.addEventListener('mousedown',function(e){isDown=true;paused=true;vp.style.cursor='grabbing';startX=e.pageX-vp.offsetLeft;scrollLeft=vp.scrollLeft;});
+  vp.addEventListener('mouseup',function(){isDown=false;paused=false;vp.style.cursor='grab';});
+  vp.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();vp.scrollLeft=scrollLeft-(e.pageX-vp.offsetLeft-startX)*1.4;});
+
+  /* Touch */
+  var tX=0,tS=0;
+  vp.addEventListener('touchstart',function(e){tX=e.touches[0].pageX;tS=vp.scrollLeft;paused=true;},{passive:true});
+  vp.addEventListener('touchend',function(){paused=false;},{passive:true});
+  vp.addEventListener('touchmove',function(e){vp.scrollLeft=tS-(e.touches[0].pageX-tX)*1.4;},{passive:true});
 })();
 </script>
 
