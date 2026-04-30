@@ -211,13 +211,14 @@ img{display:block;max-width:100%;}
 .port-top-link:hover{opacity:.65;}
 .gallery-viewport{overflow:hidden;position:relative;user-select:none;min-height:360px;}
 .gallery-viewport:active{cursor:grabbing;}
-.gallery-track{display:flex;gap:10px;padding:0 0 clamp(40px,5vh,64px);width:max-content;will-change:transform;animation:galleryScroll 60s linear infinite;}
-.gallery-track:hover{animation-play-state:paused;}
+.gallery-track{display:flex;gap:10px;padding:0 0 40px;width:max-content;will-change:transform;-webkit-animation:galleryScroll 80s linear infinite;animation:galleryScroll 80s linear infinite;}
+.gallery-track:hover{-webkit-animation-play-state:paused;animation-play-state:paused;}
+@-webkit-keyframes galleryScroll{0%{-webkit-transform:translateX(0);transform:translateX(0);}100%{-webkit-transform:translateX(-50%);transform:translateX(-50%);}}
 @keyframes galleryScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-.gallery-card{flex:0 0 clamp(200px,42vw,340px);aspect-ratio:3/4;position:relative;overflow:hidden;background:var(--mirage);}
-.gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:.88;}
-.gallery-card:hover img{transform:scale(1.04);opacity:1;}
-@media(max-width:680px){.gallery-card{flex:0 0 200px;}.gallery-viewport{min-height:280px;}}
+.gallery-card{flex:0 0 260px;height:360px;position:relative;overflow:hidden;background:var(--mirage);}
+.gallery-card img{width:100%;height:100%;object-fit:cover;opacity:.88;}
+.gallery-card:hover img{opacity:1;}
+@media(max-width:680px){.gallery-card{flex:0 0 180px;height:260px;}.gallery-viewport{min-height:300px;}}
 .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,20,22,.78) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px 18px;}
 .gallery-name{font-family:var(--serif);font-size:17px;font-weight:500;color:#fff;line-height:1.2;}
 .gallery-cat{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(250,250,248,.55);margin-top:4px;}
@@ -776,7 +777,7 @@ img{display:block;max-width:100%;}
     <div class="perm-pillars">
       <div class="perm-pillar reveal d1">
         <div class="perm-pn">01 — Estrutura</div>
-        <h3 class="perm-ph">SPE dedicada e patrimônio segregado</h3>
+        <h3 class="perm-ph">SCP dedicada e patrimônio segregado</h3>
         <p class="perm-pp">Cada empreendimento opera em Sociedade em Conta de Participação própria, com governança documentada e patrimônio isolado dos demais ativos do grupo.</p>
       </div>
       <div class="perm-pillar reveal d2">
@@ -863,6 +864,22 @@ img{display:block;max-width:100%;}
           <p class="eco-item-p">
             O <strong>IP Funding</strong> é o braço de captação de recursos externos do empreendimento. Especializado na estruturação financeira de incorporações, o fundo viabiliza o acesso a investidores qualificados, permitindo que o projeto avance com <strong>capital estruturado, governança documentada</strong> e rentabilidade atrativa para todas as partes.<br><br>
             A parceria com o IP Funding posiciona o empreendimento com credibilidade institucional perante investidores e terrenistas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Prospecta & Datastore -->
+      <div class="eco-item reveal">
+        <div class="eco-item-img">
+          <img src="images/parceiros/prospecta.webp" alt="Prospecta e Datastore" loading="lazy">
+        </div>
+        <div class="eco-item-body">
+          <div class="eco-item-tag">Análise de Dados &amp; Sucessometria</div>
+          <h3 class="eco-item-h">Prospecta e Datastore</h3>
+          <div class="eco-item-role">Inteligência de Mercado Imobiliário</div>
+          <p class="eco-item-p">
+            A <strong>Prospecta</strong> e a <strong>Datastore</strong> são as principais referências nacionais em inteligência de mercado imobiliário. A Prospecta combina pesquisa de campo, tecnologia e metodologia própria para identificar o melhor posicionamento de produto antes do lançamento — analisando demanda, perfil de comprador, mix de unidades e precificação com precisão estratégica. A Datastore, com mais de 30 anos de atuação e mais de R$ 1 trilhão em VGV pesquisado, entrega o algoritmo de sucessometria mais robusto do setor: dados concretos sobre velocidade de vendas, rentabilidade e absorção de mercado em cada praça.<br><br>
+            A adoção dessas ferramentas no desenvolvimento do empreendimento garante que cada decisão — do produto ao preço — seja respaldada por dados reais, reduzindo riscos e maximizando o retorno para todas as partes.
           </p>
         </div>
       </div>
