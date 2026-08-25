@@ -3,4 +3,4 @@ Allow: /
 Disallow: /lista-privada.html
 Disallow: /viewer.html
 
-Sitemap: https://www.nohallempreendimentos.com.br/sitemap.xml
+Sitemap: https://nohallempreendimentos.com.br/sitemap.xml
