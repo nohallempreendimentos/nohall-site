@@ -304,6 +304,7 @@ img{display:block;max-width:100%;}
 @media(max-width:900px){.cta-band{padding:64px 32px;}.cta-band-inner{flex-direction:column;align-items:flex-start;gap:32px;}.footer-top{grid-template-columns:1fr;gap:40px;}.site-footer{padding:56px 32px 0;}}
 
 </style>
+<script src="/meta-pixel.js" defer></script>
 </head>
 <body>
 <nav class="mob-nav" id="mobNav">
@@ -498,6 +499,9 @@ document.querySelectorAll('.mv-item').forEach(function(item) {
         msg.style.color = '#2d6a4f';
         msg.style.background = 'rgba(45,106,79,.08)';
         msg.style.borderLeft = '3px solid #2d6a4f';
+        if (typeof window.nohallTrackLead === 'function') {
+          window.nohallTrackLead('formulario_contato');
+        }
         form.reset();
         btn.textContent = 'Enviar mensagem →';
         btn.disabled = false;
